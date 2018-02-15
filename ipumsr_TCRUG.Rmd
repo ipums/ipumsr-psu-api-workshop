@@ -1,0 +1,460 @@
+---
+title: "ipumsr - TCRUG"
+author: "Greg Freedman Ellis"
+date: "2/12/2018"
+output:
+  revealjs::revealjs_presentation:
+    theme: simple
+    transition: none
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(
+  echo = TRUE, 
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Using the ipums.org website
+
+## Using the ipums.org website
+- Live demo: www.ipums.org
+
+## Using the ipums.org website
+- www.ipums.org
+
+- Choose a project (Example is USA)
+
+- Register for an account
+
+- Can select a subset of samples and variables to get only 
+  the parts that are relevant to your project. Example uses:
+  
+    - Default sample for 1960-2016 and variables
+    
+    - Variable: PHONE, EDUC and CONSPUMA
+    
+    - Select Cases (available when creating extract): Minnesota only
+
+## Using the ipums.org website
+- Interactively explore documentation while you choose
+
+- Get alerted by email when it’s finished
+
+- When ready, we'll download the .dat file and the DDI.
+
+# Setting up R
+
+## Setting up R
+- https://rstudio.cloud/project/18776
+
+- Hopefully you can use rstudio.cloud to avoid any setup, 
+  but if you'd like to setup on your own machine, the slides
+  below explain:
+
+## Installing ipumsr
+```{r, eval = FALSE}
+install.packages("ipumsr")
+```
+
+- Or if you want the development version (which is what I'm 
+  using), use:
+```{r, eval = FALSE}
+if (!require(devtools)) install.packages("devtools")
+devtools::install_github("mnpopcenter/ipumsr")
+```
+
+## Other packages
+- Some of the examples below also rely on the development version of
+  ggplot2 and a few extra packages.
+```{r, eval = FALSE}
+install.packages(c("shiny", "DT")) # For ipums_view()
+
+install.packages("sf") # For the geography examples 
+devtools::install_github("tidyverse/ggplot2")
+
+install.packages("revealjs") # For this presentation
+```
+
+# Loading data
+## Setup R session
+- Now that we're all set up, we'll use these libraries
+```{r}
+library(ipumsr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(sf)
+```
+
+## Loading data
+- Using commands `read_ipums_ddi()` and `read_ipums_micro()`
+```{r}
+ddi <- read_ipums_ddi("usa_00013.xml")
+
+data <- read_ipums_micro(ddi)
+```
+
+## Available metadata
+- Some (but not all) of the documentation comes with the ddi.
+```{r}
+ipums_var_label(ddi, PHONE)
+
+ipums_var_desc(ddi, PHONE) %>% strwrap(60)
+```
+
+## Available metadata
+```{r}
+ipums_val_labels(ddi, PHONE)
+```
+
+## A nicer view of metadata
+- `ipums_view()` makes a nicely formatted static html page for 
+  just your extract using htmltools.
+
+```{r, eval=FALSE}
+ipums_view(ddi)
+```
+![](ipums_view_screenshot.png){width=70%}
+
+## Data
+A regular `tbl_df` data.frame
+```{r}
+data
+```
+
+# Wrangling value labels
+
+## Wrangling value labels
+- IPUMS value labels don't translate that well to R's factors.
+
+    - (Factors always have a label, and always have values starting at 1)
+  
+- So `ipumsr` imports them as `haven::labelled()` objects, which aren't
+  always the easiest to deal with.
+
+- Luckily ipumsr provides helpers that allow you to use information
+  from both the value and label
+
+```{r, include = FALSE}
+label_before_after <- function(df, before_var, after_var, label_fun) {
+  before_var <- rlang::enquo(before_var)
+  after_var <- rlang::enquo(after_var)
+
+  
+  freqs <- df %>% 
+    mutate(val = !!before_var) %>%
+    group_by(val) %>%
+    summarize(count = n()) 
+  
+  all_vals <- ipums_val_labels(df, !!before_var) %>% pull(val)
+  attributes(all_vals) <- attributes(df %>% pull(!!before_var))
+  
+  unique_val_df <- dplyr::data_frame(val = all_vals) %>%
+    mutate(
+      after = label_fun(val),
+      `before ([val] label)` = as_factor(val, "both")
+    ) %>%
+    filter(after %in% levels(df %>% pull(!!after_var)) | is.na(after))
+  
+  attributes(unique_val_df$val) <- NULL
+  attributes(freqs$val) <- NULL
+  
+  out <- left_join(unique_val_df, freqs, by = "val") %>%
+    mutate(count = ifelse(is.na(count), 0, count)) %>%
+    select(`before ([val] label)`, after, count)
+  
+  out %>%
+    DT::datatable(
+      rownames = FALSE, 
+      filter = "none", 
+      options = list(
+        searching = FALSE, 
+        scrollY = "200px",
+        scrollCollapse = TRUE,
+        paging = FALSE,
+        bInfo = FALSE
+      )
+    )
+}
+```
+
+## `as_factor()`
+- `as_factor()` (from haven) converts directly to a factor.
+
+```{r}
+ipums_val_labels(data$GQ)
+```
+
+## `as_factor()` 
+- Suppose we want to keep these labels exactly as they are.
+
+```{r}
+data$GQ2 <- as_factor(data$GQ)
+```
+
+. . .
+
+```{r, echo = FALSE}
+label_before_after(data, GQ, GQ2, as_factor)
+```
+
+
+## `lbl_clean()`
+- `lbl_clean()` gets rid of unused value labels.
+
+```{r}
+ipums_val_labels(data$STATEFIP)
+```
+
+## `lbl_clean()`
+- Since our extract only has Minnesota, we don't want all of
+ these values.
+
+```{r}
+data$STATEFIP2 <- data$STATEFIP %>% 
+  lbl_clean() %>% 
+  as_factor()
+```
+
+. . .
+
+```{r, echo = FALSE}
+label_before_after(data, STATEFIP, STATEFIP2, . %>% lbl_clean() %>% as_factor())
+```
+
+## `lbl_na_if()`
+- `lbl_na_if()` allows you to set certain values or labels 
+  to missing.
+
+```{r}
+ipums_val_labels(data$PHONE)
+```
+
+## `lbl_na_if()`
+- Easier to use R's `NA` data structure to deal with missing values
+  like "N/A" and "Suppressed".
+
+```{r}
+data$PHONE2 <- lbl_na_if(data$PHONE, ~.val %in% c(0, 8)) %>%
+  as_factor()
+```
+
+. . . 
+
+```{r, echo = FALSE}
+label_before_after(
+  data, 
+  PHONE, 
+  PHONE2,
+  . %>% 
+    lbl_na_if(~.val %in% c(0, 8)) %>%
+    as_factor()
+)
+```
+
+## `lbl_na_if()`
+- It works with both values (`.val`) and labels (`.lbl`).
+  So we could have also written something like this:
+```{r}
+drop_labels <- c("N/A", "Suppressed (2012 and 2015 ACS)")
+
+data$PHONE3 <- lbl_na_if(data$PHONE, ~.lbl %in% drop_labels) %>%
+  as_factor()
+```
+
+## `lbl_collapse()`
+- `lbl_collapse()` allows you to take advantage of the hierarchical
+  structure of value labels.
+```{r}
+ipums_val_labels(data$EDUCD)
+```
+
+
+## `lbl_collapse()`
+- Maybe this is too much detail, so we want to collapse 
+  the last digit.
+
+```{r}
+data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val %/% 10) %>%
+  as_factor()
+```
+
+. . .
+
+```{r, echo = FALSE}
+label_before_after(
+  data, 
+  EDUCD, 
+  EDUCD2,
+  . %>% lbl_collapse(~.val %/% 10) %>%
+    as_factor()
+)
+```
+
+## `lbl_relabel()`
+- `lbl_relabel()` has more granular control of what the values are assigned to.
+
+```{r}
+levels(data$EDUCD2)
+```
+
+## `lbl_relabel()`
+- Maybe the education variable is still too specific.
+
+```{r}
+data$EDUCD3 <- data$EDUCD %>%
+  lbl_collapse(~.val %/% 10) %>% 
+  lbl_relabel(
+    lbl(2, "Less than High School") ~.val > 0 & .val < 6,
+    lbl(3, "High school") ~.lbl == "Grade 12",
+    lbl(4, "Some college") ~str_detect(.lbl, "^[123] year(s)? of college$"),
+    lbl(5, "College or more") ~.val %in% c(10, 11)
+  ) %>%
+  as_factor()
+```
+
+. . .
+
+```{r, echo = FALSE}
+label_before_after(
+  data, 
+  EDUCD, 
+  EDUCD3,
+  . %>%
+    lbl_collapse(~.val %/% 10) %>% 
+    lbl_relabel(
+      lbl(2, "Less than High School") ~.val > 0 & .val < 6,
+      lbl(3, "High school") ~.lbl == "Grade 12",
+      lbl(4, "Some college") ~str_detect(.lbl, "^[123] year(s)? of college$"),
+      lbl(5, "College or more") ~.val %in% c(10, 11)
+    ) %>%
+    as_factor()
+)
+```
+
+# Using data
+## Phone availability 
+- Now that they're factors, ready for use as regular R data
+```{r graph1, eval = FALSE}
+graph_data <- data %>%
+  group_by(YEAR) %>%
+  summarize(`% with phone` = weighted.mean(
+    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+  ))
+
+ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
+  geom_point() +
+  geom_line() + 
+  labs(
+    title = "Percent of Minnesota with phone line",
+    subtitle = paste0("Data source: ", ddi$ipums_project),
+    caption = paste(strwrap(ipums_var_desc(ddi, PHONE), 90), collapse = "\n")
+  )
+```
+
+
+## Phone availability
+```{r graph1, echo = FALSE}
+```
+
+## Interpretation
+
+> The 2008 ACS and 2008 PRCS instructed respondents to include cell 
+> phone service; prior to 2008, this was not made explicit.
+> 
+> - https://usa.ipums.org/usa-action/variables/PHONE#comparability_section
+
+## Phone availability by education
+```{r graph2, eval = FALSE}
+graph_data <- data %>%
+  group_by(YEAR, EDUCD3) %>%
+  summarize(`% with phone` = weighted.mean(
+    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+  )) %>%
+  ungroup()
+
+ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
+  geom_point() +
+  geom_line() + 
+  facet_wrap(~EDUCD3) + 
+  labs(
+    title = "Percent of Minnesota with phone line by education",
+    subtitle = paste0("Data source: ", ddi$ipums_project)
+  )
+```
+
+## Phone availability by education
+```{r graph2, echo = FALSE}
+```
+
+# Geographic data
+## Getting geographic data
+- For IPUMS USA (and several other projects), we provide geographic
+  boundaries as well. For many areas, this includes harmonizing
+  boundary changes over time.
+
+- In our extract we included CONSPUMA, so let's checkout the 
+  description on the website 
+  (https://usa.ipums.org/usa/volii/tgeotools.shtml)
+  about it.
+
+- Note that CONSPUMA is a rather large geography, if you 
+  want finer geographic detail, you need to hope that
+  NHGIS has the table you want.
+
+## Loading shape data
+- `ipumsr` provides support for both sf and sp data, but I find the sf
+  package much easier to use.
+
+- To use, use the `ipums_read_sf()` function. (Mostly just a wrapper around
+  `sf::read_sf`).
+
+
+```{r}
+shape_data <- read_ipums_sf("shape/")
+```
+
+## Joining shape data
+- We also provide helpers for merging data that work with both sf
+  and sp packages. 
+
+```{r}
+conspuma_data <- data %>%
+  group_by(CONSPUMA, YEAR) %>%
+  summarize(PHONE = weighted.mean(
+    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+  ))
+
+conspuma_data <- ipums_shape_inner_join(
+  conspuma_data, 
+  shape_data, 
+  by = "CONSPUMA"
+)
+```
+
+## Plotting shape data
+- With the development version of ggplot2, can plot sf data:
+```{r graph3, eval = FALSE}
+graph_data <- conspuma_data %>% 
+  filter(YEAR %in% c(1980, 1990, 2000, 2010))
+
+ggplot(graph_data, aes(fill = PHONE)) +
+  facet_wrap(~YEAR) + 
+  geom_sf()
+```
+
+## Plotting shape data
+```{r graph3, echo = FALSE}
+```
+
+# Thanks!
+
+## Thanks!
+- Email: gfellis@umn.edu
+
+- ipumsr github: github.com/mnpopcenter/ipumsr
+
+- This presentation: https://rstudio.cloud/project/18776 /
+  https://github.com/gergness/ipumsr-tcrug
