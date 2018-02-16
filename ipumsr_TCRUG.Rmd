@@ -1,7 +1,7 @@
 ---
 title: "ipumsr - TCRUG"
 author: "Greg Freedman Ellis"
-date: "2/12/2018"
+date: "2/15/2018"
 output:
   revealjs::revealjs_presentation:
     theme: simple
@@ -48,6 +48,8 @@ knitr::opts_chunk$set(
 
 ## Setting up R
 - https://rstudio.cloud/project/18776
+
+    - (slides also available at https://github.com/gergness/ipumsr-tcrug)
 
 - Hopefully you can use rstudio.cloud to avoid any setup, 
   but if you'd like to setup on your own machine, the slides
@@ -454,7 +456,7 @@ ggplot(graph_data, aes(fill = PHONE)) +
 ## Thanks!
 - Email: gfellis@umn.edu
 
-- ipumsr github: github.com/mnpopcenter/ipumsr
+- ipumsr github: https://github.com/mnpopcenter/ipumsr
 
 - This presentation: https://rstudio.cloud/project/18776 /
   https://github.com/gergness/ipumsr-tcrug
