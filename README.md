@@ -1,7 +1,7 @@
-# ipumsr-tcrug
-Presentation on 2/15/18 for Twin Cities R User Group on ipumsr
+# ipumsr-webinar
 
-If all's going to plan, you should be able to open this rstudio.cloud
-project with all the dependencies you need:
+This repository hosts the presentation files for the IPUMS webinar on the 
+ipumsr package from 10/12/2021. It is a fork of gergness/ipumsr-tcrug, which is 
+a presentation on ipumsr developed by Greg Freedman Ellis for the Twin Cities 
+R User Group.
 
-https://rstudio.cloud/project/18776
