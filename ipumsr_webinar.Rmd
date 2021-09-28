@@ -1,12 +1,16 @@
 ---
-title: "ipumsr - TCRUG"
-author: "Greg Freedman Ellis"
-date: "2/15/2018"
+title: "Using IPUMS data in R with ipumsr"
+author: "Derek Burk, Dan Ehrlich, & Kara Fisher"
+date: "10/12/2021"
 output:
-  revealjs::revealjs_presentation:
-    theme: simple
-    transition: none
+  xaringan::moon_reader:
+    lib_dir: libs
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
 ---
+
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(
@@ -16,73 +20,120 @@ knitr::opts_chunk$set(
 )
 ```
 
-# Using the ipums.org website
+class: center
 
-## Using the ipums.org website
-- Live demo: www.ipums.org
+# What is IPUMS?
 
-## Using the ipums.org website
-- www.ipums.org
+--
 
-- Choose a project (Example is USA)
+## IPUMS is **data**
 
-- Register for an account
+--
 
-- Can select a subset of samples and variables to get only 
-  the parts that are relevant to your project. Example uses:
-  
-    - Default sample for 1960-2016 and variables
-    
-    - Variable: PHONE, EDUC and CONSPUMA
-    
-    - Select Cases (available when creating extract): Minnesota only
+## from censuses and surveys around the world,
 
-## Using the ipums.org website
-- Interactively explore documentation while you choose
+--
 
-- Get alerted by email when it’s finished
+## integrated across space and time,
 
-- When ready, we'll download the .dat file and the DDI.
+--
 
-# Setting up R
+## thoroughly documented,
 
-## Setting up R
-- https://rstudio.cloud/project/18776
+--
 
-    - (slides also available at https://github.com/gergness/ipumsr-tcrug)
+## and available free of charge
 
-- Hopefully you can use rstudio.cloud to avoid any setup, 
-  but if you'd like to setup on your own machine, the slides
-  below explain:
+---
 
-## Installing ipumsr
+# What is ipumsr?
+
+- R package developed by Greg Freedman Ellis
+
+---
+
+class: center, middle
+
+# Poll: Have you used ipumsr?
+
+---
+
+# Installing ipumsr
 ```{r, eval = FALSE}
 install.packages("ipumsr")
 ```
 
-- Or if you want the development version (which is what I'm 
-  using), use:
+--
+
+## Or if you want the development version
+
 ```{r, eval = FALSE}
-if (!require(devtools)) install.packages("devtools")
-devtools::install_github("mnpopcenter/ipumsr")
+if (!require(remotes)) install.packages("remotes")
+remotes::install_github("mnpopcenter/ipumsr")
 ```
 
-## Other packages
-- Some of the examples below also rely on the development version of
-  ggplot2 and a few extra packages.
-```{r, eval = FALSE}
-install.packages(c("shiny", "DT")) # For ipums_view()
+---
 
-install.packages("sf") # For the geography examples 
-devtools::install_github("tidyverse/ggplot2")
+# Installing other packages
 
-install.packages("revealjs") # For this presentation
+This project uses renv to track package dependencies.
+
+--
+
+To install required packages, [clone the repo](https://happygitwithr.com/existing-github-first.html#new-rstudio-project-via-git-clone), then use:
+
+```{r eval=FALSE}
+renv::restore()
 ```
 
-# Loading data
-## Setup R session
-- Now that we're all set up, we'll use these libraries
-```{r}
+---
+
+# Downloading your data extract
+
+```{r echo=FALSE, fig.alt="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted"}
+knitr::include_graphics("download_screenshot_1.png")
+```
+
+--
+
+- Click the "Download .DAT" link to download the data
+
+--
+
+- Right-click the "DDI" link, and choose
+    - "Save Link As..." (in Firefox)
+    - "Save link as..." (in Chrome)
+    - "Download Linked File" (in Safari)
+    
+--
+
+- The "R" link on the downloads page contains this helper code:
+
+```{r eval=FALSE}
+# NOTE: To load data, you must download both the extract's data and the DDI
+# and also set the working directory to the folder with these files (or change the path below).
+
+if (!require("ipumsr")) stop("Reading IPUMS data into R requires the ipumsr package. It can be installed using the following command: install.packages('ipumsr')")
+
+ddi <- read_ipums_ddi("ipumsi_00059.xml")
+data <- read_ipums_micro(ddi)
+```
+
+
+???
+Make sure to save the data and DDI files in the same location.
+
+---
+
+# Downloading your data extract
+
+
+
+
+---
+
+# Required packages
+```{r eval=FALSE}
 library(ipumsr)
 library(dplyr)
 library(ggplot2)
@@ -90,13 +141,52 @@ library(stringr)
 library(sf)
 ```
 
-## Loading data
+```{r include=FALSE}
+library(ipumsr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(sf)
+```
+
+---
+
+# ipumsr speed comparison
+
+```{r, echo=FALSE, fig.alt="Click Download .DAT link to download the data, then right-click the DDI link and choose Save Link As..."}
+results <- readRDS("ipumsr_speed_test.rds")
+results %>% 
+  ggplot(aes(x = reorder(function_name, desc(time)), y = time, fill = value_labels)) +
+    geom_col() + 
+    coord_flip() +
+    labs(
+      title = "How long to read 3 million rows with 13 variables?",
+      y = "Seconds",
+      x = NULL
+    ) +
+    guides(fill = guide_legend("Includes value labels?"))
+```
+
+
+---
+
+# Read in the data
 - Using commands `read_ipums_ddi()` and `read_ipums_micro()`
 ```{r}
 ddi <- read_ipums_ddi("usa_00013.xml")
 
 data <- read_ipums_micro(ddi)
 ```
+
+---
+
+# What's in my extract again?
+
+--
+
+
+
+---
 
 ## Available metadata
 - Some (but not all) of the documentation comes with the ddi.

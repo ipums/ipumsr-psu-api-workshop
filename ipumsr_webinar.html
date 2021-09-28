@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>Using IPUMS data in R with ipumsr</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Derek Burk, Dan Ehrlich, &amp; Kara Fisher" />
+    <meta name="date" content="2021-10-12" />
+    <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
+    <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
+    <script src="libs/htmlwidgets-1.5.2/htmlwidgets.js"></script>
+    <script src="libs/jquery-1.12.4/jquery.min.js"></script>
+    <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
+    <script src="libs/datatables-binding-0.15/datatables.js"></script>
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.1.0.1/css/crosstalk.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.1.0.1/js/crosstalk.min.js"></script>
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# Using IPUMS data in R with ipumsr
+### Derek Burk, Dan Ehrlich, &amp; Kara Fisher
+### 10/12/2021
+
+---
+
+
+
+
+
+class: center
+
+# What is IPUMS?
+
+--
+
+# IPUMS is **data**
+
+--
+
+## from censuses and surveys from around the world,
+
+--
+
+## integrated across space and time,
+
+--
+
+## thoroughly documented,
+
+--
+
+## and available free of charge
+
+---
+
+# What is ipumsr?
+
+- R package developed by Greg Freedman Ellis
+
+---
+
+class: center, middle
+
+# Poll: Have you used ipumsr?
+
+---
+
+# Installing ipumsr
+
+```r
+install.packages("ipumsr")
+```
+
+--
+
+## Or if you want the development version
+
+
+```r
+if (!require(remotes)) install.packages("remotes")
+remotes::install_github("mnpopcenter/ipumsr")
+```
+
+---
+
+# Installing other packages
+
+This project uses renv to track package dependencies.
+
+--
+
+To install required packages, [clone the repo](https://happygitwithr.com/existing-github-first.html#new-rstudio-project-via-git-clone), then use:
+
+
+```r
+renv::restore()
+```
+
+---
+
+# Downloading your data extract
+
+&lt;img src="download_screenshot_1.png" title="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted" alt="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted"  /&gt;
+
+--
+
+- Click the "Download .DAT" link to download the data
+
+--
+
+- Right-click the "DDI" link, and choose
+    - "Save Link As..." (in Firefox)
+    - "Save link as..." (in Chrome)
+    - "Download Linked File" (in Safari)
+    
+--
+
+- The "R" link on the downloads page contains this helper code:
+
+
+```r
+# NOTE: To load data, you must download both the extract's data and the DDI
+# and also set the working directory to the folder with these files (or change the path below).
+
+if (!require("ipumsr")) stop("Reading IPUMS data into R requires the ipumsr package. It can be installed using the following command: install.packages('ipumsr')")
+
+ddi &lt;- read_ipums_ddi("ipumsi_00059.xml")
+data &lt;- read_ipums_micro(ddi)
+```
+
+
+???
+Make sure to save the data and DDI files in the same location.
+
+---
+
+# Downloading your data extract
+
+
+
+
+---
+
+# Required packages
+
+```r
+library(ipumsr)
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(sf)
+```
+
+
+
+---
+
+# ipumsr speed comparison
+
+&lt;img src="ipumsr_webinar_files/figure-html/unnamed-chunk-8-1.png" title="Click Download .DAT link to download the data, then right-click the DDI link and choose Save Link As..." alt="Click Download .DAT link to download the data, then right-click the DDI link and choose Save Link As..."  /&gt;
+
+
+---
+
+# Read in the data
+- Using commands `read_ipums_ddi()` and `read_ipums_micro()`
+
+```r
+ddi &lt;- read_ipums_ddi("usa_00013.xml")
+
+data &lt;- read_ipums_micro(ddi)
+#&gt; Use of data from IPUMS-USA is subject to conditions including that users should
+#&gt; cite the data appropriately. Use command `ipums_conditions()` for more details.
+```
+
+---
+
+# What's in my extract again?
+
+--
+
+
+
+---
+
+## Available metadata
+- Some (but not all) of the documentation comes with the ddi.
+
+```r
+ipums_var_label(ddi, PHONE)
+#&gt; [1] "Telephone availability"
+ipums_var_desc(ddi, PHONE) %&gt;% strwrap(60)
+#&gt; [1] "PHONE indicates whether residents of the housing unit had"
+#&gt; [2] "telephone access."
+```
+
+## Available metadata
+
+```r
+ipums_val_labels(ddi, PHONE)
+#&gt; # A tibble: 4 x 2
+#&gt;     val lbl                           
+#&gt;   &lt;dbl&gt; &lt;chr&gt;                         
+#&gt; 1     0 N/A                           
+#&gt; 2     1 No, no phone available        
+#&gt; 3     2 Yes, phone available          
+#&gt; 4     8 Suppressed (2012 and 2015 ACS)
+```
+
+## A nicer view of metadata
+- `ipums_view()` makes a nicely formatted static html page for 
+  just your extract using htmltools.
+
+
+```r
+ipums_view(ddi)
+```
+![](ipums_view_screenshot.png){width=70%}
+
+## Data
+A regular `tbl_df` data.frame
+
+```r
+data
+#&gt; # A tibble: 1,476,443 x 12
+#&gt;     YEAR DATANUM SERIAL  HHWT  STATEFIP CONSPUMA        GQ    PHONE PERNUM PERWT
+#&gt;    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int+lbl&gt;    &lt;dbl&gt; &lt;int+lbl&gt; &lt;int+lb&gt;  &lt;dbl&gt; &lt;dbl&gt;
+#&gt;  1  1960       1 336455   100 27 [Minn…       NA 1 [House… 2 [Yes,…      1   100
+#&gt;  2  1960       1 336455   100 27 [Minn…       NA 1 [House… 2 [Yes,…      2   100
+#&gt;  3  1960       1 336456   100 27 [Minn…       NA 1 [House… 2 [Yes,…      1   100
+#&gt;  4  1960       1 336456   100 27 [Minn…       NA 1 [House… 2 [Yes,…      2   100
+#&gt;  5  1960       1 336456   100 27 [Minn…       NA 1 [House… 2 [Yes,…      3   100
+#&gt;  6  1960       1 336456   100 27 [Minn…       NA 1 [House… 2 [Yes,…      4   100
+#&gt;  7  1960       1 336457    99 27 [Minn…       NA 1 [House… 2 [Yes,…      1    99
+#&gt;  8  1960       1 336457    99 27 [Minn…       NA 1 [House… 2 [Yes,…      2    99
+#&gt;  9  1960       1 336457    99 27 [Minn…       NA 1 [House… 2 [Yes,…      3    99
+#&gt; 10  1960       1 336458   100 27 [Minn…       NA 1 [House… 2 [Yes,…      1   100
+#&gt; # … with 1,476,433 more rows, and 2 more variables: EDUC &lt;int+lbl&gt;,
+#&gt; #   EDUCD &lt;int+lbl&gt;
+```
+
+# Wrangling value labels
+
+## Wrangling value labels
+- IPUMS value labels don't translate that well to R's factors.
+
+    - (Factors always have a label, and always have values starting at 1)
+  
+- So `ipumsr` imports them as `haven::labelled()` objects, which aren't
+  always the easiest to deal with.
+
+- Luckily ipumsr provides helpers that allow you to use information
+  from both the value and label
+
+
+
+## `as_factor()`
+- `as_factor()` (from haven) converts directly to a factor.
+
+
+```r
+ipums_val_labels(data$GQ)
+#&gt; # A tibble: 7 x 2
+#&gt;     val lbl                                        
+#&gt;   &lt;int&gt; &lt;chr&gt;                                      
+#&gt; 1     0 Vacant unit                                
+#&gt; 2     1 Households under 1970 definition           
+#&gt; 3     2 Additional households under 1990 definition
+#&gt; 4     3 Group quarters--Institutions               
+#&gt; 5     4 Other group quarters                       
+#&gt; 6     5 Additional households under 2000 definition
+#&gt; 7     6 Fragment
+```
+
+## `as_factor()` 
+- Suppose we want to keep these labels exactly as they are.
+
+
+```r
+data$GQ2 &lt;- as_factor(data$GQ)
+```
+
+. . .
+
+
+```
+#&gt; Warning: `data_frame()` was deprecated in tibble 1.1.0.
+#&gt; Please use `tibble()` instead.
+#&gt; This warning is displayed once every 8 hours.
+#&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.
+```
+
+<div id="htmlwidget-0c7db1e19c7e6f69ffa3" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-0c7db1e19c7e6f69ffa3">{"x":{"filter":"none","data":[["[0] Vacant unit","[1] Households under 1970 definition","[2] Additional households under 1990 definition","[3] Group quarters--Institutions","[4] Other group quarters","[5] Additional households under 2000 definition","[6] Fragment"],["Vacant unit","Households under 1970 definition","Additional households under 1990 definition","Group quarters--Institutions","Other group quarters","Additional households under 2000 definition","Fragment"],[0,1433423,1712,19592,21541,175,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+
+## `lbl_clean()`
+- `lbl_clean()` gets rid of unused value labels.
+
+
+```r
+ipums_val_labels(data$STATEFIP)
+#&gt; # A tibble: 62 x 2
+#&gt;      val lbl                 
+#&gt;    &lt;int&gt; &lt;chr&gt;               
+#&gt;  1     1 Alabama             
+#&gt;  2     2 Alaska              
+#&gt;  3     4 Arizona             
+#&gt;  4     5 Arkansas            
+#&gt;  5     6 California          
+#&gt;  6     8 Colorado            
+#&gt;  7     9 Connecticut         
+#&gt;  8    10 Delaware            
+#&gt;  9    11 District of Columbia
+#&gt; 10    12 Florida             
+#&gt; # … with 52 more rows
+```
+
+## `lbl_clean()`
+- Since our extract only has Minnesota, we don't want all of
+ these values.
+
+
+```r
+data$STATEFIP2 &lt;- data$STATEFIP %&gt;% 
+  lbl_clean() %&gt;% 
+  as_factor()
+```
+
+. . .
+
+<div id="htmlwidget-3d77d5cd3a9bc19b350e" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3d77d5cd3a9bc19b350e">{"x":{"filter":"none","data":[["[27] Minnesota"],["Minnesota"],[1476443]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+## `lbl_na_if()`
+- `lbl_na_if()` allows you to set certain values or labels 
+  to missing.
+
+
+```r
+ipums_val_labels(data$PHONE)
+#&gt; # A tibble: 4 x 2
+#&gt;     val lbl                           
+#&gt;   &lt;int&gt; &lt;chr&gt;                         
+#&gt; 1     0 N/A                           
+#&gt; 2     1 No, no phone available        
+#&gt; 3     2 Yes, phone available          
+#&gt; 4     8 Suppressed (2012 and 2015 ACS)
+```
+
+## `lbl_na_if()`
+- Easier to use R's `NA` data structure to deal with missing values
+  like "N/A" and "Suppressed".
+
+
+```r
+data$PHONE2 &lt;- lbl_na_if(data$PHONE, ~.val %in% c(0, 8)) %&gt;%
+  as_factor()
+```
+
+. . . 
+
+<div id="htmlwidget-979938221be8a42f495d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-979938221be8a42f495d">{"x":{"filter":"none","data":[["[0] N/A","[1] No, no phone available","[2] Yes, phone available","[8] Suppressed (2012 and 2015 ACS)"],[null,"No, no phone available","Yes, phone available",null],[41133,30852,1404458,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+## `lbl_na_if()`
+- It works with both values (`.val`) and labels (`.lbl`).
+  So we could have also written something like this:
+
+```r
+drop_labels &lt;- c("N/A", "Suppressed (2012 and 2015 ACS)")
+
+data$PHONE3 &lt;- lbl_na_if(data$PHONE, ~.lbl %in% drop_labels) %&gt;%
+  as_factor()
+```
+
+## `lbl_collapse()`
+- `lbl_collapse()` allows you to take advantage of the hierarchical
+  structure of value labels.
+
+```r
+ipums_val_labels(data$EDUCD)
+#&gt; # A tibble: 44 x 2
+#&gt;      val lbl                      
+#&gt;    &lt;int&gt; &lt;chr&gt;                    
+#&gt;  1     0 N/A or no schooling      
+#&gt;  2     1 N/A                      
+#&gt;  3     2 No schooling completed   
+#&gt;  4    10 Nursery school to grade 4
+#&gt;  5    11 Nursery school, preschool
+#&gt;  6    12 Kindergarten             
+#&gt;  7    13 Grade 1, 2, 3, or 4      
+#&gt;  8    14 Grade 1                  
+#&gt;  9    15 Grade 2                  
+#&gt; 10    16 Grade 3                  
+#&gt; # … with 34 more rows
+```
+
+
+## `lbl_collapse()`
+- Maybe this is too much detail, so we want to collapse 
+  the last digit.
+
+
+```r
+data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
+  as_factor()
+```
+
+. . .
+
+<div id="htmlwidget-4e1417fd08b5b9371fb7" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4e1417fd08b5b9371fb7">{"x":{"filter":"none","data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[11811,50098,50114,40324,14976,14611,15871,10715,11500,11836,12399,27934,16637,12274,14020,28589,15962,40520,39440,46037,44797,67118,17653,170139,102651,12312,65168,13985,156110,12989,69752,9937,3888,6712,15917,147940,4280,3062,1303,1799,42621,13744,6898,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+## `lbl_relabel()`
+- `lbl_relabel()` has more granular control of what the values are assigned to.
+
+
+```r
+levels(data$EDUCD2)
+#&gt;  [1] "N/A or no schooling"       "Nursery school to grade 4"
+#&gt;  [3] "Grade 5, 6, 7, or 8"       "Grade 9"                  
+#&gt;  [5] "Grade 10"                  "Grade 11"                 
+#&gt;  [7] "Grade 12"                  "1 year of college"        
+#&gt;  [9] "2 years of college"        "3 years of college"       
+#&gt; [11] "4 years of college"        "5+ years of college"      
+#&gt; [13] "Missing"
+```
+
+## `lbl_relabel()`
+- Maybe the education variable is still too specific.
+
+
+```r
+data$EDUCD3 &lt;- data$EDUCD %&gt;%
+  lbl_collapse(~.val %/% 10) %&gt;% 
+  lbl_relabel(
+    lbl(2, "Less than High School") ~.val &gt; 0 &amp; .val &lt; 6,
+    lbl(3, "High school") ~.lbl == "Grade 12",
+    lbl(4, "Some college") ~str_detect(.lbl, "^[123] year(s)? of college$"),
+    lbl(5, "College or more") ~.val %in% c(10, 11)
+  ) %&gt;%
+  as_factor()
+```
+
+. . .
+
+<div id="htmlwidget-161885af319f0cc77e3d" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-161885af319f0cc77e3d">{"x":{"filter":"none","data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","High school","High school","High school","High school","High school","High school","Some college","Some college","Some college","Some college","Some college","Some college","Some college","College or more","College or more","College or more","College or more","College or more","College or more","College or more","College or more","College or more","Missing"],[11811,50098,50114,40324,14976,14611,15871,10715,11500,11836,12399,27934,16637,12274,14020,28589,15962,40520,39440,46037,44797,67118,17653,170139,102651,12312,65168,13985,156110,12989,69752,9937,3888,6712,15917,147940,4280,3062,1303,1799,42621,13744,6898,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+
+# Using data
+## Phone availability 
+- Now that they're factors, ready for use as regular R data
+
+```r
+graph_data &lt;- data %&gt;%
+  group_by(YEAR) %&gt;%
+  summarize(`% with phone` = weighted.mean(
+    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+  ))
+
+ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
+  geom_point() +
+  geom_line() + 
+  labs(
+    title = "Percent of Minnesota with phone line",
+    subtitle = paste0("Data source: ", ddi$ipums_project),
+    caption = paste(strwrap(ipums_var_desc(ddi, PHONE), 90), collapse = "\n")
+  )
+```
+
+
+## Phone availability
+![](ipumsr_webinar_files/figure-html/graph1-1.png)&lt;!-- --&gt;
+
+## Interpretation
+
+&gt; The 2008 ACS and 2008 PRCS instructed respondents to include cell 
+&gt; phone service; prior to 2008, this was not made explicit.
+&gt; 
+&gt; - https://usa.ipums.org/usa-action/variables/PHONE#comparability_section
+
+## Phone availability by education
+
+```r
+graph_data &lt;- data %&gt;%
+  group_by(YEAR, EDUCD3) %&gt;%
+  summarize(`% with phone` = weighted.mean(
+    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+  )) %&gt;%
+  ungroup()
+
+ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
+  geom_point() +
+  geom_line() + 
+  facet_wrap(~EDUCD3) + 
+  labs(
+    title = "Percent of Minnesota with phone line by education",
+    subtitle = paste0("Data source: ", ddi$ipums_project)
+  )
+```
+
+## Phone availability by education
+
+```
+#&gt; `summarise()` has grouped output by 'YEAR'. You can override using the `.groups` argument.
+```
+
+![](ipumsr_webinar_files/figure-html/graph2-1.png)&lt;!-- --&gt;
+
+# Geographic data
+## Getting geographic data
+- For IPUMS USA (and several other projects), we provide geographic
+  boundaries as well. For many areas, this includes harmonizing
+  boundary changes over time.
+
+- In our extract we included CONSPUMA, so let's checkout the 
+  description on the website 
+  (https://usa.ipums.org/usa/volii/tgeotools.shtml)
+  about it.
+
+- Note that CONSPUMA is a rather large geography, if you 
+  want finer geographic detail, you need to hope that
+  NHGIS has the table you want.
+
+## Loading shape data
+- `ipumsr` provides support for both sf and sp data, but I find the sf
+  package much easier to use.
+
+- To use, use the `ipums_read_sf()` function. (Mostly just a wrapper around
+  `sf::read_sf`).
+
+
+
+```r
+shape_data &lt;- read_ipums_sf("shape/")
+#&gt; options:        ENCODING=latin1 
+#&gt; Reading layer `ipums_conspuma' from data source `/mnt/rds/ipumsi-personal/ipumsi-tech/ipumsr-webinar/shape/ipums_conspuma.shp' using driver `ESRI Shapefile'
+#&gt; Simple feature collection with 543 features and 3 fields
+#&gt; Geometry type: MULTIPOLYGON
+#&gt; Dimension:     XY
+#&gt; Bounding box:  xmin: -7115713 ymin: -1337508 xmax: 2258225 ymax: 4591616
+#&gt; Projected CRS: USA_Contiguous_Albers_Equal_Area_Conic
+```
+
+## Joining shape data
+- We also provide helpers for merging data that work with both sf
+  and sp packages. 
+
+
+```r
+conspuma_data &lt;- data %&gt;%
+  group_by(CONSPUMA, YEAR) %&gt;%
+  summarize(PHONE = weighted.mean(
+    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+  ))
+#&gt; `summarise()` has grouped output by 'CONSPUMA'. You can override using the `.groups` argument.
+conspuma_data &lt;- ipums_shape_inner_join(
+  conspuma_data, 
+  shape_data, 
+  by = "CONSPUMA"
+)
+#&gt; Some observations were lost in the join (533 observations in the shape file and
+#&gt; 11 obervation in data). See `join_failures(...)` for more details.
+```
+
+## Plotting shape data
+- With the development version of ggplot2, can plot sf data:
+
+```r
+graph_data &lt;- conspuma_data %&gt;% 
+  filter(YEAR %in% c(1980, 1990, 2000, 2010))
+
+ggplot(graph_data, aes(fill = PHONE)) +
+  facet_wrap(~YEAR) + 
+  geom_sf()
+```
+
+## Plotting shape data
+![](ipumsr_webinar_files/figure-html/graph3-1.png)&lt;!-- --&gt;
+
+# Thanks!
+
+## Thanks!
+- Email: gfellis@umn.edu
+
+- ipumsr github: https://github.com/mnpopcenter/ipumsr
+
+- This presentation: https://rstudio.cloud/project/18776 /
+  https://github.com/gergness/ipumsr-tcrug
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>
