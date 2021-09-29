@@ -20,6 +20,37 @@ knitr::opts_chunk$set(
 )
 ```
 
+# Overview
+
+1. What is IPUMS?
+
+--
+
+2. What is ipumsr, and why use it?
+
+--
+
+3. Reading data into R
+
+--
+
+4. Exploring and manipulating metadata
+
+--
+
+5. Brief analysis example
+
+--
+
+6. Working with IPUMS geographic data
+
+--
+
+7. Preview of IPUMS API functionality
+
+
+---
+
 class: center
 
 # What is IPUMS?
@@ -42,13 +73,113 @@ class: center
 
 --
 
-## and available free of charge
+## and available for free at ipums.org
 
 ---
 
 # What is ipumsr?
 
 - R package developed by Greg Freedman Ellis
+
+--
+
+- Released in 2017
+
+--
+
+- Over 90,000 CRAN downloads
+
+--
+
+- Includes functions for
+  - Reading IPUMS data
+  - Exploring and manipulating metadata
+  - COMING SOON: Interacting with the IPUMS API
+    
+    
+???
+(Metadata such as value labels, variable labels, and detailed variable 
+descriptions.)
+
+Initial API support will be for IPUMS USA, with more projects to follow soon.
+
+
+
+---
+
+# Why use ipumsr?
+
+- One package for IPUMS microdata, aggregate data, and geography
+
+--
+
+- Specialized functions for IPUMS metadata
+
+--
+
+- Bundled how-to guides (vignettes)
+
+--
+
+- More features to come; let us know what you want!
+  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
+  - Email ipums+cran@umn.edu
+
+???
+Regarding "One package": Without ipumsr, you'd need to use a variety of
+different approaches from different packages to read in and explore IPUMS
+microdata (from projects such as IPUMS USA, CPS, and International), IPUMS
+aggregate data (from NHGIS or IHGIS), and IPUMS shapefiles. ipumsr provides one
+package with a consistent interface for working with all these different types
+of IPUMS data.
+
+Regarding "More features": The aforementioned IPUMS API support will be the next
+big feature. One idea that has come up before is adding tools for properly
+handling survey weights. Let us know what would be helpful to you via GitHub or 
+email.
+
+---
+
+# Why use ipumsr?
+
+And finally... 
+
+--
+
+- It's fast!
+
+```{r, echo=FALSE, fig.alt="Bar plot titled 'How long to read 3 million rows with 13 variables?' ipumsr::read_ipums_micro() is faster than "}
+results <- readRDS("ipumsr_speed_test.rds")
+suppressPackageStartupMessages({
+  # library(ggplot2)
+  library(dplyr)
+  suppressWarnings(library(gt))
+})
+# ggplot(
+#   data = results,
+#   aes(x = reorder(function_name, desc(time)), y = time, fill = value_labels)
+# ) +
+#   geom_col() + 
+#   coord_flip() +
+#   labs(
+#     title = "How long to read 3 million rows with 13 variables?",
+#     y = "Seconds",
+#     x = NULL
+#   ) +
+#   guides(fill = guide_legend("Includes value labels?"))
+results %>% 
+  arrange(time) %>% 
+  mutate(time = round(time, 1)) %>% 
+  rename(`Function` = function_name, `Time (seconds)` = time, 
+         `With metadata?` = value_labels) %>% 
+  gt() %>% 
+  tab_header("How long to read 3 million rows with 13 variables?") %>% 
+  cols_align("center", c(`Time (seconds)`, `With metadata?`))
+```
+
+???
+There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
+to read the data in with attached metadata, such as variable and value labels.
 
 ---
 
@@ -104,8 +235,17 @@ knitr::include_graphics("download_screenshot_1.png")
     - "Save Link As..." (in Firefox)
     - "Save link as..." (in Chrome)
     - "Download Linked File" (in Safari)
-    
---
+
+???
+Make sure to save the data and DDI files in the same location.
+
+---
+
+# Downloading your data extract
+
+```{r echo=FALSE, fig.alt="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted"}
+knitr::include_graphics("download_screenshot_1.png")
+```
 
 - The "R" link on the downloads page contains this helper code:
 
@@ -118,16 +258,6 @@ if (!require("ipumsr")) stop("Reading IPUMS data into R requires the ipumsr pack
 ddi <- read_ipums_ddi("ipumsi_00059.xml")
 data <- read_ipums_micro(ddi)
 ```
-
-
-???
-Make sure to save the data and DDI files in the same location.
-
----
-
-# Downloading your data extract
-
-
 
 
 ---
@@ -147,26 +277,12 @@ library(dplyr)
 library(ggplot2)
 library(stringr)
 library(sf)
+library(purrr)
+library(DT)
 ```
 
----
-
-# ipumsr speed comparison
-
-```{r, echo=FALSE, fig.alt="Click Download .DAT link to download the data, then right-click the DDI link and choose Save Link As..."}
-results <- readRDS("ipumsr_speed_test.rds")
-results %>% 
-  ggplot(aes(x = reorder(function_name, desc(time)), y = time, fill = value_labels)) +
-    geom_col() + 
-    coord_flip() +
-    labs(
-      title = "How long to read 3 million rows with 13 variables?",
-      y = "Seconds",
-      x = NULL
-    ) +
-    guides(fill = guide_legend("Includes value labels?"))
-```
-
+???
+These packages are used in some of the examples we will walk through.
 
 ---
 
@@ -183,6 +299,61 @@ data <- read_ipums_micro(ddi)
 # What's in my extract again?
 
 --
+
+Maybe I wrote an informative extract description?
+
+```{r include=FALSE}
+ddi$extract_notes <- 
+  paste0(
+    "User-provided description: Revision of(Revision of(Revision of(Revision ", 
+    "of(my extract))))"
+  )
+```
+
+```{r}
+ddi$extract_notes
+```
+
+--
+
+No such luck 😞
+
+---
+
+# What's in my extract again?
+
+We can print the names of our variables:
+
+--
+
+```{r}
+names(data)
+```
+
+
+But often variable names aren't self-explanatory.
+
+--
+
+Let's leverage that attached metadata:
+
+```{r}
+ipums_var_label(ddi, PHONE)
+```
+
+
+--
+
+```{r}
+print_names_and_labels <- function(df) {
+  map2_dfr(
+    names(data), data, 
+    ~tibble(varname = .x, varlabel = ipums_var_label(.y))
+  ) %>% 
+    datatable()
+}
+print_names_and_labels(data)
+```
 
 
 

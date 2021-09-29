@@ -31,17 +31,48 @@ class: center, middle, inverse, title-slide
 
 
 
+# Overview
+
+1. What is IPUMS?
+
+--
+
+2. What is ipumsr, and why use it?
+
+--
+
+3. Reading data into R
+
+--
+
+4. Exploring and manipulating metadata
+
+--
+
+5. Brief analysis example
+
+--
+
+6. Working with IPUMS geographic data
+
+--
+
+7. Preview of IPUMS API functionality
+
+
+---
+
 class: center
 
 # What is IPUMS?
 
 --
 
-# IPUMS is **data**
+## IPUMS is **data**
 
 --
 
-## from censuses and surveys from around the world,
+## from censuses and surveys around the world,
 
 --
 
@@ -53,13 +84,461 @@ class: center
 
 --
 
-## and available free of charge
+## and available for free at ipums.org
 
 ---
 
 # What is ipumsr?
 
 - R package developed by Greg Freedman Ellis
+
+--
+
+- Released in 2017
+
+--
+
+- Over 90,000 CRAN downloads
+
+--
+
+- Includes functions for
+  - Reading IPUMS data
+  - Exploring and manipulating metadata
+  - COMING SOON: Interacting with the IPUMS API
+    
+    
+???
+(Metadata such as value labels, variable labels, and detailed variable 
+descriptions.)
+
+Initial API support will be for IPUMS USA, with more projects to follow soon.
+
+
+
+---
+
+# Why use ipumsr?
+
+- One package for IPUMS microdata, aggregate data, and geography
+
+--
+
+- Specialized functions for IPUMS metadata
+
+--
+
+- Bundled how-to guides (vignettes)
+
+--
+
+- More features to come
+  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
+  - Email ipums+cran@umn.edu
+
+???
+Regarding "One package": Without ipumsr, you'd need to use a variety of
+different approaches from different packages to read in and explore IPUMS
+microdata (from projects such as IPUMS USA, CPS, and International), IPUMS
+aggregate data (from NHGIS or IHGIS), and IPUMS shapefiles. ipumsr provides one
+package with a consistent interface for working with all these different types
+of IPUMS data.
+
+Regarding "More features": The aforementioned IPUMS API support will be the next
+big feature. One idea that has come up before is adding tools for properly
+handling survey weights. Let us know what would be helpful to you via GitHub or 
+email.
+
+---
+
+# Why use ipumsr?
+
+And finally... 
+
+--
+
+- It's fast!
+
+<div id="yshpggsnwa" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#yshpggsnwa .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#yshpggsnwa .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#yshpggsnwa .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#yshpggsnwa .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#yshpggsnwa .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#yshpggsnwa .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#yshpggsnwa .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#yshpggsnwa .gt_group_heading {
+  padding: 8px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yshpggsnwa .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#yshpggsnwa .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#yshpggsnwa .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#yshpggsnwa .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#yshpggsnwa .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 12px;
+}
+
+#yshpggsnwa .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yshpggsnwa .gt_first_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#yshpggsnwa .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#yshpggsnwa .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding: 4px;
+}
+
+#yshpggsnwa .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#yshpggsnwa .gt_sourcenote {
+  font-size: 90%;
+  padding: 4px;
+}
+
+#yshpggsnwa .gt_left {
+  text-align: left;
+}
+
+#yshpggsnwa .gt_center {
+  text-align: center;
+}
+
+#yshpggsnwa .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#yshpggsnwa .gt_font_normal {
+  font-weight: normal;
+}
+
+#yshpggsnwa .gt_font_bold {
+  font-weight: bold;
+}
+
+#yshpggsnwa .gt_font_italic {
+  font-style: italic;
+}
+
+#yshpggsnwa .gt_super {
+  font-size: 65%;
+}
+
+#yshpggsnwa .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 65%;
+}
+</style>
+<table class="gt_table">
+  <thead class="gt_header">
+    <tr>
+      <th colspan="3" class="gt_heading gt_title gt_font_normal gt_bottom_border" style>How long to read 3 million rows with 13 variables?</th>
+    </tr>
+    
+  </thead>
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Function</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Time (seconds)</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">With metadata?</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td class="gt_row gt_left">data.table::fread()</td>
+<td class="gt_row gt_center">2.5</td>
+<td class="gt_row gt_center">No</td></tr>
+    <tr><td class="gt_row gt_left">vroom::vroom()</td>
+<td class="gt_row gt_center">2.5</td>
+<td class="gt_row gt_center">No</td></tr>
+    <tr><td class="gt_row gt_left">ipumsr::read_ipums_micro()</td>
+<td class="gt_row gt_center">3.3</td>
+<td class="gt_row gt_center">Yes</td></tr>
+    <tr><td class="gt_row gt_left">haven::read_dta()</td>
+<td class="gt_row gt_center">7.8</td>
+<td class="gt_row gt_center">Yes</td></tr>
+    <tr><td class="gt_row gt_left">haven::read_sav()</td>
+<td class="gt_row gt_center">9.4</td>
+<td class="gt_row gt_center">Yes</td></tr>
+    <tr><td class="gt_row gt_left">readr::read_csv()</td>
+<td class="gt_row gt_center">9.8</td>
+<td class="gt_row gt_center">No</td></tr>
+  </tbody>
+  
+  
+</table>
+</div>
+
+???
+There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
+to read the data in with attached metadata, such as variable and value labels.
 
 ---
 
@@ -116,8 +595,15 @@ renv::restore()
     - "Save Link As..." (in Firefox)
     - "Save link as..." (in Chrome)
     - "Download Linked File" (in Safari)
-    
---
+
+???
+Make sure to save the data and DDI files in the same location.
+
+---
+
+# Downloading your data extract
+
+&lt;img src="download_screenshot_1.png" title="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted" alt="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted"  /&gt;
 
 - The "R" link on the downloads page contains this helper code:
 
@@ -131,16 +617,6 @@ if (!require("ipumsr")) stop("Reading IPUMS data into R requires the ipumsr pack
 ddi &lt;- read_ipums_ddi("ipumsi_00059.xml")
 data &lt;- read_ipums_micro(ddi)
 ```
-
-
-???
-Make sure to save the data and DDI files in the same location.
-
----
-
-# Downloading your data extract
-
-
 
 
 ---
@@ -157,12 +633,8 @@ library(sf)
 
 
 
----
-
-# ipumsr speed comparison
-
-&lt;img src="ipumsr_webinar_files/figure-html/unnamed-chunk-8-1.png" title="Click Download .DAT link to download the data, then right-click the DDI link and choose Save Link As..." alt="Click Download .DAT link to download the data, then right-click the DDI link and choose Save Link As..."  /&gt;
-
+???
+These packages are used in some of the examples we will walk through.
 
 ---
 
@@ -182,6 +654,66 @@ data &lt;- read_ipums_micro(ddi)
 # What's in my extract again?
 
 --
+
+Maybe I wrote an informative extract description?
+
+
+
+
+```r
+ddi$extract_notes
+#&gt; [1] "User-provided description: Revision of(Revision of(Revision of(Revision of(my extract))))"
+```
+
+--
+
+No such luck 😞
+
+---
+
+# What's in my extract again?
+
+We can print the names of our variables:
+
+--
+
+
+```r
+names(data)
+#&gt;  [1] "YEAR"     "DATANUM"  "SERIAL"   "HHWT"     "STATEFIP" "CONSPUMA"
+#&gt;  [7] "GQ"       "PHONE"    "PERNUM"   "PERWT"    "EDUC"     "EDUCD"
+```
+
+
+But often variable names aren't self-explanatory.
+
+--
+
+Let's leverage that attached metadata:
+
+
+```r
+ipums_var_label(ddi, PHONE)
+#&gt; [1] "Telephone availability"
+```
+
+
+--
+
+
+```r
+print_names_and_labels &lt;- function(df) {
+  map2_dfr(
+    names(data), data, 
+    ~tibble(varname = .x, varlabel = ipums_var_label(.y))
+  ) %&gt;% 
+    datatable()
+}
+print_names_and_labels(data)
+```
+
+<div id="htmlwidget-3a96b3db60f146e2adca" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-3a96b3db60f146e2adca">{"x":{"filter":"none","data":[["1","2","3","4","5","6","7","8","9","10","11","12"],["YEAR","DATANUM","SERIAL","HHWT","STATEFIP","CONSPUMA","GQ","PHONE","PERNUM","PERWT","EDUC","EDUCD"],["Census year","Data set number","Household serial number","Household weight","State (FIPS code)","Consistent PUMA, 1980-1990-2000","Group quarters status","Telephone availability","Person number in sample unit","Person weight","Educational attainment [general version]","Educational attainment [detailed version]"]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th> <\/th>\n      <th>varname<\/th>\n      <th>varlabel<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"order":[],"autoWidth":false,"orderClasses":false,"columnDefs":[{"orderable":false,"targets":0}]}},"evals":[],"jsHooks":[]}</script>
 
 
 
@@ -294,8 +826,8 @@ data$GQ2 &lt;- as_factor(data$GQ)
 #&gt; Call `lifecycle::last_warnings()` to see where this warning was generated.
 ```
 
-<div id="htmlwidget-0c7db1e19c7e6f69ffa3" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0c7db1e19c7e6f69ffa3">{"x":{"filter":"none","data":[["[0] Vacant unit","[1] Households under 1970 definition","[2] Additional households under 1990 definition","[3] Group quarters--Institutions","[4] Other group quarters","[5] Additional households under 2000 definition","[6] Fragment"],["Vacant unit","Households under 1970 definition","Additional households under 1990 definition","Group quarters--Institutions","Other group quarters","Additional households under 2000 definition","Fragment"],[0,1433423,1712,19592,21541,175,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-bc87fcf2917264cc2312" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-bc87fcf2917264cc2312">{"x":{"filter":"none","data":[["[0] Vacant unit","[1] Households under 1970 definition","[2] Additional households under 1990 definition","[3] Group quarters--Institutions","[4] Other group quarters","[5] Additional households under 2000 definition","[6] Fragment"],["Vacant unit","Households under 1970 definition","Additional households under 1990 definition","Group quarters--Institutions","Other group quarters","Additional households under 2000 definition","Fragment"],[0,1433423,1712,19592,21541,175,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 
 ## `lbl_clean()`
@@ -333,8 +865,8 @@ data$STATEFIP2 &lt;- data$STATEFIP %&gt;%
 
 . . .
 
-<div id="htmlwidget-3d77d5cd3a9bc19b350e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3d77d5cd3a9bc19b350e">{"x":{"filter":"none","data":[["[27] Minnesota"],["Minnesota"],[1476443]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-93175df5987a4a4eff19" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-93175df5987a4a4eff19">{"x":{"filter":"none","data":[["[27] Minnesota"],["Minnesota"],[1476443]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ## `lbl_na_if()`
 - `lbl_na_if()` allows you to set certain values or labels 
@@ -364,8 +896,8 @@ data$PHONE2 &lt;- lbl_na_if(data$PHONE, ~.val %in% c(0, 8)) %&gt;%
 
 . . . 
 
-<div id="htmlwidget-979938221be8a42f495d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-979938221be8a42f495d">{"x":{"filter":"none","data":[["[0] N/A","[1] No, no phone available","[2] Yes, phone available","[8] Suppressed (2012 and 2015 ACS)"],[null,"No, no phone available","Yes, phone available",null],[41133,30852,1404458,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d2c98e0cadaae4672926" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d2c98e0cadaae4672926">{"x":{"filter":"none","data":[["[0] N/A","[1] No, no phone available","[2] Yes, phone available","[8] Suppressed (2012 and 2015 ACS)"],[null,"No, no phone available","Yes, phone available",null],[41133,30852,1404458,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ## `lbl_na_if()`
 - It works with both values (`.val`) and labels (`.lbl`).
@@ -413,8 +945,8 @@ data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
 
 . . .
 
-<div id="htmlwidget-4e1417fd08b5b9371fb7" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-4e1417fd08b5b9371fb7">{"x":{"filter":"none","data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[11811,50098,50114,40324,14976,14611,15871,10715,11500,11836,12399,27934,16637,12274,14020,28589,15962,40520,39440,46037,44797,67118,17653,170139,102651,12312,65168,13985,156110,12989,69752,9937,3888,6712,15917,147940,4280,3062,1303,1799,42621,13744,6898,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b85c60a867ed500781f1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b85c60a867ed500781f1">{"x":{"filter":"none","data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[11811,50098,50114,40324,14976,14611,15871,10715,11500,11836,12399,27934,16637,12274,14020,28589,15962,40520,39440,46037,44797,67118,17653,170139,102651,12312,65168,13985,156110,12989,69752,9937,3888,6712,15917,147940,4280,3062,1303,1799,42621,13744,6898,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ## `lbl_relabel()`
 - `lbl_relabel()` has more granular control of what the values are assigned to.
@@ -449,8 +981,8 @@ data$EDUCD3 &lt;- data$EDUCD %&gt;%
 
 . . .
 
-<div id="htmlwidget-161885af319f0cc77e3d" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-161885af319f0cc77e3d">{"x":{"filter":"none","data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","High school","High school","High school","High school","High school","High school","Some college","Some college","Some college","Some college","Some college","Some college","Some college","College or more","College or more","College or more","College or more","College or more","College or more","College or more","College or more","College or more","Missing"],[11811,50098,50114,40324,14976,14611,15871,10715,11500,11836,12399,27934,16637,12274,14020,28589,15962,40520,39440,46037,44797,67118,17653,170139,102651,12312,65168,13985,156110,12989,69752,9937,3888,6712,15917,147940,4280,3062,1303,1799,42621,13744,6898,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-254e40b7d77b79b14b05" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-254e40b7d77b79b14b05">{"x":{"filter":"none","data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","Less than High School","High school","High school","High school","High school","High school","High school","Some college","Some college","Some college","Some college","Some college","Some college","Some college","College or more","College or more","College or more","College or more","College or more","College or more","College or more","College or more","College or more","Missing"],[11811,50098,50114,40324,14976,14611,15871,10715,11500,11836,12399,27934,16637,12274,14020,28589,15962,40520,39440,46037,44797,67118,17653,170139,102651,12312,65168,13985,156110,12989,69752,9937,3888,6712,15917,147940,4280,3062,1303,1799,42621,13744,6898,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 # Using data
 ## Phone availability 
