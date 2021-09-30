@@ -372,6 +372,8 @@ ipums_var_desc(ddi, PHONE) %>% strwrap(60)
 ipums_val_labels(ddi, PHONE)
 ```
 
+---
+
 ## A nicer view of metadata
 - `ipums_view()` makes a nicely formatted static html page for 
   just your extract using htmltools.
