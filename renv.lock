@@ -319,15 +319,10 @@
     },
     "ipumsr": {
       "Package": "ipumsr",
-      "Version": "0.4.5.9000",
-      "Source": "GitHub",
-      "RemoteType": "github",
-      "RemoteHost": "github.umn.edu/api/v3",
-      "RemoteRepo": "ipumsr",
-      "RemoteUsername": "mpc",
-      "RemoteRef": "less_tibbly",
-      "RemoteSha": "8047860634c84deca1b80c00657d19817ee59950",
-      "Hash": "2571f7931ac0fd42ccb720d3e34ead8c"
+      "Version": "0.4.5",
+      "Source": "Repository",
+      "Repository": "RSPM",
+      "Hash": "0ef39e9cf7cef7292d511816a0397c66"
     },
     "isoband": {
       "Package": "isoband",
