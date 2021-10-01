@@ -48,6 +48,29 @@ knitr::opts_chunk$set(
 
 7. Preview of IPUMS API functionality
 
+---
+
+# Overview
+
+<style>
+  .greyed-out {
+    color: #D3D3D3;
+  }
+</style>
+
+1. What is IPUMS?
+
+2. .greyed-out[What is ipumsr, and why use it?]
+
+3. .greyed-out[Reading data into R]
+
+4. .greyed-out[Exploring and manipulating metadata]
+
+5. .greyed-out[Brief analysis example]
+
+6. .greyed-out[Working with IPUMS geographic data]
+
+7. .greyed-out[Preview of IPUMS API functionality]
 
 ---
 
@@ -93,7 +116,7 @@ class: center
 
 - Includes functions for
   - Reading IPUMS data
-  - Exploring and manipulating metadata
+  - Exploring and manipulating IPUMS metadata
   - COMING SOON: Interacting with the IPUMS API
     
     
@@ -111,20 +134,6 @@ Initial API support will be for IPUMS USA, with more projects to follow soon.
 
 - One package for IPUMS microdata, aggregate data, and geography
 
---
-
-- Specialized functions for IPUMS metadata
-
---
-
-- Bundled how-to guides (vignettes)
-
---
-
-- More features to come; let us know what you want!
-  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
-  - Email ipums+cran@umn.edu
-
 ???
 Regarding "One package": Without ipumsr, you'd need to use a variety of
 different approaches from different packages to read in and explore IPUMS
@@ -133,10 +142,42 @@ aggregate data (from NHGIS or IHGIS), and IPUMS shapefiles. ipumsr provides one
 package with a consistent interface for working with all these different types
 of IPUMS data.
 
+---
+
+class: center middle inverse
+background-image: url(https://comicvine.gamespot.com/a/uploads/original/5/52246/1963701-the_one_ring_02.jpg)
+background-size: cover
+
+<span role="img" aria-label="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."></span>
+
+# One package to rule them all
+
+```{r echo=FALSE, fig.alt="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."}
+knitr::include_graphics("transparent_blank.png")
+```
+
+---
+
+# Why use ipumsr?
+
+- One package for IPUMS microdata, aggregate data, and geography
+
+- Specialized functions for viewing and manipulating IPUMS metadata
+
+--
+
+- Bundled how-to guides (vignettes)
+
+--
+
+- Potential to add more features (e.g. API support); let us know what you want!
+  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
+  - Email ipums+cran@umn.edu
+
+???
 Regarding "More features": The aforementioned IPUMS API support will be the next
-big feature. One idea that has come up before is adding tools for properly
-handling survey weights. Let us know what would be helpful to you via GitHub or 
-email.
+big feature. Another potential new feature is adding tools for properly handling
+survey weights. Let us know what would be helpful to you via GitHub or email.
 
 ---
 
@@ -147,8 +188,9 @@ And finally...
 --
 
 - It's fast!
+  - Time to read 3 million rows with 13 variables:
 
-```{r, echo=FALSE, fig.alt="Bar plot titled 'How long to read 3 million rows with 13 variables?' ipumsr::read_ipums_micro() is faster than "}
+```{r, echo=FALSE}
 results <- readRDS("ipumsr_speed_test.rds")
 suppressPackageStartupMessages({
   # library(ggplot2)
@@ -173,7 +215,7 @@ results %>%
   rename(`Function` = function_name, `Time (seconds)` = time, 
          `With metadata?` = value_labels) %>% 
   gt() %>% 
-  tab_header("How long to read 3 million rows with 13 variables?") %>% 
+  # tab_header("How long to read 3 million rows with 13 variables?") %>% 
   cols_align("center", c(`Time (seconds)`, `With metadata?`))
 ```
 
@@ -194,9 +236,13 @@ class: center, middle
 install.packages("ipumsr")
 ```
 
+???
+Now that we've convinced you of how great ipumsr is, you're probably asking 
+"How do I get my hands on it?"
+
 --
 
-## Or if you want the development version
+### Or if you want the development version
 
 ```{r, eval = FALSE}
 if (!require(remotes)) install.packages("remotes")
@@ -205,9 +251,10 @@ remotes::install_github("mnpopcenter/ipumsr")
 
 ---
 
-# Installing other packages
+# Installing packages used in this webinar
 
-This project uses renv to track package dependencies.
+This project uses [renv](https://rstudio.github.io/renv/articles/renv.html) to
+track package dependencies.
 
 --
 
@@ -243,8 +290,8 @@ Make sure to save the data and DDI files in the same location.
 
 # Downloading your data extract
 
-```{r echo=FALSE, fig.alt="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted"}
-knitr::include_graphics("download_screenshot_1.png")
+```{r echo=FALSE, fig.alt="Screenshot of IPUMS data download page with the 'R' link highlighted"}
+knitr::include_graphics("download_screenshot_2.png")
 ```
 
 - The "R" link on the downloads page contains this helper code:
@@ -259,16 +306,27 @@ ddi <- read_ipums_ddi("ipumsi_00059.xml")
 data <- read_ipums_micro(ddi)
 ```
 
+???
+This helper code checks that you have ipumsr installed, and if you do, it reads
+in the DDI codebook and data into separate objects. As an aside, in case anyone
+was curious, DDI stands for "Data Documentation Initiative" -- the DDI project
+sets standards for documenting datasets, and the codebooks for most IPUMS
+projects follow this standard.
+
+We'll see this same code pattern in just a moment when we look at how to read 
+in your data.
 
 ---
 
-# Required packages
+# Loading packages
 ```{r eval=FALSE}
 library(ipumsr)
 library(dplyr)
 library(ggplot2)
 library(stringr)
 library(sf)
+library(purrr)
+library(DT)
 ```
 
 ```{r include=FALSE}
@@ -293,6 +351,33 @@ ddi <- read_ipums_ddi("usa_00013.xml")
 
 data <- read_ipums_micro(ddi)
 ```
+
+???
+Here we see the same code pattern from the "R" helper file above, of reading the
+metadata from the codebook into an object named "ddi", and using that object to 
+read in the data.
+
+---
+
+# What's in that `ddi` object?
+
+```{r}
+names(ddi)
+```
+
+---
+
+# What's in that `ddi` object?
+
+```{r}
+ddi$var_info
+```
+
+
+???
+You don't need to know this to use ipumsr, but it might help you understand 
+what is going on when you read in the DDI codebook and then the data.
+
 
 ---
 
@@ -335,31 +420,12 @@ But often variable names aren't self-explanatory.
 
 --
 
-Let's leverage that attached metadata:
-
-```{r}
-ipums_var_label(ddi, PHONE)
-```
-
-
---
-
-```{r}
-print_names_and_labels <- function(df) {
-  map2_dfr(
-    names(data), data, 
-    ~tibble(varname = .x, varlabel = ipums_var_label(.y))
-  ) %>% 
-    datatable()
-}
-print_names_and_labels(data)
-```
-
+Let's leverage that attached metadata.
 
 
 ---
 
-## Available metadata
+# Available metadata
 - Some (but not all) of the documentation comes with the ddi.
 ```{r}
 ipums_var_label(ddi, PHONE)
@@ -367,31 +433,43 @@ ipums_var_label(ddi, PHONE)
 ipums_var_desc(ddi, PHONE) %>% strwrap(60)
 ```
 
-## Available metadata
+---
+
+# Available metadata
 ```{r}
 ipums_val_labels(ddi, PHONE)
 ```
 
 ---
 
-## A nicer view of metadata
-- `ipums_view()` makes a nicely formatted static html page for 
-  just your extract using htmltools.
+
+# A nicer view of metadata
 
 ```{r, eval=FALSE}
 ipums_view(ddi)
 ```
-![](ipums_view_screenshot.png){width=70%}
 
-## Data
+```{r echo=FALSE, fig.alt="Screenshot of static html page generated by function 'ipums_view', showing variable label and variable description for the variable 'PHONE'."}
+knitr::include_graphics("ipums_view_screenshot.png")
+```
+
+???
+The function ipums_view() makes a nicely-formatted static html page that allows 
+you to browse the metadata associated with your data extract.
+
+---
+
+
+# Data
 A regular `tbl_df` data.frame
 ```{r}
 data
 ```
 
+---
+
 # Wrangling value labels
 
-## Wrangling value labels
 - IPUMS value labels don't translate that well to R's factors.
 
     - (Factors always have a label, and always have values starting at 1)
@@ -416,7 +494,7 @@ label_before_after <- function(df, before_var, after_var, label_fun) {
   all_vals <- ipums_val_labels(df, !!before_var) %>% pull(val)
   attributes(all_vals) <- attributes(df %>% pull(!!before_var))
   
-  unique_val_df <- dplyr::data_frame(val = all_vals) %>%
+  unique_val_df <- dplyr::tibble(val = all_vals) %>%
     mutate(
       after = label_fun(val),
       `before ([val] label)` = as_factor(val, "both")
@@ -445,14 +523,19 @@ label_before_after <- function(df, before_var, after_var, label_fun) {
 }
 ```
 
-## `as_factor()`
+---
+
+# `as_factor()`
 - `as_factor()` (from haven) converts directly to a factor.
 
 ```{r}
 ipums_val_labels(data$GQ)
 ```
 
-## `as_factor()` 
+---
+
+# `as_factor()`
+
 - Suppose we want to keep these labels exactly as they are.
 
 ```{r}
@@ -465,15 +548,18 @@ data$GQ2 <- as_factor(data$GQ)
 label_before_after(data, GQ, GQ2, as_factor)
 ```
 
+---
 
-## `lbl_clean()`
+# `lbl_clean()`
 - `lbl_clean()` gets rid of unused value labels.
 
 ```{r}
 ipums_val_labels(data$STATEFIP)
 ```
 
-## `lbl_clean()`
+---
+
+# `lbl_clean()`
 - Since our extract only has Minnesota, we don't want all of
  these values.
 
@@ -489,7 +575,9 @@ data$STATEFIP2 <- data$STATEFIP %>%
 label_before_after(data, STATEFIP, STATEFIP2, . %>% lbl_clean() %>% as_factor())
 ```
 
-## `lbl_na_if()`
+---
+
+# `lbl_na_if()`
 - `lbl_na_if()` allows you to set certain values or labels 
   to missing.
 
@@ -497,7 +585,10 @@ label_before_after(data, STATEFIP, STATEFIP2, . %>% lbl_clean() %>% as_factor())
 ipums_val_labels(data$PHONE)
 ```
 
-## `lbl_na_if()`
+---
+
+# `lbl_na_if()`
+
 - Easier to use R's `NA` data structure to deal with missing values
   like "N/A" and "Suppressed".
 
@@ -519,7 +610,9 @@ label_before_after(
 )
 ```
 
-## `lbl_na_if()`
+---
+
+# `lbl_na_if()`
 - It works with both values (`.val`) and labels (`.lbl`).
   So we could have also written something like this:
 ```{r}
@@ -529,15 +622,19 @@ data$PHONE3 <- lbl_na_if(data$PHONE, ~.lbl %in% drop_labels) %>%
   as_factor()
 ```
 
-## `lbl_collapse()`
+---
+
+# `lbl_collapse()`
 - `lbl_collapse()` allows you to take advantage of the hierarchical
   structure of value labels.
 ```{r}
 ipums_val_labels(data$EDUCD)
 ```
 
+---
 
-## `lbl_collapse()`
+# `lbl_collapse()`
+
 - Maybe this is too much detail, so we want to collapse 
   the last digit.
 
@@ -558,14 +655,19 @@ label_before_after(
 )
 ```
 
-## `lbl_relabel()`
+---
+
+# `lbl_relabel()`
 - `lbl_relabel()` has more granular control of what the values are assigned to.
 
 ```{r}
 levels(data$EDUCD2)
 ```
 
-## `lbl_relabel()`
+---
+
+# `lbl_relabel()`
+
 - Maybe the education variable is still too specific.
 
 ```{r}
@@ -580,7 +682,9 @@ data$EDUCD3 <- data$EDUCD %>%
   as_factor()
 ```
 
-. . .
+---
+
+# `lbl_relabel()`
 
 ```{r, echo = FALSE}
 label_before_after(
@@ -599,10 +703,16 @@ label_before_after(
 )
 ```
 
-# Using data
-## Phone availability 
+---
+class: center middle
+
+# Brief analysis example
+
+---
+
+# Phone availability 
 - Now that they're factors, ready for use as regular R data
-```{r graph1, eval = FALSE}
+```{r graph1, eval=FALSE}
 graph_data <- data %>%
   group_by(YEAR) %>%
   summarize(`% with phone` = weighted.mean(
@@ -619,26 +729,30 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
   )
 ```
 
+---
 
-## Phone availability
-```{r graph1, echo = FALSE}
+# Phone availability
+```{r graph1, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 ```
 
-## Interpretation
+---
+
+# Interpretation
 
 > The 2008 ACS and 2008 PRCS instructed respondents to include cell 
 > phone service; prior to 2008, this was not made explicit.
 > 
 > - https://usa.ipums.org/usa-action/variables/PHONE#comparability_section
 
-## Phone availability by education
-```{r graph2, eval = FALSE}
+---
+
+# Phone availability by education
+```{r graph2, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 graph_data <- data %>%
   group_by(YEAR, EDUCD3) %>%
   summarize(`% with phone` = weighted.mean(
     PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-  )) %>%
-  ungroup()
+  ), .groups = "drop")
 
 ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
   geom_point() +
@@ -650,12 +764,15 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
   )
 ```
 
-## Phone availability by education
-```{r graph2, echo = FALSE}
-```
+---
+
+class: center middle
 
 # Geographic data
-## Getting geographic data
+
+---
+
+# Getting geographic data
 - For IPUMS USA (and several other projects), we provide geographic
   boundaries as well. For many areas, this includes harmonizing
   boundary changes over time.
@@ -669,7 +786,9 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
   want finer geographic detail, you need to hope that
   NHGIS has the table you want.
 
-## Loading shape data
+---
+
+# Loading shape data
 - `ipumsr` provides support for both sf and sp data, but I find the sf
   package much easier to use.
 
@@ -681,7 +800,9 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
 shape_data <- read_ipums_sf("shape/")
 ```
 
-## Joining shape data
+---
+
+# Joining shape data
 - We also provide helpers for merging data that work with both sf
   and sp packages. 
 
@@ -699,9 +820,11 @@ conspuma_data <- ipums_shape_inner_join(
 )
 ```
 
-## Plotting shape data
+---
+
+# Plotting shape data
 - With the development version of ggplot2, can plot sf data:
-```{r graph3, eval = FALSE}
+```{r graph3, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 graph_data <- conspuma_data %>% 
   filter(YEAR %in% c(1980, 1990, 2000, 2010))
 
@@ -710,16 +833,11 @@ ggplot(graph_data, aes(fill = PHONE)) +
   geom_sf()
 ```
 
-## Plotting shape data
-```{r graph3, echo = FALSE}
-```
+---
 
 # Thanks!
-
-## Thanks!
-- Email: gfellis@umn.edu
+- Email: ipums+cran@umn.edu
 
 - ipumsr github: https://github.com/mnpopcenter/ipumsr
 
-- This presentation: https://rstudio.cloud/project/18776 /
-  https://github.com/gergness/ipumsr-tcrug
+- This presentation: https://github.com/dtburk/ipumsr-webinar
