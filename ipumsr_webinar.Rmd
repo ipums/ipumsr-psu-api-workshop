@@ -55,23 +55,35 @@ knitr::opts_chunk$set(
 <style>
   .greyed-out {
     color: #D3D3D3;
+    text-indent: 20px;
   }
 </style>
 
-1. What is IPUMS?
+<style>
+  .strong {
+    color: #000000;
+    text-indent: 20px;
+  }
+</style>
 
-2. .greyed-out[What is ipumsr, and why use it?]
+.greyed-out[
 
-3. .greyed-out[Reading data into R]
 
-4. .greyed-out[Exploring and manipulating metadata]
+.strong[`1.` What is IPUMS?]
 
-5. .greyed-out[Brief analysis example]
+`2.` What is ipumsr, and why use it?
 
-6. .greyed-out[Working with IPUMS geographic data]
+`3.` Reading data into R
 
-7. .greyed-out[Preview of IPUMS API functionality]
+`4.` Exploring and manipulating metadata
 
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+]
 ---
 
 class: center
