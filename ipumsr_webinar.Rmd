@@ -50,7 +50,7 @@ knitr::opts_chunk$set(
 
 ---
 
-# Overview
+# Overview 1
 
 <style>
   .greyed-out {
@@ -84,6 +84,54 @@ knitr::opts_chunk$set(
 `7.` Preview of IPUMS API functionality
 
 ]
+
+
+
+# Overview 2
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+.strong[`2.` What is ipumsr, and why use it?]
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+]
+
+
+
+# Overview 3
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+.strong[`3.` Reading data into R]
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+]
+
+
 ---
 
 class: center
