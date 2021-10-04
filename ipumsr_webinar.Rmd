@@ -86,53 +86,9 @@ knitr::opts_chunk$set(
 ]
 
 
-
-# Overview 2
-
-.greyed-out[
-
-
-`1.` What is IPUMS?
-
-.strong[`2.` What is ipumsr, and why use it?]
-
-`3.` Reading data into R
-
-`4.` Exploring and manipulating metadata
-
-`5.` Brief analysis example
-
-`6.` Working with IPUMS geographic data
-
-`7.` Preview of IPUMS API functionality
-
-]
-
-
-
-# Overview 3
-
-.greyed-out[
-
-
-`1.` What is IPUMS?
-
-`2.` What is ipumsr, and why use it?
-
-.strong[`3.` Reading data into R]
-
-`4.` Exploring and manipulating metadata
-
-`5.` Brief analysis example
-
-`6.` Working with IPUMS geographic data
-
-`7.` Preview of IPUMS API functionality
-
-]
-
-
 ---
+
+
 
 class: center
 
@@ -159,6 +115,33 @@ class: center
 ## and available for free at ipums.org
 
 ---
+
+
+# Overview 2
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+.strong[`2.` What is ipumsr, and why use it?]
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+]
+
+
+---
+
+
 
 # What is ipumsr?
 
@@ -404,6 +387,31 @@ These packages are used in some of the examples we will walk through.
 
 ---
 
+
+# Overview 3
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+.strong[`3.` Reading data into R]
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+]
+
+
+---
+
 # Read in the data
 - Using commands `read_ipums_ddi()` and `read_ipums_micro()`
 ```{r}
@@ -482,6 +490,31 @@ But often variable names aren't self-explanatory.
 
 Let's leverage that attached metadata.
 
+
+---
+
+
+
+# Overview 4
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+.strong[`4.` Exploring and manipulating metadata]
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+]
 
 ---
 
@@ -763,10 +796,38 @@ label_before_after(
 )
 ```
 
----
-class: center middle
 
-# Brief analysis example
+
+
+
+
+---
+
+
+# Overview 5
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+.strong[`5.` Brief analysis example]
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+]
+
+
+
+
 
 ---
 
@@ -826,9 +887,28 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
 
 ---
 
-class: center middle
+# Overview 6
 
-# Geographic data
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+.strong[`6.` Working with IPUMS geographic data]
+
+`7.` Preview of IPUMS API functionality
+
+]
+
+
 
 ---
 
@@ -892,6 +972,29 @@ ggplot(graph_data, aes(fill = PHONE)) +
   facet_wrap(~YEAR) + 
   geom_sf()
 ```
+
+---
+# Overview 7
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+.strong[`7.` Preview of IPUMS API functionality]
+
+]
+
 
 ---
 
