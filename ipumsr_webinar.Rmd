@@ -50,7 +50,7 @@ knitr::opts_chunk$set(
 
 ---
 
-# Overview 1
+# Overview
 
 <style>
   .greyed-out {
@@ -117,7 +117,7 @@ class: center
 ---
 
 
-# Overview 2
+# Overview
 
 .greyed-out[
 
@@ -388,7 +388,7 @@ These packages are used in some of the examples we will walk through.
 ---
 
 
-# Overview 3
+# Overview
 
 .greyed-out[
 
@@ -495,7 +495,7 @@ Let's leverage that attached metadata.
 
 
 
-# Overview 4
+# Overview
 
 .greyed-out[
 
@@ -804,7 +804,7 @@ label_before_after(
 ---
 
 
-# Overview 5
+# Overview
 
 .greyed-out[
 
@@ -887,7 +887,7 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
 
 ---
 
-# Overview 6
+# Overview
 
 .greyed-out[
 
@@ -974,7 +974,7 @@ ggplot(graph_data, aes(fill = PHONE)) +
 ```
 
 ---
-# Overview 7
+# Overview
 
 .greyed-out[
 
