@@ -510,10 +510,6 @@ class: center, middle
 install.packages("ipumsr")
 ```
 
-???
-Now that we've convinced you of how great ipumsr is, you're probably asking 
-"How do I get my hands on it?"
-
 --
 
 ### Or if you want the development version
@@ -522,6 +518,10 @@ Now that we've convinced you of how great ipumsr is, you're probably asking
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("mnpopcenter/ipumsr")
 ```
+
+???
+Now that we've convinced you of how great ipumsr is, you're probably asking 
+"How do I get my hands on it?"
 
 ---
 
@@ -1233,6 +1233,229 @@ ggplot(graph_data, aes(fill = PHONE)) +
 
 ]
 
+
+---
+
+# API Timeline
+
+- Currently in internal testing
+
+- Beta testing before the end of 2021
+
+- IPUMS USA public launch early 2022
+
+???
+The API is not yet publicly available, but we wanted to offer a preview of the 
+functionality that will soon be available in ipumsr.
+
+We plan to support creating extracts via API for all of our data collections, 
+but that support will be rolled out one collection at a time, to allow us to 
+thoroughly test that the extract API is working as expected for each collection.
+
+IPUMS USA is the first collection that will be supported, and we are currently
+doing internal testing of the API for USA. We'll put out a call for beta testers
+before the end of this year, but feel free to reach out in the meantime if you
+want to be added to that list. We expect to open up the USA extract API to all
+IPUMS USA users in the first few months of next year, depending on what sort of
+issues arise during beta testing.
+
+Another important note is that there is already a public API for the IPUMS NHGIS
+collection, which offers access to tabular data from the US Census Bureau, as
+well as corresponding geographic boundaries. ipumsr does not yet include
+functions for interacting with the NHGIS API, but there is a guide to
+interacting with that API in R, which we'll share a link to at the end of these
+slides, and we plan to add that functionality to ipumsr sometime next year.
+
+---
+
+# What can I do with the API?
+
+- Define and submit extract requests
+
+--
+
+- Check extract status or "wait" for an extract to finish
+
+--
+
+- Download completed extracts
+
+--
+
+- Get info on past extracts
+
+--
+
+- Share extract definitions
+
+???
+So, your next question might be, "what will I be able to do with this API?" 
+Here's the high-level overview:
+
+You'll be able to:
+
+Define and submit extract requests.
+
+Check the status of a submitted extract, or have R "wait" for an extract to 
+finish by periodically checking the status until it is ready to download.
+
+Download completed data extracts.
+
+Get information on past extracts, including the ability to pull down the 
+definition of a previous extract, revise that definition, and resubmit it.
+
+And finally, you can save your extract definition to a JSON file, allowing you 
+to share the extract definition with other users for collaboration or 
+reproducibility. Saving as JSON makes the definition more easily shareable 
+across languages, since R is not the only way to interact with the IPUMS API -- 
+you can also call the API using a general purpose tool like curl, and IPUMS is 
+developing API client tools for Python in parallel with the R client tools that 
+will be part of the ipumsr package.
+
+---
+
+# What can't I do with the API?
+
+- Bypass the extract system entirely
+
+--
+
+- Explore what data are available
+
+--
+
+- Use all features of the extract system (at least not right away)
+
+
+???
+The other important question to answer is what the API can't do.
+
+Most importantly, it can't deliver data "on demand" -- extracts are still 
+created through the same extract system used by the website, which means you 
+have to wait for your extract to process before you can download it.
+
+In other words, the API does not create a separate system of accessing IPUMS
+data, but rather provides a programmatic way to create and download extracts
+through the existing extract system.
+
+Secondly, you can't use the API to explore what data are available from IPUMS. 
+We plan to add a public metadata API, but the timeline on that is more unknown.
+
+A third limitation is that API users will not initially have access to all the
+bells and whistles of the extract system, such as the ability to attach 
+characteristics of family members such as spouses or children. We plan to add 
+these capabilities once the core functionality is well-tested and stable.
+
+---
+
+# Pipe-friendly example
+
+```{r eval=FALSE}
+my_extract <- define_extract(
+  "usa", 
+  "Occupation by sex and age",
+  c("us2017a", "us2018a"), 
+  c("SEX", "AGE", "IND", "OCC")
+)
+```
+
+--
+
+Extract definition to data in one piped expression!
+
+```{r eval=FALSE}
+data <- my_extract %>% 
+  submit_extract() %>% 
+  wait_for_extract() %>% 
+  download_extract() %>% 
+  read_ipums_micro()
+```
+
+???
+Now let's get to some example code! We'll start with a brief example that shows 
+a typical API workflow using the "pipe" operator from the magrittr package, 
+which is often used in conjunction with tidyverse packages such as dplyr.
+
+We start by defining an extract object using the `define_extract()` function, 
+and specifying 
+
+- a data collection -- in this case, "usa" 
+- an extract description -- "Occupation by sex and age"
+- samples -- here we're asking for the 2017 and 2018 American Community Survey 
+- and variables -- sex, age, industry and occupation.
+
+The next code chunk shows how we can go from this extract definition to having 
+our extract data available in our R session in one piped expression. For any of 
+you who are unfamiliar with the pipe operator, it can be read aloud as the word 
+"then". So this piped expression says, take "my_extract", *then* submit extract, 
+*then* wait for extract, *then* download extract, *then* read in the data using 
+`read_ipums_micro()`.
+
+Since we have to wait for the extract to process, this piped expression will 
+take a bit of time to execute, depending on the size of your extract, but if we 
+have time we will actually run some code like this during the Q&A so you can 
+see it in action.
+
+---
+
+# Pipe-friendly example
+
+```{r eval=FALSE}
+my_extract <- define_extract(
+  "usa", 
+  "Occupation by sex and age",
+  c("us2017a", "us2018a"), 
+  c("SEX", "AGE", "IND", "OCC")
+)
+```
+
+Extract definition to data in one piped expression!
+
+```{r eval=FALSE}
+data <- my_extract |> 
+  submit_extract() |> 
+  wait_for_extract() |> 
+  download_extract() |> 
+  read_ipums_micro()
+```
+
+
+???
+And just for fun, here's what the same piped expression looks like with the new
+base R pipe, available as of R 4.1.
+
+---
+
+# Revise and resubmit
+
+Get definition of my most recent extract:
+
+```{r eval=FALSE}
+last_extract <- get_recent_extracts_info_list(
+  "usa", 
+  how_many = 1
+)[[1]]
+```
+
+Add a variable and resubmit:
+
+```{r eval=FALSE}
+last_extract %>% 
+  revise_extract(vars_to_add = "EDUC") %>% 
+  submit_extract()
+```
+
+---
+
+# Get a tibble of info on recent extracts
+
+```{r eval=FALSE}
+get_recent_extracts_info_tbl("usa")
+```
+
+```{r eval=FALSE}
+readRDS("recent_extracts_info.rds")
+```
 
 ---
 
