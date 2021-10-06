@@ -998,6 +998,164 @@ ggplot(graph_data, aes(fill = PHONE)) +
 
 ---
 
+# API Timeline
+
+- Currently in internal testing
+- Beta testing before the end of 2021
+- Public launch early 2022
+
+???
+Notice that this is a *preview* of API functionality, because the API is not yet 
+publicly available.
+
+We plan to support creating extracts via API for all of our data collections, 
+but that support will be rolled out one collection at a time, to allow us to 
+thoroughly test that the extract API is working as expected for each collection.
+
+IPUMS USA is the first collection that will be supported, and we are currently
+doing internal testing of the API for USA. We'll put out a call for beta testers
+before the end of this year, but feel free to reach out in the meantime if you
+want to be added to that list. We expect to open up the USA extract API to all
+IPUMS USA users in the first few months of next year, depending on what sort of
+issues arise during beta testing.
+
+---
+
+# IPUMS USA microdata extract API
+
+## What can I do with the API?
+
+- Define and submit extract requests
+
+--
+
+- Check extract status or "wait" for an extract to finish
+
+--
+
+- Download completed extracts
+
+--
+
+- Get info on recent extracts
+
+--
+
+- Share extract definitions
+
+???
+So, your next question might be, "what will I be able to do with this API?" 
+Here's the high-level overview:
+
+You'll be able to define and submit extract requests
+
+---
+
+# IPUMS USA microdata extract API
+
+## What can't I do via API?
+
+- Bypass the extract system entirely
+
+--
+
+- Use all features of the extract system (at least not right away)
+
+
+???
+The other important question to answer is what the API can't do.
+
+Most importantly, it can't deliver data "on demand" -- extracts are still 
+created through the same extract system used by the website, which means you 
+have to wait for your extract to process before you can download it.
+
+In other words, the API does not create a separate system of accessing IPUMS
+data, but rather provides a programmatic way to create and download extracts
+through the existing extract system.
+
+---
+
+# Pipe-friendly example
+
+```{r eval=FALSE}
+my_extract <- define_extract(
+  "usa", 
+  "Occupation by sex and age",
+  c("us2017a", "us2018a"), 
+  c("SEX", "AGE", "IND", "OCC")
+)
+```
+
+--
+
+Extract definition to data in one piped expression!
+
+```{r eval=FALSE}
+data <- my_extract %>% 
+  submit_extract() %>% 
+  wait_for_extract() %>% 
+  download_extract() %>% 
+  read_ipums_micro()
+```
+
+---
+
+# Pipe-friendly example
+
+```{r eval=FALSE}
+my_extract <- define_extract(
+  "usa", 
+  "Occupation by sex and age",
+  c("us2017a", "us2018a"), 
+  c("SEX", "AGE", "IND", "OCC")
+)
+```
+
+Extract definition to data in one piped expression!
+
+```{r eval=FALSE}
+data <- my_extract |> 
+  submit_extract() |> 
+  wait_for_extract() |> 
+  download_extract() |> 
+  read_ipums_micro()
+```
+
+---
+
+# Revise and resubmit
+
+Get definition of my most recent extract:
+
+```{r eval=FALSE}
+last_extract <- get_recent_extracts_info_list(
+  "usa", 
+  how_many = 1
+)[[1]]
+```
+
+Add a variable and resubmit:
+
+```{r eval=FALSE}
+last_extract %>% 
+  revise_extract(vars_to_add = "EDUC") %>% 
+  submit_extract()
+```
+
+---
+
+# Get a tibble of info on recent extracts
+
+```{r eval=FALSE}
+get_recent_extracts_info_tbl("usa")
+```
+
+```{r echo=FALSE}
+readRDS("recent_extracts_info.rds")
+```
+
+---
+
 # Thanks!
 - Email: ipums+cran@umn.edu
 
