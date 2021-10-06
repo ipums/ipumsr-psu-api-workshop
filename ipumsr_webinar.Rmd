@@ -20,17 +20,50 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+
 # Who we are
 
-Derek Burk, PhD, Sociology
+<style>
+.isrdi-logo {
+  background-image: url(logos/isrdi2.jpg);
+  background-size: cover;
+  height: 186px;
+  width: 604px;
+  position: absolute;
+  bottom: 15px;
+  left: 15;
+}
+</style>
+
+<style>
+
+.names {
+  font-size: 1.5em;
+}
+
+</style>
+
+
+.isrdi-logo[]
+
+
+
+.names[Derek Burk, PhD, Sociology]
+
 
 --
 
-Dan Ehrlich, MA, Anthropology
+
+.names[Dan Ehrlich, MA, Anthropology]
+
+
 
 --
 
-Kara Fisher, MA, Public Health
+
+
+.names[Kara Fisher, MA, Public Health]
 
 ---
 
@@ -83,6 +116,10 @@ Kara Fisher, MA, Public Health
     text-indent: 20px;
   }
 </style>
+
+
+
+
 
 .greyed-out[
 
@@ -168,27 +205,22 @@ background-size: cover;
 
 ![IPUMS NHGIS project logo](logos/int.jpg)
 
-- Census **microdata** covering *82* countries from 1960 to the present 
+-Census **microdata** covering a102 countries from 1960 to the present 
 
 --
 
--International historic **microdata** from the 19th and early 20th centuries for *8* countries.
+-International historic **microdata** from the 19th and early 20th centuries for *9* countries.
 
 --
 
-- Labor Force surveys provide high resolution **microdata** about work conditions
+-Labor Force surveys provide high resolution **microdata** about work conditions
+
   
-  --
+  -Adminstered quarterly (usually) with records going back at least 10 years (usually)
   
-  - Adminstered quarterly (usually) with records going back at least 10 years (usually)
+  -Currently available for Italy (2011-2020) & Spain (2005-2020)
   
-  --
-  
-  - Currently available for Italy (2011-2020) & Spain (2005-2020)
-  
-  --
-  
-  - Mexico (2005-2020) coming soon!
+  -Mexico (2005-2020) coming soon!
 
 
 
