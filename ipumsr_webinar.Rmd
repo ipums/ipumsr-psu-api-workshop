@@ -31,6 +31,15 @@ knitr::opts_chunk$set(
 }
 </style>
 
+<style>
+.derek-pet {
+  background-image: url(logos/derek2.jpg);
+  background-size: cover;
+  height: 196;
+  width: 240;
+}
+</style>
+
 
 
 <style>
@@ -79,6 +88,10 @@ Derek Burk,
 PhD, 
 Sociology
 ]
+
+
+.derek-pet[asdasd]
+
 
 
 ---
@@ -215,10 +228,14 @@ class: center
 ipums has grown substantially over the past 20?? years, and our data is organized within 9 projects
 
 ---
-
+# 
 ![IPUMS US Project logo](logos/usa.jpg)
 
 - U.S. Census and American Community Survey **microdata** from 1850 to the present.
+
+- 180,755,919 unique person records from decennial census and Anual community Survey.
+
+- 191,983,898 historical personrecords from full count decennial census from 1850-1940 (1890 census lost due to fire).
 
 - https://usa.ipums.org/usa/
 
@@ -229,8 +246,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 ---
 
-
-![IPUMS NHGIS project logo](logos/cps.jpg)
+# 
+![IPUMS CPS project logo](logos/cps.jpg)
 
 - Current Population Survey **microdata** from 1962 to the present.
 
@@ -240,7 +257,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 ---
 
-
+# 
 ![IPUMS NHGIS project logo](logos/int.jpg)
 
 
@@ -262,20 +279,21 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 
 ---
+# 
+![IPUMS Global Health project logo](logos/dhs.jpg)
 
-![IPUMS NHGIS project logo](logos/dhs.jpg)
-
-- Demographic and Health Surveys provide integrated **microdata** for analysis across time and space.
+- Demographic and Health Surveys (DHS) provide integrated **microdata** for analysis across time and space.
   - From the 1980s to the present.
   - Covering Africa and South Asia
   
 - Performance Monitoring for Action (PMA) surveys
   - Focus on fertility, contraception, hygiene, and health
   - Administered frequently to monitor trends in select high-fertility countries.
+  - https://ipums.github.io/pma-data-hub/index.html#category:PMA_Publications
 
 
 ---
-
+# 
 ![IPUMS Health Surveys project logo](logos/health.jpg)
 
 - Health **survey** data from the National Health Interview Survey (NHIS) from the 1960s to the present and the Medical Expenditure Panel Survey (MEPS) from 1996.
@@ -287,7 +305,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 ---
 
-
+# 
 ![IPUMS Higher Ed project logo](logos/highered.jpg)
 
 - Scientists and Engineers Statistical Data System (SESTAT), the leading surveys for studying the science and engineering (STEM) workforce in the United States
@@ -297,7 +315,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 
 ---
-
+# 
 ![IPUMS Time Use project logo](logos/time_use.jpg)
 
 - Historical and contemporary time use data from 1965 to the present.
@@ -305,7 +323,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 - Extensive time diary data from respondents in the US and *7* other countries.
 
 ---
-
+#
 ![IPUMS NHGIS project logo](logos/nhgis.jpg)
 
 - Summary tables and time series of population, housing, agriculture, and economic data 
@@ -314,7 +332,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 ---
 
-
+# 
 ![IPUMS IHGIS project logo](logos/ihgis.jpg)
 
 - **Summary** data tables from population and housing censuses as well as agricultural censuses from around the world
@@ -322,10 +340,11 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 - Integrated GIS **shapefiles.**
 
 ---
+# So What is Ipums?
 
 .pull-right[
 
-![All 9 IPUMS project logos in a grid.](logos/grid.png)
+.grid[]
 ]
 
 .pull-left[
@@ -334,9 +353,25 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 - United in consistently documented metadata
 ]
 
---
+---
+
+# So What is Ipums?
+
+.pull-right[
+
+.grid[]
+]
+
+.pull-left[
+- IPUMS is **a lot** of data
+
+- United in consistently documented metadata
 
 - *What's the best way to interact with IPUMS data?*
+]
+
+
+
 
 ???
 
@@ -344,6 +379,12 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 ---
 
+
+class: center, middle
+
+# Poll: Which IPUMS datasets have you used?
+
+---
 
 
 # Overview
