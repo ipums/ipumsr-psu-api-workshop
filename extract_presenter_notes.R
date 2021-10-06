@@ -1,5 +1,3 @@
-# Note: this script assumes each slide starts with a level one markdown header
-
 library(stringr)
 library(purrr)
 library(dplyr)
@@ -21,7 +19,7 @@ presenter_notes <- webinar_slides %>%
     notes = str_split_fixed(raw, "\\?\\?\\?\n+", n = 2)[, 2]
   ) %>% 
   mutate(
-    heading = if_else(row_number() == 1, "# TITLE SLIDE", heading),
+    heading = if_else(is.na(heading), "# NO HEADING", heading),
     heading = paste0(heading, " (", row_number(), ")"),
     heading_plus_notes = paste0(heading, "\n\n", notes, "\n\n")
   ) %>% 

@@ -4,7 +4,7 @@ output: html_document
 ---
 
 
-# TITLE SLIDE (1)
+# NO HEADING (1)
 
 
 
@@ -69,7 +69,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 
 
-NA (14)
+# NO HEADING (14)
 
 
 
@@ -309,30 +309,49 @@ you to browse the metadata associated with your data extract.
 
 # Getting geographic data (57)
 
-
+Geographic boundary data is usually found via a "Geography and GIS" link on the
+left sidebar of the home page for a data collection, under the heading
+"Supplemental Data".
 
 
 # Loading shape data (58)
 
+The sp package (short for "spatial") has been around since 2005. It is more
+established and some other R spatial packages might still assume you are using
+sp data structures. The sf package (short for "simple features") is newer, but 
+seems to be on the rise as an alternative sp for some use cases.
+
+
+# Loading shape data (59)
+
+At the risk of oversimplifying, an sf object is basically a tibble or data.frame
+with a special geometry column. That simplification helps me understand the 
+process of joining the sf object to data.
+
+
+# Joining shape data (60)
+
+Before joining to shape data, we need to summarize our person level data at the 
+level of the geography we are joining to. Thus, the first block of code computes 
+the weighted proportion of persons with access to a phone for each CONSPUMA 
+unit in each year. Once our data are summarized so that each row represents a 
+value for one CONSPUMA unit in one year, we can join to the sf object we loaded 
+above.
+
+
+# Plotting shape data (61)
+
+For more information on IPUMS geographic data, see the ipumsr vignette on
+working with geographic data, or one of several collection-specific recorded
+webinars on that topic.
+
+
+# Overview (62)
 
 
 
-# Joining shape data (59)
 
-
-
-
-# Plotting shape data (60)
-
-
-
-
-# Overview (61)
-
-
-
-
-# API Timeline (62)
+# API Timeline (63)
 
 The API is not yet publicly available, but we wanted to offer a preview of the 
 functionality that will soon be available in ipumsr.
@@ -356,7 +375,7 @@ interacting with that API in R, which we'll share a link to at the end of these
 slides, and we plan to add that functionality to ipumsr sometime next year.
 
 
-# What can I do with the API? (63)
+# What can I do with the API? (64)
 
 So, your next question might be, "what will I be able to do with this API?" 
 Here's the high-level overview:
@@ -382,7 +401,7 @@ developing API client tools for Python in parallel with the R client tools that
 will be part of the ipumsr package.
 
 
-# What can't I do with the API? (64)
+# What can't I do with the API? (65)
 
 The other important question to answer is what the API can't do.
 
@@ -403,7 +422,7 @@ characteristics of family members such as spouses or children. We plan to add
 these capabilities once the core functionality is well-tested and stable.
 
 
-# Pipe-friendly example (65)
+# Pipe-friendly example (66)
 
 Now let's get to some example code! We'll start with a brief example that shows 
 a typical API workflow using the "pipe" operator from the magrittr package, 
@@ -430,23 +449,38 @@ have time we will actually run some code like this during the Q&A so you can
 see it in action.
 
 
-# Pipe-friendly example (66)
+# Pipe-friendly example (67)
 
 And just for fun, here's what the same piped expression looks like with the new
 base R pipe, available as of R 4.1.
 
 
-# Revise and resubmit (67)
+# Revise and resubmit (68)
+
+The second argument to `get_recent_extracts_info_list()` is how many recent 
+extracts to return, up to a maximum of 10. That function always returns a list, 
+so we have to subset the first item if we want the extract object itself.
+
+
+# Revise and resubmit (69)
+
+The `revise_extract()` function allows you to add and remove variables and 
+samples, as well as change the description, data format, or data structure of 
+your extract definition.
+
+
+# Get a tibble of info on recent extracts (70)
+
+If you want to view or operate on a tibble or data.frame representation of your 
+recent extracts, there's the `get_recent_extracts_info_tbl()` function.
+
+
+# Share your extract definition (71)
 
 
 
 
-# Get a tibble of info on recent extracts (68)
-
-
-
-
-# Thanks! (69)
+# Thanks! (72)
 
 
 
