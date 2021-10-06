@@ -205,22 +205,19 @@ background-size: cover;
 
 ![IPUMS NHGIS project logo](logos/int.jpg)
 
--Census **microdata** covering a102 countries from 1960 to the present 
+- Census **microdata** covering a102 countries from 1960 to the present 
 
 --
 
--International historic **microdata** from the 19th and early 20th centuries for *9* countries.
+- International historic **microdata** from the 19th and early 20th centuries for *9* countries.
 
 --
 
--Labor Force surveys provide high resolution **microdata** about work conditions
+- Labor Force surveys provide high resolution **microdata** about work conditions
 
-  
-  -Adminstered quarterly (usually) with records going back at least 10 years (usually)
-  
-  -Currently available for Italy (2011-2020) & Spain (2005-2020)
-  
-  -Mexico (2005-2020) coming soon!
+  - Adminstered quarterly (usually) with records going back at least 10 years (usually)
+  - Currently available for Italy (2011-2020) & Spain (2005-2020)
+  - Mexico (2005-2020) coming soon!
 
 
 
