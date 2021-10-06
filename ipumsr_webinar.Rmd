@@ -20,6 +20,53 @@ knitr::opts_chunk$set(
 )
 ```
 
+
+
+# Who we are
+
+<style>
+.isrdi-logo {
+  background-image: url(logos/isrdi2.jpg);
+  background-size: cover;
+  height: 186px;
+  width: 604px;
+  position: absolute;
+  bottom: 15px;
+  left: 15;
+}
+</style>
+
+<style>
+
+.names {
+  font-size: 1.5em;
+}
+
+</style>
+
+
+.isrdi-logo[]
+
+
+
+.names[Derek Burk, PhD, Sociology]
+
+
+--
+
+
+.names[Dan Ehrlich, MA, Anthropology]
+
+
+
+--
+
+
+
+.names[Kara Fisher, MA, Public Health]
+
+---
+
 # Overview
 
 1. What is IPUMS?
@@ -48,6 +95,10 @@ knitr::opts_chunk$set(
 
 7. Preview of IPUMS API functionality
 
+--
+
+8. Q & A
+
 ---
 
 # Overview
@@ -65,6 +116,10 @@ knitr::opts_chunk$set(
     text-indent: 20px;
   }
 </style>
+
+
+
+
 
 .greyed-out[
 
@@ -114,9 +169,132 @@ class: center
 
 ## and available for free at ipums.org
 
+???
+
+ipums has grown substantially over the past 20?? years, and our data is organized within 9 projects
+
+---
+# USA
+
+<div style= "background-image: url("logos/usa.jpg");">
+background-size: cover;
+
+- U.S. Census and American Community Survey **microdata** from 1850 to the present.
+
+- Every 10 years.
+
+???
+
+
+
+
+---
+
+# CPS
+
+![IPUMS NHGIS project logo](logos/cps.jpg)
+
+- Current Population Survey **microdata** from 1962 to the present.
+
+- Monthly surveys and supplements.
+
+
+
+---
+# international
+
+![IPUMS NHGIS project logo](logos/int.jpg)
+
+- Census **microdata** covering a102 countries from 1960 to the present 
+
+--
+
+- International historic **microdata** from the 19th and early 20th centuries for *9* countries.
+
+--
+
+- Labor Force surveys provide high resolution **microdata** about work conditions
+
+  - Adminstered quarterly (usually) with records going back at least 10 years (usually)
+  - Currently available for Italy (2011-2020) & Spain (2005-2020)
+  - Mexico (2005-2020) coming soon!
+
+
+
+
+---
+
+# DHS
+
+![IPUMS NHGIS project logo](logos/dhs.jpg)
+
+- Demographic and Health Surveys provide integrated **microdata** for analysis across time and space from the 1980s to the present.
+
+--
+
+- Surveys in this project usually come from countries without infrastructure for a complete census. 
+--
+
+- Focus on maternal and child health.
+
+
+---
+# health
+
+![IPUMS Health Surveys project logo](logos/health.jpg)
+
+- Health survey data from the National Health Interview Survey from the 1960s to the present and the Medical Expenditure Panel Survey from 1996.
+
+- Supplements on cost of healthcare.
+
+???
+
+*is this microdata project??*
+
+---
+# Time Use
+
+![IPUMS Time Use project logo](logos/time_use.jpg)
+
+- Historical and contemporary time use data from 1965 to the present.
+
+- Extensive time diary data from respondents in the US and *7* other countries.
+
+
+
+---
+# Higher Ed
+
+![IPUMS NHGIS project logo](logos/highered.jpg)
+
+- Survey data on the science and engineering workforce in the U.S. from 1993 to the present.
+
+
+
+
+
+---
+# nhgis
+
+![IPUMS NHGIS project logo](logos/nhgis.jpg)
+
+- **Tabular** U.S. Census data and GIS **shapefiles** from 1790 to the present.
+
+--
+
+- Shapefiles integrated across time.
 ---
 
 
+![IPUMS Terra project logo](logos/terra.jpg)
+
+- Integrated data on population and the environment from 1960 to the present.
+
+--
+
+- Tools for creating **summaries** of international census data and connecting to geographic data
+
+---
 # Overview
 
 .greyed-out[
@@ -160,7 +338,7 @@ class: center
 - Includes functions for
   - Reading IPUMS data
   - Exploring and manipulating IPUMS metadata
-  - COMING SOON: Interacting with the IPUMS API
+  - **SOON**: Interacting with the IPUMS API
     
     
 ???
@@ -194,6 +372,8 @@ background-size: cover
 <span role="img" aria-label="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."></span>
 
 # One package to rule them all
+
+
 
 ```{r echo=FALSE, fig.alt="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."}
 knitr::include_graphics("transparent_blank.png")
@@ -296,15 +476,22 @@ Now that we've convinced you of how great ipumsr is, you're probably asking
 
 # Installing packages used in this webinar
 
-This project uses [renv](https://rstudio.github.io/renv/articles/renv.html) to
-track package dependencies.
 
---
+```{r, eval = FALSE}
 
-To install required packages, [clone the repo](https://happygitwithr.com/existing-github-first.html#new-rstudio-project-via-git-clone), then use:
 
-```{r eval=FALSE}
-renv::restore()
+# install.packages(ipumsr)
+
+## Tidyverse
+install.packages(dplyr)
+install.packages(ggplot2)
+install.packages(stringr)
+install.packages(purrr)
+
+## gis
+install.packages(sf)
+install.packages(DT)
+
 ```
 
 ---
@@ -669,7 +856,7 @@ label_before_after(data, STATEFIP, STATEFIP2, . %>% lbl_clean() %>% as_factor())
 ```
 
 ---
-
+a
 # `lbl_na_if()`
 - `lbl_na_if()` allows you to set certain values or labels 
   to missing.
@@ -1215,7 +1402,7 @@ last_extract %>%
 get_recent_extracts_info_tbl("usa")
 ```
 
-```{r echo=FALSE}
+```{r eval=FALSE}
 readRDS("recent_extracts_info.rds")
 ```
 
