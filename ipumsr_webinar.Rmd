@@ -1192,45 +1192,67 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
 ---
 
 # Getting geographic data
-- For IPUMS USA (and several other projects), we provide geographic
-  boundaries as well. For many areas, this includes harmonizing
-  boundary changes over time.
 
-- In our extract we included CONSPUMA, so let's checkout the 
-  description on the website 
-  (https://usa.ipums.org/usa/volii/tgeotools.shtml)
-  about it.
+- For IPUMS USA (and several other projects), we provide geographic boundaries 
+  as well. For many areas, this includes harmonizing boundary changes over time.
 
-- Note that CONSPUMA is a rather large geography, if you 
-  want finer geographic detail, you need to hope that
-  NHGIS has the table you want.
+- Our extract includes the variable CONSPUMA, for "Consistent Public Use 
+  Microdata Areas"
+
+- Note: CONSPUMA units are large
+  - For finer geographic detail, check out IPUMS NHGIS
+
+???
+Geographic boundary data is usually found via a "Geography and GIS" link on the
+left sidebar of the home page for a data collection, under the heading
+"Supplemental Data".
 
 ---
 
 # Loading shape data
-- `ipumsr` provides support for both sf and sp data, but I find the sf
-  package much easier to use.
 
-- To use, use the `ipums_read_sf()` function. (Mostly just a wrapper around
-  `sf::read_sf`).
+- `ipumsr` provides support for both sf and sp data; we'll use sf here
+
+- Load with the `ipums_read_sf()` function (mostly just a wrapper around
+  `sf::read_sf()`)
 
 
 ```{r}
 shape_data <- read_ipums_sf("shape/")
 ```
 
+???
+The sp package (short for "spatial") has been around since 2005. It is more
+established and some other R spatial packages might still assume you are using
+sp data structures. The sf package (short for "simple features") is newer, but 
+seems to be on the rise as an alternative sp for some use cases.
+
+---
+
+# Loading shape data
+
+```{r}
+as_tibble(shape_data)
+```
+???
+At the risk of oversimplifying, an sf object is basically a tibble or data.frame
+with a special geometry column. That simplification helps me understand the 
+process of joining the sf object to data.
+
 ---
 
 # Joining shape data
-- We also provide helpers for merging data that work with both sf
-  and sp packages. 
+- `ipumsr` has helpers for merging data that work with both sf and sp structures 
 
 ```{r}
 conspuma_data <- data %>%
   group_by(CONSPUMA, YEAR) %>%
-  summarize(PHONE = weighted.mean(
-    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-  ))
+  summarize(
+    PHONE = weighted.mean(
+      PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+    ),
+    .groups = "drop"
+  )
 
 conspuma_data <- ipums_shape_inner_join(
   conspuma_data, 
@@ -1239,10 +1261,18 @@ conspuma_data <- ipums_shape_inner_join(
 )
 ```
 
+???
+Before joining to shape data, we need to summarize our person level data at the 
+level of the geography we are joining to. Thus, the first block of code computes 
+the weighted proportion of persons with access to a phone for each CONSPUMA 
+unit in each year. Once our data are summarized so that each row represents a 
+value for one CONSPUMA unit in one year, we can join to the sf object we loaded 
+above.
+
 ---
 
 # Plotting shape data
-- With the development version of ggplot2, can plot sf data:
+- Since the addition of `geom_sf()`, ggplot2 can plot sf data:
 ```{r graph3, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 graph_data <- conspuma_data %>% 
   filter(YEAR %in% c(1980, 1990, 2000, 2010))
@@ -1251,6 +1281,11 @@ ggplot(graph_data, aes(fill = PHONE)) +
   facet_wrap(~YEAR) + 
   geom_sf()
 ```
+
+???
+For more information on IPUMS geographic data, see the ipumsr vignette on
+working with geographic data, or one of several collection-specific recorded
+webinars on that topic.
 
 ---
 # Overview
@@ -1472,19 +1507,39 @@ base R pipe, available as of R 4.1.
 Get definition of my most recent extract:
 
 ```{r eval=FALSE}
-last_extract <- get_recent_extracts_info_list(
-  "usa", 
-  how_many = 1
-)[[1]]
+last_extract <- get_recent_extracts_info_list("usa", 1)[[1]]
 ```
 
-Add a variable and resubmit:
+--
+
+Or if we know the number of the extract:
+
+```{r eval=FALSE}
+last_extract <- get_extract_info("usa:33")
+```
+
+
+???
+The second argument to `get_recent_extracts_info_list()` is how many recent 
+extracts to return, up to a maximum of 10. That function always returns a list, 
+so we have to subset the first item if we want the extract object itself.
+
+---
+
+# Revise and resubmit
+
+Then add a variable and resubmit:
 
 ```{r eval=FALSE}
 last_extract %>% 
   revise_extract(vars_to_add = "EDUC") %>% 
   submit_extract()
 ```
+
+???
+The `revise_extract()` function allows you to add and remove variables and 
+samples, as well as change the description, data format, or data structure of 
+your extract definition.
 
 ---
 
@@ -1494,9 +1549,28 @@ last_extract %>%
 get_recent_extracts_info_tbl("usa")
 ```
 
-```{r eval=FALSE}
+```{r echo=FALSE}
 readRDS("recent_extracts_info.rds")
 ```
+
+???
+If you want to view or operate on a tibble or data.frame representation of your 
+recent extracts, there's the `get_recent_extracts_info_tbl()` function.
+
+---
+
+# Share your extract definition
+
+```{r eval=FALSE}
+save_extract_as_json(my_extract, "my_extract.json")
+```
+
+Another user can read that definition back in with:
+
+```{r eval=FALSE}
+define_extract_from_json("my_extract.json", "usa")
+```
+
 
 ---
 
