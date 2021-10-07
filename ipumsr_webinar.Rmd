@@ -351,7 +351,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 
 ---
-# 
+
+#
 ![IPUMS Time Use project logo](logos/time_use.jpg)
 
 --
@@ -361,7 +362,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 - Extensive time diary data from respondents in the US and *7* other countries.
 
 ---
-#
+
+# 
 ![IPUMS NHGIS project logo](logos/nhgis.jpg)
 
 
@@ -684,7 +686,7 @@ install.packages(purrr)
 
 ## gis
 install.packages(sf)
-install.packages(DT)
+
 
 ```
 
@@ -700,7 +702,7 @@ library(ggplot2)
 library(stringr)
 library(sf)
 library(purrr)
-library(DT)
+
 ```
 
 ```{r include=FALSE}
@@ -710,7 +712,7 @@ library(ggplot2)
 library(stringr)
 library(sf)
 library(purrr)
-library(DT)
+
 ```
 
 ???
