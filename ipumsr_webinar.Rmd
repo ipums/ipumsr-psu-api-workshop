@@ -1588,9 +1588,15 @@ an extract object from a JSON-formatted definition shared by someone else.
 
 ---
 
-# Thanks!
-- Email: ipums+cran@umn.edu
+# Resources
+- Email us: ipums+cran@umn.edu
 
 - ipumsr github: https://github.com/mnpopcenter/ipumsr
 
 - This presentation: https://github.com/dtburk/ipumsr-webinar
+
+- ipumsr website, with vignettes: http://tech.popdata.org/ipumsr/index.html
+
+- IPUMS tutorials page: https://www.ipums.org/support/tutorials
+
+- *Geocomputation with R* book: https://geocompr.robinlovelace.net/
