@@ -18,6 +18,8 @@ knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>"
 )
+
+options(width = 50)
 ```
 
 
@@ -148,7 +150,7 @@ Anthropology
 
 
 Kara Fisher, 
-MA, 
+MPH, 
 Public Health
 ]
 
@@ -424,7 +426,7 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 class: center, middle
 
-# Poll: Which IPUMS datasets have you used?
+# Poll: Which IPUMS data collections have you used?
 
 ---
 
@@ -762,7 +764,7 @@ read in the data.
 
 # What's in that `ddi` object?
 
-```{r}
+```{r, results='markup'}
 names(ddi)
 ```
 
@@ -770,7 +772,7 @@ names(ddi)
 
 # What's in that `ddi` object?
 
-```{r}
+```{r, results='markup'}
 ddi$var_info
 ```
 
@@ -797,7 +799,7 @@ ddi$extract_notes <-
 ```
 
 ```{r}
-ddi$extract_notes
+ddi$extract_notes %>% strwrap(30)
 ```
 
 --
@@ -1561,7 +1563,7 @@ base R pipe, available as of R 4.1.
 Get definition of my most recent extract:
 
 ```{r eval=FALSE}
-last_extract <- get_recent_extracts_info_list("usa", 1)[[1]]
+old_extract <- get_recent_extracts_info_list("usa", 1)[[1]]
 ```
 
 --
@@ -1569,14 +1571,25 @@ last_extract <- get_recent_extracts_info_list("usa", 1)[[1]]
 Or if we know the number of the extract:
 
 ```{r eval=FALSE}
-last_extract <- get_extract_info("usa:33")
+old_extract <- get_extract_info("usa:33")
 ```
 
 
 ???
-The second argument to `get_recent_extracts_info_list()` is how many recent 
-extracts to return, up to a maximum of 10. That function always returns a list, 
-so we have to subset the first item if we want the extract object itself.
+Another handy workflow where using the extract API is a "revise and resubmit" 
+workflow. Often, you might realize that you should have added one more or a few 
+more variables to your previous extract, and you just want to resubmit that 
+extract with a few additional variables.
+
+To do this with ipumsr functions, you first pull down the definition of your 
+most recent extract using the function `get_recent_extracts_info_list()`, which 
+can return information on up to 10 recent extracts. Here, we specify that we 
+only want one recent extract (the most recent one), but because this function 
+always returns a list, we also have to subset the first element.
+
+Alternatively, if we know the extract number of the extract we want to revise, 
+we can use `get_extract_info()` and specify a shorthand notation for USA 
+extract number 33, for example.
 
 ---
 
@@ -1585,31 +1598,18 @@ so we have to subset the first item if we want the extract object itself.
 Then add a variable and resubmit:
 
 ```{r eval=FALSE}
-last_extract %>% 
+old_extract %>% 
   revise_extract(vars_to_add = "EDUC") %>% 
   submit_extract()
 ```
 
 ???
-The `revise_extract()` function allows you to add and remove variables and 
-samples, as well as change the description, data format, or data structure of 
-your extract definition.
+Once we have the old extract definition, we can pass it to the 
+`revise_extract()` function to add a variable, then resubmit it.
 
----
-
-# Get a tibble of info on recent extracts
-
-```{r eval=FALSE}
-get_recent_extracts_info_tbl("usa")
-```
-
-```{r echo=FALSE}
-readRDS("recent_extracts_info.rds")
-```
-
-???
-If you want to view or operate on a tibble or data.frame representation of your 
-recent extracts, there's the `get_recent_extracts_info_tbl()` function.
+The `revise_extract()` function currently allows you to add and remove variables
+and samples, as well as change the description, data format, or data structure
+of your extract definition.
 
 ---
 
@@ -1619,18 +1619,40 @@ recent extracts, there's the `get_recent_extracts_info_tbl()` function.
 save_extract_as_json(my_extract, "my_extract.json")
 ```
 
+--
+
 Another user can read that definition back in with:
 
 ```{r eval=FALSE}
-define_extract_from_json("my_extract.json", "usa")
+cloned_extract <- define_extract_from_json("my_extract.json", "usa")
 ```
 
+???
+One thing that really excites us about the API is the ability to share extract
+definitions to facilitate collaboration or reproducibility.
+
+To write your extract out to a JSON file, you can use the 
+`save_extract_as_json()` function as shown here.
+
+Saving as JSON makes it easier to share an extract definition with another user 
+who might not use R -- they can use the JSON definition to submit the extract 
+using curl or Python, possibly using the currently in-development IPUMS API 
+client tools in the "ipumspy" module.
+
+If you are using ipumsr, the `define_extract_from_json()` function will create
+an extract object from a JSON-formatted definition shared by someone else.
 
 ---
 
-# Thanks!
-- Email: ipums+cran@umn.edu
+# Resources
+- Email us: ipums+cran@umn.edu
 
 - ipumsr github: https://github.com/mnpopcenter/ipumsr
 
 - This presentation: https://github.com/dtburk/ipumsr-webinar
+
+- ipumsr website, with vignettes: http://tech.popdata.org/ipumsr/index.html
+
+- IPUMS tutorials page: https://www.ipums.org/support/tutorials
+
+- *Geocomputation with R* book: https://geocompr.robinlovelace.net/
