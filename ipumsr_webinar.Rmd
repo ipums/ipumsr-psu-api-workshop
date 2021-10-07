@@ -382,7 +382,7 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 class: center, middle
 
-# Poll: Which IPUMS datasets have you used?
+# Poll: Which IPUMS data collections have you used?
 
 ---
 
