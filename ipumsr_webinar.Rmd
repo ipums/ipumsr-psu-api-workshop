@@ -76,7 +76,21 @@ knitr::opts_chunk$set(
   }
 </style>
 
+---
+# test
 
+<style>
+.test {
+  background-color: #d3d3d3
+  background-size: cover;
+  width: 196px;
+  height: 240px;
+}
+</style>
+
+.test[]
+
+---
 
 
 # Who we are
@@ -90,8 +104,13 @@ Sociology
 ]
 
 
-.derek-pet[asdasd]
+.right-column[
+```{r, results='asis', echo = FALSE, fig.height=120, fig.width=98}
 
+knitr::include_graphics("logos/derek2.jpg", dpi = 180)
+```
+
+]
 
 
 ---
@@ -231,6 +250,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS US Project logo](logos/usa.jpg)
 
+--
+
 - U.S. Census and American Community Survey **microdata** from 1850 to the present.
 
 - 180,755,919 unique person records from decennial census and Anual community Survey.
@@ -249,6 +270,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS CPS project logo](logos/cps.jpg)
 
+--
+
 - Current Population Survey **microdata** from 1962 to the present.
 
 - Monthly labor force surveys and supplements.
@@ -260,7 +283,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS NHGIS project logo](logos/int.jpg)
 
-
+--
 - Census **microdata** covering a102 countries from 1960 to the present 
 
 
@@ -282,6 +305,10 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS Global Health project logo](logos/dhs.jpg)
 
+
+--
+
+
 - Demographic and Health Surveys (DHS) provide integrated **microdata** for analysis across time and space.
   - From the 1980s to the present.
   - Covering Africa and South Asia
@@ -296,6 +323,10 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS Health Surveys project logo](logos/health.jpg)
 
+
+--
+
+
 - Health **survey** data from the National Health Interview Survey (NHIS) from the 1960s to the present and the Medical Expenditure Panel Survey (MEPS) from 1996.
 
 - Supplements on cost of healthcare.
@@ -308,6 +339,9 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS Higher Ed project logo](logos/highered.jpg)
 
+--
+
+
 - Scientists and Engineers Statistical Data System (SESTAT), the leading surveys for studying the science and engineering (STEM) workforce in the United States
 
 - Data from the National Surveys of College Graduates (NSCG), Recent College Graduates (NSRCG) and Doctorate Recipients (SDR) are integrated from 1993 to the present.
@@ -318,6 +352,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS Time Use project logo](logos/time_use.jpg)
 
+--
+
 - Historical and contemporary time use data from 1965 to the present.
 
 - Extensive time diary data from respondents in the US and *7* other countries.
@@ -325,6 +361,9 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 ---
 #
 ![IPUMS NHGIS project logo](logos/nhgis.jpg)
+
+
+--
 
 - Summary tables and time series of population, housing, agriculture, and economic data 
 
@@ -335,11 +374,14 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS IHGIS project logo](logos/ihgis.jpg)
 
+--
+
 - **Summary** data tables from population and housing censuses as well as agricultural censuses from around the world
 
 - Integrated GIS **shapefiles.**
 
 ---
+
 # So What is Ipums?
 
 .pull-right[
@@ -555,6 +597,8 @@ install.packages("ipumsr")
 
 ### Or if you want the development version
 
+- www.github.com/mnpopcenter/ipumsr
+
 ```{r, eval = FALSE}
 if (!require(remotes)) install.packages("remotes")
 remotes::install_github("mnpopcenter/ipumsr")
@@ -565,27 +609,9 @@ Now that we've convinced you of how great ipumsr is, you're probably asking
 "How do I get my hands on it?"
 
 ---
+class: center, middle
 
-# Installing packages used in this webinar
-
-
-```{r, eval = FALSE}
-
-
-# install.packages(ipumsr)
-
-## Tidyverse
-install.packages(dplyr)
-install.packages(ggplot2)
-install.packages(stringr)
-install.packages(purrr)
-
-## gis
-install.packages(sf)
-install.packages(DT)
-
-```
-
+# To follow allong with this webinar
 ---
 
 # Downloading your data extract
@@ -618,7 +644,7 @@ knitr::include_graphics("download_screenshot_2.png")
 
 - The "R" link on the downloads page contains this helper code:
 
-```{r eval=FALSE}
+```{r eval=FALSE, results='asis'}
 # NOTE: To load data, you must download both the extract's data and the DDI
 # and also set the working directory to the folder with these files (or change the path below).
 
@@ -639,6 +665,30 @@ We'll see this same code pattern in just a moment when we look at how to read
 in your data.
 
 ---
+
+
+# Install R packages (as needed)
+
+```{r, eval = FALSE}
+
+
+# install.packages(ipumsr)
+
+## Tidyverse
+install.packages(dplyr)
+install.packages(ggplot2)
+install.packages(stringr)
+install.packages(purrr)
+
+## gis
+install.packages(sf)
+install.packages(DT)
+
+```
+
+---
+
+
 
 # Loading packages
 ```{r eval=FALSE}
@@ -688,6 +738,10 @@ These packages are used in some of the examples we will walk through.
 
 ]
 
+
+???
+
+Dan passes to Kara
 
 ---
 
