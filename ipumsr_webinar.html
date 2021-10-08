@@ -88,7 +88,21 @@ class: center, middle, inverse, title-slide
   }
 &lt;/style&gt;
 
+---
+# test
 
+&lt;style&gt;
+.test {
+  background-color: #d3d3d3
+  background-size: cover;
+  width: 196px;
+  height: 240px;
+}
+&lt;/style&gt;
+
+.test[]
+
+---
 
 
 # Who we are
@@ -102,8 +116,10 @@ Sociology
 ]
 
 
-.derek-pet[asdasd]
+.right-column[
+&lt;img src="logos/derek2.jpg" width="105" /&gt;
 
+]
 
 
 ---
@@ -141,7 +157,7 @@ Anthropology
 
 
 Kara Fisher, 
-MA, 
+MPH, 
 Public Health
 ]
 
@@ -243,6 +259,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS US Project logo](logos/usa.jpg)
 
+--
+
 - U.S. Census and American Community Survey **microdata** from 1850 to the present.
 
 - 180,755,919 unique person records from decennial census and Anual community Survey.
@@ -261,6 +279,8 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS CPS project logo](logos/cps.jpg)
 
+--
+
 - Current Population Survey **microdata** from 1962 to the present.
 
 - Monthly labor force surveys and supplements.
@@ -272,7 +292,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS NHGIS project logo](logos/int.jpg)
 
-
+--
 - Census **microdata** covering a102 countries from 1960 to the present 
 
 
@@ -294,6 +314,10 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS Global Health project logo](logos/dhs.jpg)
 
+
+--
+
+
 - Demographic and Health Surveys (DHS) provide integrated **microdata** for analysis across time and space.
   - From the 1980s to the present.
   - Covering Africa and South Asia
@@ -308,6 +332,10 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS Health Surveys project logo](logos/health.jpg)
 
+
+--
+
+
 - Health **survey** data from the National Health Interview Survey (NHIS) from the 1960s to the present and the Medical Expenditure Panel Survey (MEPS) from 1996.
 
 - Supplements on cost of healthcare.
@@ -320,6 +348,9 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS Higher Ed project logo](logos/highered.jpg)
 
+--
+
+
 - Scientists and Engineers Statistical Data System (SESTAT), the leading surveys for studying the science and engineering (STEM) workforce in the United States
 
 - Data from the National Surveys of College Graduates (NSCG), Recent College Graduates (NSRCG) and Doctorate Recipients (SDR) are integrated from 1993 to the present.
@@ -327,16 +358,23 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 
 ---
-# 
+
+#
 ![IPUMS Time Use project logo](logos/time_use.jpg)
+
+--
 
 - Historical and contemporary time use data from 1965 to the present.
 
 - Extensive time diary data from respondents in the US and *7* other countries.
 
 ---
-#
+
+# 
 ![IPUMS NHGIS project logo](logos/nhgis.jpg)
+
+
+--
 
 - Summary tables and time series of population, housing, agriculture, and economic data 
 
@@ -347,11 +385,14 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 # 
 ![IPUMS IHGIS project logo](logos/ihgis.jpg)
 
+--
+
 - **Summary** data tables from population and housing censuses as well as agricultural censuses from around the world
 
 - Integrated GIS **shapefiles.**
 
 ---
+
 # So What is Ipums?
 
 .pull-right[
@@ -909,6 +950,8 @@ install.packages("ipumsr")
 
 ### Or if you want the development version
 
+- www.github.com/mnpopcenter/ipumsr
+
 
 ```r
 if (!require(remotes)) install.packages("remotes")
@@ -920,28 +963,9 @@ Now that we've convinced you of how great ipumsr is, you're probably asking
 "How do I get my hands on it?"
 
 ---
+class: center, middle
 
-# Installing packages used in this webinar
-
-
-
-```r
-
-
-# install.packages(ipumsr)
-
-## Tidyverse
-install.packages(dplyr)
-install.packages(ggplot2)
-install.packages(stringr)
-install.packages(purrr)
-
-## gis
-install.packages(sf)
-install.packages(DT)
-
-```
-
+# To follow allong with this webinar
 ---
 
 # Downloading your data extract
@@ -984,6 +1008,30 @@ in your data.
 
 ---
 
+
+# Install R packages (as needed)
+
+
+```r
+
+
+# install.packages(ipumsr)
+
+## Tidyverse
+install.packages(dplyr)
+install.packages(ggplot2)
+install.packages(stringr)
+install.packages(purrr)
+
+## gis
+install.packages(sf)
+
+```
+
+---
+
+
+
 # Loading packages
 
 ```r
@@ -993,7 +1041,7 @@ library(ggplot2)
 library(stringr)
 library(sf)
 library(purrr)
-library(DT)
+
 ```
 
 
@@ -1025,6 +1073,10 @@ These packages are used in some of the examples we will walk through.
 
 ]
 
+
+???
+
+Dan passes to Kara
 
 ---
 
@@ -1070,9 +1122,12 @@ around with the data.
 
 ```r
 names(ddi)
-#&gt;  [1] "file_name"        "file_path"        "file_type"        "ipums_project"   
-#&gt;  [5] "extract_date"     "extract_notes"    "rectypes"         "rectype_idvar"   
-#&gt;  [9] "rectypes_keyvars" "var_info"         "conditions"       "citation"        
+#&gt;  [1] "file_name"        "file_path"       
+#&gt;  [3] "file_type"        "ipums_project"   
+#&gt;  [5] "extract_date"     "extract_notes"   
+#&gt;  [7] "rectypes"         "rectype_idvar"   
+#&gt;  [9] "rectypes_keyvars" "var_info"        
+#&gt; [11] "conditions"       "citation"        
 #&gt; [13] "file_encoding"
 ```
 
@@ -1089,21 +1144,23 @@ the "var_info" data.frame.
 ```r
 ddi$var_info
 #&gt; # A tibble: 12 x 10
-#&gt;    var_name var_label   var_desc   val_labels code_instr   start   end imp_decim
-#&gt;    &lt;chr&gt;    &lt;chr&gt;       &lt;chr&gt;      &lt;list&gt;     &lt;chr&gt;        &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt;
-#&gt;  1 YEAR     Census year "YEAR rep~ &lt;tibble [~  &lt;NA&gt;            1     4         0
-#&gt;  2 DATANUM  Data set n~ "DATANUM ~ &lt;tibble [~ "\n\nThe fo~     5     6         0
-#&gt;  3 SERIAL   Household ~ "SERIAL i~ &lt;tibble [~ "\nSERIAL i~     7    14         0
-#&gt;  4 HHWT     Household ~ "HHWT ind~ &lt;tibble [~ "\nHHWT is ~    15    24         2
-#&gt;  5 STATEFIP State (FIP~ "STATEFIP~ &lt;tibble [~  &lt;NA&gt;           25    26         0
-#&gt;  6 CONSPUMA Consistent~ "CONSPUMA~ &lt;tibble [~ "\nCONSPUMA~    27    29         0
-#&gt;  7 GQ       Group quar~ "GQ class~ &lt;tibble [~  &lt;NA&gt;           30    30         0
-#&gt;  8 PHONE    Telephone ~ "PHONE in~ &lt;tibble [~  &lt;NA&gt;           31    31         0
-#&gt;  9 PERNUM   Person num~ "PERNUM n~ &lt;tibble [~ "\n\nPERNUM~    32    35         0
-#&gt; 10 PERWT    Person wei~ "PERWT in~ &lt;tibble [~ "\nPERWT is~    36    45         2
-#&gt; 11 EDUC     Educationa~ "EDUC ind~ &lt;tibble [~  &lt;NA&gt;           46    47         0
-#&gt; 12 EDUCD    Educationa~ "EDUC ind~ &lt;tibble [~  &lt;NA&gt;           48    50         0
-#&gt; # ... with 2 more variables: var_type &lt;chr&gt;, rectypes &lt;lgl&gt;
+#&gt;    var_name var_label     var_desc      val_labels
+#&gt;    &lt;chr&gt;    &lt;chr&gt;         &lt;chr&gt;         &lt;list&gt;    
+#&gt;  1 YEAR     Census year   "YEAR report~ &lt;tibble [~
+#&gt;  2 DATANUM  Data set num~ "DATANUM ide~ &lt;tibble [~
+#&gt;  3 SERIAL   Household se~ "SERIAL is a~ &lt;tibble [~
+#&gt;  4 HHWT     Household we~ "HHWT indica~ &lt;tibble [~
+#&gt;  5 STATEFIP State (FIPS ~ "STATEFIP re~ &lt;tibble [~
+#&gt;  6 CONSPUMA Consistent P~ "CONSPUMA id~ &lt;tibble [~
+#&gt;  7 GQ       Group quarte~ "GQ classifi~ &lt;tibble [~
+#&gt;  8 PHONE    Telephone av~ "PHONE indic~ &lt;tibble [~
+#&gt;  9 PERNUM   Person numbe~ "PERNUM numb~ &lt;tibble [~
+#&gt; 10 PERWT    Person weight "PERWT indic~ &lt;tibble [~
+#&gt; 11 EDUC     Educational ~ "EDUC indica~ &lt;tibble [~
+#&gt; 12 EDUCD    Educational ~ "EDUC indica~ &lt;tibble [~
+#&gt; # ... with 6 more variables: code_instr &lt;chr&gt;,
+#&gt; #   start &lt;dbl&gt;, end &lt;dbl&gt;, imp_decim &lt;dbl&gt;,
+#&gt; #   var_type &lt;chr&gt;, rectypes &lt;lgl&gt;
 ```
 
 
@@ -1128,8 +1185,11 @@ Maybe I wrote an informative extract description?
 
 
 ```r
-ddi$extract_notes
-#&gt; [1] "User-provided description: Revision of(Revision of(Revision of(Revision of(my extract))))"
+ddi$extract_notes %&gt;% strwrap(30)
+#&gt; [1] "User-provided description:"   
+#&gt; [2] "Revision of(Revision"         
+#&gt; [3] "of(Revision of(Revision of(my"
+#&gt; [4] "extract))))"
 ```
 
 --
@@ -1155,8 +1215,9 @@ We can print the names of our variables:
 
 ```r
 names(data)
-#&gt;  [1] "YEAR"     "DATANUM"  "SERIAL"   "HHWT"     "STATEFIP" "CONSPUMA"
-#&gt;  [7] "GQ"       "PHONE"    "PERNUM"   "PERWT"    "EDUC"     "EDUCD"
+#&gt;  [1] "YEAR"     "DATANUM"  "SERIAL"   "HHWT"    
+#&gt;  [5] "STATEFIP" "CONSPUMA" "GQ"       "PHONE"   
+#&gt;  [9] "PERNUM"   "PERWT"    "EDUC"     "EDUCD"
 ```
 
 
@@ -1250,6 +1311,30 @@ nicely-formatted static html page that allows you to browse the metadata
 associated with your data extract.
 
 
+# Data
+A regular `tbl_df` data.frame
+
+```r
+data
+#&gt; # A tibble: 1,476,443 x 12
+#&gt;     YEAR DATANUM SERIAL  HHWT    STATEFIP CONSPUMA
+#&gt;    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;int+lbl&gt;    &lt;dbl&gt;
+#&gt;  1  1960       1 336455   100 27 [Minnes~       NA
+#&gt;  2  1960       1 336455   100 27 [Minnes~       NA
+#&gt;  3  1960       1 336456   100 27 [Minnes~       NA
+#&gt;  4  1960       1 336456   100 27 [Minnes~       NA
+#&gt;  5  1960       1 336456   100 27 [Minnes~       NA
+#&gt;  6  1960       1 336456   100 27 [Minnes~       NA
+#&gt;  7  1960       1 336457    99 27 [Minnes~       NA
+#&gt;  8  1960       1 336457    99 27 [Minnes~       NA
+#&gt;  9  1960       1 336457    99 27 [Minnes~       NA
+#&gt; 10  1960       1 336458   100 27 [Minnes~       NA
+#&gt; # ... with 1,476,433 more rows, and 6 more
+#&gt; #   variables: GQ &lt;int+lbl&gt;, PHONE &lt;int+lbl&gt;,
+#&gt; #   PERNUM &lt;dbl&gt;, PERWT &lt;dbl&gt;, EDUC &lt;int+lbl&gt;,
+#&gt; #   EDUCD &lt;int+lbl&gt;
+```
+
 ---
 
 # Wrangling value labels
@@ -1288,14 +1373,14 @@ value and label.
 ```r
 ipums_val_labels(data$GQ)
 #&gt; # A tibble: 7 x 2
-#&gt;     val lbl                                        
-#&gt;   &lt;int&gt; &lt;chr&gt;                                      
-#&gt; 1     0 Vacant unit                                
-#&gt; 2     1 Households under 1970 definition           
-#&gt; 3     2 Additional households under 1990 definition
-#&gt; 4     3 Group quarters--Institutions               
-#&gt; 5     4 Other group quarters                       
-#&gt; 6     5 Additional households under 2000 definition
+#&gt;     val lbl                                       
+#&gt;   &lt;int&gt; &lt;chr&gt;                                     
+#&gt; 1     0 Vacant unit                               
+#&gt; 2     1 Households under 1970 definition          
+#&gt; 3     2 Additional households under 1990 definiti~
+#&gt; 4     3 Group quarters--Institutions              
+#&gt; 5     4 Other group quarters                      
+#&gt; 6     5 Additional households under 2000 definiti~
 #&gt; 7     6 Fragment
 ```
 
@@ -1523,12 +1608,18 @@ power of this function.
 
 ```r
 levels(data$EDUCD2)
-#&gt;  [1] "N/A or no schooling"       "Nursery school to grade 4"
-#&gt;  [3] "Grade 5, 6, 7, or 8"       "Grade 9"                  
-#&gt;  [5] "Grade 10"                  "Grade 11"                 
-#&gt;  [7] "Grade 12"                  "1 year of college"        
-#&gt;  [9] "2 years of college"        "3 years of college"       
-#&gt; [11] "4 years of college"        "5+ years of college"      
+#&gt;  [1] "N/A or no schooling"      
+#&gt;  [2] "Nursery school to grade 4"
+#&gt;  [3] "Grade 5, 6, 7, or 8"      
+#&gt;  [4] "Grade 9"                  
+#&gt;  [5] "Grade 10"                 
+#&gt;  [6] "Grade 11"                 
+#&gt;  [7] "Grade 12"                 
+#&gt;  [8] "1 year of college"        
+#&gt;  [9] "2 years of college"       
+#&gt; [10] "3 years of college"       
+#&gt; [11] "4 years of college"       
+#&gt; [12] "5+ years of college"      
 #&gt; [13] "Missing"
 ```
 
@@ -1725,19 +1816,20 @@ seems to be on the rise as an alternative sp for some use cases.
 ```r
 as_tibble(shape_data)
 #&gt; # A tibble: 543 x 4
-#&gt;    CONSPUMA STATEFIP State                                              geometry
-#&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                                    &lt;MULTIPOLYGON [m]&gt;
-#&gt;  1      540 02       Alaska     (((-3043869 3470021, -3043834 3469980, -3043821~
-#&gt;  2      541 02       Alaska     (((-2291901 2327688, -2290772 2327243, -2290089~
-#&gt;  3      542 15       Hawaii     (((-6021813 59835.48, -6021818 59829.16, -60218~
-#&gt;  4      491 51       Virginia   (((1720696 104240.2, 1720648 104170.9, 1720684 ~
-#&gt;  5      492 51       Virginia   (((1745400 116778.3, 1745641 116749.4, 1745885 ~
-#&gt;  6      493 51       Virginia   (((1728178 119921.5, 1728243 119891.9, 1728662 ~
-#&gt;  7      494 51       Virginia   (((1717473 129180.9, 1717834 128959, 1717602 12~
-#&gt;  8      495 53       Washington (((-1584859 1462223, -1583276 1461845, -1583169~
-#&gt;  9      496 53       Washington (((-2031282 1366306, -2031348 1366324, -2031429~
-#&gt; 10      497 53       Washington (((-1970094 1408574, -1970093 1408551, -1970059~
-#&gt; # ... with 533 more rows
+#&gt;    CONSPUMA STATEFIP State     
+#&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;     
+#&gt;  1      540 02       Alaska    
+#&gt;  2      541 02       Alaska    
+#&gt;  3      542 15       Hawaii    
+#&gt;  4      491 51       Virginia  
+#&gt;  5      492 51       Virginia  
+#&gt;  6      493 51       Virginia  
+#&gt;  7      494 51       Virginia  
+#&gt;  8      495 53       Washington
+#&gt;  9      496 53       Washington
+#&gt; 10      497 53       Washington
+#&gt; # ... with 533 more rows, and 1 more variable:
+#&gt; #   geometry &lt;MULTIPOLYGON [m]&gt;
 ```
 ???
 At the risk of oversimplifying, an sf object is basically a tibble or data.frame
