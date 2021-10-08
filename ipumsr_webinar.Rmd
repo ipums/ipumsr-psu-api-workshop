@@ -741,6 +741,7 @@ Dan passes to Kara
 ---
 
 # Read in the data
+
 - Using functions `read_ipums_ddi()` and `read_ipums_micro()`
 ```{r}
 ddi <- read_ipums_ddi("usa_00013.xml")
@@ -753,7 +754,7 @@ Here we see the same code pattern from the "R" helper file above, of reading the
 metadata from the codebook into an object named "ddi", and using that object to 
 read in the data.
 
---- 
+---
 
 # Read in the data
 

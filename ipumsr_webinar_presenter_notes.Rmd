@@ -9,12 +9,12 @@ output: html_document
 
 
 
-# Who we are (2)
+# NO HEADING (2)
 
 
 
 
-# Who we are (3)
+# test (3)
 
 
 
@@ -24,29 +24,29 @@ output: html_document
 
 
 
-# Overview (5)
+# Who we are (5)
 
 
 
 
-# Overview (6)
+# Who we are (6)
 
 
 
 
-# What is IPUMS? (7)
+# Overview (7)
+
+
+
+
+# Overview (8)
+
+
+
+
+# What is IPUMS? (9)
 
 ipums has grown substantially over the past 20?? years, and our data is organized within 9 projects
-
-
-# NO HEADING (8)
-
-
-
-
-# NO HEADING (9)
-
-
 
 
 # NO HEADING (10)
@@ -84,27 +84,37 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 
 
-# So What is Ipums? (17)
+# NO HEADING (17)
 
 
 
 
-# So What is Ipums? (18)
+# NO HEADING (18)
+
+
+
+
+# So What is Ipums? (19)
+
+
+
+
+# So What is Ipums? (20)
 
 So ipums really is **data** and a whole lot of it. These 9 different projects interact with different types of data and at different scales but they are united in
 
 
-# Poll: Which IPUMS data collections have you used? (19)
+# Poll: Which IPUMS data collections have you used? (21)
 
 
 
 
-# Overview (20)
+# Overview (22)
 
 
 
 
-# What is ipumsr? (21)
+# What is ipumsr? (23)
 
 (Metadata such as value labels, variable labels, and detailed variable 
 descriptions.)
@@ -112,7 +122,7 @@ descriptions.)
 Initial API support will be for IPUMS USA, with more projects to follow soon.
 
 
-# Why use ipumsr? (22)
+# Why use ipumsr? (24)
 
 Regarding "One package": Without ipumsr, you'd need to use a variety of
 different approaches from different packages to read in and explore IPUMS
@@ -122,46 +132,46 @@ package with a consistent interface for working with all these different types
 of IPUMS data.
 
 
-# One package to rule them all (23)
+# One package to rule them all (25)
 
 
 
 
-# Why use ipumsr? (24)
+# Why use ipumsr? (26)
 
 Regarding "More features": The aforementioned IPUMS API support will be the next
 big feature. Another potential new feature is adding tools for properly handling
 survey weights. Let us know what would be helpful to you via GitHub or email.
 
 
-# Why use ipumsr? (25)
+# Why use ipumsr? (27)
 
 There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
 to read the data in with attached metadata, such as variable and value labels.
 
 
-# Poll: Have you used ipumsr? (26)
+# Poll: How much have you used ipumsr? (28)
 
 
 
 
-# Installing ipumsr (27)
+# Installing ipumsr (29)
 
 Now that we've convinced you of how great ipumsr is, you're probably asking 
 "How do I get my hands on it?"
 
 
-# Installing packages used in this webinar (28)
+# To follow allong with this webinar (30)
 
 
 
 
-# Downloading your data extract (29)
+# Downloading your data extract (31)
 
 Make sure to save the data and DDI files in the same location.
 
 
-# Downloading your data extract (30)
+# Downloading your data extract (32)
 
 This helper code checks that you have ipumsr installed, and if you do, it reads
 in the DDI codebook and data into separate objects. As an aside, in case anyone
@@ -173,47 +183,44 @@ We'll see this same code pattern in just a moment when we look at how to read
 in your data.
 
 
-# Loading packages (31)
+# Install R packages (as needed) (33)
+
+
+
+
+# Loading packages (34)
 
 These packages are used in some of the examples we will walk through.
 
 
-# Overview (32)
+# Overview (35)
+
+Dan passes to Kara
 
 
-
-
-# Read in the data (33)
+# Read in the data (36)
 
 Here we see the same code pattern from the "R" helper file above, of reading the
 metadata from the codebook into an object named "ddi", and using that object to 
 read in the data.
 
---- 
 
-# Read in the data
+# Read in the data (37)
 
-- Can also just use `read_ipums_micro()`
-
-```{r}
-data <- read_ipums_micro("usa_00013.xml")
-```
-
-???
 You can also just read the data by passing the file path to the DDI codebook to 
 the `read_ipums_micro()` function, but it's often helpful to save the codebook 
 to it's own object to preserve the original metadata once you start messing 
 around with the data.
 
 
-# What's in that `ddi` object? (34)
+# What's in that `ddi` object? (38)
 
 So what's in that ddi object? A bunch of information about your extract, but 
 perhaps the most important element for understanding and analyzing the data is 
 the "var_info" data.frame.
 
 
-# What's in that `ddi` object? (35)
+# What's in that `ddi` object? (39)
 
 As we can see here, var_info is just data.frame where each row has information 
 about one variable, including the variable name, label, description, and value 
@@ -223,7 +230,7 @@ You don't need to know this to use ipumsr, but it might help you understand
 what is going on when you read in the DDI codebook and then the data.
 
 
-# What's in my extract again? (36)
+# What's in my extract again? (40)
 
 So we've read in our data -- how do we go about exploring it?
 
@@ -233,38 +240,38 @@ that's not very helpful. I'm guessing this joke hits close to home for some of
 you long-time IPUMS users.
 
 
-# What's in my extract again? (37)
+# What's in my extract again? (41)
 
 [Read text on slides]
 
 
-# Overview (38)
+# Overview (42)
 
 
 
 
-# Available metadata (39)
+# Available metadata (43)
 
 So you can see here that ipumsr provides function to extract information from 
 the DDI object without the need to slice and dice that "var_info" data.frame I 
 showed before. Here we grab the label and description for the variable PHONE.
 
 
-# Available metadata (40)
+# Available metadata (44)
 
 Similarly, we can print the value labels by pointing to the DDI. We see here 
 that the variable PHONE takes four values: no, yes, not applicable, and 
 suppressed.
 
 
-# An interactive view of metadata (41)
+# An interactive view of metadata (45)
 
 For a more browsable view of the metadata, the ipums_view() function makes a
 nicely-formatted static html page that allows you to browse the metadata
 associated with your data extract.
 
 
-# Wrangling value labels (42)
+# Wrangling value labels (46)
 
 IPUMS value labels don't translate perfectly to R factors. The most important 
 difference is that in a factor, values always count up from 1. In IPUMS 
@@ -280,7 +287,7 @@ Luckily ipumsr provides helpers that allow you to use information from both the
 value and label.
 
 
-# Group quarters variable (43)
+# Group quarters variable (47)
 
 Here we see another way to print value labels, by pointing directly at the 
 variable in the data.frame. This only works, however, if the variable is still 
@@ -292,7 +299,7 @@ giving us much information, so perhaps we just want to convert directly to a
 factor.
 
 
-# `as_factor()` (44)
+# `as_factor()` (48)
 
 `as_factor()` (from haven) converts a labelled vector directly to a factor by 
 using the value labels as the factor levels.
@@ -300,7 +307,7 @@ using the value labels as the factor levels.
 [Read the table a bit]
 
 
-# `lbl_clean()` (45)
+# `lbl_clean()` (49)
 
 Now let's get the ipumsr helper functions for labelled vectors.
 
@@ -308,19 +315,19 @@ Sometimes we might want to get rid of values with zero frequency before
 converting to factor. Here, the labels for STATEFIP include all 50 states...
 
 
-# `lbl_clean()` (46)
+# `lbl_clean()` (50)
 
 ...but our extract only includes Minnesota, so we might not need to preserve all 
 those labels.
 
 
-# `lbl_na_if()` (47)
+# `lbl_na_if()` (51)
 
 In this case, it makes sense to set values 0 and 8 to missing, given the value 
 labels we're seeing here.
 
 
-# `lbl_na_if()` (48)
+# `lbl_na_if()` (52)
 
 `lbl_na_if()` supports a special syntax used by a few of ipumsr's label 
 functions that allows you to refer to either the value of the variable (using 
@@ -335,14 +342,14 @@ you can engage in some trial and error until you get the variable transformed as
 you want it.
 
 
-# `lbl_na_if()` (49)
+# `lbl_na_if()` (53)
 
 Because lbl_na_if works with both values and labels, we could accomplish the 
 same thing by referring to the labels. This time, we specify that PHONE3 should 
 be set to missing if the original label was "N/A" or "Suppressed".
 
 
-# `lbl_collapse()` (50)
+# `lbl_collapse()` (54)
 
 [Read bullet point]
 
@@ -351,7 +358,7 @@ values between 10 and 19 all capture levels between nursery school and grade 4;
 and so on.
 
 
-# `lbl_collapse()` (51)
+# `lbl_collapse()` (55)
 
 [Read bullet point]
 The label collapse function allows you to collapse values based on a 
@@ -366,27 +373,27 @@ of time to unpack, but hopefully this gives you a sense of the usefulness and
 power of this function.
 
 
-# `lbl_relabel()` (52)
+# `lbl_relabel()` (56)
 
 
 
 
-# `lbl_relabel()` (53)
+# `lbl_relabel()` (57)
 
 
 
 
-# `lbl_relabel()` (54)
+# `lbl_relabel()` (58)
 
 
 
 
-# Overview (55)
+# Overview (59)
 
 
 
 
-# Phone availability  (56)
+# Phone availability  (60)
 
 Microdata often needs to be summarized at a higher level for visualization. In 
 this case, if we want to make a graph of phone availability over time, we need 
@@ -397,34 +404,34 @@ to a phone in each year. Once our data are summarized so that each row
 represents a value for one year, we can make a graph by year.
 
 
-# Phone availability (57)
+# Phone availability (61)
 
 
 
 
-# Interpretation (58)
+# Interpretation (62)
 
 
 
 
-# Phone availability by education (59)
+# Phone availability by education (63)
 
 
 
 
-# Overview (60)
+# Overview (64)
 
 
 
 
-# Getting geographic data (61)
+# Getting geographic data (65)
 
 Geographic boundary data is usually found via a "Geography and GIS" link on the
 left sidebar of the home page for a data collection, under the heading
 "Supplemental Data".
 
 
-# Loading shape data (62)
+# Loading shape data (66)
 
 The sp package (short for "spatial") has been around since 2005. It is more
 established and some other R spatial packages might still assume you are using
@@ -432,14 +439,14 @@ sp data structures. The sf package (short for "simple features") is newer, but
 seems to be on the rise as an alternative sp for some use cases.
 
 
-# Loading shape data (63)
+# Loading shape data (67)
 
 At the risk of oversimplifying, an sf object is basically a tibble or data.frame
 with a special geometry column. That simplification helps me understand the 
 process of joining the sf object to data.
 
 
-# Joining shape data (64)
+# Joining shape data (68)
 
 Before joining to shape data, we need to summarize our person level data at the 
 level of the geography we are joining to. Thus, the first block of code computes 
@@ -449,19 +456,19 @@ value for one CONSPUMA unit in one year, we can join to the sf object we loaded
 above.
 
 
-# Plotting shape data (65)
+# Plotting shape data (69)
 
 For more information on IPUMS geographic data, see the ipumsr vignette on
 working with geographic data, or one of several collection-specific recorded
 webinars on that topic.
 
 
-# Overview (66)
+# Overview (70)
 
 
 
 
-# API Timeline (67)
+# API Timeline (71)
 
 The API is not yet publicly available, but we wanted to offer a preview of the 
 functionality that will soon be available in ipumsr.
@@ -485,7 +492,7 @@ interacting with that API in R, which we'll share a link to at the end of these
 slides, and we plan to add that functionality to ipumsr sometime next year.
 
 
-# What can I do with the API? (68)
+# What can I do with the API? (72)
 
 So, your next question might be, "what will I be able to do with this API?" 
 Here's the high-level overview:
@@ -511,7 +518,7 @@ developing API client tools for Python in parallel with the R client tools that
 will be part of the ipumsr package.
 
 
-# What can't I do with the API? (69)
+# What can't I do with the API? (73)
 
 The other important question to answer is what the API can't do.
 
@@ -532,7 +539,7 @@ characteristics of family members such as spouses or children. We plan to add
 these capabilities once the core functionality is well-tested and stable.
 
 
-# Pipe-friendly example (70)
+# Pipe-friendly example (74)
 
 Now let's get to some example code! We'll start with a brief example that shows 
 a typical API workflow using the "pipe" operator from the magrittr package, 
@@ -559,13 +566,13 @@ have time we will actually run some code like this during the Q&A so you can
 see it in action.
 
 
-# Pipe-friendly example (71)
+# Pipe-friendly example (75)
 
 And just for fun, here's what the same piped expression looks like with the new
 base R pipe, available as of R 4.1.
 
 
-# Revise and resubmit (72)
+# Revise and resubmit (76)
 
 Another handy workflow where using the extract API is a "revise and resubmit" 
 workflow. Often, you might realize that you should have added one more or a few 
@@ -583,7 +590,7 @@ we can use `get_extract_info()` and specify a shorthand notation for USA
 extract number 33, for example.
 
 
-# Revise and resubmit (73)
+# Revise and resubmit (77)
 
 Once we have the old extract definition, we can pass it to the 
 `revise_extract()` function to add a variable, then resubmit it.
@@ -593,7 +600,7 @@ and samples, as well as change the description, data format, or data structure
 of your extract definition.
 
 
-# Share your extract definition (74)
+# Share your extract definition (78)
 
 One thing that really excites us about the API is the ability to share extract
 definitions to facilitate collaboration or reproducibility.
@@ -610,7 +617,7 @@ If you are using ipumsr, the `define_extract_from_json()` function will create
 an extract object from a JSON-formatted definition shared by someone else.
 
 
-# Resources (75)
+# Resources (79)
 
 
 
