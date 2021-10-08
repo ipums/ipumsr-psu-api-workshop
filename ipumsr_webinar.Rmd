@@ -891,26 +891,31 @@ ddi <- read_ipums_ddi("usa_00013.xml")
 data <- read_ipums_micro(ddi)
 ```
 
-???
-Here we see the same code pattern from the "R" helper file above, of reading the
-metadata from the codebook into an object named "ddi", and using that object to 
-read in the data.
+--
 
----
-
-# Read in the data
-
-- Can also just use `read_ipums_micro()`
+- This also works:
 
 ```{r}
 data <- read_ipums_micro("usa_00013.xml")
 ```
 
+- Note: supply the codebook, *not* the data file, to `read_ipums_micro()`
+
 ???
+Here we see the same code pattern from the "R" helper file above, of reading the
+metadata from the codebook into an object named "ddi", and using that object to 
+read in the data.
+
 You can also just read the data by passing the file path to the DDI codebook to 
 the `read_ipums_micro()` function, but it's often helpful to save the codebook 
 to it's own object to preserve the original metadata once you start messing 
 around with the data.
+
+Notice that in both cases we are supplying the codebook (either already read in
+or as a file path), not the data file, to `read_ipums_micro()`. The fact that we
+don't point to the actual data file when reading in the data might confusing. If
+I want to read in the data shouldn't I point to the data file? The reason for
+this is that the codebook includes the path
 
 ---
 
@@ -1073,15 +1078,16 @@ associated with your data extract.
 
 # Wrangling value labels
 
-- IPUMS value labels don't translate perfectly to R factors.
+- IPUMS value labels don't translate perfectly to R factors
 
-    - (Factors always have a label, and always have values starting at 1)
+    - Every value in a factor must be labeled
+    - Factor values always count up from 1
   
-- So `ipumsr` imports them as `haven::labelled()` objects, which aren't
-  always the easiest to deal with.
+- `ipumsr` uses `haven::labelled()` objects to preserve values and labels, but 
+  these objects can be tricky to work with
 
-- Luckily ipumsr provides helpers that allow you to use information
-  from both the value and label
+- Luckily ipumsr provides helpers that allow you to use information from both 
+  the value and label
 
 ```{r, include = FALSE}
 label_before_after <- function(df, before_var, after_var, label_fun) {
@@ -1162,7 +1168,7 @@ factor.
 
 # `as_factor()`
 
-- Suppose we want to keep these labels exactly as they are.
+- Suppose we want to keep these labels exactly as they are
 
 ```{r}
 data$GQ2 <- as_factor(data$GQ)
@@ -1179,43 +1185,6 @@ label_before_after(data, GQ, GQ2, as_factor)
 using the value labels as the factor levels.
 
 [Read the table a bit]
-
----
-
-# `lbl_clean()`
-- `lbl_clean()` gets rid of unused value labels.
-
-```{r}
-ipums_val_labels(data$STATEFIP)
-```
-
-???
-Now let's get the ipumsr helper functions for labelled vectors.
-
-Sometimes we might want to get rid of values with zero frequency before 
-converting to factor. Here, the labels for STATEFIP include all 50 states...
-
----
-
-# `lbl_clean()`
-- Since our extract only has Minnesota, we don't want all of
- these values.
-
-```{r}
-data$STATEFIP2 <- data$STATEFIP %>% 
-  lbl_clean() %>% 
-  as_factor()
-```
-
-. . .
-
-```{r, echo = FALSE}
-label_before_after(data, STATEFIP, STATEFIP2, . %>% lbl_clean() %>% as_factor())
-```
-
-???
-...but our extract only includes Minnesota, so we might not need to preserve all 
-those labels.
 
 ---
 
@@ -1460,14 +1429,24 @@ represents a value for one year, we can make a graph by year.
 ```{r graph1, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 ```
 
+???
+What's going on here?
+
 ---
 
 # Interpretation
 
-> The 2008 ACS and 2008 PRCS instructed respondents to include cell 
-> phone service; prior to 2008, this was not made explicit.
-> 
-> - https://usa.ipums.org/usa-action/variables/PHONE#comparability_section
+```{r echo=FALSE, fig.alt="Screenshot from the IPUMS USA website showing the Comparability tab for the variable PHONE. The Comparability tab and the text 'The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service; prior to 2008, this was not made explicit.' are highlighted for emphasis."}
+knitr::include_graphics("screenshots/comparability_screenshot.png")
+```
+
+
+???
+If we look at the Comparability tab for the PHONE variable on the IPUMS USA 
+website, we find an explanation:
+
+The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service;
+prior to 2008, this was not made explicit.
 
 ---
 
@@ -1528,6 +1507,14 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
 
 - Note: CONSPUMA units are large
   - For finer geographic detail, check out IPUMS NHGIS
+
+---
+
+# Getting geographic data
+
+```{r echo=FALSE, fig.alt="Screenshot from the IPUMS USA homepage with an arrow pointing to the 'Geography and GIS' link in the left sidebar."}
+knitr::include_graphics("screenshots/geography_screenshot.png")
+```
 
 ???
 Geographic boundary data is usually found via a "Geography and GIS" link on the
