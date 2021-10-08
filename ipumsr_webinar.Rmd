@@ -542,7 +542,7 @@ to read the data in with attached metadata, such as variable and value labels.
 
 class: center, middle
 
-# Poll: Have you used ipumsr?
+# Poll: How much have you used ipumsr?
 
 ---
 
