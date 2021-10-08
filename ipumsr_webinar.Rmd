@@ -22,6 +22,47 @@ knitr::opts_chunk$set(
 options(width = 50)
 ```
 
+<style>
+.derek-pet {
+  background-color: #000000;
+  background-image: url(logos/derek2.jpg);
+  background-size: cover;
+  width: 120px;
+  height: 160px;
+  position: absolute;
+  left: 125px;
+  top: 150px;
+}
+</style>
+
+
+<style>
+.dan-pet1 {
+  background-color: #d3d3d3;
+  background-image: url(logos/felix.jpg);
+  background-size: cover;
+  width: 120px;
+  height: 160px;
+  position: absolute;
+  left: 305px;
+  top: 225px;
+  
+}
+</style>
+
+
+<style>
+.dan-pet2 {
+  background-color: #000000;
+  background-image: url(logos/luna.jpg);
+  background-size: cover;
+  width: 120px;
+  height: 120px;  
+  position: absolute;
+  left: 450px;
+  top: 250px;
+}
+</style>
 
 
 <style>
@@ -33,54 +74,6 @@ options(width = 50)
   position: absolute;
   right: 75px;
 
-}
-</style>
-
-
-<style>
-.derek-pet {
-  background-color: #000000;
-  background-image: url(logos/derek2.jpg);
-  background-size: cover;
-  width: 98px;
-  height: 120px;
-}
-</style>
-
-
-<style>
-.dan-pet1 {
-  background-color: #000000;
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  left: 200px;
-  
-}
-</style>
-
-
-<style>
-.dan-pet2 {
-  background-color: #000000;
-  background-size: cover;
-  width: 120px;
-  height: 120px;  
-  position: absolute;
-  left: 400px;
-}
-</style>
-
-<style>
-.kara-pet {
-  background-color: #000000;
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  left: 600px;
-  bottom: 400px;
 }
 </style>
 
@@ -117,44 +110,6 @@ options(width = 50)
     color: #000000;
     text-indent: 20px;
   }
-</style>
-
-
-
-<style>
-.dan-pet1 {
-  background-color: #000000;
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  left: 200px;
-  
-}
-</style>
-
-
-<style>
-.dan-pet2 {
-  background-color: #000000;
-  background-size: cover;
-  width: 120px;
-  height: 120px;  
-  position: absolute;
-  left: 400px;
-}
-</style>
-
-<style>
-.kara-pet {
-  background-color: #000000;
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  left: 600px;
-  bottom: 400px;
-}
 </style>
 
 
@@ -221,45 +176,6 @@ Name, pronouns, time with IPUMS
 
 .kara-pet[]
 
-<style>
-.derek-pet {
-  background-color: #000000;
-  background-image: url(logos/derek2.jpg);
-  background-size: cover;
-  width: 98px;
-  height: 120px;
-  position: absolute;
-  left: 150px;
-  top: 150px;
-}
-</style>
-
-
-<style>
-.dan-pet1 {
-  background-color: #d3d3d3;
-  background-size: cover;
-  width: 120px;
-  height: 120px;
-  position: absolute;
-  left: 300px;
-  top: 250px;
-  
-}
-</style>
-
-
-<style>
-.dan-pet2 {
-  background-color: #000000;
-  background-size: cover;
-  width: 120px;
-  height: 120px;  
-  position: absolute;
-  left: 450px;
-  top: 250px;
-}
-</style>
 
 <style>
 .kara-pet {
@@ -341,6 +257,8 @@ You can always reach out to through our **github**, or via **user support**.
 
 `7.` Preview of IPUMS API functionality
 
+`8.` Q & A
+
 ]
 
 
@@ -386,7 +304,7 @@ started with **US census data** has grown to include 9 collections
 
 class: center, middle
 
-# Poll: Which IPUMS data collections are you most interrested in exploring?
+# Poll: Which IPUMS data collections have you used already?
 
 
 ---
@@ -409,7 +327,6 @@ class: center, middle
 
 
 ---
-
 # 
 ![IPUMS CPS project logo](logos/cps.jpg)
 
@@ -419,12 +336,11 @@ class: center, middle
 
 - Monthly labor force surveys and supplements.
 
-
+- https://cps.ipums.org/cps/
 
 ---
-
 # 
-![IPUMS NHGIS project logo](logos/int.jpg)
+![IPUMS international project logo](logos/int.jpg)
 
 --
 
@@ -442,7 +358,7 @@ class: center, middle
   - Currently available for Italy (2011-2020) & Spain (2005-2020)
   - Mexico (2005-2020) coming soon!
 
-
+- https://international.ipums.org/international/
 
 
 ---
@@ -462,6 +378,8 @@ class: center, middle
   - Administered frequently to monitor trends in select high-fertility countries.
   - https://ipums.github.io/pma-data-hub/index.html#category:PMA_Publications
 
+- https://globalhealth.ipums.org/
+
 ???
 
 Check out Matt Gunther's blog using IPUMS Global Health Data
@@ -478,11 +396,11 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 - Supplements on cost of healthcare.
 
+- https://healthsurveys.ipums.org/
 ???
 
 
 ---
-
 # 
 ![IPUMS Higher Ed project logo](logos/highered.jpg)
 
@@ -493,11 +411,11 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 - Data from the National Surveys of College Graduates (NSCG), Recent College Graduates (NSRCG) and Doctorate Recipients (SDR) are integrated from 1993 to the present.
 
+- https://highered.ipums.org/highered/
 
 
 ---
-
-#
+# 
 ![IPUMS Time Use project logo](logos/time_use.jpg)
 
 --
@@ -506,8 +424,9 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 - Extensive time diary data from respondents in the US and *7* other countries.
 
----
+- https://timeuse.ipums.org/
 
+---
 # 
 ![IPUMS NHGIS project logo](logos/nhgis.jpg)
 
@@ -518,9 +437,11 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 - GIS Shapefiles for all levels of US geography, including tracts, from 1790 to the present
 
+- https://www.nhgis.org/
+
+
 ---
-
-
+# 
 ![IPUMS IHGIS project logo](logos/ihgis.jpg)
 
 --
@@ -528,6 +449,15 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 - **Summary** data tables from population and housing censuses as well as agricultural censuses from around the world
 
 - Integrated GIS **shapefiles.**
+
+- https://ihgis.ipums.org/
+
+
+---
+
+class: center, middle
+
+# Poll: Which IPUMS data collections are you most excited to use in the future ?
 
 ---
 
@@ -544,6 +474,12 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 - United in consistently documented metadata
 ]
 
+
+???
+
+So ipums really is **data** and a whole lot of it. These 9 different projects interact with different types of data and at different scales but they are united in the use of metadata that helps contextualize the data
+
+*So I know you're asking yoursevlves..*
 ---
 
 # So What is Ipums?
@@ -567,14 +503,6 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 ???
 
-So ipums really is **data** and a whole lot of it. These 9 different projects interact with different types of data and at different scales but they are united in 
-
----
-
-
-class: center, middle
-
-# Poll: Which IPUMS data collections have you used?
 
 ---
 
@@ -598,6 +526,8 @@ class: center, middle
 
 `7.` Preview of IPUMS API functionality
 
+`8.` Q & A
+
 ]
 
 
@@ -607,11 +537,29 @@ class: center, middle
 
 # What is ipumsr?
 
+<style>
+.ipumsr-logo {
+  background-image: url(logos/ipumsr.png);
+  background-size: cover;
+  height: 298px;
+  width: 257px;
+  position: absolute;
+  right: 50px;
+  bottom: 50px;
+}
+</style>
+
+
+.ipumsr-logo[
+
+]
+
 - R package developed by Greg Freedman Ellis
 
 --
 
 - Released in 2017
+
 
 --
 
@@ -640,13 +588,19 @@ Initial API support will be for IPUMS USA, with more projects to follow soon.
 - One package for IPUMS microdata, aggregate data, and geography
 
 ???
+
 Regarding "One package": Without ipumsr, you'd need to use a variety of
 different approaches from different packages to read in and explore IPUMS
-microdata (from projects such as IPUMS USA, CPS, and International), IPUMS
-aggregate data (from NHGIS or IHGIS), and IPUMS shapefiles. ipumsr provides one
+
+
+**microdata** from IPUMS: USA, CPS, and International, IPUMS
+
+**aggregate data** (from NHGIS or IHGIS), 
+and **IPUMS shapefiles**. ipumsr provides one
 package with a consistent interface for working with all these different types
 of IPUMS data.
 
+*a one stop shop that makes it easy to work with ipums data*
 ---
 
 class: center middle inverse
@@ -730,11 +684,16 @@ results %>%
 There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
 to read the data in with attached metadata, such as variable and value labels.
 
+Relatively small example, so the time costs can grow with larger datasets.
 ---
 
 class: center, middle
 
-# Poll: How much have you used ipumsr?
+# Poll: Have you ever used ipumsr before?
+
+???
+If you've never used ipumsr before you may be asking *where can i download it*
+
 
 ---
 
@@ -755,13 +714,25 @@ remotes::install_github("mnpopcenter/ipumsr")
 ```
 
 ???
-Now that we've convinced you of how great ipumsr is, you're probably asking 
-"How do I get my hands on it?"
+
+More advanced users might be thinking, *"this stable release is boring"* in which case you can download the development version to test out the latest features
 
 ---
 class: center, middle
 
 # To follow allong with this webinar
+
+???
+
+Repeat: slides/recording will be available, but if you want to follow along you'll need to clone/download the repo from our github. This provides the data extracts you'll need.
+
+*If you want to use other data, or manually download the extracts...*
+
+You'll have to navigate to navigate to the specific data collection at ipums.org and build a data extract. 
+
+reminder about extract requests
+
+once your extract is ready...
 ---
 
 # Downloading your data extract
@@ -775,12 +746,11 @@ knitr::include_graphics("screenshots/microdata_annotated_screenshot.png")
 ???
 
 Kind of confusing how to save the DDI/.xml file. THIS IS HOW
-
+DDI is EXTREMELY important, as it contains all the instructions regarding the METADATA
 
 Make sure to save the data and DDI files in the same location.
 
-
-R download link contains instructions that we're about to cover here
+"control download links" contains program-specific instructions for reading in the data. The R one contains a couple lines of code that we cover in the next few slides (so you don't need it) 
 
 ---
 
@@ -790,17 +760,30 @@ R download link contains instructions that we're about to cover here
 knitr::include_graphics("screenshots/download_screenshot_2.png")
 ```
 
+
+
 - The "R" link on the downloads page contains this helper code:
 
 ```{r eval=FALSE, results='asis'}
-# NOTE: To load data, you must download both the extract's data and the DDI
-# and also set the working directory to the folder with these files (or change the path below).
 
-if (!require("ipumsr")) stop("Reading IPUMS data into R requires the ipumsr package. It can be installed using the following command: install.packages('ipumsr')")
+if (!require("ipumsr"))
+  stop(
+    "Reading IPUMS data into R requires 
+    the ipumsr package. It can be installed
+    using the following command:
+    install.packages('ipumsr')"
+  )
 
 ddi <- read_ipums_ddi("ipumsi_00059.xml")
 data <- read_ipums_micro(ddi)
 ```
+
+
+
+- To load data, you must download both the extract's data and the DDI
+
+
+- Set the working directory to the folder with these files (or change the path below).
 
 ???
 This helper code checks that you have ipumsr installed, and if you do, it reads
@@ -833,6 +816,10 @@ install.packages(sf)
 
 
 ```
+
+???
+
+reminder, installing packages only needs to happen once, but some packages do update frequently so it can be a good idea to re-install once in a while
 
 ---
 
@@ -884,12 +871,14 @@ These packages are used in some of the examples we will walk through.
 
 `7.` Preview of IPUMS API functionality
 
+`8.` Q & A
+
 ]
 
 
 ???
 
-Dan passes to Kara
+Dan passes to Kara/Derek
 
 ---
 
@@ -1029,6 +1018,8 @@ Let's leverage that attached metadata!
 `6.` Working with IPUMS geographic data
 
 `7.` Preview of IPUMS API functionality
+
+`8.` Q & A
 
 ]
 
@@ -1422,6 +1413,8 @@ label_before_after(
 
 `7.` Preview of IPUMS API functionality
 
+`8.` Q & A
+
 ]
 
 
@@ -1516,6 +1509,8 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
 .strong[`6.` Working with IPUMS geographic data]
 
 `7.` Preview of IPUMS API functionality
+
+`8.` Q & A
 
 ]
 
@@ -1638,6 +1633,8 @@ webinars on that topic.
 `6.` Working with IPUMS geographic data
 
 .strong[`7.` Preview of IPUMS API functionality]
+
+`8.` Q & A
 
 ]
 
@@ -1917,6 +1914,31 @@ client tools in the "ipumspy" module.
 
 If you are using ipumsr, the `define_extract_from_json()` function will create
 an extract object from a JSON-formatted definition shared by someone else.
+
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic 
+
+`7.` Preview of IPUMS API functionality
+
+.strong[`8.` Q & A ]
+
+]
 
 ---
 
