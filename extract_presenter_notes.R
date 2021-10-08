@@ -7,7 +7,7 @@ yaml_header <- readLines("presenter_notes_yaml_header.txt")
 
 webinar_lines <- readLines("ipumsr_webinar.Rmd") %>% 
   paste0(collapse = "\n") %>% 
-  str_split("\n---\n") %>% 
+  str_split("\n---\\s*\n") %>% 
   .[[1]] %>% 
   str_trim()
 
