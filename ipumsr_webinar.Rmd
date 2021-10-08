@@ -28,20 +28,61 @@ options(width = 50)
 .grid-logo {
   background-image: url(logos/grid.png);
   background-size: cover;
-  height: 252px;
-  width: 220px;
+  width: 400px;
+  height: 400px;
+  position: absolute;
+  right: 75px;
+
+}
+</style>
+
+
+<style>
+.derek-pet {
+  background-color: #000000;
+  background-image: url(logos/derek2.jpg);
+  background-size: cover;
+  width: 98px;
+  height: 120px;
+}
+</style>
+
+
+<style>
+.dan-pet1 {
+  background-color: #000000;
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 200px;
+  
+}
+</style>
+
+
+<style>
+.dan-pet2 {
+  background-color: #000000;
+  background-size: cover;
+  width: 120px;
+  height: 120px;  
+  position: absolute;
+  left: 400px;
 }
 </style>
 
 <style>
-.derek-pet {
-  background-image: url(logos/derek2.jpg);
+.kara-pet {
+  background-color: #000000;
   background-size: cover;
-  height: 196;
-  width: 240;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 600px;
+  bottom: 400px;
 }
 </style>
-
 
 
 <style>
@@ -78,83 +119,170 @@ options(width = 50)
   }
 </style>
 
----
-# test
+
 
 <style>
-.test {
-  background-color: #d3d3d3
+.dan-pet1 {
+  background-color: #000000;
   background-size: cover;
-  width: 196px;
-  height: 240px;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 200px;
+  
 }
 </style>
 
-.test[]
+
+<style>
+.dan-pet2 {
+  background-color: #000000;
+  background-size: cover;
+  width: 120px;
+  height: 120px;  
+  position: absolute;
+  left: 400px;
+}
+</style>
+
+<style>
+.kara-pet {
+  background-color: #000000;
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 600px;
+  bottom: 400px;
+}
+</style>
+
+
 
 ---
 
 
 # Who we are
 
-.isrdi-logo[]
 
-.left-column[
-Derek Burk, 
-PhD, 
-Sociology
-]
-
-
-.right-column[
-```{r, results='asis', echo = FALSE, fig.height=120, fig.width=98}
-
-knitr::include_graphics("logos/derek2.jpg", dpi = 180)
-```
+.isrdi-logo[
 
 ]
 
+--
 
----
+.left[
+Derek Burk, PhD 
 
-# Who we are
-
-.isrdi-logo[]
-
-.left-column[
-Derek Burk, 
-PhD, 
 Sociology
-
-Dan Ehrlich, 
-MA, 
-Anthropology
 ]
 
----
+--
 
-# Who we are
+.center[
+Dan Ehrlich,MA
 
-.isrdi-logo[]
-
-.left-column[
-
-Derek Burk, 
-PhD, 
-Sociology
-
-
-Dan Ehrlich, 
-MA, 
 Anthropology
 
 
-Kara Fisher, 
-MPH, 
+]
+
+--
+
+.right[
+
+
+Kara Fisher,
+MPH
+
 Public Health
+
 ]
 
 
+???
+Name, pronouns, time with IPUMS
+
+
+---
+
+# Who we are
+
+.isrdi-logo[]
+
+
+.derek-pet[
+
+]
+
+.dan-pet1[]
+
+.dan-pet2[]
+
+.kara-pet[]
+
+<style>
+.derek-pet {
+  background-color: #000000;
+  background-image: url(logos/derek2.jpg);
+  background-size: cover;
+  width: 98px;
+  height: 120px;
+  position: absolute;
+  left: 150px;
+  top: 150px;
+}
+</style>
+
+
+<style>
+.dan-pet1 {
+  background-color: #d3d3d3;
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 300px;
+  top: 250px;
+  
+}
+</style>
+
+
+<style>
+.dan-pet2 {
+  background-color: #000000;
+  background-size: cover;
+  width: 120px;
+  height: 120px;  
+  position: absolute;
+  left: 450px;
+  top: 250px;
+}
+</style>
+
+<style>
+.kara-pet {
+  background-color: #000000;
+  background-size: cover;
+  width: 120px;
+  height: 120px;
+  position: absolute;
+  left: 650px;
+  bottom: 200px;
+}
+</style>
+
+
+???
+
+Rather than our faces, we thought everyone would appreciate pets.
+
+**A FEW NOTES**
+
+This presentation will be recorded and will be available along with slides so don't worry about trying to take notes.
+
+You can always reach out to through our **github**, or via **user support**.
 
 ---
 
@@ -246,7 +374,20 @@ class: center
 
 ???
 
-ipums has grown substantially over the past 20?? years, and our data is organized within 9 projects
+
+
+ipums has grown substantially over the past 20?? years, 
+
+started with **US census data** has grown to include 9 collections
+
+*mostly just segueing to projects*
+
+---
+
+class: center, middle
+
+# Poll: Which IPUMS data collections are you most interrested in exploring?
+
 
 ---
 # 
@@ -286,8 +427,9 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 ![IPUMS NHGIS project logo](logos/int.jpg)
 
 --
-- Census **microdata** covering a102 countries from 1960 to the present 
 
+
+- Census **microdata** covering a102 countries from 1960 to the present 
 
 
 - International historic **microdata** from the 19th and early 20th centuries for *9* countries.
@@ -320,6 +462,9 @@ ipums has grown substantially over the past 20?? years, and our data is organize
   - Administered frequently to monitor trends in select high-fertility countries.
   - https://ipums.github.io/pma-data-hub/index.html#category:PMA_Publications
 
+???
+
+Check out Matt Gunther's blog using IPUMS Global Health Data
 
 ---
 # 
@@ -375,7 +520,7 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 ---
 
-# 
+
 ![IPUMS IHGIS project logo](logos/ihgis.jpg)
 
 --
@@ -388,9 +533,9 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 # So What is Ipums?
 
-.pull-right[
 
-.grid[]
+.grid-logo[
+
 ]
 
 .pull-left[
@@ -403,10 +548,11 @@ ipums has grown substantially over the past 20?? years, and our data is organize
 
 # So What is Ipums?
 
-.pull-right[
 
-.grid[]
+.grid-logo[
+
 ]
+
 
 .pull-left[
 - IPUMS is **a lot** of data
@@ -636,7 +782,14 @@ knitr::include_graphics("download_screenshot_1.png")
     - "Download Linked File" (in Safari)
 
 ???
+
+Kind of confusing how to save the DDI/.xml file. THIS IS HOW
+
+
 Make sure to save the data and DDI files in the same location.
+
+
+R download link contains instructions that we're about to cover here
 
 ---
 
