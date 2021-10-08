@@ -514,7 +514,7 @@ background-size: cover
 
 
 ```{r echo=FALSE, fig.alt="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."}
-knitr::include_graphics("transparent_blank.png")
+knitr::include_graphics("screenshots/transparent_blank.png")
 ```
 
 ---
@@ -588,7 +588,7 @@ to read the data in with attached metadata, such as variable and value labels.
 
 class: center, middle
 
-# Poll: Have you used ipumsr?
+# Poll: How much have you used ipumsr?
 
 ---
 
@@ -620,20 +620,11 @@ class: center, middle
 
 # Downloading your data extract
 
-```{r echo=FALSE, fig.alt="Screenshot of IPUMS data download page with the 'Download .DAT' and 'DDI' links highlighted"}
-knitr::include_graphics("download_screenshot_1.png")
+```{r echo=FALSE, fig.alt="Screenshot of IPUMS data download page with overlaid instructions: 1. Click the 'Download .DAT' link to download the data. 2. Right click the 'DDI' link. 3. In the right-click menu, choose 'Save link as' in Firefox or Chrome, or 'Download Linked File' in Safari."}
+knitr::include_graphics("screenshots/microdata_annotated_screenshot.png")
 ```
 
 --
-
-- Click the "Download .DAT" link to download the data
-
---
-
-- Right-click the "DDI" link, and choose
-    - "Save Link As..." (in Firefox)
-    - "Save link as..." (in Chrome)
-    - "Download Linked File" (in Safari)
 
 ???
 Make sure to save the data and DDI files in the same location.
@@ -643,7 +634,7 @@ Make sure to save the data and DDI files in the same location.
 # Downloading your data extract
 
 ```{r echo=FALSE, fig.alt="Screenshot of IPUMS data download page with the 'R' link highlighted"}
-knitr::include_graphics("download_screenshot_2.png")
+knitr::include_graphics("screenshots/download_screenshot_2.png")
 ```
 
 - The "R" link on the downloads page contains this helper code:
@@ -750,7 +741,7 @@ Dan passes to Kara
 ---
 
 # Read in the data
-- Using commands `read_ipums_ddi()` and `read_ipums_micro()`
+- Using functions `read_ipums_ddi()` and `read_ipums_micro()`
 ```{r}
 ddi <- read_ipums_ddi("usa_00013.xml")
 
@@ -762,6 +753,22 @@ Here we see the same code pattern from the "R" helper file above, of reading the
 metadata from the codebook into an object named "ddi", and using that object to 
 read in the data.
 
+--- 
+
+# Read in the data
+
+- Can also just use `read_ipums_micro()`
+
+```{r}
+data <- read_ipums_micro("usa_00013.xml")
+```
+
+???
+You can also just read the data by passing the file path to the DDI codebook to 
+the `read_ipums_micro()` function, but it's often helpful to save the codebook 
+to it's own object to preserve the original metadata once you start messing 
+around with the data.
+
 ---
 
 # What's in that `ddi` object?
@@ -769,6 +776,11 @@ read in the data.
 ```{r, results='markup'}
 names(ddi)
 ```
+
+???
+So what's in that ddi object? A bunch of information about your extract, but 
+perhaps the most important element for understanding and analyzing the data is 
+the "var_info" data.frame.
 
 ---
 
@@ -780,6 +792,10 @@ ddi$var_info
 
 
 ???
+As we can see here, var_info is just data.frame where each row has information 
+about one variable, including the variable name, label, description, and value 
+labels, as well as where the variable is located in the fixed-width file.
+
 You don't need to know this to use ipumsr, but it might help you understand 
 what is going on when you read in the DDI codebook and then the data.
 
@@ -808,6 +824,14 @@ ddi$extract_notes %>% strwrap(30)
 
 No such luck 😞
 
+???
+So we've read in our data -- how do we go about exploring it?
+
+We could refer back to the description we wrote when creating the extract, 
+maybe that will be informative. Let's see (read extract description). Ooh, 
+that's not very helpful. I'm guessing this joke hits close to home for some of 
+you long-time IPUMS users.
+
 ---
 
 # What's in my extract again?
@@ -825,11 +849,12 @@ But often variable names aren't self-explanatory.
 
 --
 
-Let's leverage that attached metadata.
+Let's leverage that attached metadata!
 
+???
+[Read text on slides]
 
 ---
-
 
 
 # Overview
@@ -856,12 +881,17 @@ Let's leverage that attached metadata.
 ---
 
 # Available metadata
-- Some (but not all) of the documentation comes with the ddi.
+- Some (but not all) of the documentation comes with the ddi
 ```{r}
 ipums_var_label(ddi, PHONE)
 
 ipums_var_desc(ddi, PHONE) %>% strwrap(60)
 ```
+
+???
+So you can see here that ipumsr provides function to extract information from 
+the DDI object without the need to slice and dice that "var_info" data.frame I 
+showed before. Here we grab the label and description for the variable PHONE.
 
 ---
 
@@ -870,37 +900,35 @@ ipums_var_desc(ddi, PHONE) %>% strwrap(60)
 ipums_val_labels(ddi, PHONE)
 ```
 
+???
+Similarly, we can print the value labels by pointing to the DDI. We see here 
+that the variable PHONE takes four values: no, yes, not applicable, and 
+suppressed.
+
 ---
 
 
-# A nicer view of metadata
+# An interactive view of metadata
 
 ```{r, eval=FALSE}
 ipums_view(ddi)
 ```
 
-```{r echo=FALSE, fig.alt="Screenshot of static html page generated by function 'ipums_view', showing variable label and variable description for the variable 'PHONE'."}
-knitr::include_graphics("ipums_view_screenshot.png")
+```{r echo=FALSE, fig.alt="Screenshot of static html page generated by function 'ipums_view', showing variable label and variable description for the variable 'PHONE'.", fig.height=3, fig.width=5}
+knitr::include_graphics("screenshots/ipums_view_screenshot.png")
 ```
 
 ???
-The function ipums_view() makes a nicely-formatted static html page that allows 
-you to browse the metadata associated with your data extract.
+For a more browsable view of the metadata, the ipums_view() function makes a
+nicely-formatted static html page that allows you to browse the metadata
+associated with your data extract.
 
----
-
-
-# Data
-A regular `tbl_df` data.frame
-```{r}
-data
-```
 
 ---
 
 # Wrangling value labels
 
-- IPUMS value labels don't translate that well to R's factors.
+- IPUMS value labels don't translate perfectly to R factors.
 
     - (Factors always have a label, and always have values starting at 1)
   
@@ -953,14 +981,37 @@ label_before_after <- function(df, before_var, after_var, label_fun) {
 }
 ```
 
+???
+IPUMS value labels don't translate perfectly to R factors. The most important 
+difference is that in a factor, values always count up from 1. In IPUMS 
+variables, the values themselves often encode meaningful information about a 
+nested structure, which we'll see with the education variable below.
+  
+To preserve both the value and label, `ipumsr` imports labelled variables as
+`haven::labelled()` objects, but these aren't always the easiest to deal with, 
+because they aren't widely supported by functions from base R and other 
+packages.
+
+Luckily ipumsr provides helpers that allow you to use information from both the
+value and label.
+
 ---
 
-# `as_factor()`
-- `as_factor()` (from haven) converts directly to a factor.
+# Group quarters variable
 
 ```{r}
 ipums_val_labels(data$GQ)
 ```
+
+???
+Here we see another way to print value labels, by pointing directly at the 
+variable in the data.frame. This only works, however, if the variable is still 
+a `haven::labelled()` vector.
+
+How you want to transform any given variable will always depend on what you 
+want to do with it, but in the case of GQ, it doesn't look like the values are 
+giving us much information, so perhaps we just want to convert directly to a 
+factor.
 
 ---
 
@@ -978,6 +1029,12 @@ data$GQ2 <- as_factor(data$GQ)
 label_before_after(data, GQ, GQ2, as_factor)
 ```
 
+???
+`as_factor()` (from haven) converts a labelled vector directly to a factor by 
+using the value labels as the factor levels.
+
+[Read the table a bit]
+
 ---
 
 # `lbl_clean()`
@@ -986,6 +1043,12 @@ label_before_after(data, GQ, GQ2, as_factor)
 ```{r}
 ipums_val_labels(data$STATEFIP)
 ```
+
+???
+Now let's get the ipumsr helper functions for labelled vectors.
+
+Sometimes we might want to get rid of values with zero frequency before 
+converting to factor. Here, the labels for STATEFIP include all 50 states...
 
 ---
 
@@ -1005,8 +1068,12 @@ data$STATEFIP2 <- data$STATEFIP %>%
 label_before_after(data, STATEFIP, STATEFIP2, . %>% lbl_clean() %>% as_factor())
 ```
 
+???
+...but our extract only includes Minnesota, so we might not need to preserve all 
+those labels.
+
 ---
-a
+
 # `lbl_na_if()`
 - `lbl_na_if()` allows you to set certain values or labels 
   to missing.
@@ -1015,12 +1082,14 @@ a
 ipums_val_labels(data$PHONE)
 ```
 
+???
+In this case, it makes sense to set values 0 and 8 to missing, given the value 
+labels we're seeing here.
+
 ---
 
 # `lbl_na_if()`
 
-- Easier to use R's `NA` data structure to deal with missing values
-  like "N/A" and "Suppressed".
 
 ```{r}
 data$PHONE2 <- lbl_na_if(data$PHONE, ~.val %in% c(0, 8)) %>%
@@ -1040,17 +1109,36 @@ label_before_after(
 )
 ```
 
+???
+`lbl_na_if()` supports a special syntax used by a few of ipumsr's label 
+functions that allows you to refer to either the value of the variable (using 
+the special dot val variable), the label (using dot lbl), or both. Here we use 
+dot val to specify that PHONE2 should be set to missing if the original value is 
+zero or eight.
+
+
+Notice in all these examples that we create a new variable for the transformed 
+version, so that we don't overwrite the original. This can be useful so that 
+you can engage in some trial and error until you get the variable transformed as 
+you want it.
+
 ---
 
 # `lbl_na_if()`
-- It works with both values (`.val`) and labels (`.lbl`).
-  So we could have also written something like this:
+
+- Works with both values (`.val`) and labels (`.lbl`)
+
 ```{r}
 drop_labels <- c("N/A", "Suppressed (2012 and 2015 ACS)")
 
 data$PHONE3 <- lbl_na_if(data$PHONE, ~.lbl %in% drop_labels) %>%
   as_factor()
 ```
+
+???
+Because lbl_na_if works with both values and labels, we could accomplish the 
+same thing by referring to the labels. This time, we specify that PHONE3 should 
+be set to missing if the original label was "N/A" or "Suppressed".
 
 ---
 
@@ -1061,12 +1149,19 @@ data$PHONE3 <- lbl_na_if(data$PHONE, ~.lbl %in% drop_labels) %>%
 ipums_val_labels(data$EDUCD)
 ```
 
+
+???
+[Read bullet point]
+
+We see here that values less than 10 indicate missing or no schooling values; 
+values between 10 and 19 all capture levels between nursery school and grade 4; 
+and so on.
+
 ---
 
 # `lbl_collapse()`
 
-- Maybe this is too much detail, so we want to collapse 
-  the last digit.
+- Maybe this is too much detail, so we want to collapse the last digit.
 
 ```{r}
 data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val %/% 10) %>%
@@ -1084,6 +1179,19 @@ label_before_after(
     as_factor()
 )
 ```
+
+???
+[Read bullet point]
+The label collapse function allows you to collapse values based on a 
+hierarchical coding scheme. Here we use the integer division operator to group 
+values with the same first digit, and label collapse automatically assigns the 
+label of the smallest original value. You can interpret this integer division 
+expression as "how many times does 10 go into this value?" For original values 
+0, 1, and 2, the answer is that 10 goes into the value zero times, so those 
+values all receive the same output value, with the label coming from the 
+smallest original value. I think the details of what's going on here take a bit 
+of time to unpack, but hopefully this gives you a sense of the usefulness and 
+power of this function.
 
 ---
 
@@ -1163,9 +1271,6 @@ label_before_after(
 ]
 
 
-
-
-
 ---
 
 # Phone availability 
@@ -1173,9 +1278,12 @@ label_before_after(
 ```{r graph1, eval=FALSE}
 graph_data <- data %>%
   group_by(YEAR) %>%
-  summarize(`% with phone` = weighted.mean(
-    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-  ))
+  summarize(
+    `% with phone` = weighted.mean(
+      PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
+    ),
+    .groups = "drop"
+  )
 
 ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
   geom_point() +
@@ -1183,9 +1291,21 @@ ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
   labs(
     title = "Percent of Minnesota with phone line",
     subtitle = paste0("Data source: ", ddi$ipums_project),
-    caption = paste(strwrap(ipums_var_desc(ddi, PHONE), 90), collapse = "\n")
+    caption = paste(
+      strwrap(ipums_var_desc(ddi, PHONE), 90), 
+      collapse = "\n"
+    )
   )
 ```
+
+???
+Microdata often needs to be summarized at a higher level for visualization. In 
+this case, if we want to make a graph of phone availability over time, we need 
+to first summarize at the year level.
+
+The first block of code computes the weighted proportion of persons with access
+to a phone in each year. Once our data are summarized so that each row
+represents a value for one year, we can make a graph by year.
 
 ---
 
@@ -1306,7 +1426,7 @@ process of joining the sf object to data.
 conspuma_data <- data %>%
   group_by(CONSPUMA, YEAR) %>%
   summarize(
-    PHONE = weighted.mean(
+    `% with phone` = weighted.mean(
       PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
     ),
     .groups = "drop"
@@ -1335,7 +1455,7 @@ above.
 graph_data <- conspuma_data %>% 
   filter(YEAR %in% c(1980, 1990, 2000, 2010))
 
-ggplot(graph_data, aes(fill = PHONE)) +
+ggplot(graph_data, aes(fill = `% with phone`)) +
   facet_wrap(~YEAR) + 
   geom_sf()
 ```
