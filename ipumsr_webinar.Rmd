@@ -1063,7 +1063,7 @@ Let's leverage that attached metadata!
 
 # Available metadata
 
-Variable labels and descriptions
+Variable labels and descriptions:
 
 ```{r}
 ipums_var_label(ddi, PHONE)
@@ -1080,7 +1080,7 @@ showed before. Here we grab the label and description for the variable PHONE.
 
 # Available metadata
 
-Value labels
+Value labels:
 
 ```{r}
 ipums_val_labels(ddi, PHONE)
@@ -1189,7 +1189,7 @@ value and label to transform your variables into the shape you want.
 
 ---
 
-# To get rid of haven::labelled objects
+# haven::labelled columns at a glance
 
 ```{r echo=FALSE}
 old_width <- getOption("width")
@@ -1205,14 +1205,15 @@ Here's what the data look like when you read them in.
 
 
 One thing I like about the behavior of `haven::labelled()` objects is how they 
-show the value and the label when you print your data. But let's say you just 
-don't want to deal with these special haven::labelled objects, and you want to 
-do away with them in one fell swipe. I would advise against this approach in 
-general, but it could be what you want in some cases.
+show the value and the label when you print your data. 
+
+But let's say you just don't want to deal with these special haven::labelled
+objects, and you want to get rid of them in one fell swipe. I would advise
+against this approach in general, but it could be what you want in some cases.
 
 ---
 
-# To get rid of haven::labelled objects
+# Get rid of haven::labelled columns
 
 ```{r}
 as_factor(data)
@@ -1225,7 +1226,7 @@ the labels as factor levels.
 
 ---
 
-# To get rid of haven::labelled objects
+# Get rid of haven::labelled columns
 
 ```{r}
 zap_labels(data)
@@ -1247,6 +1248,9 @@ But if you're going to want to recode any of these variables, you'll often be
 able to do that more elegantly when you have access to both values and labels, 
 with the help of special ipumsr functions that leverage all that information.
 
+These special functions might take some trial and error when you first start 
+using them, but I promise the payoff will be worth it.
+
 ---
 
 # `lbl_na_if()`
@@ -1257,8 +1261,16 @@ ipums_val_labels(data$PHONE)
 ```
 
 ???
-In this case, it makes sense to set values 0 and 8 to missing, given the value 
-labels we're seeing here.
+The first label helper function is label NA if, which allows you to set values 
+to NA, which is R's code for missing values, according to either the value or 
+the label.
+
+Notice that we've called `ipums_val_labels()` directly on the labelled column, 
+rather than pointing to the DDI object. This works if PHONE is still a 
+haven::labelled column.
+
+In this case, given the value labels we see here, it makes sense to set values 0
+and 8 to missing.
 
 ---
 
@@ -1284,11 +1296,12 @@ label_before_after(
 ```
 
 ???
-`lbl_na_if()` supports a special syntax used by a few of ipumsr's label 
-functions that allows you to refer to either the value of the variable (using 
-the special dot val variable), the label (using dot lbl), or both. Here we use 
-dot val to specify that PHONE2 should be set to missing if the original value is 
-zero or eight.
+`lbl_na_if()` supports a special syntax used by a few of ipumsr's label
+functions that allows you to use anonymous functions (signaled by the "tilde"
+symbol, which is that little squiggly line) that refer to either the value of a
+variable (using the special dot val variable), the label (using dot lbl), or
+both. Here we use dot val to specify that PHONE2 should be set to missing if the
+original value is zero or eight.
 
 This can be read as, "recode variable PHONE to NA if the value is zero or 
 eight".
@@ -1297,6 +1310,38 @@ Notice in all these examples that we create a new variable for the transformed
 version, so that we don't overwrite the original. This can be useful so that 
 you can engage in some trial and error until you get the variable transformed as 
 you want it.
+
+---
+
+# `lbl_na_if()`
+
+
+```{r}
+data$PHONE2 <- lbl_na_if(
+  data$PHONE, 
+  function(.val, .lbl) .val %in% c(0, 8)
+) %>%
+  as_factor()
+```
+
+. . . 
+
+```{r, echo = FALSE}
+label_before_after(
+  data, 
+  PHONE, 
+  PHONE2,
+  . %>% 
+    lbl_na_if(~.val %in% c(0, 8)) %>%
+    as_factor()
+)
+```
+
+???
+In case you're unfamiliar with the anonymous function notation, that squiggly 
+tilde could be replaced with a regular function definition, as shown here. So 
+anytime you see the tilde symbol in any of these label helper functions, you 
+can read it as "a function of dot val and dot label".
 
 ---
 
