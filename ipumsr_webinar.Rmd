@@ -742,15 +742,16 @@ However, you may need to install some additional packages used in the example co
 # install.packages(ipumsr)
 
 ## Tidyverse
-install.packages(dplyr)
-install.packages(ggplot2)
-install.packages(stringr)
-install.packages(purrr)
+install.packages("dplyr")
+install.packages("ggplot2")
+install.packages("stringr")
+install.packages("purrr")
+
+## HTML tables
+install.packages("DT")
 
 ## gis
-install.packages(sf)
-
-
+install.packages("sf")
 ```
 
 ???
@@ -899,13 +900,17 @@ this is that the codebook includes the path
 
 ---
 
+class: center middle
+
 # Why do I point to the codebook to read in the data?
 
-### The data file is **dumb**, the codebook file is **smart**
+--
+
+### The data file is **dumb**, the codebook is **smart**
 
 ???
-Here's my attempt to explain this in a hopefully memorable way: the fixed-width 
-data file is dumb, and the codebook file is smart
+Here's my attempt to explain this in a hopefully memorable way: the data file is
+dumb, and the codebook is smart
 
 ---
 
@@ -922,6 +927,9 @@ can't just tell R "read this data file into a data.frame". The data file itself
 doesn't contain any information about what the variables are called or which 
 numbers on each line correspond to which variables, let alone what the meaning 
 of those values might be.
+
+(In case you're wondering what those blanks are, that's a geography variable 
+that is not available in some years of our data.)
 
 ---
 
@@ -949,19 +957,53 @@ is the "var_info" element, so let's take a look at that.
 
 # The DDI codebook is smart
 
+```{r echo=FALSE}
+old_width <- getOption("width")
+options(width = 150)
+```
+
+
 ```{r}
 ddi$var_info
 ```
 
+```{r echo=FALSE}
+options(width = old_width)
+```
 
 ???
 As we can see here, var_info is just data.frame where each row has information 
 about one variable, including the variable name, label, description, and value 
 labels, as well as where the variable is located in the fixed-width file.
 
-You don't need to know this to use ipumsr, but it might help you understand 
-what is going on when you read in the DDI codebook and then the data.
+You don't need to remember the details of what's in the DDI object or this 
+var_info data.frame, as long as you remember that to read in the data, you must 
+point to the DDI codebook, not the data file.
 
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+.strong[`4.` Exploring and manipulating metadata]
+
+`5.` Brief analysis example
+
+`6.` Working with IPUMS geographic data
+
+`7.` Preview of IPUMS API functionality
+
+`8.` Q & A
+
+]
 
 ---
 
@@ -980,7 +1022,7 @@ ddi$extract_notes <-
 ```
 
 ```{r}
-ddi$extract_notes %>% strwrap(30)
+ddi$extract_notes %>% strwrap(60)
 ```
 
 --
@@ -1019,34 +1061,10 @@ Let's leverage that attached metadata!
 
 ---
 
-
-# Overview
-
-.greyed-out[
-
-
-`1.` What is IPUMS?
-
-`2.` What is ipumsr, and why use it?
-
-`3.` Reading data into R
-
-.strong[`4.` Exploring and manipulating metadata]
-
-`5.` Brief analysis example
-
-`6.` Working with IPUMS geographic data
-
-`7.` Preview of IPUMS API functionality
-
-`8.` Q & A
-
-]
-
----
-
 # Available metadata
-- Some (but not all) of the documentation comes with the ddi
+
+Variable labels and descriptions
+
 ```{r}
 ipums_var_label(ddi, PHONE)
 
@@ -1061,6 +1079,9 @@ showed before. Here we grab the label and description for the variable PHONE.
 ---
 
 # Available metadata
+
+Value labels
+
 ```{r}
 ipums_val_labels(ddi, PHONE)
 ```
@@ -1096,13 +1117,17 @@ associated with your data extract.
 - IPUMS value labels don't translate perfectly to R factors
 
     - Every value in a factor must be labeled
+    
     - Factor values always count up from 1
-  
+
+--
+
 - `ipumsr` uses `haven::labelled()` objects to preserve values and labels, but 
   these objects can be tricky to work with
+  
+--
 
-- Luckily ipumsr provides helpers that allow you to use information from both 
-  the value and label
+- ipumsr helper functions allow you to leverage info from values and labels
 
 ```{r, include = FALSE}
 label_before_after <- function(df, before_var, after_var, label_fun) {
@@ -1156,56 +1181,76 @@ nested structure, which we'll see with the education variable below.
 To preserve both the value and label, `ipumsr` imports labelled variables as
 `haven::labelled()` objects, but these aren't always the easiest to deal with, 
 because they aren't widely supported by functions from base R and other 
-packages.
+packages. Thus, you will almost always want to convert these objects to 
+something like a factor or a regular numeric or character vector.
 
 Luckily ipumsr provides helpers that allow you to use information from both the
-value and label.
+value and label to transform your variables into the shape you want.
 
 ---
 
-# Group quarters variable
+# To get rid of haven::labelled objects
+
+```{r echo=FALSE}
+old_width <- getOption("width")
+options(width = 150)
+```
 
 ```{r}
-ipums_val_labels(data$GQ)
+data
 ```
 
 ???
-Here we see another way to print value labels, by pointing directly at the 
-variable in the data.frame. This only works, however, if the variable is still 
-a `haven::labelled()` vector.
+Here's what the data look like when you read them in.
 
-How you want to transform any given variable will always depend on what you 
-want to do with it, but in the case of GQ, it doesn't look like the values are 
-giving us much information, so perhaps we just want to convert directly to a 
-factor.
+
+One thing I like about the behavior of `haven::labelled()` objects is how they 
+show the value and the label when you print your data. But let's say you just 
+don't want to deal with these special haven::labelled objects, and you want to 
+do away with them in one fell swipe. I would advise against this approach in 
+general, but it could be what you want in some cases.
 
 ---
 
-# `as_factor()`
-
-- Suppose we want to keep these labels exactly as they are
+# To get rid of haven::labelled objects
 
 ```{r}
-data$GQ2 <- as_factor(data$GQ)
-```
-
-. . .
-
-```{r, echo = FALSE}
-label_before_after(data, GQ, GQ2, as_factor)
+as_factor(data)
 ```
 
 ???
-`as_factor()` (from haven) converts a labelled vector directly to a factor by 
-using the value labels as the factor levels.
+One option is the `as_factor()` function, which can be applied to the whole data 
+frame at once. Here we see that the values have been stripped away, leaving only 
+the labels as factor levels.
 
-[Read the table a bit]
+---
+
+# To get rid of haven::labelled objects
+
+```{r}
+zap_labels(data)
+```
+
+```{r echo=FALSE}
+options(width = old_width)
+```
+
+???
+Alternatively, if you just want the numeric values, you can use `zap_labels()` 
+on the whole data frame. Here we see that the labels have been stripped away, 
+leaving only the numeric codes.
+
+Both `as_factor()` and `zap_labels()` can be applied to a single column of a 
+data frame as well, to just strip away values or labels for that one column.
+
+But if you're going to want to recode any of these variables, you'll often be 
+able to do that more elegantly when you have access to both values and labels, 
+with the help of special ipumsr functions that leverage all that information.
 
 ---
 
 # `lbl_na_if()`
-- `lbl_na_if()` allows you to set certain values or labels 
-  to missing.
+- `lbl_na_if()` allows you to set certain values or labels to missing
 
 ```{r}
 ipums_val_labels(data$PHONE)
@@ -1245,6 +1290,8 @@ the special dot val variable), the label (using dot lbl), or both. Here we use
 dot val to specify that PHONE2 should be set to missing if the original value is 
 zero or eight.
 
+This can be read as, "recode variable PHONE to NA if the value is zero or 
+eight".
 
 Notice in all these examples that we create a new variable for the transformed 
 version, so that we don't overwrite the original. This can be useful so that 
@@ -1273,7 +1320,7 @@ be set to missing if the original label was "N/A" or "Suppressed".
 
 # `lbl_collapse()`
 - `lbl_collapse()` allows you to take advantage of the hierarchical
-  structure of value labels.
+  structure of value labels
 ```{r}
 ipums_val_labels(data$EDUCD)
 ```
@@ -1290,11 +1337,11 @@ and so on.
 
 # `lbl_collapse()`
 
-- Maybe this is too much detail, so we want to collapse the last digit.
+- Maybe this is too much detail, so we want to collapse the last digit
 
 ```{r}
 data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val %/% 10) %>%
-  as_factor()
+  as_factor(ordered = TRUE)
 ```
 
 . . .
@@ -1311,16 +1358,20 @@ label_before_after(
 
 ???
 [Read bullet point]
-The label collapse function allows you to collapse values based on a 
-hierarchical coding scheme. Here we use the integer division operator to group 
-values with the same first digit, and label collapse automatically assigns the 
-label of the smallest original value. You can interpret this integer division 
-expression as "how many times does 10 go into this value?" For original values 
-0, 1, and 2, the answer is that 10 goes into the value zero times, so those 
-values all receive the same output value, with the label coming from the 
-smallest original value. I think the details of what's going on here take a bit 
-of time to unpack, but hopefully this gives you a sense of the usefulness and 
-power of this function.
+The label collapse function allows you to collapse values based on a
+hierarchical coding scheme. 
+
+Here we use the integer division operator "percent forward slash percent" to
+group values with the same first digit, and label collapse automatically assigns
+the label of the smallest original value.
+
+You can
+interpret this integer division expression as "how many times does 10 go into
+this value?" For original values 0, 1, and 2, the answer is that 10 goes into
+the value zero times, so those values all receive the same output value, with
+the label coming from the smallest original value. I think the details of what's
+going on here take a bit of time to unpack, but hopefully this gives you a sense
+of the usefulness and power of this function.
 
 ---
 
