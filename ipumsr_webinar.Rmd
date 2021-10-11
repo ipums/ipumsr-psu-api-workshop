@@ -180,9 +180,10 @@ Name, pronouns, time with IPUMS
 <style>
 .kara-pet {
   background-color: #000000;
+  background-image: url(logos/Ru.jpg);
   background-size: cover;
-  width: 120px;
-  height: 120px;
+  width: 140px;
+  height: 160px;
   position: absolute;
   left: 650px;
   bottom: 200px;
