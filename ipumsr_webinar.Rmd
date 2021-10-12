@@ -911,15 +911,15 @@ class: center middle
 
 --
 
-### The data file is **dumb**, the codebook is **smart**
+### The data file is **difficult to discern**, the codebook is **easy to discern**
 
 ???
 Here's my attempt to explain this in a hopefully memorable way: the data file is
-dumb, and the codebook is smart
+difficult to discern (or read), and the codebook is easy to discern
 
 ---
 
-# The data file is dumb
+# The data file is difficult to discern
 
 ```{r echo=FALSE, comment = ''}
 readLines("usa_00013.dat.gz", n = 10) %>% 
@@ -938,7 +938,7 @@ that is not available in some years of our data.)
 
 ---
 
-# The DDI codebook is smart
+# The DDI codebook is easy to discern
 
 ```{r, results='markup'}
 names(ddi)
@@ -960,7 +960,7 @@ is the "var_info" element, so let's take a look at that.
 
 ---
 
-# The DDI codebook is smart
+# The DDI codebook is easy to discern
 
 ```{r echo=FALSE}
 old_width <- getOption("width")
