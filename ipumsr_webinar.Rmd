@@ -911,15 +911,17 @@ class: center middle
 
 --
 
-### The data file is **difficult to discern**, the codebook is **easy to discern**
+### The data file is the **raw ingredients**, the codebook is the **recipe**
 
 ???
-Here's my attempt to explain this in a hopefully memorable way: the data file is
-difficult to discern (or read), and the codebook is easy to discern
+Here's my attempt to explain this in a hopefully memorable way: the data file 
+is the raw ingredients, and the codebook is the recipe. And when you go to make 
+dinner, your recipe tells you how to combine your ingredients to get the 
+finished product.
 
 ---
 
-# The data file is difficult to discern
+# The data file is just raw ingredients
 
 ```{r echo=FALSE, comment = ''}
 readLines("usa_00013.dat.gz", n = 10) %>% 
@@ -938,7 +940,7 @@ that is not available in some years of our data.)
 
 ---
 
-# The DDI codebook is easy to discern
+# The DDI codebook is the recipe
 
 ```{r, results='markup'}
 names(ddi)
@@ -950,17 +952,17 @@ ddi$file_name
 ```
 
 ???
-The DDI codebook is the brains of the operation. It contains a bunch of
-information about your extract, including the name of the data file, which is 
-why you don't need to supply the path to the data file if you saved the codebook 
-and data in the same folder.
+The DDI codebook tells you what to do with the ingredients in the data file. It
+contains a bunch of information about your extract, including the name of the
+data file, which is why you don't need to supply the path to the data file if
+you saved the codebook and data in the same folder.
 
 But perhaps the most important element for understanding and analyzing the data
 is the "var_info" element, so let's take a look at that.
 
 ---
 
-# The DDI codebook is easy to discern
+# The DDI codebook is the recipe
 
 ```{r echo=FALSE}
 old_width <- getOption("width")
