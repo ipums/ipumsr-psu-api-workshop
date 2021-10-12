@@ -1,0 +1,23 @@
+Welcome, everyone, to this webinar on using IPUMS data in R with 
+ipumsr. We only have an hour, and we want to leave time for questions at the 
+end, so this will be a whirlwind tour of some of the key features of ipumsr. 
+
+Our goal is to get you excited about analyzing IPUMS data using ipumsr, and
+point you to additional resources to explore on your own. As you use ipumsr, you
+are bound to have questions, and at the end we will provide links to several
+places where you can seek help, including by reaching out to our excellent IPUMS
+user support team or posting a question on the IPUMS user forum.
+
+We will also share with you the webinar recording, these slides, and all of the
+code used to build this presentation, so there's no need to frantically jot down
+notes during the webinar itself. You should, however, type any questions in the
+Q&A as they occur to you, and our user support expert Grace will either answer
+them or add them to the list to be answered at the end.
+
+Finally, I just want to acknowledge that the ipumsr package was created by Greg
+Freedman Ellis, and this webinar is based on a presentation created by Greg, so
+thanks to Greg for creating a great package, and for letting us use your slides.
+
+With that, we'll get started by briefly introducing ourselves. You'll primarily 
+be hearing from me and Dan, but the development of the webinar was a 
+collaborative effort between Dan, Kara, and myself.

@@ -13,6 +13,9 @@ webinar_lines <- readLines("ipumsr_webinar.Rmd") %>%
 
 webinar_slides <- tibble(raw = webinar_lines)
 
+introduction_notes <- readLines("introduction.txt") %>% 
+  paste0(collapse = "\n")
+
 presenter_notes <- webinar_slides %>% 
   mutate(
     heading = str_match(raw, "((?<!#)# .+?)(?:$|\n)")[, 2], # "(?:...)" makes a "non-capturing group"
@@ -21,6 +24,7 @@ presenter_notes <- webinar_slides %>%
   mutate(
     heading = if_else(is.na(heading), "# NO HEADING", heading),
     heading = paste0(heading, " (", row_number(), ")"),
+    notes = if_else(row_number() == 1, introduction_notes, notes),
     heading_plus_notes = paste0(heading, "\n\n", notes, "\n\n")
   ) %>% 
   pull(heading_plus_notes) 

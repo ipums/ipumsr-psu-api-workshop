@@ -6,20 +6,41 @@ output: html_document
 
 # NO HEADING (1)
 
+Welcome, everyone, to this webinar on using IPUMS data in R with 
+ipumsr. We only have an hour, and we want to leave time for questions at the 
+end, so this will be a whirlwind tour of some of the key features of ipumsr. 
+
+Our goal is to get you excited about analyzing IPUMS data using ipumsr, and
+point you to additional resources to explore on your own. As you use ipumsr, you
+are bound to have questions, and at the end we will provide links to several
+places where you can seek help, including by reaching out to our excellent IPUMS
+user support team or posting a question on the IPUMS user forum.
+
+We will also share with you the webinar recording, these slides, and all of the
+code used to build this presentation, so there's no need to frantically jot down
+notes during the webinar itself. You should, however, type any questions in the
+Q&A as they occur to you, and our user support expert Grace will either answer
+them or add them to the list to be answered at the end.
+
+Finally, I just want to acknowledge that the ipumsr package was created by Greg
+Freedman Ellis, and this webinar is based on a presentation created by Greg, so
+thanks to Greg for creating a great package, and for letting us use your slides.
+
+With that, we'll get started by briefly introducing ourselves. You'll primarily 
+be hearing from me and Dan, but the development of the webinar was a 
+collaborative effort between Dan, Kara, and myself.
 
 
+# Who we are (2)
 
-# NO HEADING (2)
+(Name, pronouns, academic field, time with IPUMS)
 
-
+So, my name is Derek Burk, I use he/him pronouns, I've been working on the
+IPUMS International team for the past four years, and my academic training is in
+sociology.
 
 
 # Who we are (3)
-
-Name, pronouns, time with IPUMS
-
-
-# Who we are (4)
 
 Rather than our faces, we thought everyone would appreciate pets.
 
@@ -30,17 +51,17 @@ This presentation will be recorded and will be available along with slides so do
 You can always reach out to through our **github**, or via **user support**.
 
 
+# Overview (4)
+
+
+
+
 # Overview (5)
 
 
 
 
-# Overview (6)
-
-
-
-
-# What is IPUMS? (7)
+# What is IPUMS? (6)
 
 ipums has grown substantially since its first beta release in 1993, 
 
@@ -49,7 +70,12 @@ started with **US census data** has grown to include 9 collections
 *mostly just segueing to projects*
 
 
-# Poll: Which IPUMS data collections have you used already? (8)
+# Poll: Which IPUMS data collections have you used already? (7)
+
+
+
+
+# NO HEADING (8)
 
 
 
@@ -66,12 +92,12 @@ started with **US census data** has grown to include 9 collections
 
 # NO HEADING (11)
 
-
+Check out Matt Gunther's blog using IPUMS Global Health Data
 
 
 # NO HEADING (12)
 
-Check out Matt Gunther's blog using IPUMS Global Health Data
+
 
 
 # NO HEADING (13)
@@ -94,34 +120,29 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 
 
-# NO HEADING (17)
+# Poll: Which IPUMS data collections are you most excited to use in the future ? (17)
 
 
 
 
-# Poll: Which IPUMS data collections are you most excited to use in the future ? (18)
-
-
-
-
-# So what is IPUMS? (19)
+# So what is IPUMS? (18)
 
 So ipums really is **data** and a whole lot of it. These 9 different projects interact with different types of data and at different scales but they are united in the use of metadata that helps contextualize the data
 
 *So I know you're asking yourselves..*
 
 
-# So what is IPUMS? (20)
+# So what is IPUMS? (19)
 
 
 
 
-# Overview (21)
+# Overview (20)
 
 
 
 
-# What is ipumsr? (22)
+# What is ipumsr? (21)
 
 (Metadata such as value labels, variable labels, and detailed variable 
 descriptions.)
@@ -129,7 +150,7 @@ descriptions.)
 Initial API support will be for IPUMS USA, with more projects to follow soon.
 
 
-# Why use ipumsr? (23)
+# Why use ipumsr? (22)
 
 Regarding "One package": Without ipumsr, you'd need to use a variety of
 different approaches from different packages to read in and explore IPUMS
@@ -145,19 +166,19 @@ of IPUMS data.
 *a one stop shop that makes it easy to work with ipums data*
 
 
-# One package to rule them all (24)
+# One package to rule them all (23)
 
 
 
 
-# Why use ipumsr? (25)
+# Why use ipumsr? (24)
 
 Regarding "More features": The aforementioned IPUMS API support will be the next
 big feature. Another potential new feature is adding tools for properly handling
 survey weights. Let us know what would be helpful to you via GitHub or email.
 
 
-# Why use ipumsr? (26)
+# Why use ipumsr? (25)
 
 There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
 to read the data in with attached metadata, such as variable and value labels.
@@ -165,12 +186,12 @@ to read the data in with attached metadata, such as variable and value labels.
 Relatively small example, so the time costs can grow with larger datasets.
 
 
-# Poll: Have you ever used ipumsr before? (27)
+# Poll: Have you ever used ipumsr before? (26)
 
 If you've never used ipumsr before you may be asking *where can i download it*
 
 
-# Installing ipumsr (28)
+# Installing ipumsr (27)
 
 More advanced users might be thinking, *"this stable release is boring"* in which case you can download the development version to test out the latest features. 
 
@@ -178,32 +199,40 @@ The API functions are in the development version, but the API itself is not yet
 publicly available.
 
 
-# To run the code in this webinar (29)
+# To run the code in this webinar (28)
 
 Repeat: slides/recording will be available. To run this code yourself you can clone/download the repo from our github. This provides the data extracts you'll need. 
 
 However, you may need to install some additional packages used in the example code below, as shown on the next slide.
 
 
-# Install R packages (as needed) (30)
+# Install R packages (as needed) (29)
 
 reminder, installing packages only needs to happen once, but some packages do update frequently so it can be a good idea to re-install once in a while
 
 
-# Loading packages (31)
+# Loading packages (30)
 
 These packages are used in some of the examples we will walk through.
 
 
-# Overview (32)
+# Overview (31)
 
 Dan passes to Kara/Derek
 
 
-# Downloading your data extract (33)
+# Downloading your data extract (32)
 
 Kind of confusing how to save the DDI/.xml file. THIS IS HOW.
 DDI is EXTREMELY important, as it contains all the instructions regarding the METADATA
+
+Once your extract is complete, download the data file and the DDI. Downloading
+the DDI is a little bit different depending on your browser. On most browsers
+you should right-click the file and select “Save As…”. If this saves a file with
+a .xml file extension, then you should be ready. However, Safari users must
+select “Download Linked File” instead of “Download Linked File As”. On Safari,
+selecting the wrong version of these two will download a file with a .html file
+extension instead of a .xml extension.
 
 In case anyone was curious, DDI stands for "Data Documentation Initiative" --
 the DDI project sets standards for documenting datasets, and the codebooks for
@@ -212,7 +241,7 @@ most IPUMS projects follow this standard.
 Make sure to save the data and DDI files in the same location.
 
 
-# Downloading your data extract (34)
+# Downloading your data extract (33)
 
 The links under "Command Files" contain program-specific code for reading in the
 data. The R one contains the code we'll show on the next slide.
@@ -221,7 +250,7 @@ This helper code checks that you have ipumsr installed, and if you do, it reads
 in the DDI codebook and data into separate objects.
 
 
-# Read in the data (35)
+# Read in the data (34)
 
 So you've downloaded both the data and the DDI codebook, and saved them in the 
 same folder. Here's how you actually read the data into R.
@@ -242,13 +271,13 @@ I want to read in the data shouldn't I point to the data file? The reason for
 this is that the codebook includes the path
 
 
-# Why do I point to the codebook to read in the data? (36)
+# Why do I point to the codebook to read in the data? (35)
 
 Here's my attempt to explain this in a hopefully memorable way: the data file is
 dumb, and the codebook is smart
 
 
-# The data file is dumb (37)
+# The data file is dumb (36)
 
 Looking at the first ten lines of our example data file, it makes sense why you 
 can't just tell R "read this data file into a data.frame". The data file itself
@@ -260,7 +289,7 @@ of those values might be.
 that is not available in some years of our data.)
 
 
-# The DDI codebook is smart (38)
+# The DDI codebook is smart (37)
 
 The DDI codebook is the brains of the operation. It contains a bunch of
 information about your extract, including the name of the data file, which is 
@@ -271,7 +300,7 @@ But perhaps the most important element for understanding and analyzing the data
 is the "var_info" element, so let's take a look at that.
 
 
-# The DDI codebook is smart (39)
+# The DDI codebook is smart (38)
 
 As we can see here, var_info is just data.frame where each row has information 
 about one variable, including the variable name, label, description, and value 
@@ -282,12 +311,12 @@ var_info data.frame, as long as you remember that to read in the data, you must
 point to the DDI codebook, not the data file.
 
 
-# Overview (40)
+# Overview (39)
 
 
 
 
-# What's in my extract again? (41)
+# What's in my extract again? (40)
 
 So we've read in our data -- how do we go about exploring it?
 
@@ -297,33 +326,33 @@ that's not very helpful. I'm guessing this joke hits close to home for some of
 you long-time IPUMS users.
 
 
-# What's in my extract again? (42)
+# What's in my extract again? (41)
 
 [Read text on slides]
 
 
-# Available metadata (43)
+# Available metadata (42)
 
 So you can see here that ipumsr provides function to extract information from 
 the DDI object without the need to slice and dice that "var_info" data.frame I 
 showed before. Here we grab the label and description for the variable PHONE.
 
 
-# Available metadata (44)
+# Available metadata (43)
 
 Similarly, we can print the value labels by pointing to the DDI. We see here 
 that the variable PHONE takes four values: no, yes, not applicable, and 
 suppressed.
 
 
-# An interactive view of metadata (45)
+# An interactive view of metadata (44)
 
 For a more browsable view of the metadata, the ipums_view() function makes a
 nicely-formatted static html page that allows you to browse the metadata
 associated with your data extract.
 
 
-# Wrangling value labels (46)
+# Wrangling value labels (45)
 
 IPUMS value labels don't translate perfectly to R factors. The most important 
 difference is that in a factor, values always count up from 1. In IPUMS 
@@ -340,7 +369,7 @@ Luckily ipumsr provides helpers that allow you to use information from both the
 value and label to transform your variables into the shape you want.
 
 
-# haven::labelled columns at a glance (47)
+# haven::labelled columns at a glance (46)
 
 Here's what the data look like when you read them in.
 
@@ -353,14 +382,14 @@ objects, and you want to get rid of them in one fell swipe. I would advise
 against this approach in general, but it could be what you want in some cases.
 
 
-# Get rid of haven::labelled columns (48)
+# Get rid of haven::labelled columns (47)
 
 One option is the `as_factor()` function, which can be applied to the whole data 
 frame at once. Here we see that the values have been stripped away, leaving only 
 the labels as factor levels.
 
 
-# Get rid of haven::labelled columns (49)
+# Get rid of haven::labelled columns (48)
 
 Alternatively, if you just want the numeric values, you can use `zap_labels()` 
 on the whole data frame. Here we see that the labels have been stripped away, 
@@ -377,7 +406,7 @@ These special functions might take some trial and error when you first start
 using them, but I promise the payoff will be worth it.
 
 
-# `lbl_na_if()` (50)
+# `lbl_na_if()` (49)
 
 The first label helper function is label NA if, which allows you to set values 
 to NA, which is R's code for missing values, according to either the value or 
@@ -391,7 +420,7 @@ In this case, given the value labels we see here, it makes sense to set values 0
 and 8 to missing.
 
 
-# `lbl_na_if()` (51)
+# `lbl_na_if()` (50)
 
 `lbl_na_if()` supports a special syntax used by a few of ipumsr's label
 functions that allows you to use anonymous functions (signaled by the "tilde"
@@ -409,7 +438,7 @@ you can engage in some trial and error until you get the variable transformed as
 you want it.
 
 
-# `lbl_na_if()` (52)
+# `lbl_na_if()` (51)
 
 In case you're unfamiliar with the anonymous function notation, that squiggly 
 tilde could be replaced with a regular function definition, as shown here. So 
@@ -417,14 +446,14 @@ anytime you see the tilde symbol in any of these label helper functions, you
 can read it as "a function of dot val and dot label".
 
 
-# `lbl_na_if()` (53)
+# `lbl_na_if()` (52)
 
 Because lbl_na_if works with both values and labels, we could accomplish the 
 same thing by referring to the labels. This time, we specify that PHONE3 should 
 be set to missing if the original label was "N/A" or "Suppressed".
 
 
-# `lbl_collapse()` (54)
+# `lbl_collapse()` (53)
 
 [Read bullet point]
 
@@ -433,7 +462,7 @@ values between 10 and 19 all capture levels between nursery school and grade 4;
 and so on.
 
 
-# `lbl_collapse()` (55)
+# `lbl_collapse()` (54)
 
 [Read bullet point]
 The label collapse function allows you to collapse values based on a
@@ -452,27 +481,67 @@ going on here take a bit of time to unpack, but hopefully this gives you a sense
 of the usefulness and power of this function.
 
 
+# Still too detailed for a graph (55)
+
+This shows the values and labels that we get by applying lbl_collapse() to 
+collapse the last digit. However, if we want to visualize educational 
+differences, as we'll do below, this might still be too much detail.
+
+
 # `lbl_relabel()` (56)
 
+That's where `lbl_relabel()` comes in.
 
+Label relabel offers the most power and flexibility by allowing you to create an 
+arbitrary number of new labeled values, controlling both the resulting value 
+and label, using the special dot val and dot label variables to refer to the 
+values and labels of the input vector.
+
+Label relabel is powerful, but it's syntax may be confusing at first glance, so
+let's unpack what's going on here. The first line just creates a regular 
+expression string that will match either 1, 2, or 3 years of college, and which 
+we use a few lines below.
+
+The piped expression takes the EDUCD variable, then applies the same label 
+collapse expression we used before to collapse the last digit, resulting in the 
+values and labels shown on the previous slide. So, that collapsed education 
+variable is the input to the lbl_relabel() call.
+
+Each line in the lbl_relabel() call creates a labeled value using the l-b-l (or 
+"label") helper function. So the first line can be read as "assign a value of 
+two with a label of "Less than High School" when the input value is greater 
+than 0 and less than 6".
 
 
 # `lbl_relabel()` (57)
 
-
+Notice that we have examples of using the dot val variable on the first and 
+fourth lines...
 
 
 # `lbl_relabel()` (58)
 
+...and of using the dot label variable on the second and third lines. The 
+third line of the lbl_relabel() call can be read as "assign a value of 4 with a 
+label of "Some college" when the input label matches our "college_regex" 
+regular expression.
+
+
+# `lbl_relabel()` (59)
+
+So, now we have a education variable with fewer categories, which is more
+suitable for visualization.
+
+For more on these helper functions, see the "Value labels" vignette, which we 
+will link to below.
+
+
+# Overview (60)
 
 
 
-# Overview (59)
 
-
-
-
-# Phone availability  (60)
+# Phone availability  (61)
 
 Microdata often needs to be summarized at a higher level for visualization. In 
 this case, if we want to make a graph of phone availability over time, we need 
@@ -483,12 +552,13 @@ to a phone in each year. Once our data are summarized so that each row
 represents a value for one year, we can make a graph by year.
 
 
-# Phone availability (61)
+# Phone availability (62)
 
+Here we see a strange decline, then resurgence, in access to a phone line. 
 What's going on here?
 
 
-# Interpretation (62)
+# Interpretation (63)
 
 If we look at the Comparability tab for the PHONE variable on the IPUMS USA 
 website, we find an explanation:
@@ -496,45 +566,54 @@ website, we find an explanation:
 The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service;
 prior to 2008, this was not made explicit.
 
-
-# Phone availability by education (63)
-
+Just one small example of the value added to these data by the IPUMS USA team.
 
 
-
-# Overview (64)
+# Phone availability by education (64)
 
 
 
 
-# Getting geographic data (65)
+# Overview (65)
 
 
 
 
 # Getting geographic data (66)
 
+[Read bullet points]
+
+
+# Getting geographic data (67)
+
 Geographic boundary data is usually found via a "Geography and GIS" link on the
 left sidebar of the home page for a data collection, under the heading
 "Supplemental Data".
 
+Under that link, you can browse available shape files, then download the ones 
+you want in a zip archive, and unzip the contents of the archive into their 
+own folder within your project directory.
 
-# Loading shape data (67)
+
+# Loading shape data (68)
 
 The sp package (short for "spatial") has been around since 2005. It is more
 established and some other R spatial packages might still assume you are using
 sp data structures. The sf package (short for "simple features") is newer, but 
 seems to be on the rise as an alternative sp for some use cases.
 
+For more on the differences between sp and sf, see the free online book 
+*Geocomputation with R*, which we link to at the end of the slides.
 
-# Loading shape data (68)
+
+# Loading shape data (69)
 
 At the risk of oversimplifying, an sf object is basically a tibble or data.frame
 with a special geometry column. That simplification helps me understand the 
 process of joining the sf object to data.
 
 
-# Joining shape data (69)
+# Joining shape data (70)
 
 Before joining to shape data, we need to summarize our person level data at the 
 level of the geography we are joining to. Thus, the first block of code computes 
@@ -544,19 +623,28 @@ value for one CONSPUMA unit in one year, we can join to the sf object we loaded
 above.
 
 
-# Plotting shape data (70)
+# Plotting shape data (71)
+
+
+
+
+# Plotting shape data (72)
+
+As with phone access by education, these maps show evidence of declining
+geographic variation in access to a phone line.
 
 For more information on IPUMS geographic data, see the ipumsr vignette on
 working with geographic data, or one of several collection-specific recorded
-webinars on that topic.
+webinars and tutorials on that topic, which can be found on the tutorials page 
+which we will link to below.
 
 
-# Overview (71)
+# Overview (73)
 
 
 
 
-# API Timeline (72)
+# API Timeline (74)
 
 The API is not yet publicly available, but we wanted to offer a preview of the 
 functionality that will soon be available in ipumsr.
@@ -580,7 +668,7 @@ interacting with that API in R, which we'll share a link to at the end of these
 slides, and we plan to add that functionality to ipumsr sometime next year.
 
 
-# What can I do with the API? (73)
+# What can I do with the API? (75)
 
 So, your next question might be, "what will I be able to do with this API?" 
 Here's the high-level overview:
@@ -606,7 +694,7 @@ developing API client tools for Python in parallel with the R client tools that
 will be part of the ipumsr package.
 
 
-# What can't I do with the API? (74)
+# What can't I do with the API? (76)
 
 The other important question to answer is what the API can't do.
 
@@ -627,7 +715,7 @@ characteristics of family members such as spouses or children. We plan to add
 these capabilities once the core functionality is well-tested and stable.
 
 
-# Pipe-friendly example (75)
+# Pipe-friendly example (77)
 
 Now let's get to some example code! We'll start with a brief example that shows 
 a typical API workflow using the "pipe" operator from the magrittr package, 
@@ -654,13 +742,23 @@ have time we will actually run some code like this during the Q&A so you can
 see it in action.
 
 
-# Pipe-friendly example (76)
+# Pipe-friendly example (78)
 
 And just for fun, here's what the same piped expression looks like with the new
 base R pipe, available as of R 4.1.
 
 
-# Revise and resubmit (77)
+# Pipe-friendly example (79)
+
+Here are the messages you'll see if you run that code once the API is live. As 
+you can see, the `wait_for_extract()` function doubles the wait time after every 
+status check, but the maximum wait time between checks is capped at five at five 
+minutes. In the testing I've done, even large extracts of around 30 million 
+records and 40-50 variables can finish in under 30 minutes, but the wait times 
+also depend on how much traffic the extract system is getting.
+
+
+# Revise and resubmit (80)
 
 Another handy workflow where using the extract API is a "revise and resubmit" 
 workflow. Often, you might realize that you should have added one more or a few 
@@ -678,7 +776,7 @@ we can use `get_extract_info()` and specify a shorthand notation for USA
 extract number 33, for example.
 
 
-# Revise and resubmit (78)
+# Revise and resubmit (81)
 
 Once we have the old extract definition, we can pass it to the 
 `revise_extract()` function to add a variable, then resubmit it.
@@ -688,7 +786,7 @@ and samples, as well as change the description, data format, or data structure
 of your extract definition.
 
 
-# Share your extract definition (79)
+# Share your extract definition (82)
 
 One thing that really excites us about the API is the ability to share extract
 definitions to facilitate collaboration or reproducibility.
@@ -704,13 +802,17 @@ client tools in the "ipumspy" module.
 If you are using ipumsr, the `define_extract_from_json()` function will create
 an extract object from a JSON-formatted definition shared by someone else.
 
+As Dan pointed out as we were preparing this webinar, this functionality could 
+also be useful for instructors who want to share an extract definition with 
+students for a class assignment.
 
-# Overview (80)
+
+# Overview (83)
 
 
 
 
-# Resources (81)
+# Resources (84)
 
 
 
