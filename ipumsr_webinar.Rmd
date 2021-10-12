@@ -1257,6 +1257,16 @@ with the help of special ipumsr functions that leverage all that information.
 These special functions might take some trial and error when you first start 
 using them, but I promise the payoff will be worth it.
 
+***I wonder if a transition slide here would be nice to transition away from 
+getting rid of labelled columns to using them with ipumsr. Would maybe help 
+to distinguish which functions (ours) we are suggesting to use. ***
+
+---
+
+class: center middle
+
+# Using ipumsr label helper functions
+
 ---
 
 # `lbl_na_if()`
@@ -1390,7 +1400,7 @@ and so on.
 
 - Maybe this is too much detail, so we want to collapse the last digit
 
-```{r}
+```{r, tidy=TRUE}
 data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val %/% 10) %>%
   as_factor(ordered = TRUE)
 ```
@@ -1457,6 +1467,7 @@ data$EDUCD3 <- data$EDUCD %>%
   ) %>%
   as_factor()
 ```
+
 
 ???
 That's where `lbl_relabel()` comes in.

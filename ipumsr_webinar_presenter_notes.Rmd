@@ -405,8 +405,17 @@ with the help of special ipumsr functions that leverage all that information.
 These special functions might take some trial and error when you first start 
 using them, but I promise the payoff will be worth it.
 
+***I wonder if a transition slide here would be nice to transition away from 
+getting rid of labelled columns to using them with ipumsr. Would maybe help 
+to distinguish which functions (ours) we are suggesting to use. ***
 
-# `lbl_na_if()` (49)
+
+# Using ipumsr label helper functions (49)
+
+
+
+
+# `lbl_na_if()` (50)
 
 The first label helper function is label NA if, which allows you to set values 
 to NA, which is R's code for missing values, according to either the value or 
@@ -420,7 +429,7 @@ In this case, given the value labels we see here, it makes sense to set values 0
 and 8 to missing.
 
 
-# `lbl_na_if()` (50)
+# `lbl_na_if()` (51)
 
 `lbl_na_if()` supports a special syntax used by a few of ipumsr's label
 functions that allows you to use anonymous functions (signaled by the "tilde"
@@ -438,7 +447,7 @@ you can engage in some trial and error until you get the variable transformed as
 you want it.
 
 
-# `lbl_na_if()` (51)
+# `lbl_na_if()` (52)
 
 In case you're unfamiliar with the anonymous function notation, that squiggly 
 tilde could be replaced with a regular function definition, as shown here. So 
@@ -446,14 +455,14 @@ anytime you see the tilde symbol in any of these label helper functions, you
 can read it as "a function of dot val and dot label".
 
 
-# `lbl_na_if()` (52)
+# `lbl_na_if()` (53)
 
 Because lbl_na_if works with both values and labels, we could accomplish the 
 same thing by referring to the labels. This time, we specify that PHONE3 should 
 be set to missing if the original label was "N/A" or "Suppressed".
 
 
-# `lbl_collapse()` (53)
+# `lbl_collapse()` (54)
 
 [Read bullet point]
 
@@ -462,7 +471,7 @@ values between 10 and 19 all capture levels between nursery school and grade 4;
 and so on.
 
 
-# `lbl_collapse()` (54)
+# `lbl_collapse()` (55)
 
 [Read bullet point]
 The label collapse function allows you to collapse values based on a
@@ -481,14 +490,14 @@ going on here take a bit of time to unpack, but hopefully this gives you a sense
 of the usefulness and power of this function.
 
 
-# Still too detailed for a graph (55)
+# Still too detailed for a graph (56)
 
 This shows the values and labels that we get by applying lbl_collapse() to 
 collapse the last digit. However, if we want to visualize educational 
 differences, as we'll do below, this might still be too much detail.
 
 
-# `lbl_relabel()` (56)
+# `lbl_relabel()` (57)
 
 That's where `lbl_relabel()` comes in.
 
@@ -513,13 +522,13 @@ two with a label of "Less than High School" when the input value is greater
 than 0 and less than 6".
 
 
-# `lbl_relabel()` (57)
+# `lbl_relabel()` (58)
 
 Notice that we have examples of using the dot val variable on the first and 
 fourth lines...
 
 
-# `lbl_relabel()` (58)
+# `lbl_relabel()` (59)
 
 ...and of using the dot label variable on the second and third lines. The 
 third line of the lbl_relabel() call can be read as "assign a value of 4 with a 
@@ -527,7 +536,7 @@ label of "Some college" when the input label matches our "college_regex"
 regular expression.
 
 
-# `lbl_relabel()` (59)
+# `lbl_relabel()` (60)
 
 So, now we have a education variable with fewer categories, which is more
 suitable for visualization.
@@ -536,12 +545,12 @@ For more on these helper functions, see the "Value labels" vignette, which we
 will link to below.
 
 
-# Overview (60)
+# Overview (61)
 
 
 
 
-# Phone availability  (61)
+# Phone availability  (62)
 
 Microdata often needs to be summarized at a higher level for visualization. In 
 this case, if we want to make a graph of phone availability over time, we need 
@@ -552,13 +561,13 @@ to a phone in each year. Once our data are summarized so that each row
 represents a value for one year, we can make a graph by year.
 
 
-# Phone availability (62)
+# Phone availability (63)
 
 Here we see a strange decline, then resurgence, in access to a phone line. 
 What's going on here?
 
 
-# Interpretation (63)
+# Interpretation (64)
 
 If we look at the Comparability tab for the PHONE variable on the IPUMS USA 
 website, we find an explanation:
@@ -569,22 +578,22 @@ prior to 2008, this was not made explicit.
 Just one small example of the value added to these data by the IPUMS USA team.
 
 
-# Phone availability by education (64)
+# Phone availability by education (65)
 
 
 
 
-# Overview (65)
+# Overview (66)
 
 
 
 
-# Getting geographic data (66)
+# Getting geographic data (67)
 
 [Read bullet points]
 
 
-# Getting geographic data (67)
+# Getting geographic data (68)
 
 Geographic boundary data is usually found via a "Geography and GIS" link on the
 left sidebar of the home page for a data collection, under the heading
@@ -595,7 +604,7 @@ you want in a zip archive, and unzip the contents of the archive into their
 own folder within your project directory.
 
 
-# Loading shape data (68)
+# Loading shape data (69)
 
 The sp package (short for "spatial") has been around since 2005. It is more
 established and some other R spatial packages might still assume you are using
@@ -606,14 +615,14 @@ For more on the differences between sp and sf, see the free online book
 *Geocomputation with R*, which we link to at the end of the slides.
 
 
-# Loading shape data (69)
+# Loading shape data (70)
 
 At the risk of oversimplifying, an sf object is basically a tibble or data.frame
 with a special geometry column. That simplification helps me understand the 
 process of joining the sf object to data.
 
 
-# Joining shape data (70)
+# Joining shape data (71)
 
 Before joining to shape data, we need to summarize our person level data at the 
 level of the geography we are joining to. Thus, the first block of code computes 
@@ -623,12 +632,12 @@ value for one CONSPUMA unit in one year, we can join to the sf object we loaded
 above.
 
 
-# Plotting shape data (71)
-
-
-
-
 # Plotting shape data (72)
+
+
+
+
+# Plotting shape data (73)
 
 As with phone access by education, these maps show evidence of declining
 geographic variation in access to a phone line.
@@ -639,12 +648,12 @@ webinars and tutorials on that topic, which can be found on the tutorials page
 which we will link to below.
 
 
-# Overview (73)
+# Overview (74)
 
 
 
 
-# API Timeline (74)
+# API Timeline (75)
 
 The API is not yet publicly available, but we wanted to offer a preview of the 
 functionality that will soon be available in ipumsr.
@@ -668,7 +677,7 @@ interacting with that API in R, which we'll share a link to at the end of these
 slides, and we plan to add that functionality to ipumsr sometime next year.
 
 
-# What can I do with the API? (75)
+# What can I do with the API? (76)
 
 So, your next question might be, "what will I be able to do with this API?" 
 Here's the high-level overview:
@@ -694,7 +703,7 @@ developing API client tools for Python in parallel with the R client tools that
 will be part of the ipumsr package.
 
 
-# What can't I do with the API? (76)
+# What can't I do with the API? (77)
 
 The other important question to answer is what the API can't do.
 
@@ -715,7 +724,7 @@ characteristics of family members such as spouses or children. We plan to add
 these capabilities once the core functionality is well-tested and stable.
 
 
-# Pipe-friendly example (77)
+# Pipe-friendly example (78)
 
 Now let's get to some example code! We'll start with a brief example that shows 
 a typical API workflow using the "pipe" operator from the magrittr package, 
@@ -742,13 +751,13 @@ have time we will actually run some code like this during the Q&A so you can
 see it in action.
 
 
-# Pipe-friendly example (78)
+# Pipe-friendly example (79)
 
 And just for fun, here's what the same piped expression looks like with the new
 base R pipe, available as of R 4.1.
 
 
-# Pipe-friendly example (79)
+# Pipe-friendly example (80)
 
 Here are the messages you'll see if you run that code once the API is live. As 
 you can see, the `wait_for_extract()` function doubles the wait time after every 
@@ -758,7 +767,7 @@ records and 40-50 variables can finish in under 30 minutes, but the wait times
 also depend on how much traffic the extract system is getting.
 
 
-# Revise and resubmit (80)
+# Revise and resubmit (81)
 
 Another handy workflow where using the extract API is a "revise and resubmit" 
 workflow. Often, you might realize that you should have added one more or a few 
@@ -776,7 +785,7 @@ we can use `get_extract_info()` and specify a shorthand notation for USA
 extract number 33, for example.
 
 
-# Revise and resubmit (81)
+# Revise and resubmit (82)
 
 Once we have the old extract definition, we can pass it to the 
 `revise_extract()` function to add a variable, then resubmit it.
@@ -786,7 +795,7 @@ and samples, as well as change the description, data format, or data structure
 of your extract definition.
 
 
-# Share your extract definition (82)
+# Share your extract definition (83)
 
 One thing that really excites us about the API is the ability to share extract
 definitions to facilitate collaboration or reproducibility.
@@ -807,12 +816,12 @@ also be useful for instructors who want to share an extract definition with
 students for a class assignment.
 
 
-# Overview (83)
+# Overview (84)
 
 
 
 
-# Resources (84)
+# Resources (85)
 
 
 
