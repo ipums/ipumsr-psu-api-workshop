@@ -312,7 +312,7 @@ pre code {
 <p>So you’ve downloaded both the data and the DDI codebook, and saved them in the same folder. Here’s how you actually read the data into R.</p>
 <p>The first option, and the one I’d recommend, is to read the DDI codebook into an object named “ddi” using the <code>read_ipums_ddi()</code> function, and then supply that ddi object to <code>read_ipums_micro()</code>.</p>
 <p>The second option is to read in the data by passing the file path to the DDI codebook to the <code>read_ipums_micro()</code> function. However, we recommend the first pattern because it’s often helpful to save the codebook to it’s own object to preserve the original metadata once you start messing around with the data.</p>
-<p>Notice that in both cases we are supplying the codebook (either already read in or as a file path), not the data file, to <code>read_ipums_micro()</code>. The fact that we don’t point to the actual data file when reading in the data might confusing. If I want to read in the data shouldn’t I point to the data file? The reason for this is that the codebook includes the path</p>
+<p>Notice that in both cases we are supplying the codebook (either already read in or as a file path), not the data file, to <code>read_ipums_micro()</code>. The fact that we don’t point to the actual data file when reading in the data might confusing. If I want to read in the data shouldn’t I point to the data file?</p>
 </div>
 <div id="why-do-i-point-to-the-codebook-to-read-in-the-data-35" class="section level1">
 <h1>Why do I point to the codebook to read in the data? (35)</h1>
@@ -460,6 +460,7 @@ pre code {
 </div>
 <div id="phone-availability-by-education-65" class="section level1">
 <h1>Phone availability by education (65)</h1>
+<p>With our simplified education variable, we can also plot access to a phone line by education. Here we see that anomalous drop and resurgence is present at all education levels, and that differences in phone access by education have declined since 1960.</p>
 </div>
 <div id="overview-66" class="section level1">
 <h1>Overview (66)</h1>
@@ -533,7 +534,7 @@ pre code {
 <li>and variables – sex, age, industry and occupation.</li>
 </ul>
 <p>The next code chunk shows how we can go from this extract definition to having our extract data available in our R session in one piped expression. For any of you who are unfamiliar with the pipe operator, it can be read aloud as the word “then”. So this piped expression says, take “my_extract”, <em>then</em> submit extract, <em>then</em> wait for extract, <em>then</em> download extract, <em>then</em> read in the data using <code>read_ipums_micro()</code>.</p>
-<p>Since we have to wait for the extract to process, this piped expression will take a bit of time to execute, depending on the size of your extract, but if we have time we will actually run some code like this during the Q&amp;A so you can see it in action.</p>
+<p>Since we have to wait for the extract to process, this piped expression will take a bit of time to execute, depending on the size of your extract.</p>
 </div>
 <div id="pipe-friendly-example-79" class="section level1">
 <h1>Pipe-friendly example (79)</h1>

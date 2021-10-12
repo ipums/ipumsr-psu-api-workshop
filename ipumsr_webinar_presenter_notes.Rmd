@@ -267,8 +267,7 @@ preserve the original metadata once you start messing around with the data.
 Notice that in both cases we are supplying the codebook (either already read in
 or as a file path), not the data file, to `read_ipums_micro()`. The fact that we
 don't point to the actual data file when reading in the data might confusing. If
-I want to read in the data shouldn't I point to the data file? The reason for
-this is that the codebook includes the path
+I want to read in the data shouldn't I point to the data file?
 
 
 # Why do I point to the codebook to read in the data? (35)
@@ -580,7 +579,10 @@ Just one small example of the value added to these data by the IPUMS USA team.
 
 # Phone availability by education (65)
 
-
+With our simplified education variable, we can also plot access to a phone line 
+by education. Here we see that anomalous drop and resurgence is present at all 
+education levels, and that differences in phone access by education have 
+declined since 1960.
 
 
 # Overview (66)
@@ -746,9 +748,7 @@ you who are unfamiliar with the pipe operator, it can be read aloud as the word
 `read_ipums_micro()`.
 
 Since we have to wait for the extract to process, this piped expression will 
-take a bit of time to execute, depending on the size of your extract, but if we 
-have time we will actually run some code like this during the Q&A so you can 
-see it in action.
+take a bit of time to execute, depending on the size of your extract.
 
 
 # Pipe-friendly example (79)
