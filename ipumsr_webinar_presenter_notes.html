@@ -316,20 +316,20 @@ pre code {
 </div>
 <div id="why-do-i-point-to-the-codebook-to-read-in-the-data-35" class="section level1">
 <h1>Why do I point to the codebook to read in the data? (35)</h1>
-<p>Here’s my attempt to explain this in a hopefully memorable way: the data file is dumb, and the codebook is smart</p>
+<p>Here’s my attempt to explain this in a hopefully memorable way: the data file is the raw ingredients, and the codebook is the recipe. And when you go to make dinner, your recipe tells you how to combine your ingredients to get the finished product.</p>
 </div>
-<div id="the-data-file-is-dumb-36" class="section level1">
-<h1>The data file is dumb (36)</h1>
+<div id="the-data-file-is-just-raw-ingredients-36" class="section level1">
+<h1>The data file is just raw ingredients (36)</h1>
 <p>Looking at the first ten lines of our example data file, it makes sense why you can’t just tell R “read this data file into a data.frame”. The data file itself doesn’t contain any information about what the variables are called or which numbers on each line correspond to which variables, let alone what the meaning of those values might be.</p>
 <p>(In case you’re wondering what those blanks are, that’s a geography variable that is not available in some years of our data.)</p>
 </div>
-<div id="the-ddi-codebook-is-smart-37" class="section level1">
-<h1>The DDI codebook is smart (37)</h1>
-<p>The DDI codebook is the brains of the operation. It contains a bunch of information about your extract, including the name of the data file, which is why you don’t need to supply the path to the data file if you saved the codebook and data in the same folder.</p>
+<div id="the-ddi-codebook-is-the-recipe-37" class="section level1">
+<h1>The DDI codebook is the recipe (37)</h1>
+<p>The DDI codebook tells you what to do with the ingredients in the data file. It contains a bunch of information about your extract, including the name of the data file, which is why you don’t need to supply the path to the data file if you saved the codebook and data in the same folder.</p>
 <p>But perhaps the most important element for understanding and analyzing the data is the “var_info” element, so let’s take a look at that.</p>
 </div>
-<div id="the-ddi-codebook-is-smart-38" class="section level1">
-<h1>The DDI codebook is smart (38)</h1>
+<div id="the-ddi-codebook-is-the-recipe-38" class="section level1">
+<h1>The DDI codebook is the recipe (38)</h1>
 <p>As we can see here, var_info is just data.frame where each row has information about one variable, including the variable name, label, description, and value labels, as well as where the variable is located in the fixed-width file.</p>
 <p>You don’t need to remember the details of what’s in the DDI object or this var_info data.frame, as long as you remember that to read in the data, you must point to the DDI codebook, not the data file.</p>
 </div>

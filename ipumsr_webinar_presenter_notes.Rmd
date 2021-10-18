@@ -272,11 +272,13 @@ I want to read in the data shouldn't I point to the data file?
 
 # Why do I point to the codebook to read in the data? (35)
 
-Here's my attempt to explain this in a hopefully memorable way: the data file is
-dumb, and the codebook is smart
+Here's my attempt to explain this in a hopefully memorable way: the data file 
+is the raw ingredients, and the codebook is the recipe. And when you go to make 
+dinner, your recipe tells you how to combine your ingredients to get the 
+finished product.
 
 
-# The data file is dumb (36)
+# The data file is just raw ingredients (36)
 
 Looking at the first ten lines of our example data file, it makes sense why you 
 can't just tell R "read this data file into a data.frame". The data file itself
@@ -288,18 +290,18 @@ of those values might be.
 that is not available in some years of our data.)
 
 
-# The DDI codebook is smart (37)
+# The DDI codebook is the recipe (37)
 
-The DDI codebook is the brains of the operation. It contains a bunch of
-information about your extract, including the name of the data file, which is 
-why you don't need to supply the path to the data file if you saved the codebook 
-and data in the same folder.
+The DDI codebook tells you what to do with the ingredients in the data file. It
+contains a bunch of information about your extract, including the name of the
+data file, which is why you don't need to supply the path to the data file if
+you saved the codebook and data in the same folder.
 
 But perhaps the most important element for understanding and analyzing the data
 is the "var_info" element, so let's take a look at that.
 
 
-# The DDI codebook is smart (38)
+# The DDI codebook is the recipe (38)
 
 As we can see here, var_info is just data.frame where each row has information 
 about one variable, including the variable name, label, description, and value 
