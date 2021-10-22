@@ -919,6 +919,10 @@ is the raw ingredients, and the codebook is the recipe. And when you go to make
 dinner, your recipe tells you how to combine your ingredients to get the 
 finished product.
 
+Note for future revisions of this section: Seems like we could add a visual or 
+two here (possibly from Allison Horst's collection of R illustrations), and/or 
+improve the analogy (would Lego set and instruction booklet be better?).
+
 ---
 
 # The data file is just raw ingredients
