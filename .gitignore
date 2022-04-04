@@ -3,3 +3,6 @@
 .RData
 .Ruserdata
 .Renviron
+shiny_demo/**.xml
+shiny_demo/**.dat.gz
+
