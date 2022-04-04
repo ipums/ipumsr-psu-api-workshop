@@ -1,0 +1,80 @@
+{
+    "description": "Revision of (exploring data for api/shiny demo), adding EDUC, children born",
+    "data_structure": {
+        "rectangular": {
+            "on": "P"
+        }
+    },
+    "data_format": "fixed_width",
+    "samples": {
+        "us2015b": {
+
+        },
+        "us2016b": {
+
+        },
+        "us2017b": {
+
+        },
+        "us2018b": {
+
+        },
+        "us2019b": {
+
+        }
+    },
+    "variables": {
+        "YEAR": {
+
+        },
+        "SAMPLE": {
+
+        },
+        "SERIAL": {
+
+        },
+        "CBSERIAL": {
+
+        },
+        "NUMPREC": {
+
+        },
+        "HHWT": {
+
+        },
+        "GQ": {
+
+        },
+        "VACANCY": {
+
+        },
+        "PERNUM": {
+
+        },
+        "PERWT": {
+
+        },
+        "RELATE": {
+
+        },
+        "SEX": {
+
+        },
+        "AGE": {
+
+        },
+        "FERTYR": {
+
+        },
+        "EDUC": {
+
+        },
+        "EMPSTAT": {
+
+        },
+        "INCTOT": {
+
+        }
+    }
+}
+
