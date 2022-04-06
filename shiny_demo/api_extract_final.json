@@ -1,5 +1,5 @@
 {
-    "description": "Revision of (exploring data for api/shiny demo), adding EDUC, children born",
+    "description": "final_api_demo_version",
     "data_structure": {
         "rectangular": {
             "on": "P"
@@ -36,16 +36,28 @@
         "CBSERIAL": {
 
         },
-        "NUMPREC": {
+        "HHWT": {
 
         },
-        "HHWT": {
+        "CPI99": {
 
         },
         "GQ": {
 
         },
+        "COSTELEC": {
+
+        },
+        "HHINCOME": {
+
+        },
+        "NUMPREC": {
+
+        },
         "VACANCY": {
+
+        },
+        "CINETHH": {
 
         },
         "PERNUM": {
@@ -54,7 +66,16 @@
         "PERWT": {
 
         },
+        "MOMLOC": {
+
+        },
+        "POPLOC": {
+
+        },
         "RELATE": {
+
+        },
+        "RELATED": {
 
         },
         "SEX": {
@@ -63,16 +84,52 @@
         "AGE": {
 
         },
+        "MARRINYR": {
+
+        },
+        "DIVINYR": {
+
+        },
+        "WIDINYR": {
+
+        },
         "FERTYR": {
+
+        },
+        "RACE": {
+
+        },
+        "RACED": {
+
+        },
+        "HISPAN": {
+
+        },
+        "HISPAND": {
+
+        },
+        "SPEAKENG": {
 
         },
         "EDUC": {
 
         },
+        "EDUCD": {
+
+        },
         "EMPSTAT": {
 
         },
+        "EMPSTATD": {
+
+        },
         "INCTOT": {
+
+        },
+        "MIGRATE1": {
+
+        },
+        "MIGRATE1D": {
 
         }
     }
