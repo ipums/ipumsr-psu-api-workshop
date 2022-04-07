@@ -1,0 +1,116 @@
+{
+    "description": "Revision of (exploring data for api/shiny demo)",
+    "data_structure": {
+        "rectangular": {
+            "on": "P"
+        }
+    },
+    "data_format": "fixed_width",
+    "samples": {
+        "us2015b": {
+
+        },
+        "us2016b": {
+
+        },
+        "us2017b": {
+
+        },
+        "us2018b": {
+
+        },
+        "us2019b": {
+
+        }
+    },
+    "variables": {
+        "YEAR": {
+
+        },
+        "SAMPLE": {
+
+        },
+        "SERIAL": {
+
+        },
+        "CBSERIAL": {
+
+        },
+        "HHWT": {
+
+        },
+        "GQ": {
+
+        },
+        "VACANCY": {
+
+        },
+        "PERNUM": {
+
+        },
+        "PERWT": {
+
+        },
+        "RELATE": {
+
+        },
+        "SEX": {
+
+        },
+        "AGE": {
+
+        },
+        "EMPSTAT": {
+
+        },
+        "INCTOT": {
+
+        },
+        "RACE": {
+
+        },
+        "EDUC": {
+
+        },
+        "MIGRATE1": {
+
+        },
+        "HISPAN": {
+
+        },
+        "CPI99": {
+
+        },
+        "COSTELEC": {
+
+        },
+        "CINETHH": {
+
+        },
+        "MOMLOC": {
+
+        },
+        "POPLOC": {
+
+        },
+        "MARRINYR": {
+
+        },
+        "DIVINYR": {
+
+        },
+        "WIDINYR": {
+
+        },
+        "FERTYR": {
+
+        },
+        "SPEAKENG": {
+
+        },
+        "HHINCOME": {
+
+        }
+    }
+}
+

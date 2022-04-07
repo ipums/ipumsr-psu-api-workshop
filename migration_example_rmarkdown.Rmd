@@ -1,0 +1,169 @@
+---
+title: "Graphing migration in Puerto Rico 2015-2019 with IPUMS USA PRCS data"
+author: "Your Name Here"
+date: '2022-04-05'
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
+
+```{r}
+suppressPackageStartupMessages({
+  library(ipumsr)
+  library(tidyverse)
+})
+```
+
+```{r load-data, eval=FALSE}
+ddi <- read_ipums_ddi("usa_00014.xml")
+data <- read_ipums_micro(ddi, verbose = FALSE)
+```
+
+```{r prep-data}
+# Prep education variable
+college_regex <- "^[123] year(s)? of college$"
+data <- data %>% 
+  mutate(
+    EDUCD3 = EDUCD %>%
+      lbl_collapse(~.val %/% 10) %>% 
+      lbl_relabel(
+        lbl(2, "Less than High School") ~.val > 0 & .val < 6,
+        lbl(3, "High school") ~.lbl == "Grade 12", #<<
+        lbl(4, "Some college") ~str_detect(.lbl, college_regex), #<<
+        lbl(5, "College or more") ~.val %in% c(10, 11)
+      ) %>%
+      as_factor()
+  )
+
+# Prep income variable
+value_to_quintile <- function(x) {
+  cut_points <- quantile(x, probs = c(0.2, 0.4, 0.6, 0.8), na.rm = TRUE)
+  cut(
+    x, 
+    breaks = c(-Inf, cut_points, Inf), 
+    labels = c("Lowest", "Lower Middle", "Middle", "Upper Middle", "Highest"),
+    ordered_result = TRUE
+  )
+}
+
+hhincome_quintiles <- data %>% 
+  filter(PERNUM == 1 & HHINCOME != 9999999) %>% 
+  group_by(YEAR) %>% 
+  mutate(hhincome_quintile = value_to_quintile(HHINCOME)) %>% 
+  ungroup() %>% 
+  select(YEAR, SERIAL, hhincome_quintile)
+
+data <- data %>% 
+  left_join(hhincome_quintiles, by = c("YEAR", "SERIAL"))
+
+# Prep migration variable
+data <- data %>% 
+  mutate(moved_in_last_year = MIGRATE1 %in% 2:4)
+
+
+# Prep age variable
+age_to_age_group <- function(x) {
+  cut_points <- c(9, 17, 34, 64)
+  cut(
+    x,
+    breaks = c(-Inf, cut_points, Inf),
+    labels = c("0-9", "10-17", "18-34", "35-64", "65+"),
+    ordered_result = TRUE
+  )
+}
+
+data <- data %>% 
+  mutate(age_group = age_to_age_group(AGE))
+```
+
+# Migration 2015-2019 {.tabset}
+
+The percentage of people who had moved in the last year increased between 2017 
+and 2018 from about 6% to over 8% among all persons in Puerto Rico, but the 
+magnitude of this trend varies by education, household income, and age.
+
+Note: These graphs show trends in point estimates from sample data, without 
+displaying estimates of sampling error. Differences over time or across groups 
+may not be statistically significant. To calculate confidence intervals for 
+point estimates, follow the 
+[IPUMS USA instructions for using replicate weights](https://usa.ipums.org/usa/repwt.shtml).
+
+## Overall
+
+```{r migration-graph-1, dpi=300, fig.height=5, fig.width=8, echo = FALSE}
+data %>% 
+  group_by(YEAR) %>% 
+  summarize(
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT)
+  ) %>% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      x = NULL,
+      y = "%"
+    )
+```
+
+## By education
+
+```{r migration-graph-2, dpi=300, fig.height=5, fig.width=8, echo = FALSE}
+data %>% 
+  filter(AGE >= 25) %>%
+  group_by(YEAR, EDUCD3) %>% 
+  summarize(
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT),
+    .groups = "drop"
+  ) %>% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    facet_wrap(~EDUCD3) +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      subtitle = "Among persons age 25 and older",
+      x = NULL,
+      y = "%"
+    )
+```
+
+## By household income
+
+```{r migration-graph-3, dpi=300, fig.height=5, fig.width=8, echo = FALSE}
+data %>% 
+  filter(!is.na(hhincome_quintile)) %>% 
+  group_by(YEAR, hhincome_quintile) %>% 
+  summarize(
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT),
+    .groups = "drop"
+  ) %>% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    facet_wrap(~hhincome_quintile) +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      x = NULL,
+      y = "%"
+    )
+```
+
+
+## By age
+
+```{r migration-graph-4, dpi=300, fig.height=5, fig.width=8, echo = FALSE}
+data %>% 
+  group_by(YEAR, age_group) %>% 
+  summarize(
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT),
+    .groups = "drop"
+  ) %>% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    facet_wrap(~age_group) +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      x = NULL,
+      y = "%"
+    )
+```

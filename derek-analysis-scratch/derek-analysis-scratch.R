@@ -26,6 +26,7 @@ ddi_path <- download_extract(
 )
 
 data <- read_ipums_micro(ddi_path)
+data <- read_ipums_micro("derek-analysis-scratch/usa_00098.xml")
 
 # Outcome variables are: COSTELEC, CINETHH, MOMLOC/POPLOC, MARRINYR, 
 # DIVINYR, WIDINYR, FERTYR, EMPSTAT, MIGRATE1
