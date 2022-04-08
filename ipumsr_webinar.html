@@ -1,28 +1,28 @@
 <!DOCTYPE html>
 <html lang="" xml:lang="">
   <head>
-    <title>Using IPUMS data in R with ipumsr</title>
+    <title>Enhancing reproducibility with the IPUMS API and the ipumsr package</title>
     <meta charset="utf-8" />
     <meta name="author" content="Derek Burk, Dan Ehrlich, &amp; Kara Fisher" />
     <meta name="date" content="2021-10-12" />
-    <script src="libs/header-attrs-2.11/header-attrs.js"></script>
+    <script src="libs/header-attrs-2.13/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
     <script src="libs/htmlwidgets-1.5.4/htmlwidgets.js"></script>
     <link href="libs/datatables-css-0.0.0/datatables-crosstalk.css" rel="stylesheet" />
-    <script src="libs/datatables-binding-0.19/datatables.js"></script>
+    <script src="libs/datatables-binding-0.21/datatables.js"></script>
     <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.min.css" rel="stylesheet" />
-    <link href="libs/dt-core-1.10.20/css/jquery.dataTables.extra.css" rel="stylesheet" />
-    <script src="libs/dt-core-1.10.20/js/jquery.dataTables.min.js"></script>
-    <link href="libs/crosstalk-1.1.1/css/crosstalk.css" rel="stylesheet" />
-    <script src="libs/crosstalk-1.1.1/js/crosstalk.min.js"></script>
+    <link href="libs/dt-core-1.11.3/css/jquery.dataTables.min.css" rel="stylesheet" />
+    <link href="libs/dt-core-1.11.3/css/jquery.dataTables.extra.css" rel="stylesheet" />
+    <script src="libs/dt-core-1.11.3/js/jquery.dataTables.min.js"></script>
+    <link href="libs/crosstalk-1.2.0/css/crosstalk.min.css" rel="stylesheet" />
+    <script src="libs/crosstalk-1.2.0/js/crosstalk.min.js"></script>
   </head>
   <body>
     <textarea id="source">
 class: center, middle, inverse, title-slide
 
-# Using IPUMS data in R with ipumsr
+# Enhancing reproducibility with the IPUMS API and the ipumsr package
 ### Derek Burk, Dan Ehrlich, &amp; Kara Fisher
 ### 10/12/2021
 
@@ -659,12 +659,12 @@ And finally...
 - It's fast!
   - Time to read 3 million rows with 13 variables:
 
-<div id="vqpiilrfwq" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="dgsfbcdptc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#vqpiilrfwq .gt_table {
+#dgsfbcdptc .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -689,7 +689,7 @@ And finally...
   border-left-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_heading {
+#dgsfbcdptc .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -701,7 +701,7 @@ And finally...
   border-right-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_title {
+#dgsfbcdptc .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -711,7 +711,7 @@ And finally...
   border-bottom-width: 0;
 }
 
-#vqpiilrfwq .gt_subtitle {
+#dgsfbcdptc .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -721,13 +721,13 @@ And finally...
   border-top-width: 0;
 }
 
-#vqpiilrfwq .gt_bottom_border {
+#dgsfbcdptc .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_col_headings {
+#dgsfbcdptc .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -742,7 +742,7 @@ And finally...
   border-right-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_col_heading {
+#dgsfbcdptc .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -762,7 +762,7 @@ And finally...
   overflow-x: hidden;
 }
 
-#vqpiilrfwq .gt_column_spanner_outer {
+#dgsfbcdptc .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -774,15 +774,15 @@ And finally...
   padding-right: 4px;
 }
 
-#vqpiilrfwq .gt_column_spanner_outer:first-child {
+#dgsfbcdptc .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#vqpiilrfwq .gt_column_spanner_outer:last-child {
+#dgsfbcdptc .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#vqpiilrfwq .gt_column_spanner {
+#dgsfbcdptc .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -794,7 +794,7 @@ And finally...
   width: 100%;
 }
 
-#vqpiilrfwq .gt_group_heading {
+#dgsfbcdptc .gt_group_heading {
   padding: 8px;
   color: #333333;
   background-color: #FFFFFF;
@@ -816,7 +816,7 @@ And finally...
   vertical-align: middle;
 }
 
-#vqpiilrfwq .gt_empty_group_heading {
+#dgsfbcdptc .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -831,15 +831,15 @@ And finally...
   vertical-align: middle;
 }
 
-#vqpiilrfwq .gt_from_md > :first-child {
+#dgsfbcdptc .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#vqpiilrfwq .gt_from_md > :last-child {
+#dgsfbcdptc .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#vqpiilrfwq .gt_row {
+#dgsfbcdptc .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -858,7 +858,7 @@ And finally...
   overflow-x: hidden;
 }
 
-#vqpiilrfwq .gt_stub {
+#dgsfbcdptc .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -870,7 +870,7 @@ And finally...
   padding-left: 12px;
 }
 
-#vqpiilrfwq .gt_summary_row {
+#dgsfbcdptc .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -880,7 +880,7 @@ And finally...
   padding-right: 5px;
 }
 
-#vqpiilrfwq .gt_first_summary_row {
+#dgsfbcdptc .gt_first_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -890,7 +890,7 @@ And finally...
   border-top-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_grand_summary_row {
+#dgsfbcdptc .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -900,7 +900,7 @@ And finally...
   padding-right: 5px;
 }
 
-#vqpiilrfwq .gt_first_grand_summary_row {
+#dgsfbcdptc .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -910,11 +910,11 @@ And finally...
   border-top-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_striped {
+#dgsfbcdptc .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#vqpiilrfwq .gt_table_body {
+#dgsfbcdptc .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -923,7 +923,7 @@ And finally...
   border-bottom-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_footnotes {
+#dgsfbcdptc .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -937,13 +937,13 @@ And finally...
   border-right-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_footnote {
+#dgsfbcdptc .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding: 4px;
 }
 
-#vqpiilrfwq .gt_sourcenotes {
+#dgsfbcdptc .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -957,41 +957,41 @@ And finally...
   border-right-color: #D3D3D3;
 }
 
-#vqpiilrfwq .gt_sourcenote {
+#dgsfbcdptc .gt_sourcenote {
   font-size: 90%;
   padding: 4px;
 }
 
-#vqpiilrfwq .gt_left {
+#dgsfbcdptc .gt_left {
   text-align: left;
 }
 
-#vqpiilrfwq .gt_center {
+#dgsfbcdptc .gt_center {
   text-align: center;
 }
 
-#vqpiilrfwq .gt_right {
+#dgsfbcdptc .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#vqpiilrfwq .gt_font_normal {
+#dgsfbcdptc .gt_font_normal {
   font-weight: normal;
 }
 
-#vqpiilrfwq .gt_font_bold {
+#dgsfbcdptc .gt_font_bold {
   font-weight: bold;
 }
 
-#vqpiilrfwq .gt_font_italic {
+#dgsfbcdptc .gt_font_italic {
   font-style: italic;
 }
 
-#vqpiilrfwq .gt_super {
+#dgsfbcdptc .gt_super {
   font-size: 65%;
 }
 
-#vqpiilrfwq .gt_footnote_marks {
+#dgsfbcdptc .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 65%;
@@ -1214,14 +1214,15 @@ in the DDI codebook and data into separate objects.
 
 # Read in the data
 
+
+
+
 - Using functions `read_ipums_ddi()` and `read_ipums_micro()`
 
 ```r
 ddi &lt;- read_ipums_ddi("usa_00013.xml")
 
 data &lt;- read_ipums_micro(ddi)
-#&gt; Use of data from IPUMS-USA is subject to conditions including that users should
-#&gt; cite the data appropriately. Use command `ipums_conditions()` for more details.
 ```
 
 --
@@ -1231,8 +1232,6 @@ data &lt;- read_ipums_micro(ddi)
 
 ```r
 data &lt;- read_ipums_micro("usa_00013.xml")
-#&gt; Use of data from IPUMS-USA is subject to conditions including that users should
-#&gt; cite the data appropriately. Use command `ipums_conditions()` for more details.
 ```
 
 - Note: supply the codebook, *not* the data file, to `read_ipums_micro()`
@@ -1270,6 +1269,10 @@ Here's my attempt to explain this in a hopefully memorable way: the data file
 is the raw ingredients, and the codebook is the recipe. And when you go to make 
 dinner, your recipe tells you how to combine your ingredients to get the 
 finished product.
+
+Note for future revisions of this section: Seems like we could add a visual or 
+two here (possibly from Allison Horst's collection of R illustrations), and/or 
+improve the analogy (would Lego set and instruction booklet be better?).
 
 ---
 
@@ -1318,7 +1321,7 @@ names(ddi)
 
 ```r
 ddi$file_name
-#&gt; [1] "usa_00013.dat"
+#&gt; [1] "usa_00100.dat"
 ```
 
 ???
@@ -1340,21 +1343,20 @@ is the "var_info" element, so let's take a look at that.
 
 ```r
 ddi$var_info
-#&gt; # A tibble: 12 x 10
-#&gt;    var_name var_label                                 var_desc              val_labels  code_instr             start   end imp_decim var_type rectypes
-#&gt;    &lt;chr&gt;    &lt;chr&gt;                                     &lt;chr&gt;                 &lt;list&gt;      &lt;chr&gt;                  &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;lgl&gt;   
-#&gt;  1 YEAR     Census year                               "YEAR reports the fo~ &lt;tibble [0~  &lt;NA&gt;                      1     4         0 integer  NA      
-#&gt;  2 DATANUM  Data set number                           "DATANUM identifies ~ &lt;tibble [0~ "\n\nThe following ye~     5     6         0 numeric  NA      
-#&gt;  3 SERIAL   Household serial number                   "SERIAL is an identi~ &lt;tibble [0~ "\nSERIAL is an 8-dig~     7    14         0 numeric  NA      
-#&gt;  4 HHWT     Household weight                          "HHWT indicates how ~ &lt;tibble [0~ "\nHHWT is a 6-digit ~    15    24         2 numeric  NA      
-#&gt;  5 STATEFIP State (FIPS code)                         "STATEFIP reports th~ &lt;tibble [6~  &lt;NA&gt;                     25    26         0 integer  NA      
-#&gt;  6 CONSPUMA Consistent PUMA, 1980-1990-2000           "CONSPUMA identifies~ &lt;tibble [0~ "\nCONSPUMA is a 5-di~    27    29         0 numeric  NA      
-#&gt;  7 GQ       Group quarters status                     "GQ classifies all h~ &lt;tibble [7~  &lt;NA&gt;                     30    30         0 integer  NA      
-#&gt;  8 PHONE    Telephone availability                    "PHONE indicates whe~ &lt;tibble [4~  &lt;NA&gt;                     31    31         0 integer  NA      
-#&gt;  9 PERNUM   Person number in sample unit              "PERNUM numbers all ~ &lt;tibble [0~ "\n\nPERNUM is a 4-di~    32    35         0 numeric  NA      
-#&gt; 10 PERWT    Person weight                             "PERWT indicates how~ &lt;tibble [0~ "\nPERWT is a 6-digit~    36    45         2 numeric  NA      
-#&gt; 11 EDUC     Educational attainment [general version]  "EDUC indicates resp~ &lt;tibble [1~  &lt;NA&gt;                     46    47         0 integer  NA      
-#&gt; 12 EDUCD    Educational attainment [detailed version] "EDUC indicates resp~ &lt;tibble [4~  &lt;NA&gt;                     48    50         0 integer  NA
+#&gt; # A tibble: 35 x 10
+#&gt;    var_name var_label                                        var_desc                    val_labels code_instr start   end imp_decim var_type rectypes
+#&gt;    &lt;chr&gt;    &lt;chr&gt;                                            &lt;chr&gt;                       &lt;list&gt;     &lt;chr&gt;      &lt;dbl&gt; &lt;dbl&gt;     &lt;dbl&gt; &lt;chr&gt;    &lt;lgl&gt;   
+#&gt;  1 YEAR     "Census year"                                    "YEAR reports the four-dig~ &lt;tibble&gt;    &lt;NA&gt;          1     4         0 integer  NA      
+#&gt;  2 SAMPLE   "IPUMS sample identifier"                        "SAMPLE identifies the IPU~ &lt;tibble&gt;    &lt;NA&gt;          5    10         0 integer  NA      
+#&gt;  3 SERIAL   "Household serial number"                        "SERIAL is an identifying ~ &lt;tibble&gt;   "CodesSER~    11    18         0 numeric  NA      
+#&gt;  4 CBSERIAL "Original Census Bureau household serial number" "CBSERIAL is the unique, o~ &lt;tibble&gt;   "CodesCBS~    19    31         0 numeric  NA      
+#&gt;  5 HHWT     "Household weight"                               "HHWT indicates how many h~ &lt;tibble&gt;   "CodesHHW~    32    41         2 numeric  NA      
+#&gt;  6 CPI99    "CPI-U adjustment factor to 1999 dollars"        "CPI99 provides the CPI-U ~ &lt;tibble&gt;   "CodesCPI~    42    46         3 numeric  NA      
+#&gt;  7 GQ       "Group quarters status"                          "GQ classifies all housing~ &lt;tibble&gt;    &lt;NA&gt;         47    47         0 integer  NA      
+#&gt;  8 COSTELEC "Annual electricity cost"                        "COSTELEC for 1970 reports~ &lt;tibble&gt;   "CodesCOS~    48    51         0 numeric  NA      
+#&gt;  9 HHINCOME "Total household income "                        "HHINCOME reports the tota~ &lt;tibble&gt;   "CodesHHI~    52    58         0 numeric  NA      
+#&gt; 10 VACANCY  "Vacancy status"                                 "VACANCY identifies vacant~ &lt;tibble&gt;    &lt;NA&gt;         59    59         0 integer  NA      
+#&gt; # ... with 25 more rows
 ```
 
 
@@ -1433,9 +1435,18 @@ We can print the names of our variables:
 
 ```r
 names(data)
-#&gt;  [1] "YEAR"     "DATANUM"  "SERIAL"   "HHWT"    
-#&gt;  [5] "STATEFIP" "CONSPUMA" "GQ"       "PHONE"   
-#&gt;  [9] "PERNUM"   "PERWT"    "EDUC"     "EDUCD"
+#&gt;  [1] "YEAR"      "SAMPLE"    "SERIAL"   
+#&gt;  [4] "CBSERIAL"  "HHWT"      "CPI99"    
+#&gt;  [7] "GQ"        "COSTELEC"  "HHINCOME" 
+#&gt; [10] "VACANCY"   "CINETHH"   "PERNUM"   
+#&gt; [13] "PERWT"     "MOMLOC"    "POPLOC"   
+#&gt; [16] "RELATE"    "RELATED"   "SEX"      
+#&gt; [19] "AGE"       "MARRINYR"  "DIVINYR"  
+#&gt; [22] "WIDINYR"   "FERTYR"    "RACE"     
+#&gt; [25] "RACED"     "HISPAN"    "HISPAND"  
+#&gt; [28] "SPEAKENG"  "EDUC"      "EDUCD"    
+#&gt; [31] "EMPSTAT"   "EMPSTATD"  "INCTOT"   
+#&gt; [34] "MIGRATE1"  "MIGRATE1D"
 ```
 
 
@@ -1456,18 +1467,20 @@ Variable labels and descriptions:
 
 
 ```r
-ipums_var_label(ddi, PHONE)
-#&gt; [1] "Telephone availability"
+ipums_var_label(ddi, MARRINYR)
+#&gt; [1] "Married within the past year"
 
-ipums_var_desc(ddi, PHONE) %&gt;% strwrap(60)
-#&gt; [1] "PHONE indicates whether residents of the housing unit had"
-#&gt; [2] "telephone access."
+ipums_var_desc(ddi, MARRINYR) %&gt;% strwrap(60)
+#&gt; [1] "MARRINYR identifies persons who had married within the 12"  
+#&gt; [2] "months preceding June 1 (for the 1850-1880 censuses) or the"
+#&gt; [3] "date of interview (for the ACS and PRCS)."
 ```
 
 ???
 So you can see here that ipumsr provides function to extract information from 
 the DDI object without the need to slice and dice that "var_info" data.frame I 
-showed before. Here we grab the label and description for the variable PHONE.
+showed before. Here we grab the label and description for the variable "Married 
+within the past year."
 
 ---
 
@@ -1477,20 +1490,19 @@ Value labels:
 
 
 ```r
-ipums_val_labels(ddi, PHONE)
-#&gt; # A tibble: 4 x 2
-#&gt;     val lbl                           
-#&gt;   &lt;dbl&gt; &lt;chr&gt;                         
-#&gt; 1     0 N/A                           
-#&gt; 2     1 No, no phone available        
-#&gt; 3     2 Yes, phone available          
-#&gt; 4     8 Suppressed (2012 and 2015 ACS)
+ipums_val_labels(ddi, MARRINYR)
+#&gt; # A tibble: 3 x 2
+#&gt;     val lbl       
+#&gt;   &lt;dbl&gt; &lt;chr&gt;     
+#&gt; 1     0 N/A       
+#&gt; 2     1 Blank (No)
+#&gt; 3     2 Yes
 ```
 
 ???
 Similarly, we can print the value labels by pointing to the DDI. We see here 
-that the variable PHONE takes four values: no, yes, not applicable, and 
-suppressed.
+that the variable married in the last year takes three values: NA, blank, and 
+yes.
 
 ---
 
@@ -1555,20 +1567,22 @@ value and label to transform your variables into the shape you want.
 
 ```r
 data
-#&gt; # A tibble: 1,476,443 x 12
-#&gt;     YEAR DATANUM SERIAL  HHWT       STATEFIP CONSPUMA                                   GQ                    PHONE PERNUM PERWT        EDUC     EDUCD
-#&gt;    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;      &lt;int+lbl&gt;    &lt;dbl&gt;                            &lt;int+lbl&gt;                &lt;int+lbl&gt;  &lt;dbl&gt; &lt;dbl&gt;   &lt;int+lbl&gt; &lt;int+lbl&gt;
-#&gt;  1  1960       1 336455   100 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      1   100 5 [Grade 1~ 50 [Grad~
-#&gt;  2  1960       1 336455   100 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      2   100 6 [Grade 1~ 60 [Grad~
-#&gt;  3  1960       1 336456   100 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      1   100 6 [Grade 1~ 60 [Grad~
-#&gt;  4  1960       1 336456   100 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      2   100 6 [Grade 1~ 60 [Grad~
-#&gt;  5  1960       1 336456   100 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      3   100 2 [Grade 5~ 22 [Grad~
-#&gt;  6  1960       1 336456   100 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      4   100 0 [N/A or ~  1 [N/A] 
-#&gt;  7  1960       1 336457    99 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      1    99 6 [Grade 1~ 60 [Grad~
-#&gt;  8  1960       1 336457    99 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      2    99 4 [Grade 1~ 40 [Grad~
-#&gt;  9  1960       1 336457    99 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      3    99 4 [Grade 1~ 40 [Grad~
-#&gt; 10  1960       1 336458   100 27 [Minnesota]       NA 1 [Households under 1970 definition] 2 [Yes, phone available]      1   100 6 [Grade 1~ 60 [Grad~
-#&gt; # ... with 1,476,433 more rows
+#&gt; # A tibble: 137,900 x 35
+#&gt;     YEAR             SAMPLE SERIAL CBSERIAL  HHWT CPI99      GQ   COSTELEC     HHINCOME VACANCY CINETHH PERNUM PERWT MOMLOC POPLOC   RELATE    RELATED
+#&gt;    &lt;int&gt;          &lt;int+lbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int+l&gt;  &lt;dbl+lbl&gt;    &lt;dbl+lbl&gt; &lt;int+l&gt; &lt;int+l&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int+lb&gt;  &lt;int+lbl&gt;
+#&gt;  1  2015 201502 [2015 PRCS]      1       74    32 0.703 3 [Gro~    0 [N/A] 1.00e7 [N/A~ 0 [N/A] 0 [N/A~      1    32      0      0 13 [Ins~ 1301 [Ins~
+#&gt;  2  2015 201502 [2015 PRCS]      2      221    67 0.703 1 [Hou~ 4320       1.2 e4       0 [N/A] 3 [No ~      1    68      0      0  1 [Hea~  101 [Hea~
+#&gt;  3  2015 201502 [2015 PRCS]      2      221    67 0.703 1 [Hou~ 4320       1.2 e4       0 [N/A] 3 [No ~      2    89      0      0  2 [Spo~  201 [Spo~
+#&gt;  4  2015 201502 [2015 PRCS]      2      221    67 0.703 1 [Hou~ 4320       1.2 e4       0 [N/A] 3 [No ~      3    99      1      2  3 [Chi~  301 [Chi~
+#&gt;  5  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      1    60      0      0  1 [Hea~  101 [Hea~
+#&gt;  6  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      2    86      0      0  2 [Spo~  201 [Spo~
+#&gt;  7  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      3    93      2      1  3 [Chi~  301 [Chi~
+#&gt;  8  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      4    91      2      1  3 [Chi~  301 [Chi~
+#&gt;  9  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      5    91      2      1  3 [Chi~  301 [Chi~
+#&gt; 10  2015 201502 [2015 PRCS]      4     1087   110 0.703 1 [Hou~  840       4.36e4       0 [N/A] 1 [Yes~      1   111      0      0  1 [Hea~  101 [Hea~
+#&gt; # ... with 137,890 more rows, and 18 more variables: SEX &lt;int+lbl&gt;, AGE &lt;int+lbl&gt;, MARRINYR &lt;int+lbl&gt;, DIVINYR &lt;int+lbl&gt;, WIDINYR &lt;int+lbl&gt;,
+#&gt; #   FERTYR &lt;int+lbl&gt;, RACE &lt;int+lbl&gt;, RACED &lt;int+lbl&gt;, HISPAN &lt;int+lbl&gt;, HISPAND &lt;int+lbl&gt;, SPEAKENG &lt;int+lbl&gt;, EDUC &lt;int+lbl&gt;, EDUCD &lt;int+lbl&gt;,
+#&gt; #   EMPSTAT &lt;int+lbl&gt;, EMPSTATD &lt;int+lbl&gt;, INCTOT &lt;dbl+lbl&gt;, MIGRATE1 &lt;int+lbl&gt;, MIGRATE1D &lt;int+lbl&gt;
 ```
 
 ???
@@ -1589,20 +1603,21 @@ against this approach in general, but it could be what you want in some cases.
 
 ```r
 as_factor(data)
-#&gt; # A tibble: 1,476,443 x 12
-#&gt;     YEAR DATANUM SERIAL  HHWT STATEFIP  CONSPUMA GQ                               PHONE                PERNUM PERWT EDUC                EDUCD   
-#&gt;    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;        &lt;dbl&gt; &lt;fct&gt;                            &lt;fct&gt;                 &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;               &lt;fct&gt;   
-#&gt;  1  1960       1 336455   100 Minnesota       NA Households under 1970 definition Yes, phone available      1   100 Grade 11            Grade 11
-#&gt;  2  1960       1 336455   100 Minnesota       NA Households under 1970 definition Yes, phone available      2   100 Grade 12            Grade 12
-#&gt;  3  1960       1 336456   100 Minnesota       NA Households under 1970 definition Yes, phone available      1   100 Grade 12            Grade 12
-#&gt;  4  1960       1 336456   100 Minnesota       NA Households under 1970 definition Yes, phone available      2   100 Grade 12            Grade 12
-#&gt;  5  1960       1 336456   100 Minnesota       NA Households under 1970 definition Yes, phone available      3   100 Grade 5, 6, 7, or 8 Grade 5 
-#&gt;  6  1960       1 336456   100 Minnesota       NA Households under 1970 definition Yes, phone available      4   100 N/A or no schooling N/A     
-#&gt;  7  1960       1 336457    99 Minnesota       NA Households under 1970 definition Yes, phone available      1    99 Grade 12            Grade 12
-#&gt;  8  1960       1 336457    99 Minnesota       NA Households under 1970 definition Yes, phone available      2    99 Grade 10            Grade 10
-#&gt;  9  1960       1 336457    99 Minnesota       NA Households under 1970 definition Yes, phone available      3    99 Grade 10            Grade 10
-#&gt; 10  1960       1 336458   100 Minnesota       NA Households under 1970 definition Yes, phone available      1   100 Grade 12            Grade 12
-#&gt; # ... with 1,476,433 more rows
+#&gt; # A tibble: 137,900 x 35
+#&gt;     YEAR SAMPLE    SERIAL CBSERIAL  HHWT CPI99 GQ     COSTELEC HHINCOME VACANCY CINETHH PERNUM PERWT MOMLOC POPLOC RELATE RELATED SEX   AGE   MARRINYR
+#&gt;    &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;   &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   
+#&gt;  1  2015 2015 PRCS      1       74    32 0.703 Group~ N/A      "N/A "   N/A     N/A (G~      1    32      0      0 Insti~ Instit~ Male  34    N/A     
+#&gt;  2  2015 2015 PRCS      2      221    67 0.703 House~ 4320     "12000"  N/A     No Int~      1    68      0      0 Head/~ Head/H~ Fema~ 25    Blank (~
+#&gt;  3  2015 2015 PRCS      2      221    67 0.703 House~ 4320     "12000"  N/A     No Int~      2    89      0      0 Spouse Spouse  Male  36    Blank (~
+#&gt;  4  2015 2015 PRCS      2      221    67 0.703 House~ 4320     "12000"  N/A     No Int~      3    99      1      2 Child  Child   Male  2     N/A     
+#&gt;  5  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      1    60      0      0 Head/~ Head/H~ Male  42    Blank (~
+#&gt;  6  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      2    86      0      0 Spouse Spouse  Fema~ 38    Blank (~
+#&gt;  7  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      3    93      2      1 Child  Child   Fema~ 13    N/A     
+#&gt;  8  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      4    91      2      1 Child  Child   Fema~ 12    N/A     
+#&gt;  9  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      5    91      2      1 Child  Child   Fema~ 9     N/A     
+#&gt; 10  2015 2015 PRCS      4     1087   110 0.703 House~ 840      "43600"  N/A     Yes, w~      1   111      0      0 Head/~ Head/H~ Male  28    Yes     
+#&gt; # ... with 137,890 more rows, and 15 more variables: DIVINYR &lt;fct&gt;, WIDINYR &lt;fct&gt;, FERTYR &lt;fct&gt;, RACE &lt;fct&gt;, RACED &lt;fct&gt;, HISPAN &lt;fct&gt;,
+#&gt; #   HISPAND &lt;fct&gt;, SPEAKENG &lt;fct&gt;, EDUC &lt;fct&gt;, EDUCD &lt;fct&gt;, EMPSTAT &lt;fct&gt;, EMPSTATD &lt;fct&gt;, INCTOT &lt;fct&gt;, MIGRATE1 &lt;fct&gt;, MIGRATE1D &lt;fct&gt;
 ```
 
 ???
@@ -1617,20 +1632,21 @@ the labels as factor levels.
 
 ```r
 zap_labels(data)
-#&gt; # A tibble: 1,476,443 x 12
-#&gt;     YEAR DATANUM SERIAL  HHWT STATEFIP CONSPUMA    GQ PHONE PERNUM PERWT  EDUC EDUCD
-#&gt;    &lt;int&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;    &lt;int&gt;    &lt;dbl&gt; &lt;int&gt; &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt; &lt;int&gt;
-#&gt;  1  1960       1 336455   100       27       NA     1     2      1   100     5    50
-#&gt;  2  1960       1 336455   100       27       NA     1     2      2   100     6    60
-#&gt;  3  1960       1 336456   100       27       NA     1     2      1   100     6    60
-#&gt;  4  1960       1 336456   100       27       NA     1     2      2   100     6    60
-#&gt;  5  1960       1 336456   100       27       NA     1     2      3   100     2    22
-#&gt;  6  1960       1 336456   100       27       NA     1     2      4   100     0     1
-#&gt;  7  1960       1 336457    99       27       NA     1     2      1    99     6    60
-#&gt;  8  1960       1 336457    99       27       NA     1     2      2    99     4    40
-#&gt;  9  1960       1 336457    99       27       NA     1     2      3    99     4    40
-#&gt; 10  1960       1 336458   100       27       NA     1     2      1   100     6    60
-#&gt; # ... with 1,476,433 more rows
+#&gt; # A tibble: 137,900 x 35
+#&gt;     YEAR SAMPLE SERIAL CBSERIAL  HHWT CPI99    GQ COSTELEC HHINCOME VACANCY CINETHH PERNUM PERWT MOMLOC POPLOC RELATE RELATED   SEX   AGE MARRINYR
+#&gt;    &lt;int&gt;  &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;
+#&gt;  1  2015 201502      1       74    32 0.703     3        0  9999999       0       0      1    32      0      0     13    1301     1    34        0
+#&gt;  2  2015 201502      2      221    67 0.703     1     4320    12000       0       3      1    68      0      0      1     101     2    25        1
+#&gt;  3  2015 201502      2      221    67 0.703     1     4320    12000       0       3      2    89      0      0      2     201     1    36        1
+#&gt;  4  2015 201502      2      221    67 0.703     1     4320    12000       0       3      3    99      1      2      3     301     1     2        0
+#&gt;  5  2015 201502      3      310    60 0.703     1      480    23000       0       1      1    60      0      0      1     101     1    42        1
+#&gt;  6  2015 201502      3      310    60 0.703     1      480    23000       0       1      2    86      0      0      2     201     2    38        1
+#&gt;  7  2015 201502      3      310    60 0.703     1      480    23000       0       1      3    93      2      1      3     301     2    13        0
+#&gt;  8  2015 201502      3      310    60 0.703     1      480    23000       0       1      4    91      2      1      3     301     2    12        0
+#&gt;  9  2015 201502      3      310    60 0.703     1      480    23000       0       1      5    91      2      1      3     301     2     9        0
+#&gt; 10  2015 201502      4     1087   110 0.703     1      840    43600       0       1      1   111      0      0      1     101     1    28        2
+#&gt; # ... with 137,890 more rows, and 15 more variables: DIVINYR &lt;int&gt;, WIDINYR &lt;int&gt;, FERTYR &lt;int&gt;, RACE &lt;int&gt;, RACED &lt;int&gt;, HISPAN &lt;int&gt;,
+#&gt; #   HISPAND &lt;int&gt;, SPEAKENG &lt;int&gt;, EDUC &lt;int&gt;, EDUCD &lt;int&gt;, EMPSTAT &lt;int&gt;, EMPSTATD &lt;int&gt;, INCTOT &lt;dbl&gt;, MIGRATE1 &lt;int&gt;, MIGRATE1D &lt;int&gt;
 ```
 
 
@@ -1667,14 +1683,16 @@ class: center middle
 
 
 ```r
-ipums_val_labels(data$PHONE)
-#&gt; # A tibble: 4 x 2
-#&gt;     val lbl                           
-#&gt;   &lt;int&gt; &lt;chr&gt;                         
-#&gt; 1     0 N/A                           
-#&gt; 2     1 No, no phone available        
-#&gt; 3     2 Yes, phone available          
-#&gt; 4     8 Suppressed (2012 and 2015 ACS)
+ipums_val_labels(data$MIGRATE1)
+#&gt; # A tibble: 6 x 2
+#&gt;     val lbl                 
+#&gt;   &lt;int&gt; &lt;chr&gt;               
+#&gt; 1     0 N/A                 
+#&gt; 2     1 Same house          
+#&gt; 3     2 Moved within state  
+#&gt; 4     3 Moved between states
+#&gt; 5     4 Abroad one year ago 
+#&gt; 6     9 Unknown
 ```
 
 ???
@@ -1687,23 +1705,22 @@ rather than pointing to the DDI object. This works if PHONE is still a
 haven::labelled column.
 
 In this case, given the value labels we see here, it makes sense to set values 0
-and 8 to missing.
+and 9 to missing.
 
 ---
 
 # `lbl_na_if()`
 
 
-
 ```r
-data$PHONE2 &lt;- lbl_na_if(data$PHONE, ~.val %in% c(0, 8)) %&gt;%
+data$MIGRATE1a &lt;- lbl_na_if(data$MIGRATE1, ~.val %in% c(0, 9)) %&gt;%
   as_factor()
 ```
 
-. . . 
+...
 
-<div id="htmlwidget-55d3ce378f1fbf85a530" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-55d3ce378f1fbf85a530">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A","[1] No, no phone available","[2] Yes, phone available","[8] Suppressed (2012 and 2015 ACS)"],[null,"No, no phone available","Yes, phone available",null],[41133,30852,1404458,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-efe413e55256c84b6b80" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-efe413e55256c84b6b80">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A","[1] Same house","[2] Moved within state","[3] Moved between states","[4] Abroad one year ago","[9] Unknown"],[null,"Same house","Moved within state","Moved between states","Abroad one year ago",null],[822,126664,9259,936,219,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ???
 `lbl_na_if()` supports a special syntax used by a few of ipumsr's label
@@ -1723,30 +1740,6 @@ you want it.
 
 ---
 
-# `lbl_na_if()`
-
-
-
-```r
-data$PHONE2 &lt;- lbl_na_if(
-  data$PHONE, 
-  function(.val, .lbl) .val %in% c(0, 8)
-) %&gt;%
-  as_factor()
-```
-
-. . . 
-
-<div id="htmlwidget-06345bcde20c0d44e7c5" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-06345bcde20c0d44e7c5">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A","[1] No, no phone available","[2] Yes, phone available","[8] Suppressed (2012 and 2015 ACS)"],[null,"No, no phone available","Yes, phone available",null],[41133,30852,1404458,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-
-???
-In case you're unfamiliar with the anonymous function notation, that squiggly 
-tilde could be replaced with a regular function definition, as shown here. So 
-anytime you see the tilde symbol in any of these label helper functions, you 
-can read it as "a function of dot val and dot label".
-
----
 
 # `lbl_na_if()`
 
@@ -1754,9 +1747,9 @@ can read it as "a function of dot val and dot label".
 
 
 ```r
-drop_labels &lt;- c("N/A", "Suppressed (2012 and 2015 ACS)")
+drop_labels &lt;- c("N/A", "Unknown")
 
-data$PHONE3 &lt;- lbl_na_if(data$PHONE, ~.lbl %in% drop_labels) %&gt;%
+data$MIGRATE1b &lt;- lbl_na_if(data$MIGRATE1, ~.lbl %in% drop_labels) %&gt;%
   as_factor()
 ```
 
@@ -1811,8 +1804,8 @@ data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
 
 . . .
 
-<div id="htmlwidget-6a1137308c861f52ae16" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6a1137308c861f52ae16">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[11811,50098,50114,40324,14976,14611,15871,10715,11500,11836,12399,27934,16637,12274,14020,28589,15962,40520,39440,46037,44797,67118,17653,170139,102651,12312,65168,13985,156110,12989,69752,9937,3888,6712,15917,147940,4280,3062,1303,1799,42621,13744,6898,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-b3d5d0099244aaf77b02" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-b3d5d0099244aaf77b02">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ???
 [Read bullet point]
@@ -2010,79 +2003,54 @@ will link to below.
 
 ---
 
-# Phone availability 
-- Now that they're factors, ready for use as regular R data
+# Migration in Puerto Rico, 2015-2019
+
+
+
+
 
 ```r
-graph_data &lt;- data %&gt;%
-  group_by(YEAR) %&gt;%
+data %&gt;% 
+  group_by(YEAR) %&gt;% 
   summarize(
-    `% with phone` = weighted.mean(
-      PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-    ),
-    .groups = "drop"
-  )
-
-ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
-  geom_point() +
-  geom_line() + 
-  labs(
-    title = "Percent of Minnesota with phone line",
-    subtitle = paste0("Data source: ", ddi$ipums_project),
-    caption = paste(
-      strwrap(ipums_var_desc(ddi, PHONE), 90), 
-      collapse = "\n"
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT)
+  ) %&gt;% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      x = NULL,
+      y = "%"
     )
-  )
 ```
 
-???
-Microdata often needs to be summarized at a higher level for visualization. In 
-this case, if we want to make a graph of phone availability over time, we need 
-to first summarize at the year level.
 
-The first block of code computes the weighted proportion of persons with access
-to a phone in each year. Once our data are summarized so that each row
-represents a value for one year, we can make a graph by year.
-
----
-
-# Phone availability
-![](ipumsr_webinar_files/figure-html/graph1-1.png)&lt;!-- --&gt;
-
-???
-Here we see a strange decline, then resurgence, in access to a phone line. 
-What's going on here?
-
----
-
-# Interpretation
-
-&lt;img src="images/comparability_screenshot.png" title="Screenshot from the IPUMS USA website showing the Comparability tab for the variable PHONE. The Comparability tab and the text 'The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service; prior to 2008, this was not made explicit.' are highlighted for emphasis." alt="Screenshot from the IPUMS USA website showing the Comparability tab for the variable PHONE. The Comparability tab and the text 'The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service; prior to 2008, this was not made explicit.' are highlighted for emphasis." width="4025" /&gt;
 
 
 ???
-If we look at the Comparability tab for the PHONE variable on the IPUMS USA 
-website, we find an explanation:
-
-The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service;
-prior to 2008, this was not made explicit.
-
-Just one small example of the value added to these data by the IPUMS USA team.
+Assuming we've already loaded the data at this point, I can just run the code to 
+create a graph of migration (any migration) by year, then on a subsequent slide, 
+the code to graph migration by year, faceted by education.
 
 ---
 
-# Phone availability by education
-![](ipumsr_webinar_files/figure-html/graph2-1.png)&lt;!-- --&gt;
+
+![](ipumsr_webinar_files/figure-html/migration-graph-1-1.png)&lt;!-- --&gt;
+
 
 ???
-With our simplified education variable, we can also plot access to a phone line 
-by education. Here we see that anomalous drop and resurgence is present at all 
-education levels, and that differences in phone access by education have 
-declined since 1960.
+Disclaimer: All of the analyses presented here include only point estimates 
+without any estimation of sampling error. Thus, we cannot assess the statistical
+significance of any differences over time or between groups. To estimate 
+confidence intervals for point estimates from the ACS or PRCS, use the replicate 
+weight variables REPWT and REPWTP and follow the instructions from the IPUMS USA 
+replicate weight FAQ page [here](https://usa.ipums.org/usa/repwt.shtml#q40).
 
 ---
 
+![](ipumsr_webinar_files/figure-html/migration-graph-2-1.png)&lt;!-- --&gt;
+
+---
 # Overview
 
 .greyed-out[
@@ -2098,199 +2066,9 @@ declined since 1960.
 
 `5.` Brief analysis example
 
-.strong[`6.` Working with IPUMS geographic data]
+.strong[`6.` Intro to the IPUMS USA API]
 
 `7.` Preview of IPUMS API functionality
-
-`8.` Q &amp; A
-
-]
-
-
-
----
-
-# Getting geographic data
-
-- For IPUMS USA (and several other projects), we provide geographic boundaries 
-  as well. For many areas, this includes harmonizing boundary changes over time.
-
---
-
-- Our extract includes the variable CONSPUMA, for "Consistent Public Use 
-  Microdata Areas"
-  
---
-
-- Note: CONSPUMA units are large
-  - For finer geographic detail, check out IPUMS NHGIS
-
-???
-[Read bullet points]
-
----
-
-# Getting geographic data
-
-&lt;img src="images/geography_screenshot.png" title="Screenshot from the IPUMS USA homepage with an arrow pointing to the 'Geography &amp;amp; GIS' link in the left sidebar." alt="Screenshot from the IPUMS USA homepage with an arrow pointing to the 'Geography &amp;amp; GIS' link in the left sidebar." width="3892" /&gt;
-
-???
-Geographic boundary data is usually found via a "Geography and GIS" link on the
-left sidebar of the home page for a data collection, under the heading
-"Supplemental Data".
-
-Under that link, you can browse available shape files, then download the ones 
-you want in a zip archive, and unzip the contents of the archive into their 
-own folder within your project directory.
-
----
-
-# Loading shape data
-
-- `ipumsr` provides support for both sf and sp data; we'll use sf here
-
-- Load with the `ipums_read_sf()` function (mostly just a wrapper around
-  `sf::read_sf()`)
-
-
-
-```r
-shape_data &lt;- read_ipums_sf("shape/")
-#&gt; options:        ENCODING=latin1 
-#&gt; Reading layer `ipums_conspuma' from data source 
-#&gt;   `C:\Users\derek\Documents\ipumsr-webinar\shape\ipums_conspuma.shp' 
-#&gt;   using driver `ESRI Shapefile'
-#&gt; Simple feature collection with 543 features and 3 fields
-#&gt; Geometry type: MULTIPOLYGON
-#&gt; Dimension:     XY
-#&gt; Bounding box:  xmin: -7115713 ymin: -1337508 xmax: 2258225 ymax: 4591616
-#&gt; Projected CRS: USA_Contiguous_Albers_Equal_Area_Conic
-```
-
-???
-The sp package (short for "spatial") has been around since 2005. It is more
-established and some other R spatial packages might still assume you are using
-sp data structures. The sf package (short for "simple features") is newer, but 
-seems to be on the rise as an alternative sp for some use cases.
-
-For more on the differences between sp and sf, see the free online book 
-*Geocomputation with R*, which we link to at the end of the slides.
-
----
-
-# Loading shape data
-
-
-
-
-
-```r
-as_tibble(shape_data)
-#&gt; # A tibble: 543 x 4
-#&gt;    CONSPUMA STATEFIP State                                                                                     geometry
-#&gt;       &lt;dbl&gt; &lt;chr&gt;    &lt;chr&gt;                                                                           &lt;MULTIPOLYGON [m]&gt;
-#&gt;  1      540 02       Alaska     (((-3043869 3470021, -3043834 3469980, -3043821 3469944, -3043832 3469891, -3043833 ...
-#&gt;  2      541 02       Alaska     (((-2291901 2327688, -2290772 2327243, -2290089 2327347, -2289967 2327289, -2289857 ...
-#&gt;  3      542 15       Hawaii     (((-6021813 59835.48, -6021818 59829.16, -6021811 59820.01, -6021798 59816.03, -6021...
-#&gt;  4      491 51       Virginia   (((1720696 104240.2, 1720648 104170.9, 1720684 103958.8, 1720625 103935.2, 1720631 1...
-#&gt;  5      492 51       Virginia   (((1745400 116778.3, 1745641 116749.4, 1745885 116801.4, 1746072 116841.2, 1746091 1...
-#&gt;  6      493 51       Virginia   (((1728178 119921.5, 1728243 119891.9, 1728662 119738.7, 1728837 119672.2, 1729106 1...
-#&gt;  7      494 51       Virginia   (((1717473 129180.9, 1717834 128959, 1717602 127788.6, 1717877 127766, 1717948 12747...
-#&gt;  8      495 53       Washington (((-1584859 1462223, -1583276 1461845, -1583169 1461826, -1582507 1461663, -1582289 ...
-#&gt;  9      496 53       Washington (((-2031282 1366306, -2031348 1366324, -2031429 1366422, -2031467 1366499, -2031474 ...
-#&gt; 10      497 53       Washington (((-1970094 1408574, -1970093 1408551, -1970059 1408587, -1969988 1408582, -1969951 ...
-#&gt; # ... with 533 more rows
-```
-
-
-???
-At the risk of oversimplifying, an sf object is basically a tibble or data.frame
-with a special geometry column. That simplification helps me understand the 
-process of joining the sf object to data.
-
-
----
-
-# Joining shape data
-- `ipumsr` has helpers for merging data that work with both sf and sp structures 
-
-
-```r
-conspuma_data &lt;- data %&gt;%
-  group_by(CONSPUMA, YEAR) %&gt;%
-  summarize(
-    `% with phone` = weighted.mean(
-      PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-    ),
-    .groups = "drop"
-  )
-
-conspuma_data &lt;- ipums_shape_inner_join(
-  conspuma_data, 
-  shape_data, 
-  by = "CONSPUMA"
-)
-#&gt; Some observations were lost in the join (533 observations in the shape file and
-#&gt; 11 obervation in data). See `join_failures(...)` for more details.
-```
-
-???
-Before joining to shape data, we need to summarize our person level data at the 
-level of the geography we are joining to. Thus, the first block of code computes 
-the weighted proportion of persons with access to a phone for each CONSPUMA 
-unit in each year. Once our data are summarized so that each row represents a 
-value for one CONSPUMA unit in one year, we can join to the sf object we loaded 
-above.
-
----
-
-# Plotting shape data
-- Since the addition of `geom_sf()`, ggplot2 can plot sf data:
-
-
-```r
-graph_data &lt;- conspuma_data %&gt;% 
-  filter(YEAR %in% c(1980, 1990, 2000, 2010))
-
-ggplot(graph_data, aes(fill = `% with phone`)) +
-  facet_wrap(~YEAR) + 
-  geom_sf()
-```
-
----
-
-# Plotting shape data
-
-![](ipumsr_webinar_files/figure-html/graph3-1.png)&lt;!-- --&gt;
-
-???
-As with phone access by education, these maps show evidence of declining
-geographic variation in access to a phone line.
-
-For more information on IPUMS geographic data, see the ipumsr vignette on
-working with geographic data, or one of several collection-specific recorded
-webinars and tutorials on that topic, which can be found on the tutorials page 
-which we will link to below.
-
----
-# Overview
-
-.greyed-out[
-
-
-`1.` What is IPUMS?
-
-`2.` What is ipumsr, and why use it?
-
-`3.` Reading data into R
-
-`4.` Exploring and manipulating metadata
-
-`5.` Brief analysis example
-
-`6.` Working with IPUMS geographic data
-
-.strong[`7.` Preview of IPUMS API functionality]
 
 `8.` Q &amp; A
 
@@ -2301,37 +2079,28 @@ which we will link to below.
 
 # API Timeline
 
-- Currently in internal testing
+- Currently in beta testing for IPUMS USA
 
-- Beta testing before the end of 2021
+- IPUMS USA public launch expected mid-2022
 
-- IPUMS USA public launch early 2022
+- Interested in becoming a beta tester? Email ipums+api@umn.edu
 
 ???
-The API is not yet publicly available, but we wanted to offer a preview of the 
-functionality that will soon be available in ipumsr.
+The API is not yet publicly available, but is available to volunteer beta 
+testers. If you'd like to become a beta tester, email ipums+api@umn.edu and you 
+should hear back within about two business days.
 
-We plan to support creating extracts via API for all of our data collections, 
-but that support will be rolled out one collection at a time, to allow us to 
-thoroughly test that the extract API is working as expected for each collection.
-
-IPUMS USA is the first collection that will be supported, and we are currently
-doing internal testing of the API for USA. We'll put out a call for beta testers
-before the end of this year, but feel free to reach out in the meantime if you
-want to be added to that list. We expect to open up the USA extract API to all
-IPUMS USA users in the first few months of next year, depending on what sort of
-issues arise during beta testing.
-
-Another important note is that there is already a public API for the IPUMS NHGIS
-collection, which offers access to tabular data from the US Census Bureau, as
-well as corresponding geographic boundaries. ipumsr does not yet include
-functions for interacting with the NHGIS API, but there is a guide to
-interacting with that API in R, which we'll share a link to at the end of these
-slides, and we plan to add that functionality to ipumsr sometime next year.
+IPUMS USA is the first microdata project for which we are adding API support,
+but there is already a public API for the IPUMS NHGIS collection, which offers
+access to tabular data from the US Census Bureau, as well as corresponding
+geographic boundaries. ipumsr does not yet include functions for interacting
+with the NHGIS API, but there is a guide to interacting with that API in R,
+which we'll share a link to at the end of these slides, and we are currently
+working to add that functionality to ipumsr.
 
 ---
 
-# What can I do with the API?
+# What can I do with the IPUMS USA API?
 
 - Define and submit extract requests
 
@@ -2377,7 +2146,7 @@ will be part of the ipumsr package.
 
 ---
 
-# What can't I do with the API?
+# What can't I do with the IPUMS USA API?
 
 - Bypass the extract system entirely
 
@@ -2408,6 +2177,212 @@ A third limitation is that API users will not initially have access to all the
 bells and whistles of the extract system, such as the ability to attach 
 characteristics of family members such as spouses or children. We plan to add 
 these capabilities once the core functionality is well-tested and stable.
+
+---
+
+# How to use your IPUMS USA API key
+
+&lt;img src="images/api-key-in-renviron-screenshot.png" title="Screenshot of a file named '.Renviron' opened in the RStudio editor, containing one line of text that reads `IPUMS_API_KEY = 'paste-your-api-key-here'`" alt="Screenshot of a file named '.Renviron' opened in the RStudio editor, containing one line of text that reads `IPUMS_API_KEY = 'paste-your-api-key-here'`" width="681" /&gt;
+
+???
+If you become an API beta tester, you will receive instructions on creating an 
+API key. Once you create the key, we recommend storing it in an environment 
+variable named "IPUMS_API_KEY" by defining that environment variable in a file 
+named ".Renviron" that lives in your user account home directory. You can also 
+store it a file named ".Renviron" in your project working directory, but then 
+you need to make sure you don't include that file if you share your work with 
+others, either directly or through a code repository like GitHub. The rest of 
+the API code examples in this presentation assume that we've already stored our 
+API key in this environment variable, and thus that we don't need to pass that 
+key as an argument when we make API calls.
+
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Intro to the IPUMS USA API
+
+.strong[`7.` API use case 1: Revise your extract]
+
+`8.` Q &amp; A
+
+]
+
+---
+
+# Add HHINCOME to our extract
+
+
+```r
+# Pull down definition of last extract
+last_extract &lt;- get_last_extract_info("usa")
+
+# Add HHINCOME, resubmit, and download
+ddi &lt;- last_extract %&gt;% 
+  revise_extract_micro(vars_to_add = "HHINCOME") %&gt;% 
+  submit_extract() %&gt;% 
+  wait_for_extract() %&gt;% 
+  download_extract() %&gt;% 
+  read_ipums_ddi()
+
+data &lt;- read_ipums_micro(ddi)
+```
+
+
+???
+Not only does this approach save you a little time pointing and clicking through 
+the IPUMS USA website, it also streamlines the file download process by 
+automatically saving the DDI codebook and data files into your current working 
+directory.
+
+Note that you would likely run this code interactively as a convenient way to 
+revise, resubmit, and redownload your extract, but you wouldn't want to include 
+it in your analysis script, because then you'd be waiting for and redownloading 
+your extract every time you reran your analysis.
+
+---
+
+# Update your script with new filename
+
+
+```r
+# Before
+ddi &lt;- read_ipums_ddi("usa_00013.xml")
+data &lt;- read_ipums_micro(ddi)
+
+# After
+ddi &lt;- read_ipums_ddi("usa_00014.xml")
+data &lt;- read_ipums_micro(ddi)
+```
+
+???
+Instead, you would likely hard-code the newly downloaded filename into your 
+analysis script, replacing the old filename.
+
+---
+
+![](ipumsr_webinar_files/figure-html/unnamed-chunk-47-1.png)&lt;!-- --&gt;
+
+???
+Now we can create a graph similar to the education one grouping instead by 
+household income quintile. Here we see that persons from households in the 
+lowest income quintile were more likely to move across this whole time period, 
+but the highest two income quintiles seem to have the biggest jump in migration 
+in 2018. Again, I want to remind you that these are purely descriptive trends, 
+and that differences over time and by group may not be statistically 
+significant.
+
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Intro to the IPUMS USA API
+
+`7.` API use case 1: Revise your extract
+
+.strong[`8.` API use case 2: Share your extract]
+
+]
+
+---
+
+# Share your extract (definition)
+
+
+```r
+extract_to_share &lt;- get_last_extract_info("usa")
+
+# Or if you have the extract number:
+extract_to_share &lt;- get_extract_info("usa:14")
+
+save_extract_as_json(extract_to_share, file = "prcs_2015_2019_extract.json")
+```
+
+- Then share "prcs_2015_2019_extract.json" with collaborators
+
+---
+
+# Recreate a shared extract
+
+
+```r
+shared_extract_definition &lt;- define_extract_from_json(
+  "prcs_2015_2019_extract.json",
+  collection = "usa"
+)
+
+ddi &lt;- shared_extract_definition %&gt;% 
+  submit_extract() %&gt;% 
+  wait_for_extract() %&gt;% 
+  download_extract() %&gt;% 
+  read_ipums_ddi()
+
+data &lt;- read_ipums_micro(ddi)
+```
+
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Intro to the IPUMS USA API
+
+`7.` API use case 1: Revise your extract
+
+`8.` API use case 2: Share your extract
+
+.strong[`9.` API use case 3: Share your analysis]
+
+]
+
+---
+
+# Save analysis as RMarkdown
+
+&lt;img src="images/migration-rmarkdown-doc-screenshot.png" title="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." alt="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." width="100%" /&gt;
+
+
+---
+
+&lt;img src="images/knitted-rmarkdown-screenshot-4.png" title="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." alt="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." width="100%" /&gt;
 
 ---
 
