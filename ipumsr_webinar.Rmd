@@ -1558,7 +1558,7 @@ data <- data %>%
   )
 ```
 
-```{r migration-graph-1, eval=FALSE}
+```{r migration-graph-1, echo=FALSE, eval=FALSE}
 data %>% 
   filter(!is.na(moved_in_last_year)) %>% 
   group_by(YEAR) %>% 
