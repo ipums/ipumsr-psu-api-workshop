@@ -772,8 +772,6 @@ big feature. Another potential new feature is adding tools for properly handling
 survey weights. Let us know what would be helpful to you via GitHub or email.
 
 ---
-
----
 class: center, middle
 
 # To run the code in this presentation
