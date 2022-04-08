@@ -239,31 +239,40 @@ You can always reach out to through our **github**, or via **user support**.
 
 --
 
-3. Reading data into R
+3. How to create a data extract
 
 --
 
-4. Exploring and manipulating metadata
+4. Reading data into R
 
 --
 
-5. Brief analysis example
+5. Exploring and manipulating metadata
 
 --
 
-6. Working with IPUMS geographic data
+6. Brief analysis example
 
 --
 
-7. Preview of IPUMS API functionality
+7. Intro to the IPUMS USA API
 
 --
 
-8. Q & A
+8. Preview of IPUMS API functionality
+
+--
+
+9. Q & A
 
 ---
 
+
+
+
 # Overview
+
+
 
 
 
@@ -274,17 +283,21 @@ You can always reach out to through our **github**, or via **user support**.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q & A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q & A
+
+
 
 ]
 
@@ -349,28 +362,6 @@ knitr::include_graphics("images/harmonization_4.png")
 
 ???
 
----
-
-# 
-![IPUMS US Project logo](images/usa.jpg)
-
-
-
-- “Historical Trends in Children Living in Multigenerational Households in the United States: 1870–2018” 
-- Natasha V. Pilkauskas, Mariana Amorim, and Rachel E. Dunifon
-
-
-
-
-
-```{r echo=FALSE, fig.alt="Trends in multigenerational households by income level and race/ethnicity.", fig.height=3, fig.width=5}
-knitr::include_graphics("images/example_usa1.png")
-```
-
-
-
-???
-
 
 
 ---
@@ -406,24 +397,6 @@ knitr::include_graphics("images/example_usa1.png")
 
 ---
 # 
-![IPUMS Health Surveys project logo](images/health.jpg)
-
-
-
-- “Hearing Impairment, Household Composition, Marital Status, and Mortality Among U.S. Adults” 
-
-- Justin T. Denney and Jason D. Boardman
-
-
-![Table showing correlation between hearing impairment and mortality](images/example_health1.png)
-
-
-???
-
-Looked at relationship between degrees of hearing impairment and mortality rates.
-
----
-# 
 ![IPUMS Higher Ed project logo](images/highered.jpg)
 
 
@@ -434,103 +407,6 @@ Looked at relationship between degrees of hearing impairment and mortality rates
 - Data from the National Surveys of College Graduates (NSCG), Recent College Graduates (NSRCG) and Doctorate Recipients (SDR) are integrated from 1993 to the present.
 
 - https://highered.ipums.org/highered/
-
-
----
-
-# 
-![IPUMS Time Use project logo](images/time_use.jpg)
-
-
-
-- Historical and contemporary time use data from 1965 to the present.
-
-- Extensive time diary data from respondents in the US and *7* other countries.
-
-- https://timeuse.ipums.org/
-
-
----
-
-# 
-![IPUMS Time Use project logo](images/time_use.jpg)
-.pull-left[
-- Nathan Yau of Flowing Data
-
-- http://flowingdata.com/projects/2015/timeuse-simulation/
-]
-
-.pull-right[
-!["Visualization of individuals (dots) moving between activity categories."](images/example_time_use.png)
-
-]
-
-
-
----
-
-.pull-left[ 
-![IPUMS NHGIS project logo](images/nhgis.jpg)
-
-]
-
-
-.pull-right[
-
-
-![IPUMS IHGIS project logo](images/ihgis.jpg)
-]
-
-
-.pull-left[ 
-
-- **NHGIS** Shapefiles for all levels of US geography including tracts, from 1790 to the present
-
-
-- https://www.nhgis.org/
-]
-
-
-.pull-right[
-
-
-- **IGIS** Shapefiles for admin level 2
-
-- https://ihgis.ipums.org/
-
-
-]
-
-- Summary tables and time series of population, housing, agriculture, and economic data 
-
-
-
-
----
-# ![IPUMS NHGIS project logo](images/nhgis.jpg)
-
-
-- “Migrant Selection and Sorting during the Great American Drought.” 
-- Christopher Sichko
-
-
-
-
-.pull-left[
-![map showing extent of drought](images/example_nhgis1.png)
-
-
-
-]
-
-.pull-right[
-
-
-
-![map showing educational achievement by region](images/example_nhgis2b.png)
-
-
-]
 
 
 
@@ -622,6 +498,109 @@ Check out blog using IPUMS Global Health Data
 
 ---
 
+
+
+.pull-left[ 
+![IPUMS NHGIS project logo](images/nhgis.jpg)
+
+]
+
+
+.pull-right[
+
+
+![IPUMS IHGIS project logo](images/ihgis.jpg)
+]
+
+
+.pull-left[ 
+
+- **NHGIS** Shapefiles for all levels of US geography including tracts, from 1790 to the present
+
+
+- https://www.nhgis.org/
+]
+
+
+.pull-right[
+
+
+- **IGIS** Shapefiles for admin level 2
+
+- https://ihgis.ipums.org/
+
+
+]
+
+- Summary tables and time series of population, housing, agriculture, and economic data 
+
+
+
+
+---
+
+#
+![IPUMS NHGIS project logo](images/nhgis.jpg)
+
+
+- “Migrant Selection and Sorting during the Great American Drought.” 
+- Christopher Sichko
+
+
+
+
+.pull-left[
+![map showing extent of drought](images/example_nhgis1.png)
+
+
+
+]
+
+.pull-right[
+
+
+
+![map showing educational achievement by region](images/example_nhgis2b.png)
+
+
+]
+
+
+
+
+---
+
+
+# 
+![IPUMS Time Use project logo](images/time_use.jpg)
+
+
+
+- Historical and contemporary time use data from 1965 to the present.
+
+- Extensive time diary data from respondents in the US and *7* other countries.
+
+- https://timeuse.ipums.org/
+
+
+---
+
+# 
+![IPUMS Time Use project logo](images/time_use.jpg)
+.pull-left[
+- Nathan Yau of Flowing Data
+
+- http://flowingdata.com/projects/2015/timeuse-simulation/
+]
+
+.pull-right[
+!["Visualization of individuals (dots) moving between activity categories."](images/example_time_use.png)
+
+]
+
+
+---
+
 # So what is IPUMS?
 
 
@@ -686,24 +665,26 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 # Overview
 
-.greyed-out[
-
+greyed-out[
 
 `1.` What is IPUMS?
 
-.strong[`2.` What is ipumsr?]
+.strong[`2.` What is ipumsr, and why use it?]
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q & A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q & A
+
 
 ]
 
@@ -879,6 +860,7 @@ reminder, installing packages only needs to happen once, but some packages do up
 .greyed-out[
 
 
+
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
@@ -891,7 +873,7 @@ reminder, installing packages only needs to happen once, but some packages do up
 
 `6.` Brief analysis example
 
-`7.` Working with IPUMS geographic data
+`7.` Intro to the IPUMS USA API
 
 `8.` Preview of IPUMS API functionality
 
@@ -911,6 +893,7 @@ Dan passes to Derek. Derek switches to a web demo of extract system.
 .greyed-out[
 
 
+
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
@@ -923,11 +906,12 @@ Dan passes to Derek. Derek switches to a web demo of extract system.
 
 `6.` Brief analysis example
 
-`7.` Working with IPUMS geographic data
+`7.` Intro to the IPUMS USA API
 
 `8.` Preview of IPUMS API functionality
 
 `9.` Q & A
+
 
 ]
 
@@ -1158,23 +1142,26 @@ point to the DDI codebook, not the data file.
 .greyed-out[
 
 
+
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-.strong[`4.` Exploring and manipulating metadata]
+`4.` Reading data into R
 
-`5.` Brief analysis example
+.strong[`5.` Exploring and manipulating metadata]
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q & A
+`8.` Preview of IPUMS API functionality
 
-]
+`9.` Q & A
+
+
 
 ---
 
@@ -1703,17 +1690,21 @@ will link to below.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-.strong[`5.` Brief analysis example]
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+.strong[`6.` Brief analysis example]
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q & A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q & A
+
+
 
 ]
 
@@ -1824,22 +1815,23 @@ data %>%
 
 .greyed-out[
 
-
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-.strong[`6.` Intro to the IPUMS USA API]
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+.strong[`7.` Intro to the IPUMS USA API]
 
-`8.` Q & A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q & A
 
 ]
 
@@ -1978,17 +1970,20 @@ key as an argument when we make API calls.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Intro to the IPUMS USA API
+`6.` Brief analysis example
 
-.strong[`7.` API use case 1: Revise your extract]
+`7.` Intro to the IPUMS USA API
 
-`8.` Q & A
+.strong[`8.` Preview of IPUMS API functionality]
+
+`9.` Q & A
+
 
 ]
 
@@ -2103,19 +2098,26 @@ significant.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Intro to the IPUMS USA API
+`6.` Brief analysis example
 
-`7.` API use case 1: Revise your extract
+`7.` Intro to the IPUMS USA API
 
-.strong[`8.` API use case 2: Share your extract]
+`8a.` API use case 1: Revise your extract
+
+.strong[`8b.` API use case 2: Share your extract]
+
+`9.` Q & A
+
 
 ]
+
+
 
 ---
 
@@ -2158,23 +2160,28 @@ data <- read_ipums_micro(ddi)
 .greyed-out[
 
 
+
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Intro to the IPUMS USA API
+`6.` Brief analysis example
 
-`7.` API use case 1: Revise your extract
+`7.` Intro to the IPUMS USA API
 
-`8.` API use case 2: Share your extract
+`8a.` API use case 1: Revise your extract
 
-.strong[`9.` API use case 3: Share your analysis]
+`8b.` API use case 2: Share your extract
+
+.strong[`8c.` API use case 3: Share your analysis]
+
+`9.` Q & A
 
 ]
 
@@ -2543,22 +2550,27 @@ students for a class assignment.
 
 .greyed-out[
 
-
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic 
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-.strong[`8.` Q & A ]
+`8a.` API use case 1: Revise your extract
+
+`8b.` API use case 2: Share your extract
+
+`8c.` API use case 3: Share your analysis
+
+.strong[`9.` Q & A]
 
 ]
 
