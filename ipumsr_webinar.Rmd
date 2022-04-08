@@ -1161,7 +1161,7 @@ point to the DDI codebook, not the data file.
 
 `9.` Q & A
 
-
+]
 
 ---
 
