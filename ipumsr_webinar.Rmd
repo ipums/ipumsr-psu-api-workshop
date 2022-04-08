@@ -8,6 +8,7 @@ output:
     nature:
       highlightStyle: github
       highlightLines: true
+      highlightSpans: true
       countIncrementalSlides: false
 ---
 
@@ -271,9 +272,6 @@ You can always reach out to through our **github**, or via **user support**.
 
 
 # Overview
-
-
-
 
 
 .greyed-out[
@@ -665,7 +663,7 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 # Overview
 
-greyed-out[
+.greyed-out[
 
 `1.` What is IPUMS?
 
@@ -973,6 +971,8 @@ in the DDI codebook and data into separate objects.
 
 ---
 
+---
+
 # Read in the data
 
 ```{r include=FALSE}
@@ -994,16 +994,16 @@ if (length(ddi_path) != 1 || length(data_path) != 1) {
     "Extract for PSU API workshop",
     c("us2015b", "us2016b", "us2017b", "us2018b", "us2019b"),
     c(
-      "YEAR", "SAMPLE", "SERIAL", "CBSERIAL", "HHWT", "CPI99", "GQ", 
-      "COSTELEC", "HHINCOME", "VACANCY", "CINETHH", "PERNUM", "PERWT", 
-      "MOMLOC", "POPLOC", "RELATE", "RELATED", "SEX", "AGE", "MARRINYR", 
-      "DIVINYR", "WIDINYR", "FERTYR", "RACE", "RACED", "HISPAN", "HISPAND", 
-      "SPEAKENG", "EDUC", "EDUCD", "EMPSTAT", "EMPSTATD", "INCTOT", 
+      "YEAR", "SAMPLE", "SERIAL", "CBSERIAL", "HHWT", "CPI99", "GQ",
+      "COSTELEC", "HHINCOME", "VACANCY", "CINETHH", "PERNUM", "PERWT",
+      "MOMLOC", "POPLOC", "RELATE", "RELATED", "SEX", "AGE", "MARRINYR",
+      "DIVINYR", "WIDINYR", "FERTYR", "RACE", "RACED", "HISPAN", "HISPAND",
+      "SPEAKENG", "EDUC", "EDUCD", "EMPSTAT", "EMPSTATD", "INCTOT",
       "MIGRATE1", "MIGRATE1D"
     )
-  ) %>% 
-    submit_extract() %>% 
-    wait_for_extract() %>% 
+  ) %>%
+    submit_extract() %>%
+    wait_for_extract() %>%
     download_extract(download_dir = "presentation_extract")
 }
 
@@ -1019,14 +1019,6 @@ ddi <- read_ipums_ddi("usa_00013.xml")
 data <- read_ipums_micro(ddi)
 ```
 
---
-
-- This also works:
-
-```{r eval=FALSE}
-data <- read_ipums_micro("usa_00013.xml")
-```
-
 - Note: supply the codebook, *not* the data file, to `read_ipums_micro()`
 
 ???
@@ -1037,44 +1029,25 @@ The first option, and the one I'd recommend, is to read the DDI codebook into an
 object named "ddi" using the `read_ipums_ddi()` function, and then supply that 
 ddi object to `read_ipums_micro()`.
 
-The second option is to read in the data by passing the file path to the DDI
-codebook to the `read_ipums_micro()` function. However, we recommend the first
-pattern because it's often helpful to save the codebook to it's own object to
-preserve the original metadata once you start messing around with the data.
-
-Notice that in both cases we are supplying the codebook (either already read in
+Notice that we are supplying the codebook (either already read in
 or as a file path), not the data file, to `read_ipums_micro()`. The fact that we
-don't point to the actual data file when reading in the data might confusing. If
-I want to read in the data shouldn't I point to the data file?
+don't point to the actual data file when reading in the data might confusing. 
 
----
+Want to emphasize that we are pointing to the ddi - not the data file - to read 
+it in.
 
-class: center middle
-
-# Why do I point to the codebook to read in the data?
-
---
-
-### The data file is the **raw ingredients**, the codebook is the **recipe**
-
-???
-Here's my attempt to explain this in a hopefully memorable way: the data file 
-is the raw ingredients, and the codebook is the recipe. And when you go to make 
-dinner, your recipe tells you how to combine your ingredients to get the 
-finished product.
-
-Note for future revisions of this section: Seems like we could add a visual or 
-two here (possibly from Allison Horst's collection of R illustrations), and/or 
-improve the analogy (would Lego set and instruction booklet be better?).
+***Change the slides below to just show what's in a ddi + data file, so it
+makes sense why we need both (streamlined version of what we did before)
 
 ---
 
 # The data file is just raw ingredients
 
 ```{r echo=FALSE, comment = ''}
-readLines("usa_00013.dat.gz", n = 10) %>% 
+readLines(data_path, n = 10) %>% 
   paste0(collapse = "\n") %>% 
   cat()
+
 ```
 ???
 Looking at the first ten lines of our example data file, it makes sense why you 
@@ -1142,7 +1115,6 @@ point to the DDI codebook, not the data file.
 .greyed-out[
 
 
-
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
@@ -1167,44 +1139,13 @@ point to the DDI codebook, not the data file.
 
 # What's in my extract again?
 
---
-
-Maybe I wrote an informative extract description?
-
-```{r include=FALSE}
-ddi$extract_notes <- 
-  paste0(
-    "User-provided description: Revision of(Revision of(Revision of(Revision ", 
-    "of(my extract))))"
-  )
-```
-
-```{r}
-ddi$extract_notes %>% strwrap(60)
-```
-
---
-
-No such luck 😞
-
-???
-So we've read in our data -- how do we go about exploring it?
-
-We could refer back to the description we wrote when creating the extract, 
-maybe that will be informative. Let's see (read extract description). Ooh, 
-that's not very helpful. I'm guessing this joke hits close to home for some of 
-you long-time IPUMS users.
-
----
-
-# What's in my extract again?
-
 We can print the names of our variables:
 
 --
 
 ```{r}
 names(data)
+
 ```
 
 
@@ -1268,16 +1209,11 @@ For a more browsable view of the metadata, the ipums_view() function makes a
 nicely-formatted static html page that allows you to browse the metadata
 associated with your data extract.
 
-
 ---
 
 # Wrangling value labels
 
-- IPUMS value labels don't translate perfectly to R factors
-
-    - Every value in a factor must be labeled
-    
-    - Factor values always count up from 1
+- R doesn't natively support value labels like other statistical packages do
 
 --
 
@@ -1286,7 +1222,12 @@ associated with your data extract.
   
 --
 
-- ipumsr helper functions allow you to leverage info from values and labels
+- `ipumsr` helper functions allow you to leverage info from values and labels
+
+--
+
+- When you are finished manipulating variables, convert to factor using 
+`as_factor()` or convert to character or numeric vector
 
 ```{r, include = FALSE}
 label_before_after <- function(df, before_var, after_var, label_fun) {
@@ -1336,15 +1277,25 @@ IPUMS value labels don't translate perfectly to R factors. The most important
 difference is that in a factor, values always count up from 1. In IPUMS 
 variables, the values themselves often encode meaningful information about a 
 nested structure, which we'll see with the education variable below.
-  
-To preserve both the value and label, `ipumsr` imports labelled variables as
-`haven::labelled()` objects, but these aren't always the easiest to deal with, 
-because they aren't widely supported by functions from base R and other 
-packages. Thus, you will almost always want to convert these objects to 
-something like a factor or a regular numeric or character vector.
+
+Other stats packages are more full featured - for example, R doesn't natively support variables where only some of the values are labelled, or labelled variables with values that aren't all sequential. 
+
+To preserve the value and label `ipumsr` imports labelled variables as
+`haven::labelled()` objects which are structured more like labelled variables in
+other stats packages.
 
 Luckily ipumsr provides helpers that allow you to use information from both the
 value and label to transform your variables into the shape you want.
+*We will show you some of these helper functions today*
+
+When you are done transforming your variables, you will probably need to change back to a format native to R to run an analysis because labelled variables aren't supported. To 
+do this you'll need to convert back to factor or numeric or char vector using as_factor or zap_label.
+
+---
+
+class: center middle
+
+# Using ipumsr label helper functions
 
 ---
 
@@ -1355,154 +1306,30 @@ old_width <- getOption("width")
 options(width = 150)
 ```
 
+- Let's look at the detailed education variable
+
 ```{r}
-data
+ipums_val_labels(data$EDUCD)
+
 ```
 
 ???
-Here's what the data look like when you read them in.
+Here's what the data look like when you read them in. Show detailed education
+variable as an example - nested structure.
 
+We see here that values less than 10 indicate missing or no schooling values; 
+values between 10 and 19 all capture levels between nursery school and grade 4; 
+and so on.
 
-One thing I like about the behavior of `haven::labelled()` objects is how they 
-show the value and the label when you print your data. 
-
-But let's say you just don't want to deal with these special haven::labelled
-objects, and you want to get rid of them in one fell swipe. I would advise
-against this approach in general, but it could be what you want in some cases.
-
----
-
-# Get rid of haven::labelled columns
-
-```{r}
-as_factor(data)
-```
-
-???
-One option is the `as_factor()` function, which can be applied to the whole data 
-frame at once. Here we see that the values have been stripped away, leaving only 
-the labels as factor levels.
-
----
-
-# Get rid of haven::labelled columns
-
-```{r}
-zap_labels(data)
-```
-
-```{r echo=FALSE}
-options(width = old_width)
-```
-
-???
-Alternatively, if you just want the numeric values, you can use `zap_labels()` 
-on the whole data frame. Here we see that the labels have been stripped away, 
-leaving only the numeric codes.
-
-Both `as_factor()` and `zap_labels()` can be applied to a single column of a 
-data frame as well, to just strip away values or labels for that one column.
-
-But if you're going to want to recode any of these variables, you'll often be 
-able to do that more elegantly when you have access to both values and labels, 
-with the help of special ipumsr functions that leverage all that information.
-
-These special functions might take some trial and error when you first start 
-using them, but I promise the payoff will be worth it.
-
-***I wonder if a transition slide here would be nice to transition away from 
-getting rid of labelled columns to using them with ipumsr. Would maybe help 
-to distinguish which functions (ours) we are suggesting to use. ***
-
----
-
-class: center middle
-
-# Using ipumsr label helper functions
-
----
-
-# `lbl_na_if()`
-- `lbl_na_if()` allows you to set certain values or labels to missing
-
-```{r}
-ipums_val_labels(data$MIGRATE1)
-```
-
-???
-The first label helper function is label NA if, which allows you to set values 
-to NA, which is R's code for missing values, according to either the value or 
-the label.
-
-Notice that we've called `ipums_val_labels()` directly on the labelled column, 
-rather than pointing to the DDI object. This works if PHONE is still a 
-haven::labelled column.
-
-In this case, given the value labels we see here, it makes sense to set values 0
-and 9 to missing.
-
----
-
-# `lbl_na_if()`
-
-```{r}
-data$MIGRATE1a <- lbl_na_if(data$MIGRATE1, ~.val %in% c(0, 9)) %>%
-  as_factor()
-```
-
-...
-
-```{r, echo = FALSE}
-label_before_after(
-  data, 
-  MIGRATE1, 
-  MIGRATE1a,
-  . %>% 
-    lbl_na_if(~.val %in% c(0, 9)) %>%
-    as_factor()
-)
-```
-
-???
-`lbl_na_if()` supports a special syntax used by a few of ipumsr's label
-functions that allows you to use anonymous functions (signaled by the "tilde"
-symbol, which is that little squiggly line) that refer to either the value of a
-variable (using the special dot val variable), the label (using dot lbl), or
-both. Here we use dot val to specify that PHONE2 should be set to missing if the
-original value is zero or eight.
-
-This can be read as, "recode variable PHONE to NA if the value is zero or 
-eight".
-
-Notice in all these examples that we create a new variable for the transformed 
-version, so that we don't overwrite the original. This can be useful so that 
-you can engage in some trial and error until you get the variable transformed as 
-you want it.
-
----
-
-
-# `lbl_na_if()`
-
-- Works with both values (`.val`) and labels (`.lbl`)
-
-```{r}
-drop_labels <- c("N/A", "Unknown")
-
-data$MIGRATE1b <- lbl_na_if(data$MIGRATE1, ~.lbl %in% drop_labels) %>%
-  as_factor()
-```
-
-???
-Because lbl_na_if works with both values and labels, we could accomplish the 
-same thing by referring to the labels. This time, we specify that PHONE3 should 
-be set to missing if the original label was "N/A" or "Suppressed".
+We can take advantage of all of the details given by both the value and label
+when we use a labelled variable.
 
 ---
 
 # `lbl_collapse()`
 - `lbl_collapse()` allows you to take advantage of the hierarchical
   structure of value labels
+  
 ```{r}
 ipums_val_labels(data$EDUCD)
 ```
@@ -1511,15 +1338,51 @@ ipums_val_labels(data$EDUCD)
 ???
 [Read bullet point]
 
-We see here that values less than 10 indicate missing or no schooling values; 
-values between 10 and 19 all capture levels between nursery school and grade 4; 
-and so on.
 
 ---
 
 # `lbl_collapse()`
 
-- Maybe this is too much detail, so we want to collapse the last digit
+- `lbl_collapse()` allows you to take advantage of the hierarchical
+  structure of value labels
+  
+--
+
+```{r}
+data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val %/% 10) %>%
+  as_factor(ordered = TRUE)
+```
+
+
+---
+
+# `lbl_collapse()`
+
+- All `ipumsr` helper functions allow you to use `.val` or `.lbl` to refer to 
+values or value labels
+
+```{r, eval = FALSE}
+data$EDUCD2 <- lbl_collapse(data$EDUCD, `~`.val %/% 10) %>%
+  as_factor(ordered = TRUE)
+
+```
+
+--
+
+---
+
+# `lbl_collapse()`
+
+- In this case, we want to collapse the last digit
+
+```{r, eval = FALSE}
+data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val `%/%` 10) %>%
+  as_factor(ordered = TRUE)
+```
+
+---
+
+# `lbl_collapse()`
 
 ```{r}
 data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val %/% 10) %>%
@@ -1621,6 +1484,7 @@ than 0 and less than 6".
 
 ```{r eval=FALSE}
 college_regex <- "^[123] year(s)? of college$"
+
 data$EDUCD3 <- data$EDUCD %>%
   lbl_collapse(~.val %/% 10) %>% 
   lbl_relabel(
@@ -1646,6 +1510,7 @@ fourth lines...
 
 ```{r eval=FALSE}
 college_regex <- "^[123] year(s)? of college$"
+
 data$EDUCD3 <- data$EDUCD %>%
   lbl_collapse(~.val %/% 10) %>% 
   lbl_relabel(
@@ -1655,6 +1520,7 @@ data$EDUCD3 <- data$EDUCD %>%
     lbl(5, "College or more") ~.val %in% c(10, 11)
   ) %>%
   as_factor()
+
 ```
 
 
@@ -1668,8 +1534,9 @@ regular expression.
 
 # `lbl_relabel()`
 
-```{r}
+```{r, echo = FALSE}
 levels(data$EDUCD3)
+
 ```
 ???
 So, now we have a education variable with fewer categories, which is more
