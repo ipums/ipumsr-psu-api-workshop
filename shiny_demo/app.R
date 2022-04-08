@@ -79,6 +79,7 @@
 library(shiny)
 library(ipumsr)
 library(dplyr)
+library(stringr)
 
 ## Set up wait for extract
 
@@ -105,6 +106,18 @@ data <- read_ipums_micro(ddi)
 
 
 
+#### perform educ recode from pres
+# 
+# college_regex <- "^[123] year(s)? of college$"
+# data$EDUCD3 <- data$EDUCD %>%
+#   lbl_collapse(~.val %/% 10) %>% 
+#   lbl_relabel(
+#     lbl(2, "Less than High School") ~.val > 0 & .val < 6,
+#     lbl(3, "High school") ~.lbl == "Grade 12",
+#     lbl(4, "Some college") ~str_detect(.lbl, college_regex),
+#     lbl(5, "College or more") ~.val %in% c(10, 11)
+#   ) %>%
+#   as_factor()
 
 
 select_choices <- data.frame("Var"= ddi$var_info$var_name)
@@ -126,7 +139,7 @@ vals <- NULL
 # Define UI for application that draws a histogram
 ui <- fluidPage(
     # Application title
-    titlePanel("Exploring Trends Over Time"),
+    h3("Exploring Trends Over Time: Puerto Rico Community Survey"),
 
     # Sidebar with a slider input for number of bins
     sidebarLayout(
@@ -149,20 +162,21 @@ ui <- fluidPage(
         ),
 
         # Show a plot of the generated distribution
-        mainPanel(tabsetPanel(
+        mainPanel(
+          tabsetPanel(
           tabPanel(
-          "Main",
-          h2(textOutput("main_plot_lbl")),
+          "Plot",
+          h3(textOutput("main_plot_lbl")),
           plotOutput("main_plot"),
-          h2(textOutput("main_tab_lbl")),
+          h3(textOutput("main_tab_lbl")),
           tableOutput("main_tab")
         ),
         tabPanel(
           "Metadata",
           
-          h2("Variable Definition"),
+          h3("Variable Definition"),
           textOutput("var_desc"),
-          h2("Value Labels (All Possible)"),
+          h3("Value Labels (All Possible)"),
           tableOutput("vals_lbls")
         )
         
@@ -176,20 +190,47 @@ ui <- fluidPage(
 # Define server logic required to draw a histogram
 server <- function(input, output) {
 
-  # input <- list("Var" = "SEX","drop_na" = TRUE)
+  # input <- list("Var" = "EDUCD3","drop_na" = TRUE)
   
+  
+  #### Render Text Main panel
   output$main_plot_lbl <- renderText({paste("Trends in", input$Var, "over time")})
   
   output$main_tab_lbl <- renderText({paste("Weighted frequencies for", input$Var)})
-
-  output$var_desc <- renderText({ipums_var_desc(ddi, input$Var)})
   
-  output$vals_lbls <- renderTable(ipums_val_labels(ddi, input$Var), digits = 0, align = "c")
+  #### Render Metadata
 
+  output$var_desc <- renderText({
+    
+    if(input$Var == "EDUCD3"){
+      text <- ipums_var_desc(ddi, "EDUCD")
+    } else {
+      text <- ipums_var_desc(ddi, input$Var)
+    }
+    text
+      })
+  
+  output$vals_lbls <- renderTable({
+    if(input$Var == "EDUCD3"){
+      ipums_val_labels(ddi, "EDUCD")
+    }else {
+      ipums_val_labels(ddi, input$Var)
+    }
+      }, digits = 0, align = "c")
+
+  
+  #### capture data
+  
   selectedData <- reactive({
     vars <- c(input$Var, "YEAR", "HHWT", "PERWT", "CPI99", "PERNUM")
     
-    drop_vals <- ipums_val_labels(ddi, input$Var)
+    if(input$Var == "EDUCD3"){
+      drop_vals <- data.frame("val" = 1:length(levels(data$EDUCD3)),
+                              "lbl" = levels(data$EDUCD3))
+    } else {
+      drop_vals <- ipums_val_labels(ddi, input$Var)
+      
+    }
     drop_vals_chk <- stringr::str_detect(drop_vals$lbl, "N/A") |
       stringr::str_detect(drop_vals$lbl, "[Mm]issing")
     drop_vals <- drop_vals[drop_vals_chk,]
@@ -224,6 +265,7 @@ server <- function(input, output) {
       
       
       #### reformat continues variables
+      
       if(input$Var %in% c("COSTELEC", "HHINCOME", "AGE", "INCTOT")){
         
         year_summary <- data.frame("Min." = numeric(),"1st Qu." = numeric(), "Median" = numeric(), "Mean" = numeric(), "3d Qu." = numeric(), "Max." = numeric())
@@ -270,12 +312,14 @@ server <- function(input, output) {
     output$main_plot <- renderPlot({
       
       cols <- rainbow(nrow(to_plot()), .6, .9)
-      
+      par("mar" = c(2,1,0,0))
+     layout(matrix(c(1,1,2), ncol =3))
       
       if(input$Var %in% c("COSTELEC", "HHINCOME", "AGE", "INCTOT")){
         
         ## add a toggle to drop NA
         ## add toggle to drop special values
+       
         
         boxplot(selectedData()[[input$Var]] ~ selectedData()$YEAR, col = rainbow(length(unique(selectedData()$YEAR)), .6,.9), xlab = "", ylab = "", main = "")
         
@@ -290,8 +334,9 @@ server <- function(input, output) {
                 col = cols,
                 xlab = ""
         )
-        
-        # legend("topright", )
+        par("mar" = c(0,0,0,0))
+        plot(1, type = "n", bty = "n", xaxt = "n", yaxt="n", xlab = "", ylab = "")
+        legend("center", legend = rownames(to_plot()), pch = 22, pt.bg = cols, cex = 1.5)
         
         
       }
