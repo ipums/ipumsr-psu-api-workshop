@@ -2214,6 +2214,62 @@ that will work for any researcher with API access. Notice that since we've
 renamed the data file, we need to use the `data_file` argument in 
 `read_ipums_micro()` to specify that file name.
 
+---
+
+# Create a GitHub repository
+
+```{r echo=FALSE, eval=TRUE, fig.alt="Screenshot of RStudio Files pane. The user is in a folder named 'puerto-rico-migration' within the Home directory, and that folder contains two files, named 'migration_example_rmarkdown.Rmd' and 'prcs_migration_extract.json'."}
+knitr::include_graphics("images/project-directory-screenshot.png")
+```
+
+???
+At this point, let's assume you are working in RStudio in a folder containing 
+two files: your R Markdown analysis document and the JSON definition of your 
+extract created by `save_extract_as_json()`.
+
+---
+
+# Create a GitHub repository
+
+```{r}
+usethis::create_project(".")
+usethis::use_git()
+usethis::use_github()
+```
+
+--
+
+For more details, check out the free online book
+[Happy Git and GitHub for the useR](https://happygitwithr.com)
+
+???
+From the starting point on the previous slide, you can get your project on 
+GitHub in three R function calls. The first line turns your current working 
+directory into an RStudio project, if it isn't one already. The second line 
+turns on git version control for your project, again, if you aren't using it 
+already, and it optionally will make an initial commit on your behalf. Finally, 
+the third line creates a repository on github.com with the same name as your 
+project directory, connects that repository to your local project, and pushes 
+your committed files up to that GitHub repository.
+
+This workflow assumes that you already have git installed on your computer, that 
+you have an account on github.com, and that you have created a GitHub personal 
+access token. All these steps are described in the fantastic free online book 
+*Happy Git and GitHub for the useR* by Jenny Bryan.
+
+---
+
+# Create a GitHub repository
+
+```{r echo=FALSE, eval=TRUE, fig.alt="Screenshot of GitHub repository named 'dtburk/puerto-rico-migration' opened in a browser window."}
+knitr::include_graphics("images/puerto-rico-migration-github-repo-screenshot.png")
+```
+
+???
+With those three steps, we now have a GitHub repository that you can point 
+anyone you'd like to share your analysis with to. And as we'll show in a minute, 
+RStudio tries to make it easy to create a new project directly from a GitHub 
+repo, so this a great way to share your work with other R users.
 
 
 ---

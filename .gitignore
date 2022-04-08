@@ -7,3 +7,4 @@ shiny_demo/**.xml
 shiny_demo/**.dat.gz
 presentation_extract
 shiny_demo/lib/
+migration_example_rmarkdown.html
