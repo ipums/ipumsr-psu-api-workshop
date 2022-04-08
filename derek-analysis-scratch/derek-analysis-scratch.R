@@ -7,6 +7,8 @@ dans_initial_extract_def <- define_extract_from_json(
   "usa"
 )
 
+dans_initial_extract_def <- define_extract_from_json("api_ex.json", "usa")
+
 revised_extract <- dans_initial_extract_def %>% 
   revise_extract_micro(
     vars_to_add = c(
@@ -35,7 +37,7 @@ data <- read_ipums_micro("derek-analysis-scratch/usa_00098.xml")
 # Prep outcome vars -------------------------------------------------------
 
 # > COSTELEC ----
-ipums_val_labels(data$COSTELEC)
+ipums_val_labels(ddi, COSTELEC)
 
 data %>% 
   filter(PERNUM == 1) %>% 

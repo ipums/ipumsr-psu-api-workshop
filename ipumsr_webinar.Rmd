@@ -1,7 +1,8 @@
 ---
+
 title: "Enhancing reproducibility with the IPUMS API and the ipumsr package"
 author: "Derek Burk, Dan Ehrlich, & Kara Fisher"
-date: "10/12/2021"
+date: "4/11/2022"
 output:
   xaringan::moon_reader:
     lib_dir: libs
@@ -74,6 +75,35 @@ options(width = 50)
   top: 250px;
 }
 </style>
+
+
+<style>
+.kara-pet1 {
+  background-color: #000000;
+  background-image: url(images/Ru.jpg);
+  background-size: cover;
+  width: 120px;
+  height: 160px;
+  position: absolute;
+  left: 600px;
+  bottom: 200px;
+}
+</style>
+
+<style>
+.kara-pet2 {
+  background-color: #000000;
+  background-image: url(images/harvey.jpg);
+  background-size: cover;
+  width: 120px;
+  height: 160px;
+  position: absolute;
+  left: 730px;
+  bottom: 200px;
+}
+</style>
+
+
 
 
 <style>
@@ -276,7 +306,6 @@ You can always reach out to through our **github**, or via **user support**.
 ---
 
 
-
 class: center
 
 # What is IPUMS?
@@ -285,21 +314,18 @@ class: center
 
 ## IPUMS is **data**
 
---
 
 ## from censuses and surveys around the world,
 
---
 
-## integrated across space and time,
+## **harmonized** across space and time,
 
---
 
 ## thoroughly documented,
 
---
 
 ## and available for free at ipums.org
+
 
 ???
 
@@ -309,20 +335,23 @@ ipums has grown substantially since its first beta release in 1993,
 
 started with **US census data** has grown to include 9 collections
 
-*mostly just segueing to projects*
 
 ---
 
-class: center, middle
+# Harmonization
 
-# Poll: Which IPUMS data collections have you used already?
+
+
+```{r echo=FALSE, fig.alt="Table illustrating IPUMS harmonization process.", fig.height=3, fig.width=5}
+knitr::include_graphics("images/harmonization_4.png")
+```
 
 
 ---
 # 
 ![IPUMS US Project logo](images/usa.jpg)
 
---
+
 
 - U.S. Census and American Community Survey **microdata** from 1850 to the present.
 
@@ -334,6 +363,27 @@ class: center, middle
 
 ???
 
+---
+
+# 
+![IPUMS US Project logo](images/usa.jpg)
+
+
+
+- “Historical Trends in Children Living in Multigenerational Households in the United States: 1870–2018” 
+- Natasha V. Pilkauskas, Mariana Amorim, and Rachel E. Dunifon
+
+
+
+
+
+```{r echo=FALSE, fig.alt="Trends in multigenerational households by income level and race/ethnicity.", fig.height=3, fig.width=5}
+knitr::include_graphics("images/example_usa1.png")
+```
+
+
+
+???
 
 
 
@@ -341,7 +391,7 @@ class: center, middle
 # 
 ![IPUMS CPS project logo](images/cps.jpg)
 
---
+
 
 - Current Population Survey **microdata** from 1962 to the present.
 
@@ -349,58 +399,13 @@ class: center, middle
 
 - https://cps.ipums.org/cps/
 
----
-# 
-![IPUMS international project logo](images/int.jpg)
-
---
-
-
-- Census **microdata** covering 102 countries from 1960 to the present 
-
-
-- International historic **microdata** from the 19th and early 20th centuries for *9* countries.
-
---
-
-- Labor Force surveys provide high resolution **microdata** about work conditions
-
-  - Administered quarterly (usually) with records going back at least 10 years (usually)
-  - Currently available for Italy (2011-2020) & Spain (2005-2020)
-  - Mexico (2005-2020) coming soon!
-
-- https://international.ipums.org/international/
-
-
----
-# 
-![IPUMS Global Health project logo](images/dhs.jpg)
-
-
---
-
-
-- Demographic and Health Surveys (DHS) provide integrated **microdata** for analysis across time and space.
-  - From the 1980s to the present.
-  - Covering Africa and South Asia
-  
-- Performance Monitoring for Action (PMA) surveys
-  - Focus on fertility, contraception, hygiene, and health
-  - Administered frequently to monitor trends in select high-fertility countries.
-  - https://ipums.github.io/pma-data-hub/index.html#category:PMA_Publications
-
-- https://globalhealth.ipums.org/
-
-???
-
-Check out Matt Gunther's blog using IPUMS Global Health Data
 
 ---
 # 
 ![IPUMS Health Surveys project logo](images/health.jpg)
 
 
---
+
 
 
 - Health **survey** data from the National Health Interview Survey (NHIS) from the 1960s to the present and the Medical Expenditure Panel Survey (MEPS) from 1996.
@@ -411,11 +416,31 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 ???
 
 
+
+
+---
+# 
+![IPUMS Health Surveys project logo](images/health.jpg)
+
+
+
+- “Hearing Impairment, Household Composition, Marital Status, and Mortality Among U.S. Adults” 
+
+- Justin T. Denney and Jason D. Boardman
+
+
+![Table showing correlation between hearing impairment and mortality](images/example_health1.png)
+
+
+???
+
+Looked at relationship between degrees of hearing impairment and mortality rates.
+
 ---
 # 
 ![IPUMS Higher Ed project logo](images/highered.jpg)
 
---
+
 
 
 - Scientists and Engineers Statistical Data System (SESTAT), the leading surveys for studying the science and engineering (STEM) workforce in the United States
@@ -426,10 +451,11 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 
 ---
+
 # 
 ![IPUMS Time Use project logo](images/time_use.jpg)
 
---
+
 
 - Historical and contemporary time use data from 1965 to the present.
 
@@ -437,38 +463,176 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 - https://timeuse.ipums.org/
 
+
 ---
+
 # 
+![IPUMS Time Use project logo](images/time_use.jpg)
+.pull-left[
+- Nathan Yau of Flowing Data
+
+- http://flowingdata.com/projects/2015/timeuse-simulation/
+]
+
+.pull-right[
+!["Visualization of individuals (dots) moving between activity categories."](images/example_time_use.png)
+
+]
+
+
+
+---
+
+.pull-left[ 
 ![IPUMS NHGIS project logo](images/nhgis.jpg)
 
+]
 
---
 
-- Summary tables and time series of population, housing, agriculture, and economic data 
+.pull-right[
 
-- GIS Shapefiles for all levels of US geography, including tracts, from 1790 to the present
+
+![IPUMS IHGIS project logo](images/ihgis.jpg)
+]
+
+
+.pull-left[ 
+
+- **NHGIS** Shapefiles for all levels of US geography including tracts, from 1790 to the present
+
 
 - https://www.nhgis.org/
+]
 
 
----
-# 
-![IPUMS IHGIS project logo](images/ihgis.jpg)
+.pull-right[
 
---
 
-- **Summary** data tables from population and housing censuses as well as agricultural censuses from around the world
-
-- Integrated GIS **shapefiles.**
+- **IGIS** Shapefiles for admin level 2
 
 - https://ihgis.ipums.org/
 
 
+]
+
+- Summary tables and time series of population, housing, agriculture, and economic data 
+
+
+
+
+---
+# ![IPUMS NHGIS project logo](images/nhgis.jpg)
+
+
+- “Migrant Selection and Sorting during the Great American Drought.” 
+- Christopher Sichko
+
+
+
+
+.pull-left[
+![map showing extent of drought](images/example_nhgis1.png)
+
+
+
+]
+
+.pull-right[
+
+
+
+![map showing educational achievement by region](images/example_nhgis2b.png)
+
+
+]
+
+
+
+---
+# 
+![IPUMS international project logo](images/int.jpg)
+
+
+
+
+- Census **microdata** covering 103 countries from 1960 to the present 
+
+
+- International historic **microdata** from the 19th and early 20th centuries available for some samples.
+
+
+
+- Labor Force surveys provide high resolution **microdata** about work conditions
+
+  - Administered quarterly (usually) with records going back at least 10 years (usually)
+  - Currently available for Italy (2011-2020), Spain (2005-2020), and Mexico (2005-2020)
+
+- https://international.ipums.org/international/
+
+
+
+---
+# 
+![IPUMS international project logo](images/int.jpg)
+
+
+
+.pull-left[
+
+- “Climate-Induced migration and unemployment in middle-income Africa”
+
+- Valerie Mueller, Clark Gray, and Douglas Hopping
+]
+
+.pull-right[
+![Maps of migration, education, temperature, and precipitation for 3 counties.](images/example_international.png)
+]
+
+
+
+
+
+---
+# 
+![IPUMS Global Health project logo](images/dhs.jpg)
+
+
+
+
+
+- Demographic and Health Surveys (DHS) provide integrated **microdata** for analysis across time and space.
+  - From the 1980s to the present.
+  - Covering Africa and South Asia
+  
+- Performance Monitoring for Action (PMA) surveys
+  - Focus on fertility, contraception, hygiene, and health
+  - Administered frequently to monitor trends in select high-fertility countries.
+  
+  - https://globalhealth.ipums.org/
+
 ---
 
-class: center, middle
 
-# Poll: Which IPUMS data collections are you most excited to use in the future ?
+
+# 
+![IPUMS Global Health project logo](images/dhs.jpg)
+
+
+
+
+.pull-left[
+![alluvial plot showing which individuals were using family planning at two points in time](images/example_global_health.png)
+]
+
+.pull-right[
+  - https://tech.popdata.org/pma-data-hub/
+]
+
+???
+
+Check out blog using IPUMS Global Health Data
+
+
 
 ---
 
@@ -480,9 +644,18 @@ class: center, middle
 ]
 
 .pull-left[
+
 - IPUMS is **a lot** of data
 
-- United in consistently documented metadata
+- Individual-level microdata
+
+- Summarized tabular data
+
+- GIS shapefiles
+
+- Consistent and extensively documented **metadata**
+
+
 ]
 
 
@@ -504,15 +677,22 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 .pull-left[
 - IPUMS is **a lot** of data
 
-- United in consistently documented metadata
+- Individual-level microdata
 
-- *What's the best way to interact with IPUMS data?*
+- Summarized tabular data
+
+- GIS shapefiles
+
+- Consistent and extensively documented **metadata**
+
+- *How can I work with all this IPUMS data?*
 ]
 
 
 
 
 ???
+
 
 
 ---
@@ -525,7 +705,7 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 `1.` What is IPUMS?
 
-.strong[`2.` What is ipumsr, and why use it?]
+.strong[`2.` What is ipumsr?]
 
 `3.` Reading data into R
 
@@ -543,7 +723,6 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 
 ---
-
 
 
 # What is ipumsr?
@@ -567,16 +746,12 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 - R package developed by Greg Freedman Ellis
 
---
 
 - Released in 2017
 
 
---
+- Over 100,000 CRAN downloads
 
-- Over 90,000 CRAN downloads
-
---
 
 - Includes functions for
   - Reading IPUMS data
@@ -598,6 +773,20 @@ Initial API support will be for IPUMS USA, with more projects to follow soon.
 
 - One package for IPUMS microdata, aggregate data, and geography
 
+
+
+- Specialized functions for viewing and manipulating IPUMS metadata
+
+
+
+- Bundled how-to guides (vignettes)
+
+
+
+- Potential to add more features (e.g. API support); let us know what you want!
+  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
+  - Email ipums+cran@umn.edu
+
 ???
 
 Regarding "One package": Without ipumsr, you'd need to use a variety of
@@ -612,116 +801,17 @@ package with a consistent interface for working with all these different types
 of IPUMS data.
 
 *a one stop shop that makes it easy to work with ipums data*
----
 
-class: center middle inverse
-background-image: url(https://comicvine.gamespot.com/a/uploads/original/5/52246/1963701-the_one_ring_02.jpg)
-background-size: cover
-
-<span role="img" aria-label="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."></span>
-
-# One package to rule them all
-
-
-
-```{r echo=FALSE, fig.alt="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."}
-knitr::include_graphics("images/transparent_blank.png")
-```
-
----
-
-# Why use ipumsr?
-
-- One package for IPUMS microdata, aggregate data, and geography
-
-- Specialized functions for viewing and manipulating IPUMS metadata
-
---
-
-- Bundled how-to guides (vignettes)
-
---
-
-- Potential to add more features (e.g. API support); let us know what you want!
-  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
-  - Email ipums+cran@umn.edu
-
-???
 Regarding "More features": The aforementioned IPUMS API support will be the next
 big feature. Another potential new feature is adding tools for properly handling
 survey weights. Let us know what would be helpful to you via GitHub or email.
 
 ---
 
-# Why use ipumsr?
-
-And finally... 
-
---
-
-- It's fast!
-  - Time to read 3 million rows with 13 variables:
-
-```{r, echo=FALSE}
-results <- readRDS("ipumsr_speed_test.rds")
-suppressPackageStartupMessages({
-  library(dplyr)
-  suppressWarnings(library(gt))
-})
-results %>% 
-  arrange(time) %>% 
-  mutate(time = round(time, 1)) %>% 
-  rename(`Function` = function_name, `Time (seconds)` = time, 
-         `With metadata?` = value_labels) %>% 
-  gt() %>% 
-  # tab_header("How long to read 3 million rows with 13 variables?") %>% 
-  cols_align("center", c(`Time (seconds)`, `With metadata?`))
-```
-
-???
-There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
-to read the data in with attached metadata, such as variable and value labels.
-
-Relatively small example, so the time costs can grow with larger datasets.
----
-
-class: center, middle
-
-# Poll: Have you ever used ipumsr before?
-
-???
-If you've never used ipumsr before you may be asking *where can i download it*
-
-
----
-
-# Installing ipumsr
-```{r, eval = FALSE}
-install.packages("ipumsr")
-```
-
---
-
-### Or if you want the development version
-
-- www.github.com/mnpopcenter/ipumsr
-
-```{r, eval = FALSE}
-if (!require(remotes)) install.packages("remotes")
-remotes::install_github("mnpopcenter/ipumsr", ref = "api-alpha-dev")
-```
-
-???
-
-More advanced users might be thinking, *"this stable release is boring"* in which case you can download the development version to test out the latest features. 
-
-The API functions are in the development version, but the API itself is not yet 
-publicly available.
-
 ---
 class: center, middle
 
-# To run the code in this webinar
+# To run the code in this presentation
 
 ???
 
@@ -731,13 +821,11 @@ However, you may need to install some additional packages used in the example co
 
 ---
 
-
+.pull-left[
 # Install R packages (as needed)
 
 ```{r, eval = FALSE}
-
-
-# install.packages(ipumsr)
+install.packages("ipumsr")
 
 ## Tidyverse
 install.packages("dplyr")
@@ -752,35 +840,50 @@ install.packages("DT")
 install.packages("sf")
 ```
 
+]
+
+
+.pull-right[
+# Load R packages (each time)
+```{r, eval = FALSE}
+library(ipumsr)
+
+## Tidyverse
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(purrr)
+
+## HTML tables
+library(DT)
+
+## gis
+library(sf)
+```
+
+]
+
+```{r, echo = FALSE, include=FALSE}
+library(ipumsr)
+
+## Tidyverse
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(purrr)
+
+## HTML tables
+library(DT)
+
+## gis
+library(sf)
+```
+
+
 ???
 
 reminder, installing packages only needs to happen once, but some packages do update frequently so it can be a good idea to re-install once in a while
 
----
-
-
-
-# Loading packages
-```{r eval=FALSE}
-library(ipumsr)
-library(dplyr)
-library(ggplot2)
-library(stringr)
-library(sf)
-library(purrr)
-```
-
-```{r include=FALSE}
-library(ipumsr)
-library(dplyr)
-library(ggplot2)
-library(stringr)
-library(sf)
-library(purrr)
-```
-
-???
-These packages are used in some of the examples we will walk through.
 
 ---
 
@@ -794,24 +897,58 @@ These packages are used in some of the examples we will walk through.
 
 `2.` What is ipumsr, and why use it?
 
-.strong[`3.` Reading data into R]
+.strong[`3.` How to create a data extract]
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Working with IPUMS geographic data
 
-`8.` Q & A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q & A
+
+]
+
+???
+
+Dan passes to Derek. Derek switches to a web demo of extract system.
+
+---
+
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` How to create a data extract
+
+.strong[`4.` Reading data into R]
+
+`5.` Exploring and manipulating metadata
+
+`6.` Brief analysis example
+
+`7.` Working with IPUMS geographic data
+
+`8.` Preview of IPUMS API functionality
+
+`9.` Q & A
 
 ]
 
 
 ???
 
-Dan passes to Kara/Derek
+Website demo ends, back to slides. Derek passes to Kara.
 
 ---
 
