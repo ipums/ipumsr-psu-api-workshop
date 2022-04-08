@@ -1,9 +1,6 @@
 ---
-<<<<<<< HEAD
-title: "Working with IPUMS data using API and ipumsr"
-=======
+
 title: "Enhancing reproducibility with the IPUMS API and the ipumsr package"
->>>>>>> ace8a324c55f76b119e27ec16cc8de9ec4b99685
 author: "Derek Burk, Dan Ehrlich, & Kara Fisher"
 date: "4/11/2022"
 output:
