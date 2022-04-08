@@ -1722,22 +1722,42 @@ will link to below.
 
 # Migration in Puerto Rico, 2015-2019
 
-```{r include=FALSE}
+```{r}
+ipums_val_labels(data$MIGRATE1)
+```
+
+--
+
+```{r}
 data <- data %>% 
   mutate(
-    # MIGRATE1 = lbl_na_if(MIGRATE1, ~.val %in% c(0, 9)),
-    # moved_in_last_year = lbl_relabel(
-    #   MIGRATE1,
-    #   lbl(1, "No, didn't move") ~.val == 1,
-    #   lbl(2, "Yes, moved") ~.val %in% 2:4
-    # ) %>% as_factor(),
-    moved_in_last_year = MIGRATE1 %in% 2:4
+    moved_in_last_year = case_when(
+      MIGRATE1 %in% c(0, 9) ~ NA, 
+      MIGRATE1 == 1 ~ FALSE, 
+      MIGRATE1 %in% 2:4 ~ TRUE
+    )
   )
 ```
 
+???
+Let's say we want to visualize the trend in migration in Puerto Rico between 
+2015 and 2019. Looking at the value labels for the variable MIGRATE1, it looks 
+like values 0 and 9 are effectively missing, a value of 1 indicates that the 
+person lives in the same house as a year ago, and values 2 through 4 indicate 
+that they lived somewhere else a year ago.
+
+If we just want to create a simple TRUE-FALSE flag for whether a person moved 
+in the past year, we can use an approach like this the `case_when()` function 
+from the dplyr package, setting values of 0 and 9 to missing, a value of 1 to 
+FALSE, and values 2 through 4 to TRUE.
+
+---
+
+# Migration in Puerto Rico, 2015-2019
 
 ```{r migration-graph-1, eval=FALSE}
 data %>% 
+  filter(!is.na(moved_in_last_year)) %>% 
   group_by(YEAR) %>% 
   summarize(
     pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT)
@@ -1752,32 +1772,38 @@ data %>%
 ```
 
 
-
-
 ???
-Assuming we've already loaded the data at this point, I can just run the code to 
-create a graph of migration (any migration) by year, then on a subsequent slide, 
-the code to graph migration by year, faceted by education.
+Now we're ready to create a line graph of the percentage of people who moved in 
+the past year. Notice that we are excluding people with missing values on the 
+migration variable from our calculations.
 
 ---
 
+class: center
 
 ```{r migration-graph-1, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 ```
 
+Note: To estimate confidence intervals, use variables REPWT or REPTWP
 
 ???
-Disclaimer: All of the analyses presented here include only point estimates 
-without any estimation of sampling error. Thus, we cannot assess the statistical
-significance of any differences over time or between groups. To estimate 
-confidence intervals for point estimates from the ACS or PRCS, use the replicate 
-weight variables REPWT and REPWTP and follow the instructions from the IPUMS USA 
-replicate weight FAQ page [here](https://usa.ipums.org/usa/repwt.shtml#q40).
+It looks like the percentage of people who had moved in the past year increased 
+from about 6% to 8% between 2017 and 2018, possibly as a result of Hurricane 
+Maria, which made landfall in September of 2017.
+
+However, it is important to keep in mind that all of the analyses presented here
+include only point estimates without any estimation of sampling error. Thus, we
+cannot assess the statistical significance of any differences over time or
+between groups. To estimate confidence intervals for point estimates from the
+ACS or PRCS, use the replicate weight variables REPWT and REPWTP and follow the
+instructions from the IPUMS USA replicate weight FAQ page
+[here](https://usa.ipums.org/usa/repwt.shtml#q40).
 
 ---
 
 ```{r migration-graph-2, dpi=300, fig.height=5, fig.width=8, echo = FALSE}
 data %>% 
+  filter(!is.na(moved_in_last_year)) %>% 
   group_by(YEAR, EDUCD3) %>% 
   summarize(
     pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT),
@@ -2039,6 +2065,7 @@ data <- data %>%
   left_join(hhincome_quintiles, by = c("YEAR", "SERIAL"))
 
 data %>% 
+  filter(!is.na(moved_in_last_year)) %>% 
   filter(!is.na(hhincome_quintile)) %>% 
   group_by(YEAR, hhincome_quintile) %>% 
   summarize(

@@ -17,8 +17,23 @@ suppressPackageStartupMessages({
 ```
 
 ```{r load-data, eval=FALSE}
-ddi <- read_ipums_ddi("usa_00014.xml")
-data <- read_ipums_micro(ddi, verbose = FALSE)
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract <- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+  # Submit, wait for, and download extract
+  ddi_filename <- submit_extract(prcs_migration_extract) %>% 
+    wait_for_extract() %>% 
+    download_extract() %>% 
+    basename()
+  # Infer data file name from DDI file name
+  data_filename <- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
+  # Standardize DDI and data file names #<<
+  file.rename(ddi_filename, "prcs_migration_extract.xml") #<<
+  file.rename(data_filename, "prcs_migration_extract.dat.gz") #<<
+}
 ```
 
 ```{r prep-data}
@@ -60,7 +75,13 @@ data <- data %>%
 
 # Prep migration variable
 data <- data %>% 
-  mutate(moved_in_last_year = MIGRATE1 %in% 2:4)
+  mutate(
+    moved_in_last_year = case_when(
+      MIGRATE1 %in% c(0, 9) ~ NA, 
+      MIGRATE1 == 1 ~ FALSE, 
+      MIGRATE1 %in% 2:4 ~ TRUE
+    )
+  )
 
 
 # Prep age variable
