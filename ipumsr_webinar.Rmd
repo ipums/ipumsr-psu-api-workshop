@@ -1547,46 +1547,9 @@ will link to below.
 
 ---
 
+class: center
 
-# Overview
-
-.greyed-out[
-
-
-`1.` What is IPUMS?
-
-`2.` What is ipumsr, and why use it?
-
-`3.` How to create a data extract
-
-`4.` Reading data into R
-
-`5.` Exploring and manipulating metadata
-
-.strong[`6.` Brief analysis example]
-
-`7.` Intro to the IPUMS USA API
-
-`8.` IPUMS API use cases
-
-`9.` Q & A
-
-
-
-]
-
-
----
-
-# Migration in Puerto Rico, 2015-2019
-
-```{r}
-ipums_val_labels(data$MIGRATE1)
-```
-
---
-
-```{r}
+```{r include=FALSE}
 data <- data %>% 
   mutate(
     moved_in_last_year = case_when(
@@ -1596,22 +1559,6 @@ data <- data %>%
     )
   )
 ```
-
-???
-Let's say we want to visualize the trend in migration in Puerto Rico between 
-2015 and 2019. Looking at the value labels for the variable MIGRATE1, it looks 
-like values 0 and 9 are effectively missing, a value of 1 indicates that the 
-person lives in the same house as a year ago, and values 2 through 4 indicate 
-that they lived somewhere else a year ago.
-
-If we just want to create a simple TRUE-FALSE flag for whether a person moved 
-in the past year, we can use an approach like this the `case_when()` function 
-from the dplyr package, setting values of 0 and 9 to missing, a value of 1 to 
-FALSE, and values 2 through 4 to TRUE.
-
----
-
-# Migration in Puerto Rico, 2015-2019
 
 ```{r migration-graph-1, eval=FALSE}
 data %>% 
@@ -1630,22 +1577,16 @@ data %>%
     )
 ```
 
-
-???
-Now we're ready to create a line graph of the percentage of people who moved in 
-the past year. Notice that we are excluding people with missing values on the 
-migration variable from our calculations.
-
----
-
-class: center
-
 ```{r migration-graph-1, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 ```
 
 Note: To estimate confidence intervals, use variables REPWT or REPTWP
 
 ???
+Now we're ready to create a line graph of the percentage of people who moved in 
+the past year. Notice that we are excluding people with missing values on the 
+migration variable from our calculations.
+
 It looks like the percentage of people who had moved in the past year increased 
 from about 6% to 8% between 2017 and 2018, possibly as a result of Hurricane 
 Maria, which made landfall in September of 2017.
@@ -1682,13 +1623,14 @@ data %>%
 ```
 
 ???
-Now, we can use that nice, collapsed education variable that Kara created to 
+Now, we can use that nice, collapsed education variable that we just created to 
 visualize these trends by level of education. Here we see a more complex picture 
 of who was moving during this time period, though again, we would need to 
 calculate confidence intervals to know whether these differences over time or by 
 education are statistically significant.
 
 ---
+
 # Overview
 
 .greyed-out[
