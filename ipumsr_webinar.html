@@ -4,7 +4,6 @@
     <title>Enhancing reproducibility with the IPUMS API and the ipumsr package</title>
     <meta charset="utf-8" />
     <meta name="author" content="Derek Burk, Dan Ehrlich, &amp; Kara Fisher" />
-    <meta name="date" content="2021-10-12" />
     <script src="libs/header-attrs-2.13/header-attrs.js"></script>
     <link href="libs/remark-css-0.0.1/default.css" rel="stylesheet" />
     <link href="libs/remark-css-0.0.1/default-fonts.css" rel="stylesheet" />
@@ -24,7 +23,7 @@ class: center, middle, inverse, title-slide
 
 # Enhancing reproducibility with the IPUMS API and the ipumsr package
 ### Derek Burk, Dan Ehrlich, &amp; Kara Fisher
-### 10/12/2021
+### 4/11/2022
 
 ---
 
@@ -73,6 +72,35 @@ class: center, middle, inverse, title-slide
   top: 250px;
 }
 &lt;/style&gt;
+
+
+&lt;style&gt;
+.kara-pet1 {
+  background-color: #000000;
+  background-image: url(images/Ru.jpg);
+  background-size: cover;
+  width: 120px;
+  height: 160px;
+  position: absolute;
+  left: 600px;
+  bottom: 200px;
+}
+&lt;/style&gt;
+
+&lt;style&gt;
+.kara-pet2 {
+  background-color: #000000;
+  background-image: url(images/harvey.jpg);
+  background-size: cover;
+  width: 120px;
+  height: 160px;
+  position: absolute;
+  left: 730px;
+  bottom: 200px;
+}
+&lt;/style&gt;
+
+
 
 
 &lt;style&gt;
@@ -183,21 +211,8 @@ sociology.
 
 .dan-pet2[]
 
-.kara-pet[]
-
-
-&lt;style&gt;
-.kara-pet {
-  background-color: #000000;
-  background-image: url(images/Ru.jpg);
-  background-size: cover;
-  width: 140px;
-  height: 160px;
-  position: absolute;
-  left: 650px;
-  bottom: 200px;
-}
-&lt;/style&gt;
+.kara-pet1[]
+.kara-pet2[]
 
 
 ???
@@ -275,7 +290,6 @@ You can always reach out to through our **github**, or via **user support**.
 ---
 
 
-
 class: center
 
 # What is IPUMS?
@@ -284,21 +298,18 @@ class: center
 
 ## IPUMS is **data**
 
---
 
 ## from censuses and surveys around the world,
 
---
 
-## integrated across space and time,
+## **harmonized** across space and time,
 
---
 
 ## thoroughly documented,
 
---
 
 ## and available for free at ipums.org
+
 
 ???
 
@@ -308,20 +319,21 @@ ipums has grown substantially since its first beta release in 1993,
 
 started with **US census data** has grown to include 9 collections
 
-*mostly just segueing to projects*
 
 ---
 
-class: center, middle
+# Harmonization
 
-# Poll: Which IPUMS data collections have you used already?
+
+
+&lt;img src="images/harmonization_4.png" title="Table illustrating IPUMS harmonization process." alt="Table illustrating IPUMS harmonization process." width="3301" /&gt;
 
 
 ---
 # 
 ![IPUMS US Project logo](images/usa.jpg)
 
---
+
 
 - U.S. Census and American Community Survey **microdata** from 1850 to the present.
 
@@ -333,6 +345,25 @@ class: center, middle
 
 ???
 
+---
+
+# 
+![IPUMS US Project logo](images/usa.jpg)
+
+
+
+- “Historical Trends in Children Living in Multigenerational Households in the United States: 1870–2018” 
+- Natasha V. Pilkauskas, Mariana Amorim, and Rachel E. Dunifon
+
+
+
+
+
+&lt;img src="images/example_usa1.png" title="Trends in multigenerational households by income level and race/ethnicity." alt="Trends in multigenerational households by income level and race/ethnicity." width="5765" /&gt;
+
+
+
+???
 
 
 
@@ -340,7 +371,7 @@ class: center, middle
 # 
 ![IPUMS CPS project logo](images/cps.jpg)
 
---
+
 
 - Current Population Survey **microdata** from 1962 to the present.
 
@@ -348,58 +379,13 @@ class: center, middle
 
 - https://cps.ipums.org/cps/
 
----
-# 
-![IPUMS international project logo](images/int.jpg)
-
---
-
-
-- Census **microdata** covering 102 countries from 1960 to the present 
-
-
-- International historic **microdata** from the 19th and early 20th centuries for *9* countries.
-
---
-
-- Labor Force surveys provide high resolution **microdata** about work conditions
-
-  - Administered quarterly (usually) with records going back at least 10 years (usually)
-  - Currently available for Italy (2011-2020) &amp; Spain (2005-2020)
-  - Mexico (2005-2020) coming soon!
-
-- https://international.ipums.org/international/
-
-
----
-# 
-![IPUMS Global Health project logo](images/dhs.jpg)
-
-
---
-
-
-- Demographic and Health Surveys (DHS) provide integrated **microdata** for analysis across time and space.
-  - From the 1980s to the present.
-  - Covering Africa and South Asia
-  
-- Performance Monitoring for Action (PMA) surveys
-  - Focus on fertility, contraception, hygiene, and health
-  - Administered frequently to monitor trends in select high-fertility countries.
-  - https://ipums.github.io/pma-data-hub/index.html#category:PMA_Publications
-
-- https://globalhealth.ipums.org/
-
-???
-
-Check out Matt Gunther's blog using IPUMS Global Health Data
 
 ---
 # 
 ![IPUMS Health Surveys project logo](images/health.jpg)
 
 
---
+
 
 
 - Health **survey** data from the National Health Interview Survey (NHIS) from the 1960s to the present and the Medical Expenditure Panel Survey (MEPS) from 1996.
@@ -410,11 +396,31 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 ???
 
 
+
+
+---
+# 
+![IPUMS Health Surveys project logo](images/health.jpg)
+
+
+
+- “Hearing Impairment, Household Composition, Marital Status, and Mortality Among U.S. Adults” 
+
+- Justin T. Denney and Jason D. Boardman
+
+
+![Table showing correlation between hearing impairment and mortality](images/example_health1.png)
+
+
+???
+
+Looked at relationship between degrees of hearing impairment and mortality rates.
+
 ---
 # 
 ![IPUMS Higher Ed project logo](images/highered.jpg)
 
---
+
 
 
 - Scientists and Engineers Statistical Data System (SESTAT), the leading surveys for studying the science and engineering (STEM) workforce in the United States
@@ -425,10 +431,11 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 
 ---
+
 # 
 ![IPUMS Time Use project logo](images/time_use.jpg)
 
---
+
 
 - Historical and contemporary time use data from 1965 to the present.
 
@@ -436,38 +443,176 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 - https://timeuse.ipums.org/
 
+
 ---
+
 # 
+![IPUMS Time Use project logo](images/time_use.jpg)
+.pull-left[
+- Nathan Yau of Flowing Data
+
+- http://flowingdata.com/projects/2015/timeuse-simulation/
+]
+
+.pull-right[
+!["Visualization of individuals (dots) moving between activity categories."](images/example_time_use.png)
+
+]
+
+
+
+---
+
+.pull-left[ 
 ![IPUMS NHGIS project logo](images/nhgis.jpg)
 
+]
 
---
 
-- Summary tables and time series of population, housing, agriculture, and economic data 
+.pull-right[
 
-- GIS Shapefiles for all levels of US geography, including tracts, from 1790 to the present
+
+![IPUMS IHGIS project logo](images/ihgis.jpg)
+]
+
+
+.pull-left[ 
+
+- **NHGIS** Shapefiles for all levels of US geography including tracts, from 1790 to the present
+
 
 - https://www.nhgis.org/
+]
 
 
----
-# 
-![IPUMS IHGIS project logo](images/ihgis.jpg)
+.pull-right[
 
---
 
-- **Summary** data tables from population and housing censuses as well as agricultural censuses from around the world
-
-- Integrated GIS **shapefiles.**
+- **IGIS** Shapefiles for admin level 2
 
 - https://ihgis.ipums.org/
 
 
+]
+
+- Summary tables and time series of population, housing, agriculture, and economic data 
+
+
+
+
+---
+# ![IPUMS NHGIS project logo](images/nhgis.jpg)
+
+
+- “Migrant Selection and Sorting during the Great American Drought.” 
+- Christopher Sichko
+
+
+
+
+.pull-left[
+![map showing extent of drought](images/example_nhgis1.png)
+
+
+
+]
+
+.pull-right[
+
+
+
+![map showing educational achievement by region](images/example_nhgis2b.png)
+
+
+]
+
+
+
+---
+# 
+![IPUMS international project logo](images/int.jpg)
+
+
+
+
+- Census **microdata** covering 103 countries from 1960 to the present 
+
+
+- International historic **microdata** from the 19th and early 20th centuries available for some samples.
+
+
+
+- Labor Force surveys provide high resolution **microdata** about work conditions
+
+  - Administered quarterly (usually) with records going back at least 10 years (usually)
+  - Currently available for Italy (2011-2020), Spain (2005-2020), and Mexico (2005-2020)
+
+- https://international.ipums.org/international/
+
+
+
+---
+# 
+![IPUMS international project logo](images/int.jpg)
+
+
+
+.pull-left[
+
+- “Climate-Induced migration and unemployment in middle-income Africa”
+
+- Valerie Mueller, Clark Gray, and Douglas Hopping
+]
+
+.pull-right[
+![Maps of migration, education, temperature, and precipitation for 3 counties.](images/example_international.png)
+]
+
+
+
+
+
+---
+# 
+![IPUMS Global Health project logo](images/dhs.jpg)
+
+
+
+
+
+- Demographic and Health Surveys (DHS) provide integrated **microdata** for analysis across time and space.
+  - From the 1980s to the present.
+  - Covering Africa and South Asia
+  
+- Performance Monitoring for Action (PMA) surveys
+  - Focus on fertility, contraception, hygiene, and health
+  - Administered frequently to monitor trends in select high-fertility countries.
+  
+  - https://globalhealth.ipums.org/
+
 ---
 
-class: center, middle
 
-# Poll: Which IPUMS data collections are you most excited to use in the future ?
+
+# 
+![IPUMS Global Health project logo](images/dhs.jpg)
+
+
+
+
+.pull-left[
+![alluvial plot showing which individuals were using family planning at two points in time](images/example_global_health.png)
+]
+
+.pull-right[
+  - https://tech.popdata.org/pma-data-hub/
+]
+
+???
+
+Check out blog using IPUMS Global Health Data
+
+
 
 ---
 
@@ -479,9 +624,18 @@ class: center, middle
 ]
 
 .pull-left[
+
 - IPUMS is **a lot** of data
 
-- United in consistently documented metadata
+- Individual-level microdata
+
+- Summarized tabular data
+
+- GIS shapefiles
+
+- Consistent and extensively documented **metadata**
+
+
 ]
 
 
@@ -503,15 +657,22 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 .pull-left[
 - IPUMS is **a lot** of data
 
-- United in consistently documented metadata
+- Individual-level microdata
 
-- *What's the best way to interact with IPUMS data?*
+- Summarized tabular data
+
+- GIS shapefiles
+
+- Consistent and extensively documented **metadata**
+
+- *How can I work with all this IPUMS data?*
 ]
 
 
 
 
 ???
+
 
 
 ---
@@ -524,7 +685,7 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 `1.` What is IPUMS?
 
-.strong[`2.` What is ipumsr, and why use it?]
+.strong[`2.` What is ipumsr?]
 
 `3.` Reading data into R
 
@@ -542,7 +703,6 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 
 ---
-
 
 
 # What is ipumsr?
@@ -566,16 +726,12 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 - R package developed by Greg Freedman Ellis
 
---
 
 - Released in 2017
 
 
---
+- Over 100,000 CRAN downloads
 
-- Over 90,000 CRAN downloads
-
---
 
 - Includes functions for
   - Reading IPUMS data
@@ -597,6 +753,20 @@ Initial API support will be for IPUMS USA, with more projects to follow soon.
 
 - One package for IPUMS microdata, aggregate data, and geography
 
+
+
+- Specialized functions for viewing and manipulating IPUMS metadata
+
+
+
+- Bundled how-to guides (vignettes)
+
+
+
+- Potential to add more features (e.g. API support); let us know what you want!
+  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
+  - Email ipums+cran@umn.edu
+
 ???
 
 Regarding "One package": Without ipumsr, you'd need to use a variety of
@@ -611,472 +781,17 @@ package with a consistent interface for working with all these different types
 of IPUMS data.
 
 *a one stop shop that makes it easy to work with ipums data*
----
 
-class: center middle inverse
-background-image: url(https://comicvine.gamespot.com/a/uploads/original/5/52246/1963701-the_one_ring_02.jpg)
-background-size: cover
-
-&lt;span role="img" aria-label="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background."&gt;&lt;/span&gt;
-
-# One package to rule them all
-
-
-
-&lt;img src="images/transparent_blank.png" title="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background." alt="Slide background shows: The 'One Ring' from The Lord of the Rings set on a fiery background." width="33" /&gt;
-
----
-
-# Why use ipumsr?
-
-- One package for IPUMS microdata, aggregate data, and geography
-
-- Specialized functions for viewing and manipulating IPUMS metadata
-
---
-
-- Bundled how-to guides (vignettes)
-
---
-
-- Potential to add more features (e.g. API support); let us know what you want!
-  - File an issue at https://github.com/mnpopcenter/ipumsr/issues
-  - Email ipums+cran@umn.edu
-
-???
 Regarding "More features": The aforementioned IPUMS API support will be the next
 big feature. Another potential new feature is adding tools for properly handling
 survey weights. Let us know what would be helpful to you via GitHub or email.
 
 ---
 
-# Why use ipumsr?
-
-And finally... 
-
---
-
-- It's fast!
-  - Time to read 3 million rows with 13 variables:
-
-<div id="dgsfbcdptc" style="overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
-<style>html {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
-}
-
-#dgsfbcdptc .gt_table {
-  display: table;
-  border-collapse: collapse;
-  margin-left: auto;
-  margin-right: auto;
-  color: #333333;
-  font-size: 16px;
-  font-weight: normal;
-  font-style: normal;
-  background-color: #FFFFFF;
-  width: auto;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #A8A8A8;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #A8A8A8;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_heading {
-  background-color: #FFFFFF;
-  text-align: center;
-  border-bottom-color: #FFFFFF;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_title {
-  color: #333333;
-  font-size: 125%;
-  font-weight: initial;
-  padding-top: 4px;
-  padding-bottom: 4px;
-  border-bottom-color: #FFFFFF;
-  border-bottom-width: 0;
-}
-
-#dgsfbcdptc .gt_subtitle {
-  color: #333333;
-  font-size: 85%;
-  font-weight: initial;
-  padding-top: 0;
-  padding-bottom: 6px;
-  border-top-color: #FFFFFF;
-  border-top-width: 0;
-}
-
-#dgsfbcdptc .gt_bottom_border {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_col_headings {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_col_heading {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 6px;
-  padding-left: 5px;
-  padding-right: 5px;
-  overflow-x: hidden;
-}
-
-#dgsfbcdptc .gt_column_spanner_outer {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: normal;
-  text-transform: inherit;
-  padding-top: 0;
-  padding-bottom: 0;
-  padding-left: 4px;
-  padding-right: 4px;
-}
-
-#dgsfbcdptc .gt_column_spanner_outer:first-child {
-  padding-left: 0;
-}
-
-#dgsfbcdptc .gt_column_spanner_outer:last-child {
-  padding-right: 0;
-}
-
-#dgsfbcdptc .gt_column_spanner {
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: bottom;
-  padding-top: 5px;
-  padding-bottom: 5px;
-  overflow-x: hidden;
-  display: inline-block;
-  width: 100%;
-}
-
-#dgsfbcdptc .gt_group_heading {
-  padding: 8px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#dgsfbcdptc .gt_empty_group_heading {
-  padding: 0.5px;
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  vertical-align: middle;
-}
-
-#dgsfbcdptc .gt_from_md > :first-child {
-  margin-top: 0;
-}
-
-#dgsfbcdptc .gt_from_md > :last-child {
-  margin-bottom: 0;
-}
-
-#dgsfbcdptc .gt_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  margin: 10px;
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 1px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 1px;
-  border-right-color: #D3D3D3;
-  vertical-align: middle;
-  overflow-x: hidden;
-}
-
-#dgsfbcdptc .gt_stub {
-  color: #333333;
-  background-color: #FFFFFF;
-  font-size: 100%;
-  font-weight: initial;
-  text-transform: inherit;
-  border-right-style: solid;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-  padding-left: 12px;
-}
-
-#dgsfbcdptc .gt_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dgsfbcdptc .gt_first_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_grand_summary_row {
-  color: #333333;
-  background-color: #FFFFFF;
-  text-transform: inherit;
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-}
-
-#dgsfbcdptc .gt_first_grand_summary_row {
-  padding-top: 8px;
-  padding-bottom: 8px;
-  padding-left: 5px;
-  padding-right: 5px;
-  border-top-style: double;
-  border-top-width: 6px;
-  border-top-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_striped {
-  background-color: rgba(128, 128, 128, 0.05);
-}
-
-#dgsfbcdptc .gt_table_body {
-  border-top-style: solid;
-  border-top-width: 2px;
-  border-top-color: #D3D3D3;
-  border-bottom-style: solid;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_footnotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_footnote {
-  margin: 0px;
-  font-size: 90%;
-  padding: 4px;
-}
-
-#dgsfbcdptc .gt_sourcenotes {
-  color: #333333;
-  background-color: #FFFFFF;
-  border-bottom-style: none;
-  border-bottom-width: 2px;
-  border-bottom-color: #D3D3D3;
-  border-left-style: none;
-  border-left-width: 2px;
-  border-left-color: #D3D3D3;
-  border-right-style: none;
-  border-right-width: 2px;
-  border-right-color: #D3D3D3;
-}
-
-#dgsfbcdptc .gt_sourcenote {
-  font-size: 90%;
-  padding: 4px;
-}
-
-#dgsfbcdptc .gt_left {
-  text-align: left;
-}
-
-#dgsfbcdptc .gt_center {
-  text-align: center;
-}
-
-#dgsfbcdptc .gt_right {
-  text-align: right;
-  font-variant-numeric: tabular-nums;
-}
-
-#dgsfbcdptc .gt_font_normal {
-  font-weight: normal;
-}
-
-#dgsfbcdptc .gt_font_bold {
-  font-weight: bold;
-}
-
-#dgsfbcdptc .gt_font_italic {
-  font-style: italic;
-}
-
-#dgsfbcdptc .gt_super {
-  font-size: 65%;
-}
-
-#dgsfbcdptc .gt_footnote_marks {
-  font-style: italic;
-  font-weight: normal;
-  font-size: 65%;
-}
-</style>
-<table class="gt_table">
-  
-  <thead class="gt_col_headings">
-    <tr>
-      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1">Function</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">Time (seconds)</th>
-      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1">With metadata?</th>
-    </tr>
-  </thead>
-  <tbody class="gt_table_body">
-    <tr><td class="gt_row gt_left">data.table::fread()</td>
-<td class="gt_row gt_center">2.5</td>
-<td class="gt_row gt_center">No</td></tr>
-    <tr><td class="gt_row gt_left">vroom::vroom()</td>
-<td class="gt_row gt_center">2.5</td>
-<td class="gt_row gt_center">No</td></tr>
-    <tr><td class="gt_row gt_left">ipumsr::read_ipums_micro()</td>
-<td class="gt_row gt_center">3.3</td>
-<td class="gt_row gt_center">Yes</td></tr>
-    <tr><td class="gt_row gt_left">haven::read_dta()</td>
-<td class="gt_row gt_center">7.8</td>
-<td class="gt_row gt_center">Yes</td></tr>
-    <tr><td class="gt_row gt_left">haven::read_sav()</td>
-<td class="gt_row gt_center">9.4</td>
-<td class="gt_row gt_center">Yes</td></tr>
-    <tr><td class="gt_row gt_left">readr::read_csv()</td>
-<td class="gt_row gt_center">9.8</td>
-<td class="gt_row gt_center">No</td></tr>
-  </tbody>
-  
-  
-</table>
-</div>
-
-???
-There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
-to read the data in with attached metadata, such as variable and value labels.
-
-Relatively small example, so the time costs can grow with larger datasets.
----
-
-class: center, middle
-
-# Poll: Have you ever used ipumsr before?
-
-???
-If you've never used ipumsr before you may be asking *where can i download it*
-
-
----
-
-# Installing ipumsr
-
-```r
-install.packages("ipumsr")
-```
-
---
-
-### Or if you want the development version
-
-- www.github.com/mnpopcenter/ipumsr
-
-
-```r
-if (!require(remotes)) install.packages("remotes")
-remotes::install_github("mnpopcenter/ipumsr", ref = "api-alpha-dev")
-```
-
-???
-
-More advanced users might be thinking, *"this stable release is boring"* in which case you can download the development version to test out the latest features. 
-
-The API functions are in the development version, but the API itself is not yet 
-publicly available.
-
 ---
 class: center, middle
 
-# To run the code in this webinar
+# To run the code in this presentation
 
 ???
 
@@ -1086,14 +801,12 @@ However, you may need to install some additional packages used in the example co
 
 ---
 
-
+.pull-left[
 # Install R packages (as needed)
 
 
 ```r
-
-
-# install.packages(ipumsr)
+install.packages("ipumsr")
 
 ## Tidyverse
 install.packages("dplyr")
@@ -1108,29 +821,37 @@ install.packages("DT")
 install.packages("sf")
 ```
 
+]
+
+
+.pull-right[
+# Load R packages (each time)
+
+```r
+library(ipumsr)
+
+## Tidyverse
+library(dplyr)
+library(ggplot2)
+library(stringr)
+library(purrr)
+
+## HTML tables
+library(DT)
+
+## gis
+library(sf)
+```
+
+]
+
+
+
+
 ???
 
 reminder, installing packages only needs to happen once, but some packages do update frequently so it can be a good idea to re-install once in a while
 
----
-
-
-
-# Loading packages
-
-```r
-library(ipumsr)
-library(dplyr)
-library(ggplot2)
-library(stringr)
-library(sf)
-library(purrr)
-```
-
-
-
-???
-These packages are used in some of the examples we will walk through.
 
 ---
 
@@ -1144,24 +865,58 @@ These packages are used in some of the examples we will walk through.
 
 `2.` What is ipumsr, and why use it?
 
-.strong[`3.` Reading data into R]
+.strong[`3.` How to create a data extract]
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Working with IPUMS geographic data
 
-`8.` Q &amp; A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q &amp; A
+
+]
+
+???
+
+Dan passes to Derek. Derek switches to a web demo of extract system.
+
+---
+
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` How to create a data extract
+
+.strong[`4.` Reading data into R]
+
+`5.` Exploring and manipulating metadata
+
+`6.` Brief analysis example
+
+`7.` Working with IPUMS geographic data
+
+`8.` Preview of IPUMS API functionality
+
+`9.` Q &amp; A
 
 ]
 
 
 ???
 
-Dan passes to Kara/Derek
+Website demo ends, back to slides. Derek passes to Kara.
 
 ---
 
@@ -1719,8 +1474,8 @@ data$MIGRATE1a &lt;- lbl_na_if(data$MIGRATE1, ~.val %in% c(0, 9)) %&gt;%
 
 ...
 
-<div id="htmlwidget-efe413e55256c84b6b80" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-efe413e55256c84b6b80">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A","[1] Same house","[2] Moved within state","[3] Moved between states","[4] Abroad one year ago","[9] Unknown"],[null,"Same house","Moved within state","Moved between states","Abroad one year ago",null],[822,126664,9259,936,219,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-d9d6a99f42c082d497d1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-d9d6a99f42c082d497d1">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A","[1] Same house","[2] Moved within state","[3] Moved between states","[4] Abroad one year ago","[9] Unknown"],[null,"Same house","Moved within state","Moved between states","Abroad one year ago",null],[822,126664,9259,936,219,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ???
 `lbl_na_if()` supports a special syntax used by a few of ipumsr's label
@@ -1804,8 +1559,8 @@ data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
 
 . . .
 
-<div id="htmlwidget-b3d5d0099244aaf77b02" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-b3d5d0099244aaf77b02">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-69550ed6ac357d14cdd2" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-69550ed6ac357d14cdd2">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ???
 [Read bullet point]
@@ -2274,7 +2029,7 @@ analysis script, replacing the old filename.
 
 ---
 
-![](ipumsr_webinar_files/figure-html/unnamed-chunk-47-1.png)&lt;!-- --&gt;
+![](ipumsr_webinar_files/figure-html/unnamed-chunk-45-1.png)&lt;!-- --&gt;
 
 ???
 Now we can create a graph similar to the education one grouping instead by 
@@ -2321,10 +2076,10 @@ extract_to_share &lt;- get_last_extract_info("usa")
 # Or if you have the extract number:
 extract_to_share &lt;- get_extract_info("usa:14")
 
-save_extract_as_json(extract_to_share, file = "prcs_2015_2019_extract.json")
+save_extract_as_json(extract_to_share, file = "prcs_migration_extract.json")
 ```
 
-- Then share "prcs_2015_2019_extract.json" with collaborators
+- Then share "prcs_migration_extract.json" with collaborators
 
 ---
 
@@ -2333,7 +2088,7 @@ save_extract_as_json(extract_to_share, file = "prcs_2015_2019_extract.json")
 
 ```r
 shared_extract_definition &lt;- define_extract_from_json(
-  "prcs_2015_2019_extract.json",
+  "prcs_migration_extract.json",
   collection = "usa"
 )
 
@@ -2375,94 +2130,247 @@ data &lt;- read_ipums_micro(ddi)
 
 ---
 
-# Save analysis as RMarkdown
+class: center
 
-&lt;img src="images/migration-rmarkdown-doc-screenshot.png" title="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." alt="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." width="100%" /&gt;
+# 1. Save analysis as RMarkdown
 
+&lt;img src="images/migration-rmarkdown-doc-screenshot.png" title="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." alt="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." width="85%" /&gt;
+
+???
+A good first step to share your analysis is to put it in an RMarkdown document, 
+such as the one shown here. If you're not familiar with RMarkdown, its a plain 
+text format that uses a special syntax to combine R code and formatted text, 
+which can then be rendered into HTML, PDF, or even Word document reports.
 
 ---
 
-&lt;img src="images/knitted-rmarkdown-screenshot-4.png" title="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." alt="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income." width="100%" /&gt;
+class: center
+
+&lt;img src="images/knitted-rmarkdown-screenshot-4.png" title="Screenshot of knitted HTML report titled 'Graphing migration in Puerto Rico 2015-2019 with IPUMS PRCS data' opened in web browser window. The report includes a first level heading that reads 'Migration 2015-2019' and four tabs titled 'Overall', 'By education', 'By household income', and 'By age'. The 'By age' tab is selected and visualizes migration by age, with a line graph for five age groups in separate panels. In the graphs, age groups 0-9, 10-17, and 18-34 are more likely to have moved in the past year than the older age groups across the whole time period, and also show a more pronounced increase from 2017 to 2018." alt="Screenshot of knitted HTML report titled 'Graphing migration in Puerto Rico 2015-2019 with IPUMS PRCS data' opened in web browser window. The report includes a first level heading that reads 'Migration 2015-2019' and four tabs titled 'Overall', 'By education', 'By household income', and 'By age'. The 'By age' tab is selected and visualizes migration by age, with a line graph for five age groups in separate panels. In the graphs, age groups 0-9, 10-17, and 18-34 are more likely to have moved in the past year than the older age groups across the whole time period, and also show a more pronounced increase from 2017 to 2018." width="75%" /&gt;
+
+This slide shows the result of rendering that RMarkdown document as an HTML 
+report. You can see RMarkdown allows you to create reports with nice features 
+like a tabbed structure for different plots or report sections. In this report 
+I've hidden the code chunks used to load and prepare the data and to create the 
+graphs, but you can also include the code in the rendered report.
 
 ---
 
-# Pipe-friendly example
+# Instead of hard-coding the extract number...
+
+This only works for you:
 
 
 ```r
-my_extract &lt;- define_extract(
-  "usa", 
-  "Occupation by sex and age",
-  c("us2017a", "us2018a"), 
-  c("SEX", "AGE", "IND", "OCC")
+ddi &lt;- read_ipums_ddi("usa_00014.xml")
+data &lt;- read_ipums_micro(ddi)
+```
+
+???
+Now, in that R Markdown document that contains your analysis and interpretation, 
+you want to change the code that reads in the data so that it will work not 
+only for you, but for those you share it with, who won't already have the data 
+on their computer.
+
+---
+
+# ...download the data if not available locally!
+
+
+```r
+if (!file.exists("prcs_migration_extract.xml")) {
+
+}
+```
+
+???
+The code on this and the next few slides shows one way you can have your R 
+Markdown document check for the data locally and download it if it's not there 
+already. The first thing you'll notice is that we are checking for the existence 
+of a DDI codebook file that isn't named with a collection and extract number, 
+such as USA 14 from the previous slide, because if you are sharing this with 
+someone else, you don't know what the extract number of their extract will be. 
+As you'll see, if this DDI codebook file doesn't exist in the working directory, 
+this code will submit a new extract request, download the extract files, and 
+rename them to match this naming scheme.
+
+---
+
+# Download the data if not available locally
+
+
+```r
+if (!file.exists("prcs_migration_extract.xml")) {
+* # Load extract definition from JSON
+* prcs_migration_extract &lt;- define_extract_from_json(
+*   "prcs_migration_extract.json",
+*   "usa"
+* )
+}
+```
+
+???
+So, if the file doesn't exist locally, the first step is to load the extract 
+definition from a JSON file that you created with the `save_extract_as_json()` 
+function.
+
+---
+
+# Download the data if not available locally
+
+
+```r
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract &lt;- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+* # Submit, wait for, and download extract
+* ddi_filename &lt;- submit_extract(prcs_migration_extract) %&gt;%
+*   wait_for_extract() %&gt;%
+*   download_extract() %&gt;%
+*   basename()
+}
+```
+
+???
+Next, the code submits, waits for, and downloads the extract files, then grabs
+the DDI filename using the `basename()` function on the full file path which is
+returned by the `download_extract()` function.
+
+---
+
+# Download the data if not available locally
+
+
+```r
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract &lt;- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+  # Submit, wait for, and download extract
+  ddi_filename &lt;- submit_extract(prcs_migration_extract) %&gt;% 
+    wait_for_extract() %&gt;% 
+    download_extract() %&gt;% 
+    basename()
+* # Infer data file name from DDI file name
+* data_filename &lt;- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
+}
+```
+
+???
+Next, we can infer the data file name from the DDI filename, since they use the 
+same naming scheme.
+
+---
+
+# Download the data if not available locally
+
+
+```r
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract &lt;- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+  # Submit, wait for, and download extract
+  ddi_filename &lt;- submit_extract(prcs_migration_extract) %&gt;% 
+    wait_for_extract() %&gt;% 
+    download_extract() %&gt;% 
+    basename()
+  # Infer data file name from DDI file name
+  data_filename &lt;- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
+* # Standardize DDI and data file names
+* file.rename(ddi_filename, "prcs_migration_extract.xml")
+* file.rename(data_filename, "prcs_migration_extract.dat.gz")
+}
+```
+
+???
+And finally, we rename the data and DDI codebook files to match our chosen 
+naming scheme, so that if we run the code again, the if statement will evaluate 
+to false and this code that downloads the data will be skipped over.
+
+---
+
+# Download the data if not available locally
+
+Now this will work for anyone:
+
+
+```r
+ddi &lt;- read_ipums_ddi("prcs_migration_extract.xml")
+data &lt;- read_ipums_micro(
+  ddi,
+  data_file = "prcs_migration_extract.dat.gz"
 )
+```
+
+???
+Now, since the code in the if statement ensures that the data are available 
+locally and have the expected filename, we can read in the DDI and data in a way 
+that will work for any researcher with API access. Notice that since we've 
+renamed the data file, we need to use the `data_file` argument in 
+`read_ipums_micro()` to specify that file name.
+
+---
+
+# Create a GitHub repository
+
+&lt;img src="images/project-directory-screenshot.png" title="Screenshot of RStudio Files pane. The user is in a folder named 'puerto-rico-migration' within the Home directory, and that folder contains two files, named 'migration_example_rmarkdown.Rmd' and 'prcs_migration_extract.json'." alt="Screenshot of RStudio Files pane. The user is in a folder named 'puerto-rico-migration' within the Home directory, and that folder contains two files, named 'migration_example_rmarkdown.Rmd' and 'prcs_migration_extract.json'." width="648" /&gt;
+
+???
+At this point, let's assume you are working in RStudio in a folder containing 
+two files: your R Markdown analysis document and the JSON definition of your 
+extract created by `save_extract_as_json()`.
+
+---
+
+# Create a GitHub repository
+
+
+```r
+usethis::create_project(".")
+usethis::use_git()
+usethis::use_github()
 ```
 
 --
 
-Extract definition to data in one piped expression!
-
-
-```r
-data &lt;- my_extract %&gt;% 
-  submit_extract() %&gt;% 
-  wait_for_extract() %&gt;% 
-  download_extract() %&gt;% 
-  read_ipums_micro()
-```
+For more details, check out the free online book
+[Happy Git and GitHub for the useR](https://happygitwithr.com)
 
 ???
-Now let's get to some example code! We'll start with a brief example that shows 
-a typical API workflow using the "pipe" operator from the magrittr package, 
-which is often used in conjunction with tidyverse packages such as dplyr.
+From the starting point on the previous slide, you can get your project on 
+GitHub in three R function calls. The first line turns your current working 
+directory into an RStudio project, if it isn't one already. The second line 
+turns on git version control for your project, again, if you aren't using it 
+already, and it optionally will make an initial commit on your behalf. Finally, 
+the third line creates a repository on github.com with the same name as your 
+project directory, connects that repository to your local project, and pushes 
+your committed files up to that GitHub repository.
 
-We start by defining an extract object using the `define_extract()` function, 
-and specifying 
-
-- a data collection -- in this case, "usa" 
-- an extract description -- "Occupation by sex and age"
-- samples -- here we're asking for the 2017 and 2018 American Community Survey 
-- and variables -- sex, age, industry and occupation.
-
-The next code chunk shows how we can go from this extract definition to having 
-our extract data available in our R session in one piped expression. For any of 
-you who are unfamiliar with the pipe operator, it can be read aloud as the word 
-"then". So this piped expression says, take "my_extract", *then* submit extract, 
-*then* wait for extract, *then* download extract, *then* read in the data using 
-`read_ipums_micro()`.
-
-Since we have to wait for the extract to process, this piped expression will 
-take a bit of time to execute, depending on the size of your extract.
+This workflow assumes that you already have git installed on your computer, that 
+you have an account on github.com, and that you have created a GitHub personal 
+access token. All these steps are described in the fantastic free online book 
+*Happy Git and GitHub for the useR* by Jenny Bryan.
 
 ---
 
-# Pipe-friendly example
+# Create a GitHub repository
 
-
-```r
-my_extract &lt;- define_extract(
-  "usa", 
-  "Occupation by sex and age",
-  c("us2017a", "us2018a"), 
-  c("SEX", "AGE", "IND", "OCC")
-)
-```
-
-Extract definition to data in one piped expression!
-
-
-```r
-data &lt;- my_extract |&gt; 
-  submit_extract() |&gt; 
-  wait_for_extract() |&gt; 
-  download_extract() |&gt; 
-  read_ipums_micro()
-```
-
+&lt;img src="images/puerto-rico-migration-github-repo-screenshot.png" title="Screenshot of GitHub repository named 'dtburk/puerto-rico-migration' opened in a browser window." alt="Screenshot of GitHub repository named 'dtburk/puerto-rico-migration' opened in a browser window." width="1275" /&gt;
 
 ???
-And just for fun, here's what the same piped expression looks like with the new
-base R pipe, available as of R 4.1.
+With those three steps, we now have a GitHub repository that you can point 
+anyone you'd like to share your analysis with to. And as we'll show in a minute, 
+RStudio tries to make it easy to create a new project directly from a GitHub 
+repo, so this a great way to share your work with other R users.
+
 
 ---
 

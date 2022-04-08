@@ -1,5 +1,4 @@
 ---
-
 title: "Enhancing reproducibility with the IPUMS API and the ipumsr package"
 author: "Derek Burk, Dan Ehrlich, & Kara Fisher"
 date: "4/11/2022"
@@ -214,21 +213,8 @@ sociology.
 
 .dan-pet2[]
 
-.kara-pet[]
-
-
-<style>
-.kara-pet {
-  background-color: #000000;
-  background-image: url(images/Ru.jpg);
-  background-size: cover;
-  width: 140px;
-  height: 160px;
-  position: absolute;
-  left: 650px;
-  bottom: 200px;
-}
-</style>
+.kara-pet1[]
+.kara-pet2[]
 
 
 ???
@@ -2201,7 +2187,7 @@ graphs, but you can also include the code in the rendered report.
 
 This only works for you:
 
-```{r}
+```{r eval=FALSE}
 ddi <- read_ipums_ddi("usa_00014.xml")
 data <- read_ipums_micro(ddi)
 ```
@@ -2216,7 +2202,7 @@ on their computer.
 
 # ...download the data if not available locally!
 
-```{r}
+```{r eval=FALSE}
 if (!file.exists("prcs_migration_extract.xml")) {
 
 }
@@ -2237,7 +2223,7 @@ rename them to match this naming scheme.
 
 # Download the data if not available locally
 
-```{r}
+```{r eval=FALSE}
 if (!file.exists("prcs_migration_extract.xml")) {
   # Load extract definition from JSON #<<
   prcs_migration_extract <- define_extract_from_json( #<<
@@ -2256,7 +2242,7 @@ function.
 
 # Download the data if not available locally
 
-```{r}
+```{r eval=FALSE}
 if (!file.exists("prcs_migration_extract.xml")) {
   # Load extract definition from JSON
   prcs_migration_extract <- define_extract_from_json(
@@ -2280,7 +2266,7 @@ returned by the `download_extract()` function.
 
 # Download the data if not available locally
 
-```{r}
+```{r eval=FALSE}
 if (!file.exists("prcs_migration_extract.xml")) {
   # Load extract definition from JSON
   prcs_migration_extract <- define_extract_from_json(
@@ -2305,7 +2291,7 @@ same naming scheme.
 
 # Download the data if not available locally
 
-```{r}
+```{r eval=FALSE}
 if (!file.exists("prcs_migration_extract.xml")) {
   # Load extract definition from JSON
   prcs_migration_extract <- define_extract_from_json(
@@ -2336,7 +2322,7 @@ to false and this code that downloads the data will be skipped over.
 
 Now this will work for anyone:
 
-```{r}
+```{r eval=FALSE}
 ddi <- read_ipums_ddi("prcs_migration_extract.xml")
 data <- read_ipums_micro(
   ddi,
@@ -2368,7 +2354,7 @@ extract created by `save_extract_as_json()`.
 
 # Create a GitHub repository
 
-```{r}
+```{r eval=FALSE}
 usethis::create_project(".")
 usethis::use_git()
 usethis::use_github()
@@ -2408,82 +2394,6 @@ anyone you'd like to share your analysis with to. And as we'll show in a minute,
 RStudio tries to make it easy to create a new project directly from a GitHub 
 repo, so this a great way to share your work with other R users.
 
-
----
-
-# Pipe-friendly example
-
-```{r eval=FALSE}
-my_extract <- define_extract(
-  "usa", 
-  "Occupation by sex and age",
-  c("us2017a", "us2018a"), 
-  c("SEX", "AGE", "IND", "OCC")
-)
-```
-
---
-
-Extract definition to data in one piped expression!
-
-```{r eval=FALSE}
-data <- my_extract %>% 
-  submit_extract() %>% 
-  wait_for_extract() %>% 
-  download_extract() %>% 
-  read_ipums_micro()
-```
-
-???
-Now let's get to some example code! We'll start with a brief example that shows 
-a typical API workflow using the "pipe" operator from the magrittr package, 
-which is often used in conjunction with tidyverse packages such as dplyr.
-
-We start by defining an extract object using the `define_extract()` function, 
-and specifying 
-
-- a data collection -- in this case, "usa" 
-- an extract description -- "Occupation by sex and age"
-- samples -- here we're asking for the 2017 and 2018 American Community Survey 
-- and variables -- sex, age, industry and occupation.
-
-The next code chunk shows how we can go from this extract definition to having 
-our extract data available in our R session in one piped expression. For any of 
-you who are unfamiliar with the pipe operator, it can be read aloud as the word 
-"then". So this piped expression says, take "my_extract", *then* submit extract, 
-*then* wait for extract, *then* download extract, *then* read in the data using 
-`read_ipums_micro()`.
-
-Since we have to wait for the extract to process, this piped expression will 
-take a bit of time to execute, depending on the size of your extract.
-
----
-
-# Pipe-friendly example
-
-```{r eval=FALSE}
-my_extract <- define_extract(
-  "usa", 
-  "Occupation by sex and age",
-  c("us2017a", "us2018a"), 
-  c("SEX", "AGE", "IND", "OCC")
-)
-```
-
-Extract definition to data in one piped expression!
-
-```{r eval=FALSE}
-data <- my_extract |> 
-  submit_extract() |> 
-  wait_for_extract() |> 
-  download_extract() |> 
-  read_ipums_micro()
-```
-
-
-???
-And just for fun, here's what the same piped expression looks like with the new
-base R pipe, available as of R 4.1.
 
 ---
 
