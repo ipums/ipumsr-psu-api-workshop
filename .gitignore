@@ -6,5 +6,5 @@
 shiny_demo/**.xml
 shiny_demo/**.dat.gz
 shiny_demo/lib/
-derek-analysis-scratch/
+derek-analysis-scratch/derek-analysis-scratch.R
 
