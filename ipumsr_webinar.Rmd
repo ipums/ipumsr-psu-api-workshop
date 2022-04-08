@@ -1,5 +1,9 @@
 ---
+<<<<<<< HEAD
 title: "Working with IPUMS data using API and ipumsr"
+=======
+title: "Enhancing reproducibility with the IPUMS API and the ipumsr package"
+>>>>>>> ace8a324c55f76b119e27ec16cc8de9ec4b99685
 author: "Derek Burk, Dan Ehrlich, & Kara Fisher"
 date: "4/11/2022"
 output:
@@ -1004,8 +1008,45 @@ in the DDI codebook and data into separate objects.
 
 # Read in the data
 
+```{r include=FALSE}
+if (!dir.exists("presentation_extract")) dir.create("presentation_extract")
+presentation_extract_files <- list.files(
+  "presentation_extract", 
+  full.names = TRUE
+)
+ddi_path <- str_subset(presentation_extract_files, pattern = "\\.xml$")
+data_path <- str_subset(presentation_extract_files, pattern = "\\.dat\\.gz$")
+
+# There should only be one ddi file and one data file, so if there are zero or 
+# more than one, we want to delete everything in that directory and re-submit 
+# the extract
+if (length(ddi_path) != 1 || length(data_path) != 1) {
+  file.remove(presentation_extract_files)
+  ddi_path <- define_extract_micro(
+    "usa",
+    "Extract for PSU API workshop",
+    c("us2015b", "us2016b", "us2017b", "us2018b", "us2019b"),
+    c(
+      "YEAR", "SAMPLE", "SERIAL", "CBSERIAL", "HHWT", "CPI99", "GQ", 
+      "COSTELEC", "HHINCOME", "VACANCY", "CINETHH", "PERNUM", "PERWT", 
+      "MOMLOC", "POPLOC", "RELATE", "RELATED", "SEX", "AGE", "MARRINYR", 
+      "DIVINYR", "WIDINYR", "FERTYR", "RACE", "RACED", "HISPAN", "HISPAND", 
+      "SPEAKENG", "EDUC", "EDUCD", "EMPSTAT", "EMPSTATD", "INCTOT", 
+      "MIGRATE1", "MIGRATE1D"
+    )
+  ) %>% 
+    submit_extract() %>% 
+    wait_for_extract() %>% 
+    download_extract(download_dir = "presentation_extract")
+}
+
+ddi <- read_ipums_ddi(ddi_path)
+data <- read_ipums_micro(ddi)
+```
+
+
 - Using functions `read_ipums_ddi()` and `read_ipums_micro()`
-```{r}
+```{r eval=FALSE}
 ddi <- read_ipums_ddi("usa_00013.xml")
 
 data <- read_ipums_micro(ddi)
@@ -1015,7 +1056,7 @@ data <- read_ipums_micro(ddi)
 
 - This also works:
 
-```{r}
+```{r eval=FALSE}
 data <- read_ipums_micro("usa_00013.xml")
 ```
 
@@ -1213,15 +1254,16 @@ Let's leverage that attached metadata!
 Variable labels and descriptions:
 
 ```{r}
-ipums_var_label(ddi, PHONE)
+ipums_var_label(ddi, MARRINYR)
 
-ipums_var_desc(ddi, PHONE) %>% strwrap(60)
+ipums_var_desc(ddi, MARRINYR) %>% strwrap(60)
 ```
 
 ???
 So you can see here that ipumsr provides function to extract information from 
 the DDI object without the need to slice and dice that "var_info" data.frame I 
-showed before. Here we grab the label and description for the variable PHONE.
+showed before. Here we grab the label and description for the variable "Married 
+within the past year."
 
 ---
 
@@ -1230,13 +1272,13 @@ showed before. Here we grab the label and description for the variable PHONE.
 Value labels:
 
 ```{r}
-ipums_val_labels(ddi, PHONE)
+ipums_val_labels(ddi, MARRINYR)
 ```
 
 ???
 Similarly, we can print the value labels by pointing to the DDI. We see here 
-that the variable PHONE takes four values: no, yes, not applicable, and 
-suppressed.
+that the variable married in the last year takes three values: NA, blank, and 
+yes.
 
 ---
 
@@ -1414,7 +1456,7 @@ class: center middle
 - `lbl_na_if()` allows you to set certain values or labels to missing
 
 ```{r}
-ipums_val_labels(data$PHONE)
+ipums_val_labels(data$MIGRATE1)
 ```
 
 ???
@@ -1427,27 +1469,26 @@ rather than pointing to the DDI object. This works if PHONE is still a
 haven::labelled column.
 
 In this case, given the value labels we see here, it makes sense to set values 0
-and 8 to missing.
+and 9 to missing.
 
 ---
 
 # `lbl_na_if()`
 
-
 ```{r}
-data$PHONE2 <- lbl_na_if(data$PHONE, ~.val %in% c(0, 8)) %>%
+data$MIGRATE1a <- lbl_na_if(data$MIGRATE1, ~.val %in% c(0, 9)) %>%
   as_factor()
 ```
 
-. . . 
+...
 
 ```{r, echo = FALSE}
 label_before_after(
   data, 
-  PHONE, 
-  PHONE2,
+  MIGRATE1, 
+  MIGRATE1a,
   . %>% 
-    lbl_na_if(~.val %in% c(0, 8)) %>%
+    lbl_na_if(~.val %in% c(0, 9)) %>%
     as_factor()
 )
 ```
@@ -1470,46 +1511,15 @@ you want it.
 
 ---
 
-# `lbl_na_if()`
-
-
-```{r}
-data$PHONE2 <- lbl_na_if(
-  data$PHONE, 
-  function(.val, .lbl) .val %in% c(0, 8)
-) %>%
-  as_factor()
-```
-
-. . . 
-
-```{r, echo = FALSE}
-label_before_after(
-  data, 
-  PHONE, 
-  PHONE2,
-  . %>% 
-    lbl_na_if(~.val %in% c(0, 8)) %>%
-    as_factor()
-)
-```
-
-???
-In case you're unfamiliar with the anonymous function notation, that squiggly 
-tilde could be replaced with a regular function definition, as shown here. So 
-anytime you see the tilde symbol in any of these label helper functions, you 
-can read it as "a function of dot val and dot label".
-
----
 
 # `lbl_na_if()`
 
 - Works with both values (`.val`) and labels (`.lbl`)
 
 ```{r}
-drop_labels <- c("N/A", "Suppressed (2012 and 2015 ACS)")
+drop_labels <- c("N/A", "Unknown")
 
-data$PHONE3 <- lbl_na_if(data$PHONE, ~.lbl %in% drop_labels) %>%
+data$MIGRATE1b <- lbl_na_if(data$MIGRATE1, ~.lbl %in% drop_labels) %>%
   as_factor()
 ```
 
@@ -1541,7 +1551,7 @@ and so on.
 
 - Maybe this is too much detail, so we want to collapse the last digit
 
-```{r, tidy=TRUE}
+```{r}
 data$EDUCD2 <- lbl_collapse(data$EDUCD, ~.val %/% 10) %>%
   as_factor(ordered = TRUE)
 ```
@@ -1727,96 +1737,80 @@ will link to below.
 
 ---
 
-# Phone availability 
-- Now that they're factors, ready for use as regular R data
-```{r graph1, eval=FALSE}
-graph_data <- data %>%
-  group_by(YEAR) %>%
+# Migration in Puerto Rico, 2015-2019
+
+```{r include=FALSE}
+data <- data %>% 
+  mutate(
+    # MIGRATE1 = lbl_na_if(MIGRATE1, ~.val %in% c(0, 9)),
+    # moved_in_last_year = lbl_relabel(
+    #   MIGRATE1,
+    #   lbl(1, "No, didn't move") ~.val == 1,
+    #   lbl(2, "Yes, moved") ~.val %in% 2:4
+    # ) %>% as_factor(),
+    moved_in_last_year = MIGRATE1 %in% 2:4
+  )
+```
+
+
+```{r migration-graph-1, eval=FALSE}
+data %>% 
+  group_by(YEAR) %>% 
   summarize(
-    `% with phone` = weighted.mean(
-      PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-    ),
-    .groups = "drop"
-  )
-
-ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
-  geom_point() +
-  geom_line() + 
-  labs(
-    title = "Percent of Minnesota with phone line",
-    subtitle = paste0("Data source: ", ddi$ipums_project),
-    caption = paste(
-      strwrap(ipums_var_desc(ddi, PHONE), 90), 
-      collapse = "\n"
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT)
+  ) %>% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      x = NULL,
+      y = "%"
     )
-  )
 ```
 
-???
-Microdata often needs to be summarized at a higher level for visualization. In 
-this case, if we want to make a graph of phone availability over time, we need 
-to first summarize at the year level.
 
-The first block of code computes the weighted proportion of persons with access
-to a phone in each year. Once our data are summarized so that each row
-represents a value for one year, we can make a graph by year.
+
+
+???
+Assuming we've already loaded the data at this point, I can just run the code to 
+create a graph of migration (any migration) by year, then on a subsequent slide, 
+the code to graph migration by year, faceted by education.
 
 ---
 
-# Phone availability
-```{r graph1, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
-```
 
-???
-Here we see a strange decline, then resurgence, in access to a phone line. 
-What's going on here?
-
----
-
-# Interpretation
-
-```{r echo=FALSE, fig.alt="Screenshot from the IPUMS USA website showing the Comparability tab for the variable PHONE. The Comparability tab and the text 'The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service; prior to 2008, this was not made explicit.' are highlighted for emphasis."}
-knitr::include_graphics("images/comparability_screenshot.png")
+```{r migration-graph-1, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
 ```
 
 
 ???
-If we look at the Comparability tab for the PHONE variable on the IPUMS USA 
-website, we find an explanation:
-
-The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service;
-prior to 2008, this was not made explicit.
-
-Just one small example of the value added to these data by the IPUMS USA team.
+Disclaimer: All of the analyses presented here include only point estimates 
+without any estimation of sampling error. Thus, we cannot assess the statistical
+significance of any differences over time or between groups. To estimate 
+confidence intervals for point estimates from the ACS or PRCS, use the replicate 
+weight variables REPWT and REPWTP and follow the instructions from the IPUMS USA 
+replicate weight FAQ page [here](https://usa.ipums.org/usa/repwt.shtml#q40).
 
 ---
 
-# Phone availability by education
-```{r graph2, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
-graph_data <- data %>%
-  group_by(YEAR, EDUCD3) %>%
-  summarize(`% with phone` = weighted.mean(
-    PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-  ), .groups = "drop")
-
-ggplot(graph_data, aes(x = YEAR, y = `% with phone`)) +
-  geom_point() +
-  geom_line() + 
-  facet_wrap(~EDUCD3) + 
-  labs(
-    title = "Percent of Minnesota with phone line by education",
-    subtitle = paste0("Data source: ", ddi$ipums_project)
-  )
+```{r migration-graph-2, dpi=300, fig.height=5, fig.width=8, echo = FALSE}
+data %>% 
+  group_by(YEAR, EDUCD3) %>% 
+  summarize(
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT),
+    .groups = "drop"
+  ) %>% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    facet_wrap(~EDUCD3) +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      x = NULL,
+      y = "%"
+    )
 ```
 
-???
-With our simplified education variable, we can also plot access to a phone line 
-by education. Here we see that anomalous drop and resurgence is present at all 
-education levels, and that differences in phone access by education have 
-declined since 1960.
-
 ---
-
 # Overview
 
 .greyed-out[
@@ -1832,178 +1826,9 @@ declined since 1960.
 
 `5.` Brief analysis example
 
-.strong[`6.` Working with IPUMS geographic data]
+.strong[`6.` Intro to the IPUMS USA API]
 
 `7.` Preview of IPUMS API functionality
-
-`8.` Q & A
-
-]
-
-
-
----
-
-# Getting geographic data
-
-- For IPUMS USA (and several other projects), we provide geographic boundaries 
-  as well. For many areas, this includes harmonizing boundary changes over time.
-
---
-
-- Our extract includes the variable CONSPUMA, for "Consistent Public Use 
-  Microdata Areas"
-  
---
-
-- Note: CONSPUMA units are large
-  - For finer geographic detail, check out IPUMS NHGIS
-
-???
-[Read bullet points]
-
----
-
-# Getting geographic data
-
-```{r echo=FALSE, fig.alt="Screenshot from the IPUMS USA homepage with an arrow pointing to the 'Geography & GIS' link in the left sidebar."}
-knitr::include_graphics("images/geography_screenshot.png")
-```
-
-???
-Geographic boundary data is usually found via a "Geography and GIS" link on the
-left sidebar of the home page for a data collection, under the heading
-"Supplemental Data".
-
-Under that link, you can browse available shape files, then download the ones 
-you want in a zip archive, and unzip the contents of the archive into their 
-own folder within your project directory.
-
----
-
-# Loading shape data
-
-- `ipumsr` provides support for both sf and sp data; we'll use sf here
-
-- Load with the `ipums_read_sf()` function (mostly just a wrapper around
-  `sf::read_sf()`)
-
-
-```{r}
-shape_data <- read_ipums_sf("shape/")
-```
-
-???
-The sp package (short for "spatial") has been around since 2005. It is more
-established and some other R spatial packages might still assume you are using
-sp data structures. The sf package (short for "simple features") is newer, but 
-seems to be on the rise as an alternative sp for some use cases.
-
-For more on the differences between sp and sf, see the free online book 
-*Geocomputation with R*, which we link to at the end of the slides.
-
----
-
-# Loading shape data
-
-```{r echo=FALSE}
-old_width <- getOption("width")
-options(width = 150)
-```
-
-
-```{r}
-as_tibble(shape_data)
-```
-```{r echo=FALSE}
-options(width = old_width)
-```
-
-???
-At the risk of oversimplifying, an sf object is basically a tibble or data.frame
-with a special geometry column. That simplification helps me understand the 
-process of joining the sf object to data.
-
-
----
-
-# Joining shape data
-- `ipumsr` has helpers for merging data that work with both sf and sp structures 
-
-```{r}
-conspuma_data <- data %>%
-  group_by(CONSPUMA, YEAR) %>%
-  summarize(
-    `% with phone` = weighted.mean(
-      PHONE2 == "Yes, phone available", PERWT, na.rm = TRUE
-    ),
-    .groups = "drop"
-  )
-
-conspuma_data <- ipums_shape_inner_join(
-  conspuma_data, 
-  shape_data, 
-  by = "CONSPUMA"
-)
-```
-
-???
-Before joining to shape data, we need to summarize our person level data at the 
-level of the geography we are joining to. Thus, the first block of code computes 
-the weighted proportion of persons with access to a phone for each CONSPUMA 
-unit in each year. Once our data are summarized so that each row represents a 
-value for one CONSPUMA unit in one year, we can join to the sf object we loaded 
-above.
-
----
-
-# Plotting shape data
-- Since the addition of `geom_sf()`, ggplot2 can plot sf data:
-
-```{r graph3, eval=FALSE}
-graph_data <- conspuma_data %>% 
-  filter(YEAR %in% c(1980, 1990, 2000, 2010))
-
-ggplot(graph_data, aes(fill = `% with phone`)) +
-  facet_wrap(~YEAR) + 
-  geom_sf()
-```
-
----
-
-# Plotting shape data
-
-```{r graph3, dpi=300, fig.height=4, fig.width=6, echo = FALSE}
-```
-
-???
-As with phone access by education, these maps show evidence of declining
-geographic variation in access to a phone line.
-
-For more information on IPUMS geographic data, see the ipumsr vignette on
-working with geographic data, or one of several collection-specific recorded
-webinars and tutorials on that topic, which can be found on the tutorials page 
-which we will link to below.
-
----
-# Overview
-
-.greyed-out[
-
-
-`1.` What is IPUMS?
-
-`2.` What is ipumsr, and why use it?
-
-`3.` Reading data into R
-
-`4.` Exploring and manipulating metadata
-
-`5.` Brief analysis example
-
-`6.` Working with IPUMS geographic data
-
-.strong[`7.` Preview of IPUMS API functionality]
 
 `8.` Q & A
 
@@ -2014,37 +1839,28 @@ which we will link to below.
 
 # API Timeline
 
-- Currently in internal testing
+- Currently in beta testing for IPUMS USA
 
-- Beta testing before the end of 2021
+- IPUMS USA public launch expected mid-2022
 
-- IPUMS USA public launch early 2022
+- Interested in becoming a beta tester? Email ipums+api@umn.edu
 
 ???
-The API is not yet publicly available, but we wanted to offer a preview of the 
-functionality that will soon be available in ipumsr.
+The API is not yet publicly available, but is available to volunteer beta 
+testers. If you'd like to become a beta tester, email ipums+api@umn.edu and you 
+should hear back within about two business days.
 
-We plan to support creating extracts via API for all of our data collections, 
-but that support will be rolled out one collection at a time, to allow us to 
-thoroughly test that the extract API is working as expected for each collection.
-
-IPUMS USA is the first collection that will be supported, and we are currently
-doing internal testing of the API for USA. We'll put out a call for beta testers
-before the end of this year, but feel free to reach out in the meantime if you
-want to be added to that list. We expect to open up the USA extract API to all
-IPUMS USA users in the first few months of next year, depending on what sort of
-issues arise during beta testing.
-
-Another important note is that there is already a public API for the IPUMS NHGIS
-collection, which offers access to tabular data from the US Census Bureau, as
-well as corresponding geographic boundaries. ipumsr does not yet include
-functions for interacting with the NHGIS API, but there is a guide to
-interacting with that API in R, which we'll share a link to at the end of these
-slides, and we plan to add that functionality to ipumsr sometime next year.
+IPUMS USA is the first microdata project for which we are adding API support,
+but there is already a public API for the IPUMS NHGIS collection, which offers
+access to tabular data from the US Census Bureau, as well as corresponding
+geographic boundaries. ipumsr does not yet include functions for interacting
+with the NHGIS API, but there is a guide to interacting with that API in R,
+which we'll share a link to at the end of these slides, and we are currently
+working to add that functionality to ipumsr.
 
 ---
 
-# What can I do with the API?
+# What can I do with the IPUMS USA API?
 
 - Define and submit extract requests
 
@@ -2090,7 +1906,7 @@ will be part of the ipumsr package.
 
 ---
 
-# What can't I do with the API?
+# What can't I do with the IPUMS USA API?
 
 - Bypass the extract system entirely
 
@@ -2121,6 +1937,424 @@ A third limitation is that API users will not initially have access to all the
 bells and whistles of the extract system, such as the ability to attach 
 characteristics of family members such as spouses or children. We plan to add 
 these capabilities once the core functionality is well-tested and stable.
+
+---
+
+# How to use your IPUMS USA API key
+
+```{r api-key-screenshot, echo=FALSE, fig.alt="Screenshot of a file named '.Renviron' opened in the RStudio editor, containing one line of text that reads `IPUMS_API_KEY = 'paste-your-api-key-here'`"}
+knitr::include_graphics("images/api-key-in-renviron-screenshot.png")
+```
+
+???
+If you become an API beta tester, you will receive instructions on creating an 
+API key. Once you create the key, we recommend storing it in an environment 
+variable named "IPUMS_API_KEY" by defining that environment variable in a file 
+named ".Renviron" that lives in your user account home directory. You can also 
+store it a file named ".Renviron" in your project working directory, but then 
+you need to make sure you don't include that file if you share your work with 
+others, either directly or through a code repository like GitHub. The rest of 
+the API code examples in this presentation assume that we've already stored our 
+API key in this environment variable, and thus that we don't need to pass that 
+key as an argument when we make API calls.
+
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Intro to the IPUMS USA API
+
+.strong[`7.` API use case 1: Revise your extract]
+
+`8.` Q & A
+
+]
+
+---
+
+# Add HHINCOME to our extract
+
+```{r eval=FALSE}
+# Pull down definition of last extract
+last_extract <- get_last_extract_info("usa")
+
+# Add HHINCOME, resubmit, and download
+ddi <- last_extract %>% 
+  revise_extract_micro(vars_to_add = "HHINCOME") %>% 
+  submit_extract() %>% 
+  wait_for_extract() %>% 
+  download_extract() %>% 
+  read_ipums_ddi()
+
+data <- read_ipums_micro(ddi)
+```
+
+
+???
+Not only does this approach save you a little time pointing and clicking through 
+the IPUMS USA website, it also streamlines the file download process by 
+automatically saving the DDI codebook and data files into your current working 
+directory.
+
+Note that you would likely run this code interactively as a convenient way to 
+revise, resubmit, and redownload your extract, but you wouldn't want to include 
+it in your analysis script, because then you'd be waiting for and redownloading 
+your extract every time you reran your analysis.
+
+---
+
+# Update your script with new filename
+
+```{r eval=FALSE}
+# Before
+ddi <- read_ipums_ddi("usa_00013.xml")
+data <- read_ipums_micro(ddi)
+
+# After
+ddi <- read_ipums_ddi("usa_00014.xml")
+data <- read_ipums_micro(ddi)
+```
+
+???
+Instead, you would likely hard-code the newly downloaded filename into your 
+analysis script, replacing the old filename.
+
+---
+
+```{r echo=FALSE, dpi=300, fig.height=5, fig.width=8}
+value_to_quintile <- function(x) {
+  cut_points <- quantile(x, probs = c(0.2, 0.4, 0.6, 0.8), na.rm = TRUE)
+  cut(
+    x, 
+    breaks = c(-Inf, cut_points, Inf), 
+    labels = c("Lowest", "Lower Middle", "Middle", "Upper Middle", "Highest"),
+    ordered_result = TRUE
+  )
+}
+
+hhincome_quintiles <- data %>% 
+  filter(PERNUM == 1 & HHINCOME != 9999999) %>% 
+  group_by(YEAR) %>% 
+  mutate(hhincome_quintile = value_to_quintile(HHINCOME)) %>% 
+  ungroup() %>% 
+  select(YEAR, SERIAL, hhincome_quintile)
+
+data <- data %>% 
+  left_join(hhincome_quintiles, by = c("YEAR", "SERIAL"))
+
+data %>% 
+  filter(!is.na(hhincome_quintile)) %>% 
+  group_by(YEAR, hhincome_quintile) %>% 
+  summarize(
+    pct_moved = 100 * sum(PERWT[moved_in_last_year]) / sum(PERWT),
+    .groups = "drop"
+  ) %>% 
+  ggplot(aes(x = YEAR, y = pct_moved)) +
+    geom_line() +
+    facet_wrap(~hhincome_quintile) +
+    labs(
+      title = "Percentage of people who moved in the past year, 2015-2019",
+      subtitle = "Grouped by household income quintile",
+      x = NULL,
+      y = "%"
+    )
+```
+
+???
+Now we can create a graph similar to the education one grouping instead by 
+household income quintile. Here we see that persons from households in the 
+lowest income quintile were more likely to move across this whole time period, 
+but the highest two income quintiles seem to have the biggest jump in migration 
+in 2018. Again, I want to remind you that these are purely descriptive trends, 
+and that differences over time and by group may not be statistically 
+significant.
+
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Intro to the IPUMS USA API
+
+`7.` API use case 1: Revise your extract
+
+.strong[`8.` API use case 2: Share your extract]
+
+]
+
+---
+
+# Share your extract (definition)
+
+```{r eval=FALSE}
+extract_to_share <- get_last_extract_info("usa")
+
+# Or if you have the extract number:
+extract_to_share <- get_extract_info("usa:14")
+
+save_extract_as_json(extract_to_share, file = "prcs_migration_extract.json")
+```
+
+- Then share "prcs_migration_extract.json" with collaborators
+
+---
+
+# Recreate a shared extract
+
+```{r eval=FALSE}
+shared_extract_definition <- define_extract_from_json(
+  "prcs_migration_extract.json",
+  collection = "usa"
+)
+
+ddi <- shared_extract_definition %>% 
+  submit_extract() %>% 
+  wait_for_extract() %>% 
+  download_extract() %>% 
+  read_ipums_ddi()
+
+data <- read_ipums_micro(ddi)
+```
+
+---
+
+# Overview
+
+.greyed-out[
+
+
+`1.` What is IPUMS?
+
+`2.` What is ipumsr, and why use it?
+
+`3.` Reading data into R
+
+`4.` Exploring and manipulating metadata
+
+`5.` Brief analysis example
+
+`6.` Intro to the IPUMS USA API
+
+`7.` API use case 1: Revise your extract
+
+`8.` API use case 2: Share your extract
+
+.strong[`9.` API use case 3: Share your analysis]
+
+]
+
+---
+
+class: center
+
+# 1. Save analysis as RMarkdown
+
+```{r echo=FALSE, out.width="85%", fig.alt="Screenshot of RMarkdown file named migration_example_rmarkdown.Rmd opened in the RStudio editor. The code in the file loads required packages, loads data from IPUMS USA extract 14, preps the data in a code chunk that is collapsed in the screenshot, then uses the .tabset RMarkdown notation to create three tabs for graphs of migration overall, by education, and by household income."}
+knitr::include_graphics("images/migration-rmarkdown-doc-screenshot.png")
+```
+
+???
+A good first step to share your analysis is to put it in an RMarkdown document, 
+such as the one shown here. If you're not familiar with RMarkdown, its a plain 
+text format that uses a special syntax to combine R code and formatted text, 
+which can then be rendered into HTML, PDF, or even Word document reports.
+
+---
+
+class: center
+
+```{r echo=FALSE, out.width="75%", fig.alt="Screenshot of knitted HTML report titled 'Graphing migration in Puerto Rico 2015-2019 with IPUMS PRCS data' opened in web browser window. The report includes a first level heading that reads 'Migration 2015-2019' and four tabs titled 'Overall', 'By education', 'By household income', and 'By age'. The 'By age' tab is selected and visualizes migration by age, with a line graph for five age groups in separate panels. In the graphs, age groups 0-9, 10-17, and 18-34 are more likely to have moved in the past year than the older age groups across the whole time period, and also show a more pronounced increase from 2017 to 2018."}
+knitr::include_graphics("images/knitted-rmarkdown-screenshot-4.png")
+```
+
+This slide shows the result of rendering that RMarkdown document as an HTML 
+report. You can see RMarkdown allows you to create reports with nice features 
+like a tabbed structure for different plots or report sections. In this report 
+I've hidden the code chunks used to load and prepare the data and to create the 
+graphs, but you can also include the code in the rendered report.
+
+---
+
+# Instead of hard-coding the extract number...
+
+This only works for you:
+
+```{r}
+ddi <- read_ipums_ddi("usa_00014.xml")
+data <- read_ipums_micro(ddi)
+```
+
+???
+Now, in that R Markdown document that contains your analysis and interpretation, 
+you want to change the code that reads in the data so that it will work not 
+only for you, but for those you share it with, who won't already have the data 
+on their computer.
+
+---
+
+# ...download the data if not available locally!
+
+```{r}
+if (!file.exists("prcs_migration_extract.xml")) {
+
+}
+```
+
+???
+The code on this and the next few slides shows one way you can have your R 
+Markdown document check for the data locally and download it if it's not there 
+already. The first thing you'll notice is that we are checking for the existence 
+of a DDI codebook file that isn't named with a collection and extract number, 
+such as USA 14 from the previous slide, because if you are sharing this with 
+someone else, you don't know what the extract number of their extract will be. 
+As you'll see, if this DDI codebook file doesn't exist in the working directory, 
+this code will submit a new extract request, download the extract files, and 
+rename them to match this naming scheme.
+
+---
+
+# Download the data if not available locally
+
+```{r}
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON #<<
+  prcs_migration_extract <- define_extract_from_json( #<<
+    "prcs_migration_extract.json", #<<
+    "usa" #<<
+  ) #<<
+}
+```
+
+???
+So, if the file doesn't exist locally, the first step is to load the extract 
+definition from a JSON file that you created with the `save_extract_as_json()` 
+function.
+
+---
+
+# Download the data if not available locally
+
+```{r}
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract <- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+  # Submit, wait for, and download extract #<<
+  ddi_filename <- submit_extract(prcs_migration_extract) %>%  #<<
+    wait_for_extract() %>%  #<<
+    download_extract() %>%  #<<
+    basename() #<<
+}
+```
+
+???
+Next, the code submits, waits for, and downloads the extract files, then grabs
+the DDI filename using the `basename()` function on the full file path which is
+returned by the `download_extract()` function.
+
+---
+
+# Download the data if not available locally
+
+```{r}
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract <- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+  # Submit, wait for, and download extract
+  ddi_filename <- submit_extract(prcs_migration_extract) %>% 
+    wait_for_extract() %>% 
+    download_extract() %>% 
+    basename()
+  # Infer data file name from DDI file name #<<
+  data_filename <- str_replace(ddi_filename, "\\.xml$", ".dat.gz") #<<
+}
+```
+
+???
+Next, we can infer the data file name from the DDI filename, since they use the 
+same naming scheme.
+
+---
+
+# Download the data if not available locally
+
+```{r}
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract <- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+  # Submit, wait for, and download extract
+  ddi_filename <- submit_extract(prcs_migration_extract) %>% 
+    wait_for_extract() %>% 
+    download_extract() %>% 
+    basename()
+  # Infer data file name from DDI file name
+  data_filename <- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
+  # Standardize DDI and data file names #<<
+  file.rename(ddi_filename, "prcs_migration_extract.xml") #<<
+  file.rename(data_filename, "prcs_migration_extract.dat.gz") #<<
+}
+```
+
+???
+And finally, we rename the data and DDI codebook files to match our chosen 
+naming scheme, so that if we run the code again, the if statement will evaluate 
+to false and this code that downloads the data will be skipped over.
+
+---
+
+# Download the data if not available locally
+
+Now this will work for anyone:
+
+```{r}
+ddi <- read_ipums_ddi("prcs_migration_extract.xml")
+data <- read_ipums_micro(
+  ddi,
+  data_file = "prcs_migration_extract.dat.gz"
+)
+```
+
+???
+Now, since the code in the if statement ensures that the data are available 
+locally and have the expected filename, we can read in the DDI and data in a way 
+that will work for any researcher with API access. Notice that since we've 
+renamed the data file, we need to use the `data_file` argument in 
+`read_ipums_micro()` to specify that file name.
+
+
 
 ---
 
