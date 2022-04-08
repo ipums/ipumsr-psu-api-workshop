@@ -974,39 +974,26 @@ in the DDI codebook and data into separate objects.
 # Read in the data
 
 ```{r include=FALSE}
-if (!dir.exists("presentation_extract")) dir.create("presentation_extract")
-presentation_extract_files <- list.files(
-  "presentation_extract", 
-  full.names = TRUE
-)
-ddi_path <- str_subset(presentation_extract_files, pattern = "\\.xml$")
-data_path <- str_subset(presentation_extract_files, pattern = "\\.dat\\.gz$")
-
-# There should only be one ddi file and one data file, so if there are zero or 
-# more than one, we want to delete everything in that directory and re-submit 
-# the extract
-if (length(ddi_path) != 1 || length(data_path) != 1) {
-  file.remove(presentation_extract_files)
-  ddi_path <- define_extract_micro(
-    "usa",
-    "Extract for PSU API workshop",
-    c("us2015b", "us2016b", "us2017b", "us2018b", "us2019b"),
-    c(
-      "YEAR", "SAMPLE", "SERIAL", "CBSERIAL", "HHWT", "CPI99", "GQ",
-      "COSTELEC", "HHINCOME", "VACANCY", "CINETHH", "PERNUM", "PERWT",
-      "MOMLOC", "POPLOC", "RELATE", "RELATED", "SEX", "AGE", "MARRINYR",
-      "DIVINYR", "WIDINYR", "FERTYR", "RACE", "RACED", "HISPAN", "HISPAND",
-      "SPEAKENG", "EDUC", "EDUCD", "EMPSTAT", "EMPSTATD", "INCTOT",
-      "MIGRATE1", "MIGRATE1D"
-    )
-  ) %>%
-    submit_extract() %>%
-    wait_for_extract() %>%
-    download_extract(download_dir = "presentation_extract")
+if (!file.exists("prcs_migration_extract.xml")) {
+  # Load extract definition from JSON
+  prcs_migration_extract <- define_extract_from_json(
+    "prcs_migration_extract.json",
+    "usa"
+  )
+  # Submit, wait for, and download extract
+  ddi_filename <- submit_extract(prcs_migration_extract) %>% 
+    wait_for_extract() %>% 
+    download_extract() %>% 
+    basename()
+  # Infer data file name from DDI file name
+  data_filename <- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
+  # Standardize DDI and data file names #<<
+  file.rename(ddi_filename, "prcs_migration_extract.xml") #<<
+  file.rename(data_filename, "prcs_migration_extract.dat.gz") #<<
 }
 
-ddi <- read_ipums_ddi(ddi_path)
-data <- read_ipums_micro(ddi)
+ddi <- read_ipums_ddi("prcs_migration_extract.xml")
+data <- read_ipums_micro(ddi, data_file = "prcs_migration_extract.dat.gz")
 ```
 
 
@@ -1042,7 +1029,7 @@ makes sense why we need both (streamlined version of what we did before)
 # The data file is just raw ingredients
 
 ```{r echo=FALSE, comment = ''}
-readLines(data_path, n = 10) %>% 
+readLines("prcs_migration_extract.dat.gz", n = 10) %>% 
   paste0(collapse = "\n") %>% 
   cat()
 

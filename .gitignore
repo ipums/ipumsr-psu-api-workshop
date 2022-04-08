@@ -9,3 +9,5 @@ presentation_extract
 shiny_demo/lib/
 migration_example_rmarkdown.html
 derek-analysis-scratch/derek-analysis-scratch.R
+prcs_migration_extract.dat.gz
+prcs_migration_extract.xml
