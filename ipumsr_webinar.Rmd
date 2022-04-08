@@ -274,9 +274,6 @@ You can always reach out to through our **github**, or via **user support**.
 # Overview
 
 
-
-
-
 .greyed-out[
 
 
@@ -666,7 +663,7 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 # Overview
 
-greyed-out[
+.greyed-out[
 
 `1.` What is IPUMS?
 
@@ -1122,17 +1119,19 @@ point to the DDI codebook, not the data file.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-.strong[`4.` Exploring and manipulating metadata]
+`4.` Reading data into R
 
-`5.` Brief analysis example
+.strong[`5.` Exploring and manipulating metadata]
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q & A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q & A
 
 ]
 

@@ -237,32 +237,38 @@ You can always reach out to through our **github**, or via **user support**.
 
 --
 
-3. Reading data into R
+3. How to create a data extract
 
 --
 
-4. Exploring and manipulating metadata
+4. Reading data into R
 
 --
 
-5. Brief analysis example
+5. Exploring and manipulating metadata
 
 --
 
-6. Working with IPUMS geographic data
+6. Brief analysis example
 
 --
 
-7. Preview of IPUMS API functionality
+7. Intro to the IPUMS USA API
 
 --
 
-8. Q &amp; A
+8. Preview of IPUMS API functionality
+
+--
+
+9. Q &amp; A
 
 ---
 
-# Overview
 
+
+
+# Overview
 
 
 .greyed-out[
@@ -272,17 +278,21 @@ You can always reach out to through our **github**, or via **user support**.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q &amp; A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q &amp; A
+
+
 
 ]
 
@@ -345,26 +355,6 @@ started with **US census data** has grown to include 9 collections
 
 ???
 
----
-
-# 
-![IPUMS US Project logo](images/usa.jpg)
-
-
-
-- “Historical Trends in Children Living in Multigenerational Households in the United States: 1870–2018” 
-- Natasha V. Pilkauskas, Mariana Amorim, and Rachel E. Dunifon
-
-
-
-
-
-&lt;img src="images/example_usa1.png" title="Trends in multigenerational households by income level and race/ethnicity." alt="Trends in multigenerational households by income level and race/ethnicity." width="5765" /&gt;
-
-
-
-???
-
 
 
 ---
@@ -400,24 +390,6 @@ started with **US census data** has grown to include 9 collections
 
 ---
 # 
-![IPUMS Health Surveys project logo](images/health.jpg)
-
-
-
-- “Hearing Impairment, Household Composition, Marital Status, and Mortality Among U.S. Adults” 
-
-- Justin T. Denney and Jason D. Boardman
-
-
-![Table showing correlation between hearing impairment and mortality](images/example_health1.png)
-
-
-???
-
-Looked at relationship between degrees of hearing impairment and mortality rates.
-
----
-# 
 ![IPUMS Higher Ed project logo](images/highered.jpg)
 
 
@@ -428,103 +400,6 @@ Looked at relationship between degrees of hearing impairment and mortality rates
 - Data from the National Surveys of College Graduates (NSCG), Recent College Graduates (NSRCG) and Doctorate Recipients (SDR) are integrated from 1993 to the present.
 
 - https://highered.ipums.org/highered/
-
-
----
-
-# 
-![IPUMS Time Use project logo](images/time_use.jpg)
-
-
-
-- Historical and contemporary time use data from 1965 to the present.
-
-- Extensive time diary data from respondents in the US and *7* other countries.
-
-- https://timeuse.ipums.org/
-
-
----
-
-# 
-![IPUMS Time Use project logo](images/time_use.jpg)
-.pull-left[
-- Nathan Yau of Flowing Data
-
-- http://flowingdata.com/projects/2015/timeuse-simulation/
-]
-
-.pull-right[
-!["Visualization of individuals (dots) moving between activity categories."](images/example_time_use.png)
-
-]
-
-
-
----
-
-.pull-left[ 
-![IPUMS NHGIS project logo](images/nhgis.jpg)
-
-]
-
-
-.pull-right[
-
-
-![IPUMS IHGIS project logo](images/ihgis.jpg)
-]
-
-
-.pull-left[ 
-
-- **NHGIS** Shapefiles for all levels of US geography including tracts, from 1790 to the present
-
-
-- https://www.nhgis.org/
-]
-
-
-.pull-right[
-
-
-- **IGIS** Shapefiles for admin level 2
-
-- https://ihgis.ipums.org/
-
-
-]
-
-- Summary tables and time series of population, housing, agriculture, and economic data 
-
-
-
-
----
-# ![IPUMS NHGIS project logo](images/nhgis.jpg)
-
-
-- “Migrant Selection and Sorting during the Great American Drought.” 
-- Christopher Sichko
-
-
-
-
-.pull-left[
-![map showing extent of drought](images/example_nhgis1.png)
-
-
-
-]
-
-.pull-right[
-
-
-
-![map showing educational achievement by region](images/example_nhgis2b.png)
-
-
-]
 
 
 
@@ -616,6 +491,109 @@ Check out blog using IPUMS Global Health Data
 
 ---
 
+
+
+.pull-left[ 
+![IPUMS NHGIS project logo](images/nhgis.jpg)
+
+]
+
+
+.pull-right[
+
+
+![IPUMS IHGIS project logo](images/ihgis.jpg)
+]
+
+
+.pull-left[ 
+
+- **NHGIS** Shapefiles for all levels of US geography including tracts, from 1790 to the present
+
+
+- https://www.nhgis.org/
+]
+
+
+.pull-right[
+
+
+- **IGIS** Shapefiles for admin level 2
+
+- https://ihgis.ipums.org/
+
+
+]
+
+- Summary tables and time series of population, housing, agriculture, and economic data 
+
+
+
+
+---
+
+#
+![IPUMS NHGIS project logo](images/nhgis.jpg)
+
+
+- “Migrant Selection and Sorting during the Great American Drought.” 
+- Christopher Sichko
+
+
+
+
+.pull-left[
+![map showing extent of drought](images/example_nhgis1.png)
+
+
+
+]
+
+.pull-right[
+
+
+
+![map showing educational achievement by region](images/example_nhgis2b.png)
+
+
+]
+
+
+
+
+---
+
+
+# 
+![IPUMS Time Use project logo](images/time_use.jpg)
+
+
+
+- Historical and contemporary time use data from 1965 to the present.
+
+- Extensive time diary data from respondents in the US and *7* other countries.
+
+- https://timeuse.ipums.org/
+
+
+---
+
+# 
+![IPUMS Time Use project logo](images/time_use.jpg)
+.pull-left[
+- Nathan Yau of Flowing Data
+
+- http://flowingdata.com/projects/2015/timeuse-simulation/
+]
+
+.pull-right[
+!["Visualization of individuals (dots) moving between activity categories."](images/example_time_use.png)
+
+]
+
+
+---
+
 # So what is IPUMS?
 
 
@@ -682,22 +660,24 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 .greyed-out[
 
-
 `1.` What is IPUMS?
 
-.strong[`2.` What is ipumsr?]
+.strong[`2.` What is ipumsr, and why use it?]
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q &amp; A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q &amp; A
+
 
 ]
 
@@ -861,6 +841,7 @@ reminder, installing packages only needs to happen once, but some packages do up
 .greyed-out[
 
 
+
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
@@ -873,7 +854,7 @@ reminder, installing packages only needs to happen once, but some packages do up
 
 `6.` Brief analysis example
 
-`7.` Working with IPUMS geographic data
+`7.` Intro to the IPUMS USA API
 
 `8.` Preview of IPUMS API functionality
 
@@ -893,6 +874,7 @@ Dan passes to Derek. Derek switches to a web demo of extract system.
 .greyed-out[
 
 
+
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
@@ -905,11 +887,12 @@ Dan passes to Derek. Derek switches to a web demo of extract system.
 
 `6.` Brief analysis example
 
-`7.` Working with IPUMS geographic data
+`7.` Intro to the IPUMS USA API
 
 `8.` Preview of IPUMS API functionality
 
 `9.` Q &amp; A
+
 
 ]
 
@@ -967,6 +950,8 @@ in the DDI codebook and data into separate objects.
 
 ---
 
+---
+
 # Read in the data
 
 
@@ -980,15 +965,6 @@ ddi &lt;- read_ipums_ddi("usa_00013.xml")
 data &lt;- read_ipums_micro(ddi)
 ```
 
---
-
-- This also works:
-
-
-```r
-data &lt;- read_ipums_micro("usa_00013.xml")
-```
-
 - Note: supply the codebook, *not* the data file, to `read_ipums_micro()`
 
 ???
@@ -999,35 +975,15 @@ The first option, and the one I'd recommend, is to read the DDI codebook into an
 object named "ddi" using the `read_ipums_ddi()` function, and then supply that 
 ddi object to `read_ipums_micro()`.
 
-The second option is to read in the data by passing the file path to the DDI
-codebook to the `read_ipums_micro()` function. However, we recommend the first
-pattern because it's often helpful to save the codebook to it's own object to
-preserve the original metadata once you start messing around with the data.
-
-Notice that in both cases we are supplying the codebook (either already read in
+Notice that we are supplying the codebook (either already read in
 or as a file path), not the data file, to `read_ipums_micro()`. The fact that we
-don't point to the actual data file when reading in the data might confusing. If
-I want to read in the data shouldn't I point to the data file?
+don't point to the actual data file when reading in the data might confusing. 
 
----
+Want to emphasize that we are pointing to the ddi - not the data file - to read 
+it in.
 
-class: center middle
-
-# Why do I point to the codebook to read in the data?
-
---
-
-### The data file is the **raw ingredients**, the codebook is the **recipe**
-
-???
-Here's my attempt to explain this in a hopefully memorable way: the data file 
-is the raw ingredients, and the codebook is the recipe. And when you go to make 
-dinner, your recipe tells you how to combine your ingredients to get the 
-finished product.
-
-Note for future revisions of this section: Seems like we could add a visual or 
-two here (possibly from Allison Horst's collection of R illustrations), and/or 
-improve the analogy (would Lego set and instruction booklet be better?).
+***Change the slides below to just show what's in a ddi + data file, so it
+makes sense why we need both (streamlined version of what we did before)
 
 ---
 
@@ -1035,16 +991,16 @@ improve the analogy (would Lego set and instruction booklet be better?).
 
 
 ```
-19600100336455000001000027   120001000001000005050
-19600100336455000001000027   120002000001000006060
-19600100336456000001000027   120001000001000006060
-19600100336456000001000027   120002000001000006060
-19600100336456000001000027   120003000001000002022
-19600100336456000001000027   120004000001000000001
-19600100336457000000990027   120001000000990006060
-19600100336457000000990027   120002000000990004040
-19600100336457000000990027   120003000000990004040
-19600100336458000001000027   120001000001000006060
+20152015020000000100000000000740000003200007033000099999990000010000003200000013130110340000770022006070713300021000110
+20152015020000000200000000002210000006700007031432000120000300010000006800000001010120251111110022001060633300000000110
+20152015020000000200000000002210000006700007031432000120000300020000008900000002020110361110110022001050501100012000110
+20152015020000000200000000002210000006700007031432000120000300030000009900010203030110020000110022000000010009999999110
+20152015020000000300000000003100000006000007031048000230000100010000006000000001010110421110770022004101011100023000110
+20152015020000000300000000003100000006000007031048000230000100020000008600000002020120381111770022006080813300000000110
+20152015020000000300000000003100000006000007031048000230000100030000009300020103030120130000770022001020230009999999110
+20152015020000000300000000003100000006000007031048000230000100040000009100020103030120120000770022001020260009999999110
+20152015020000000300000000003100000006000007031048000230000100050000009100020103030120090000770022004010160009999999110
+20152015020000000400000000010870000011000007031084000436000100010000011100000001010110282110220022004101011100024000110
 ```
 ???
 Looking at the first ten lines of our example data file, it makes sense why you 
@@ -1136,48 +1092,21 @@ point to the DDI codebook, not the data file.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-.strong[`4.` Exploring and manipulating metadata]
+`4.` Reading data into R
 
-`5.` Brief analysis example
+.strong[`5.` Exploring and manipulating metadata]
 
-`6.` Working with IPUMS geographic data
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q &amp; A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q &amp; A
 
 ]
-
----
-
-# What's in my extract again?
-
---
-
-Maybe I wrote an informative extract description?
-
-
-
-
-```r
-ddi$extract_notes %&gt;% strwrap(60)
-#&gt; [1] "User-provided description: Revision of(Revision of(Revision"
-#&gt; [2] "of(Revision of(my extract))))"
-```
-
---
-
-No such luck 😞
-
-???
-So we've read in our data -- how do we go about exploring it?
-
-We could refer back to the description we wrote when creating the extract, 
-maybe that will be informative. Let's see (read extract description). Ooh, 
-that's not very helpful. I'm guessing this joke hits close to home for some of 
-you long-time IPUMS users.
 
 ---
 
@@ -1276,16 +1205,11 @@ For a more browsable view of the metadata, the ipums_view() function makes a
 nicely-formatted static html page that allows you to browse the metadata
 associated with your data extract.
 
-
 ---
 
 # Wrangling value labels
 
-- IPUMS value labels don't translate perfectly to R factors
-
-    - Every value in a factor must be labeled
-    
-    - Factor values always count up from 1
+- R doesn't natively support value labels like other statistical packages do
 
 --
 
@@ -1294,7 +1218,12 @@ associated with your data extract.
   
 --
 
-- ipumsr helper functions allow you to leverage info from values and labels
+- `ipumsr` helper functions allow you to leverage info from values and labels
+
+--
+
+- When you are finished manipulating variables, convert to factor using 
+`as_factor()` or convert to character or numeric vector
 
 
 
@@ -1303,127 +1232,19 @@ IPUMS value labels don't translate perfectly to R factors. The most important
 difference is that in a factor, values always count up from 1. In IPUMS 
 variables, the values themselves often encode meaningful information about a 
 nested structure, which we'll see with the education variable below.
-  
-To preserve both the value and label, `ipumsr` imports labelled variables as
-`haven::labelled()` objects, but these aren't always the easiest to deal with, 
-because they aren't widely supported by functions from base R and other 
-packages. Thus, you will almost always want to convert these objects to 
-something like a factor or a regular numeric or character vector.
+
+Other stats packages are more full featured - for example, R doesn't natively support variables where only some of the values are labelled, or labelled variables with values that aren't all sequential. 
+
+To preserve the value and label `ipumsr` imports labelled variables as
+`haven::labelled()` objects which are structured more like labelled variables in
+other stats packages.
 
 Luckily ipumsr provides helpers that allow you to use information from both the
 value and label to transform your variables into the shape you want.
+*We will show you some of these helper functions today*
 
----
-
-# haven::labelled columns at a glance
-
-
-
-
-```r
-data
-#&gt; # A tibble: 137,900 x 35
-#&gt;     YEAR             SAMPLE SERIAL CBSERIAL  HHWT CPI99      GQ   COSTELEC     HHINCOME VACANCY CINETHH PERNUM PERWT MOMLOC POPLOC   RELATE    RELATED
-#&gt;    &lt;int&gt;          &lt;int+lbl&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int+l&gt;  &lt;dbl+lbl&gt;    &lt;dbl+lbl&gt; &lt;int+l&gt; &lt;int+l&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;int+lb&gt;  &lt;int+lbl&gt;
-#&gt;  1  2015 201502 [2015 PRCS]      1       74    32 0.703 3 [Gro~    0 [N/A] 1.00e7 [N/A~ 0 [N/A] 0 [N/A~      1    32      0      0 13 [Ins~ 1301 [Ins~
-#&gt;  2  2015 201502 [2015 PRCS]      2      221    67 0.703 1 [Hou~ 4320       1.2 e4       0 [N/A] 3 [No ~      1    68      0      0  1 [Hea~  101 [Hea~
-#&gt;  3  2015 201502 [2015 PRCS]      2      221    67 0.703 1 [Hou~ 4320       1.2 e4       0 [N/A] 3 [No ~      2    89      0      0  2 [Spo~  201 [Spo~
-#&gt;  4  2015 201502 [2015 PRCS]      2      221    67 0.703 1 [Hou~ 4320       1.2 e4       0 [N/A] 3 [No ~      3    99      1      2  3 [Chi~  301 [Chi~
-#&gt;  5  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      1    60      0      0  1 [Hea~  101 [Hea~
-#&gt;  6  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      2    86      0      0  2 [Spo~  201 [Spo~
-#&gt;  7  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      3    93      2      1  3 [Chi~  301 [Chi~
-#&gt;  8  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      4    91      2      1  3 [Chi~  301 [Chi~
-#&gt;  9  2015 201502 [2015 PRCS]      3      310    60 0.703 1 [Hou~  480       2.3 e4       0 [N/A] 1 [Yes~      5    91      2      1  3 [Chi~  301 [Chi~
-#&gt; 10  2015 201502 [2015 PRCS]      4     1087   110 0.703 1 [Hou~  840       4.36e4       0 [N/A] 1 [Yes~      1   111      0      0  1 [Hea~  101 [Hea~
-#&gt; # ... with 137,890 more rows, and 18 more variables: SEX &lt;int+lbl&gt;, AGE &lt;int+lbl&gt;, MARRINYR &lt;int+lbl&gt;, DIVINYR &lt;int+lbl&gt;, WIDINYR &lt;int+lbl&gt;,
-#&gt; #   FERTYR &lt;int+lbl&gt;, RACE &lt;int+lbl&gt;, RACED &lt;int+lbl&gt;, HISPAN &lt;int+lbl&gt;, HISPAND &lt;int+lbl&gt;, SPEAKENG &lt;int+lbl&gt;, EDUC &lt;int+lbl&gt;, EDUCD &lt;int+lbl&gt;,
-#&gt; #   EMPSTAT &lt;int+lbl&gt;, EMPSTATD &lt;int+lbl&gt;, INCTOT &lt;dbl+lbl&gt;, MIGRATE1 &lt;int+lbl&gt;, MIGRATE1D &lt;int+lbl&gt;
-```
-
-???
-Here's what the data look like when you read them in.
-
-
-One thing I like about the behavior of `haven::labelled()` objects is how they 
-show the value and the label when you print your data. 
-
-But let's say you just don't want to deal with these special haven::labelled
-objects, and you want to get rid of them in one fell swipe. I would advise
-against this approach in general, but it could be what you want in some cases.
-
----
-
-# Get rid of haven::labelled columns
-
-
-```r
-as_factor(data)
-#&gt; # A tibble: 137,900 x 35
-#&gt;     YEAR SAMPLE    SERIAL CBSERIAL  HHWT CPI99 GQ     COSTELEC HHINCOME VACANCY CINETHH PERNUM PERWT MOMLOC POPLOC RELATE RELATED SEX   AGE   MARRINYR
-#&gt;    &lt;int&gt; &lt;fct&gt;      &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;    &lt;fct&gt;    &lt;fct&gt;   &lt;fct&gt;    &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt; &lt;fct&gt; &lt;fct&gt;   
-#&gt;  1  2015 2015 PRCS      1       74    32 0.703 Group~ N/A      "N/A "   N/A     N/A (G~      1    32      0      0 Insti~ Instit~ Male  34    N/A     
-#&gt;  2  2015 2015 PRCS      2      221    67 0.703 House~ 4320     "12000"  N/A     No Int~      1    68      0      0 Head/~ Head/H~ Fema~ 25    Blank (~
-#&gt;  3  2015 2015 PRCS      2      221    67 0.703 House~ 4320     "12000"  N/A     No Int~      2    89      0      0 Spouse Spouse  Male  36    Blank (~
-#&gt;  4  2015 2015 PRCS      2      221    67 0.703 House~ 4320     "12000"  N/A     No Int~      3    99      1      2 Child  Child   Male  2     N/A     
-#&gt;  5  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      1    60      0      0 Head/~ Head/H~ Male  42    Blank (~
-#&gt;  6  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      2    86      0      0 Spouse Spouse  Fema~ 38    Blank (~
-#&gt;  7  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      3    93      2      1 Child  Child   Fema~ 13    N/A     
-#&gt;  8  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      4    91      2      1 Child  Child   Fema~ 12    N/A     
-#&gt;  9  2015 2015 PRCS      3      310    60 0.703 House~ 480      "23000"  N/A     Yes, w~      5    91      2      1 Child  Child   Fema~ 9     N/A     
-#&gt; 10  2015 2015 PRCS      4     1087   110 0.703 House~ 840      "43600"  N/A     Yes, w~      1   111      0      0 Head/~ Head/H~ Male  28    Yes     
-#&gt; # ... with 137,890 more rows, and 15 more variables: DIVINYR &lt;fct&gt;, WIDINYR &lt;fct&gt;, FERTYR &lt;fct&gt;, RACE &lt;fct&gt;, RACED &lt;fct&gt;, HISPAN &lt;fct&gt;,
-#&gt; #   HISPAND &lt;fct&gt;, SPEAKENG &lt;fct&gt;, EDUC &lt;fct&gt;, EDUCD &lt;fct&gt;, EMPSTAT &lt;fct&gt;, EMPSTATD &lt;fct&gt;, INCTOT &lt;fct&gt;, MIGRATE1 &lt;fct&gt;, MIGRATE1D &lt;fct&gt;
-```
-
-???
-One option is the `as_factor()` function, which can be applied to the whole data 
-frame at once. Here we see that the values have been stripped away, leaving only 
-the labels as factor levels.
-
----
-
-# Get rid of haven::labelled columns
-
-
-```r
-zap_labels(data)
-#&gt; # A tibble: 137,900 x 35
-#&gt;     YEAR SAMPLE SERIAL CBSERIAL  HHWT CPI99    GQ COSTELEC HHINCOME VACANCY CINETHH PERNUM PERWT MOMLOC POPLOC RELATE RELATED   SEX   AGE MARRINYR
-#&gt;    &lt;int&gt;  &lt;int&gt;  &lt;dbl&gt;    &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;    &lt;dbl&gt;    &lt;dbl&gt;   &lt;int&gt;   &lt;int&gt;  &lt;dbl&gt; &lt;dbl&gt;  &lt;dbl&gt;  &lt;dbl&gt;  &lt;int&gt;   &lt;int&gt; &lt;int&gt; &lt;int&gt;    &lt;int&gt;
-#&gt;  1  2015 201502      1       74    32 0.703     3        0  9999999       0       0      1    32      0      0     13    1301     1    34        0
-#&gt;  2  2015 201502      2      221    67 0.703     1     4320    12000       0       3      1    68      0      0      1     101     2    25        1
-#&gt;  3  2015 201502      2      221    67 0.703     1     4320    12000       0       3      2    89      0      0      2     201     1    36        1
-#&gt;  4  2015 201502      2      221    67 0.703     1     4320    12000       0       3      3    99      1      2      3     301     1     2        0
-#&gt;  5  2015 201502      3      310    60 0.703     1      480    23000       0       1      1    60      0      0      1     101     1    42        1
-#&gt;  6  2015 201502      3      310    60 0.703     1      480    23000       0       1      2    86      0      0      2     201     2    38        1
-#&gt;  7  2015 201502      3      310    60 0.703     1      480    23000       0       1      3    93      2      1      3     301     2    13        0
-#&gt;  8  2015 201502      3      310    60 0.703     1      480    23000       0       1      4    91      2      1      3     301     2    12        0
-#&gt;  9  2015 201502      3      310    60 0.703     1      480    23000       0       1      5    91      2      1      3     301     2     9        0
-#&gt; 10  2015 201502      4     1087   110 0.703     1      840    43600       0       1      1   111      0      0      1     101     1    28        2
-#&gt; # ... with 137,890 more rows, and 15 more variables: DIVINYR &lt;int&gt;, WIDINYR &lt;int&gt;, FERTYR &lt;int&gt;, RACE &lt;int&gt;, RACED &lt;int&gt;, HISPAN &lt;int&gt;,
-#&gt; #   HISPAND &lt;int&gt;, SPEAKENG &lt;int&gt;, EDUC &lt;int&gt;, EDUCD &lt;int&gt;, EMPSTAT &lt;int&gt;, EMPSTATD &lt;int&gt;, INCTOT &lt;dbl&gt;, MIGRATE1 &lt;int&gt;, MIGRATE1D &lt;int&gt;
-```
-
-
-
-???
-Alternatively, if you just want the numeric values, you can use `zap_labels()` 
-on the whole data frame. Here we see that the labels have been stripped away, 
-leaving only the numeric codes.
-
-Both `as_factor()` and `zap_labels()` can be applied to a single column of a 
-data frame as well, to just strip away values or labels for that one column.
-
-But if you're going to want to recode any of these variables, you'll often be 
-able to do that more elegantly when you have access to both values and labels, 
-with the help of special ipumsr functions that leverage all that information.
-
-These special functions might take some trial and error when you first start 
-using them, but I promise the payoff will be worth it.
-
-***I wonder if a transition slide here would be nice to transition away from 
-getting rid of labelled columns to using them with ipumsr. Would maybe help 
-to distinguish which functions (ours) we are suggesting to use. ***
+When you are done transforming your variables, you will probably need to change back to a format native to R to run an analysis because labelled variables aren't supported. To 
+do this you'll need to convert back to factor or numeric or char vector using as_factor or zap_label.
 
 ---
 
@@ -1433,91 +1254,48 @@ class: center middle
 
 ---
 
-# `lbl_na_if()`
-- `lbl_na_if()` allows you to set certain values or labels to missing
+# haven::labelled columns at a glance
+
+
+
+- Let's look at the detailed education variable
 
 
 ```r
-ipums_val_labels(data$MIGRATE1)
-#&gt; # A tibble: 6 x 2
-#&gt;     val lbl                 
-#&gt;   &lt;int&gt; &lt;chr&gt;               
-#&gt; 1     0 N/A                 
-#&gt; 2     1 Same house          
-#&gt; 3     2 Moved within state  
-#&gt; 4     3 Moved between states
-#&gt; 5     4 Abroad one year ago 
-#&gt; 6     9 Unknown
+ipums_val_labels(data$EDUCD)
+#&gt; # A tibble: 44 x 2
+#&gt;      val lbl                      
+#&gt;    &lt;int&gt; &lt;chr&gt;                    
+#&gt;  1     0 N/A or no schooling      
+#&gt;  2     1 N/A                      
+#&gt;  3     2 No schooling completed   
+#&gt;  4    10 Nursery school to grade 4
+#&gt;  5    11 Nursery school, preschool
+#&gt;  6    12 Kindergarten             
+#&gt;  7    13 Grade 1, 2, 3, or 4      
+#&gt;  8    14 Grade 1                  
+#&gt;  9    15 Grade 2                  
+#&gt; 10    16 Grade 3                  
+#&gt; # ... with 34 more rows
 ```
 
 ???
-The first label helper function is label NA if, which allows you to set values 
-to NA, which is R's code for missing values, according to either the value or 
-the label.
+Here's what the data look like when you read them in. Show detailed education
+variable as an example - nested structure.
 
-Notice that we've called `ipums_val_labels()` directly on the labelled column, 
-rather than pointing to the DDI object. This works if PHONE is still a 
-haven::labelled column.
+We see here that values less than 10 indicate missing or no schooling values; 
+values between 10 and 19 all capture levels between nursery school and grade 4; 
+and so on.
 
-In this case, given the value labels we see here, it makes sense to set values 0
-and 9 to missing.
-
----
-
-# `lbl_na_if()`
-
-
-```r
-data$MIGRATE1a &lt;- lbl_na_if(data$MIGRATE1, ~.val %in% c(0, 9)) %&gt;%
-  as_factor()
-```
-
-...
-
-<div id="htmlwidget-070b1247c1aeeed3397e" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-070b1247c1aeeed3397e">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A","[1] Same house","[2] Moved within state","[3] Moved between states","[4] Abroad one year ago","[9] Unknown"],[null,"Same house","Moved within state","Moved between states","Abroad one year ago",null],[822,126664,9259,936,219,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
-
-???
-`lbl_na_if()` supports a special syntax used by a few of ipumsr's label
-functions that allows you to use anonymous functions (signaled by the "tilde"
-symbol, which is that little squiggly line) that refer to either the value of a
-variable (using the special dot val variable), the label (using dot lbl), or
-both. Here we use dot val to specify that PHONE2 should be set to missing if the
-original value is zero or eight.
-
-This can be read as, "recode variable PHONE to NA if the value is zero or 
-eight".
-
-Notice in all these examples that we create a new variable for the transformed 
-version, so that we don't overwrite the original. This can be useful so that 
-you can engage in some trial and error until you get the variable transformed as 
-you want it.
-
----
-
-
-# `lbl_na_if()`
-
-- Works with both values (`.val`) and labels (`.lbl`)
-
-
-```r
-drop_labels &lt;- c("N/A", "Unknown")
-
-data$MIGRATE1b &lt;- lbl_na_if(data$MIGRATE1, ~.lbl %in% drop_labels) %&gt;%
-  as_factor()
-```
-
-???
-Because lbl_na_if works with both values and labels, we could accomplish the 
-same thing by referring to the labels. This time, we specify that PHONE3 should 
-be set to missing if the original label was "N/A" or "Suppressed".
+We can take advantage of all of the details given by both the value and label
+when we use a labelled variable.
 
 ---
 
 # `lbl_collapse()`
 - `lbl_collapse()` allows you to take advantage of the hierarchical
   structure of value labels
+  
 
 ```r
 ipums_val_labels(data$EDUCD)
@@ -1541,15 +1319,54 @@ ipums_val_labels(data$EDUCD)
 ???
 [Read bullet point]
 
-We see here that values less than 10 indicate missing or no schooling values; 
-values between 10 and 19 all capture levels between nursery school and grade 4; 
-and so on.
 
 ---
 
 # `lbl_collapse()`
 
-- Maybe this is too much detail, so we want to collapse the last digit
+- `lbl_collapse()` allows you to take advantage of the hierarchical
+  structure of value labels
+  
+--
+
+
+```r
+data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
+  as_factor(ordered = TRUE)
+```
+
+
+---
+
+# `lbl_collapse()`
+
+- All `ipumsr` helper functions allow you to use `.val` or `.lbl` to refer to 
+values or value labels
+
+
+```r
+data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, `~`.val %/% 10) %&gt;%
+  as_factor(ordered = TRUE)
+
+```
+
+--
+
+---
+
+# `lbl_collapse()`
+
+- In this case, we want to collapse the last digit
+
+
+```r
+data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val `%/%` 10) %&gt;%
+  as_factor(ordered = TRUE)
+```
+
+---
+
+# `lbl_collapse()`
 
 
 ```r
@@ -1559,8 +1376,8 @@ data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
 
 . . .
 
-<div id="htmlwidget-3167681d1ec212a47131" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-3167681d1ec212a47131">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-6cbeecdf52c567b2122b" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-6cbeecdf52c567b2122b">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ???
 [Read bullet point]
@@ -1664,6 +1481,7 @@ than 0 and less than 6".
 
 ```r
 college_regex &lt;- "^[123] year(s)? of college$"
+
 data$EDUCD3 &lt;- data$EDUCD %&gt;%
   lbl_collapse(~.val %/% 10) %&gt;% 
   lbl_relabel(
@@ -1690,6 +1508,7 @@ fourth lines...
 
 ```r
 college_regex &lt;- "^[123] year(s)? of college$"
+
 data$EDUCD3 &lt;- data$EDUCD %&gt;%
   lbl_collapse(~.val %/% 10) %&gt;% 
   lbl_relabel(
@@ -1699,6 +1518,7 @@ data$EDUCD3 &lt;- data$EDUCD %&gt;%
     lbl(5, "College or more") ~.val %in% c(10, 11)
   ) %&gt;%
   as_factor()
+
 ```
 
 
@@ -1713,14 +1533,8 @@ regular expression.
 # `lbl_relabel()`
 
 
-```r
-levels(data$EDUCD3)
-#&gt; [1] "N/A or no schooling"  
-#&gt; [2] "Less than High School"
-#&gt; [3] "High school"          
-#&gt; [4] "Some college"         
-#&gt; [5] "College or more"      
-#&gt; [6] "Missing"
+```
+#&gt; [1] "N/A or no schooling"   "Less than High School" "High school"           "Some college"          "College or more"       "Missing"
 ```
 ???
 So, now we have a education variable with fewer categories, which is more
@@ -1741,17 +1555,21 @@ will link to below.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-.strong[`5.` Brief analysis example]
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic data
+.strong[`6.` Brief analysis example]
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-`8.` Q &amp; A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q &amp; A
+
+
 
 ]
 
@@ -1850,12 +1668,6 @@ instructions from the IPUMS USA replicate weight FAQ page
 
 ---
 
-
-```
-#&gt; Warning: Removed 5 row(s) containing missing
-#&gt; values (geom_path).
-```
-
 ![](ipumsr_webinar_files/figure-html/migration-graph-2-1.png)&lt;!-- --&gt;
 
 ---
@@ -1863,22 +1675,23 @@ instructions from the IPUMS USA replicate weight FAQ page
 
 .greyed-out[
 
-
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-.strong[`6.` Intro to the IPUMS USA API]
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+.strong[`7.` Intro to the IPUMS USA API]
 
-`8.` Q &amp; A
+`8.` Preview of IPUMS API functionality
+
+`9.` Q &amp; A
 
 ]
 
@@ -2015,17 +1828,20 @@ key as an argument when we make API calls.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Intro to the IPUMS USA API
+`6.` Brief analysis example
 
-.strong[`7.` API use case 1: Revise your extract]
+`7.` Intro to the IPUMS USA API
 
-`8.` Q &amp; A
+.strong[`8.` Preview of IPUMS API functionality]
+
+`9.` Q &amp; A
+
 
 ]
 
@@ -2082,13 +1898,7 @@ analysis script, replacing the old filename.
 
 ---
 
-
-```
-#&gt; Warning: Removed 25 row(s) containing missing
-#&gt; values (geom_path).
-```
-
-![](ipumsr_webinar_files/figure-html/unnamed-chunk-46-1.png)&lt;!-- --&gt;
+![](ipumsr_webinar_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
 
 ???
 Now we can create a graph similar to the education one grouping instead by 
@@ -2110,19 +1920,26 @@ significant.
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Intro to the IPUMS USA API
+`6.` Brief analysis example
 
-`7.` API use case 1: Revise your extract
+`7.` Intro to the IPUMS USA API
 
-.strong[`8.` API use case 2: Share your extract]
+`8a.` API use case 1: Revise your extract
+
+.strong[`8b.` API use case 2: Share your extract]
+
+`9.` Q &amp; A
+
 
 ]
+
+
 
 ---
 
@@ -2167,23 +1984,28 @@ data &lt;- read_ipums_micro(ddi)
 .greyed-out[
 
 
+
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Intro to the IPUMS USA API
+`6.` Brief analysis example
 
-`7.` API use case 1: Revise your extract
+`7.` Intro to the IPUMS USA API
 
-`8.` API use case 2: Share your extract
+`8a.` API use case 1: Revise your extract
 
-.strong[`9.` API use case 3: Share your analysis]
+`8b.` API use case 2: Share your extract
+
+.strong[`8c.` API use case 3: Share your analysis]
+
+`9.` Q &amp; A
 
 ]
 
@@ -2569,22 +2391,27 @@ students for a class assignment.
 
 .greyed-out[
 
-
 `1.` What is IPUMS?
 
 `2.` What is ipumsr, and why use it?
 
-`3.` Reading data into R
+`3.` How to create a data extract
 
-`4.` Exploring and manipulating metadata
+`4.` Reading data into R
 
-`5.` Brief analysis example
+`5.` Exploring and manipulating metadata
 
-`6.` Working with IPUMS geographic 
+`6.` Brief analysis example
 
-`7.` Preview of IPUMS API functionality
+`7.` Intro to the IPUMS USA API
 
-.strong[`8.` Q &amp; A ]
+`8a.` API use case 1: Revise your extract
+
+`8b.` API use case 2: Share your extract
+
+`8c.` API use case 3: Share your analysis
+
+.strong[`9.` Q &amp; A]
 
 ]
 
@@ -2612,6 +2439,7 @@ students for a class assignment.
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
+"highlightSpans": true,
 "countIncrementalSlides": false
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
