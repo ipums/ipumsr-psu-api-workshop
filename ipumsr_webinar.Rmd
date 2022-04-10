@@ -1150,9 +1150,9 @@ Let's leverage that attached metadata!
 Variable labels and descriptions:
 
 ```{r}
-ipums_var_label(ddi, MARRINYR)
+ipums_var_label(ddi, MIGRATE1)
 
-ipums_var_desc(ddi, MARRINYR) %>% strwrap(60)
+ipums_var_desc(ddi, MIGRATE1) %>% strwrap(60)
 ```
 
 ???
@@ -1168,7 +1168,7 @@ within the past year."
 Value labels:
 
 ```{r}
-ipums_val_labels(ddi, MARRINYR)
+ipums_val_labels(ddi, MIGRATE1)
 ```
 
 ???
