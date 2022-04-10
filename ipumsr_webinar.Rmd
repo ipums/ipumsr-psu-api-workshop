@@ -799,8 +799,8 @@ install.packages("purrr")
 ## HTML tables
 install.packages("DT")
 
-## gis
-install.packages("sf")
+## GitHub helper functions
+install.packages("usethis")
 ```
 
 ]
@@ -820,8 +820,8 @@ library(purrr)
 ## HTML tables
 library(DT)
 
-## gis
-library(sf)
+## GitHub helper functions
+library(usethis)
 ```
 
 ]
@@ -838,8 +838,8 @@ library(purrr)
 ## HTML tables
 library(DT)
 
-## gis
-library(sf)
+## GitHub helper functions
+library(usethis)
 ```
 
 
