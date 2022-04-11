@@ -2148,6 +2148,21 @@ Now this will work for anyone!
 ddi <- read_ipums_ddi("prcs_migration_extract.xml")
 data <- read_ipums_micro(
   ddi,
+  data_file = "prcs_migration_extract.dat.gz"
+)
+```
+
+
+---
+
+# Download the data if not available locally
+
+Now this will work for anyone!
+
+```{r eval=FALSE}
+ddi <- read_ipums_ddi("prcs_migration_extract.xml")
+data <- read_ipums_micro(
+  ddi,
   data_file = "prcs_migration_extract.dat.gz" #<<
 )
 ```
