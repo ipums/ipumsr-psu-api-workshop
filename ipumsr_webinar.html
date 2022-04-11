@@ -191,7 +191,7 @@ Public Health
 ???
 (Name, pronouns, academic field, time with IPUMS)
 
-So, my name is Derek Burk, I use he/him pronouns, I've been working on the
+So, my name is Derek Burk, my pronouns are he/him, I've been working on the
 IPUMS International team for the past four years, and my academic training is in
 sociology.
 
@@ -974,16 +974,16 @@ makes sense why we need both (streamlined version of what we did before)
 
 
 ```
-20152015020000000100000000000740000003200007033000099999990000010000003200000013130110340000770022006070713300021000110
-20152015020000000200000000002210000006700007031432000120000300010000006800000001010120251111110022001060633300000000110
-20152015020000000200000000002210000006700007031432000120000300020000008900000002020110361110110022001050501100012000110
-20152015020000000200000000002210000006700007031432000120000300030000009900010203030110020000110022000000010009999999110
-20152015020000000300000000003100000006000007031048000230000100010000006000000001010110421110770022004101011100023000110
-20152015020000000300000000003100000006000007031048000230000100020000008600000002020120381111770022006080813300000000110
-20152015020000000300000000003100000006000007031048000230000100030000009300020103030120130000770022001020230009999999110
-20152015020000000300000000003100000006000007031048000230000100040000009100020103030120120000770022001020260009999999110
-20152015020000000300000000003100000006000007031048000230000100050000009100020103030120090000770022004010160009999999110
-20152015020000000400000000010870000011000007031084000436000100010000011100000001010110282110220022004101011100024000110
+2015201502000000010000000000074000000320000703300009999999000001000000
+2015201502000000020000000000221000000670000703143200012000030001000000
+2015201502000000020000000000221000000670000703143200012000030002000000
+2015201502000000020000000000221000000670000703143200012000030003000000
+2015201502000000030000000000310000000600000703104800023000010001000000
+2015201502000000030000000000310000000600000703104800023000010002000000
+2015201502000000030000000000310000000600000703104800023000010003000000
+2015201502000000030000000000310000000600000703104800023000010004000000
+2015201502000000030000000000310000000600000703104800023000010005000000
+2015201502000000040000000001087000001100000703108400043600010001000001
 ```
 ???
 Looking at the first ten lines of our example data file, it makes sense why you 
@@ -1135,38 +1135,17 @@ Variable labels and descriptions:
 ipums_var_label(ddi, MIGRATE1)
 #&gt; [1] "Migration status, 1 year [general version]"
 
-ipums_var_desc(ddi, MIGRATE1) %&gt;% strwrap(60)
-#&gt;  [1] "MIGRATE1 reports whether the person had changed residence"    
-#&gt;  [2] "since a reference point 1 year ago. Specifically,"            
-#&gt;  [3] "individuals age 1+ were asked if they had lived in the"       
-#&gt;  [4] "\"same house\" (non-movers) or a \"different house\" (movers)"
-#&gt;  [5] "one year earlier. Persons who had moved were to indicate"     
-#&gt;  [6] "the foreign country or the state, county, and place of"       
-#&gt;  [7] "their normal residence during the reference year. Migration"  
-#&gt;  [8] "data were collected only for sample-line persons in 1950."    
-#&gt;  [9] ""                                                             
-#&gt; [10] "The category \"Same house\" includes all eligible persons who"
-#&gt; [11] "did not move since the reference year, as well as those who"  
-#&gt; [12] "had moved but by the enumeration or survey date had"          
-#&gt; [13] "returned to their earlier residence. The category"            
-#&gt; [14] "\"Different house\" includes persons who lived in a different"
-#&gt; [15] "house in the reference year. For 1950, movers (those who"     
-#&gt; [16] "reported living in a different house in the reference year)"  
-#&gt; [17] "are further subdivided according to type of move (e.g.,"      
-#&gt; [18] "within the county or across state lines). The ACS and the"    
-#&gt; [19] "PRCS report only same/different residence and identifies"     
-#&gt; [20] "those previously living abroad."                              
-#&gt; [21] ""                                                             
-#&gt; [22] "Therefore, for the ACS/PRCS samples, MIGRATE1 uses"           
-#&gt; [23] "information contained in the IPUMS variable MIGPLAC1 and"     
-#&gt; [24] "compatible PUMAs of migration and PUMAs of residence to"      
-#&gt; [25] "indicate whether movers migrated between states or within"    
-#&gt; [26] "the same state (the same levels of detail in the 1950"        
-#&gt; [27] "classification.). For movers who migrated between states, a"  
-#&gt; [28] "detailed version of MIGRATE1 indicates whether they moved"    
-#&gt; [29] "between contiguous or non-contiguous states. For movers who"  
-#&gt; [30] "migrated within the same state, detailed MIGRATE1 indicates"  
-#&gt; [31] "whether they moved within or between PUMAs."
+ipums_var_desc(ddi, MIGRATE1) %&gt;% 
+  substr(1,450) %&gt;% 
+  strwrap(60) 
+#&gt; [1] "MIGRATE1 reports whether the person had changed residence"    
+#&gt; [2] "since a reference point 1 year ago. Specifically,"            
+#&gt; [3] "individuals age 1+ were asked if they had lived in the"       
+#&gt; [4] "\"same house\" (non-movers) or a \"different house\" (movers)"
+#&gt; [5] "one year earlier. Persons who had moved were to indicate"     
+#&gt; [6] "the foreign country or the state, county, and place of"       
+#&gt; [7] "their normal residence during the reference year. Migration"  
+#&gt; [8] "data were collected only for sample-line persons in 1950."
 ```
 
 ???
@@ -1210,7 +1189,7 @@ yes.
 ipums_view(ddi)
 ```
 
-&lt;img src="images/ipums_view_screenshot.png" title="Screenshot of static html page generated by function 'ipums_view', showing variable label and variable description for the variable 'PHONE'." alt="Screenshot of static html page generated by function 'ipums_view', showing variable label and variable description for the variable 'PHONE'." width="1056" /&gt;
+&lt;img src="images/ipums_view_screenshot_migr.png" title="Screenshot of static html page generated by function 'ipums_view', showing variable label and variable description for the variable 'PHONE'." alt="Screenshot of static html page generated by function 'ipums_view', showing variable label and variable description for the variable 'PHONE'." width="1993" /&gt;
 
 ???
 For a more browsable view of the metadata, the ipums_view() function makes a
@@ -1388,8 +1367,8 @@ data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
 
 . . .
 
-<div id="htmlwidget-aa6d1c4fe00961f5f348" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-aa6d1c4fe00961f5f348">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-a96b12a1f8bbf87d00c1" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-a96b12a1f8bbf87d00c1">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ???
 [Read bullet point]
@@ -1449,6 +1428,7 @@ differences, as we'll do below, this might still be too much detail.
 
 ```r
 college_regex &lt;- "^[123] year(s)? of college$"
+
 data$EDUCD3 &lt;- data$EDUCD %&gt;%
   lbl_collapse(~.val %/% 10) %&gt;% 
   lbl_relabel(
@@ -1543,6 +1523,11 @@ regular expression.
 ---
 
 # `lbl_relabel()`
+
+
+```r
+levels(data$EDUCD3)
+```
 
 
 ```
@@ -1868,7 +1853,7 @@ analysis script, replacing the old filename.
 
 ---
 
-![](ipumsr_webinar_files/figure-html/unnamed-chunk-37-1.png)&lt;!-- --&gt;
+![](ipumsr_webinar_files/figure-html/unnamed-chunk-38-1.png)&lt;!-- --&gt;
 
 ???
 Now we can create a graph similar to the education one grouping instead by
@@ -1878,6 +1863,33 @@ and that the lowest and middle quintiles have a less pronounced jump in
 migration in 2018. Again, I want to remind you that these are purely descriptive
 trends, and that differences over time and by group may not be statistically
 significant.
+
+---
+
+# How to create the extract from scratch
+
+
+```r
+my_extract &lt;- define_extract_micro(
+  "usa",
+  description = "Puerto Rico migration extract",
+  samples = c("us2015b", "us2016b", "us2017b", "us2018b", "us2019b"),
+  variables = c("AGE", "SEX", "EDUC", "MIGRATE1", "HHINCOME")
+)
+
+ddi &lt;- my_extract %&gt;% 
+  submit_extract() %&gt;% 
+  wait_for_extract() %&gt;% 
+  download_extract() %&gt;% 
+  read_ipums_ddi()
+
+data &lt;- read_ipums_micro(ddi)
+```
+
+???
+And just so you don't think the API can only revise extracts created on the 
+website, here's how you'd create and download the same extract that Dan made 
+earlier, with the addition of the HHINCOME variable.
 
 ---
 
@@ -2103,7 +2115,7 @@ brief live demo at the end of the presentation.
 
 ---
 
-# Download the data if not available locally
+# Then hard-code the renamed files
 
 Now this will work for anyone!
 
@@ -2119,7 +2131,7 @@ data &lt;- read_ipums_micro(
 
 ---
 
-# Download the data if not available locally
+# Then hard-code the renamed files
 
 Now this will work for anyone!
 
