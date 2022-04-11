@@ -6,36 +6,28 @@ output: html_document
 
 # NO HEADING (1)
 
-Welcome, everyone, to this webinar on using IPUMS data in R with 
-ipumsr. We only have an hour, and we want to leave time for questions at the 
-end, so this will be a whirlwind tour of some of the key features of ipumsr. 
+Thanks to everyone for joining us today, and thanks to Scott for organizing this
+workshop and inviting us to talk about "Enhancing reproducibility with the IPUMS
+API and the ipumsr package." Before getting to the IPUMS API, we will provide
+some helpful context in terms of what data are available from IPUMS, how to
+create a data extract without the API, and quick introduction to some of the key
+functionality of the ipumsr package.
 
-Our goal is to get you excited about analyzing IPUMS data using ipumsr, and
-point you to additional resources to explore on your own. As you use ipumsr, you
-are bound to have questions, and at the end we will provide links to several
-places where you can seek help, including by reaching out to our excellent IPUMS
-user support team or posting a question on the IPUMS user forum.
+All the materials for this presentation, including a PDF version of these 
+slides, will be available on GitHub, and we'll share the link after the 
+workshop, so you shouldn't feel the need to take extensive notes. We should have 
+time at the end of our presentation for some Q&A, but you can also put questions 
+in the chat during the presentation and one of us will try to answer or add them 
+to a list to discuss at the end.
 
-We will also share with you the webinar recording, these slides, and all of the
-code used to build this presentation, so there's no need to frantically jot down
-notes during the webinar itself. You should, however, type any questions in the
-Q&A as they occur to you, and our user support expert Grace will either answer
-them or add them to the list to be answered at the end.
-
-Finally, I just want to acknowledge that the ipumsr package was created by Greg
-Freedman Ellis, and this webinar is based on a presentation created by Greg, so
-thanks to Greg for creating a great package, and for letting us use your slides.
-
-With that, we'll get started by briefly introducing ourselves. You'll primarily 
-be hearing from me and Dan, but the development of the webinar was a 
-collaborative effort between Dan, Kara, and myself.
+With that, we'll get started by briefly introducing ourselves.
 
 
 # Who we are (2)
 
 (Name, pronouns, academic field, time with IPUMS)
 
-So, my name is Derek Burk, I use he/him pronouns, I've been working on the
+So, my name is Derek Burk, my pronouns are he/him, I've been working on the
 IPUMS International team for the past four years, and my academic training is in
 sociology.
 
@@ -67,10 +59,8 @@ ipums has grown substantially since its first beta release in 1993,
 
 started with **US census data** has grown to include 9 collections
 
-*mostly just segueing to projects*
 
-
-# Poll: Which IPUMS data collections have you used already? (7)
+# Harmonization (7)
 
 
 
@@ -92,7 +82,7 @@ started with **US census data** has grown to include 9 collections
 
 # NO HEADING (11)
 
-Check out Matt Gunther's blog using IPUMS Global Health Data
+
 
 
 # NO HEADING (12)
@@ -112,7 +102,7 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 # NO HEADING (15)
 
-
+Check out blog using IPUMS Global Health Data
 
 
 # NO HEADING (16)
@@ -120,29 +110,39 @@ Check out Matt Gunther's blog using IPUMS Global Health Data
 
 
 
-# Poll: Which IPUMS data collections are you most excited to use in the future ? (17)
+# NO HEADING (17)
 
 
 
 
-# So what is IPUMS? (18)
+# NO HEADING (18)
+
+
+
+
+# NO HEADING (19)
+
+
+
+
+# So what is IPUMS? (20)
 
 So ipums really is **data** and a whole lot of it. These 9 different projects interact with different types of data and at different scales but they are united in the use of metadata that helps contextualize the data
 
 *So I know you're asking yourselves..*
 
 
-# So what is IPUMS? (19)
+# So what is IPUMS? (21)
 
 
 
 
-# Overview (20)
+# Overview (22)
 
 
 
 
-# What is ipumsr? (21)
+# What is ipumsr? (23)
 
 (Metadata such as value labels, variable labels, and detailed variable 
 descriptions.)
@@ -150,7 +150,7 @@ descriptions.)
 Initial API support will be for IPUMS USA, with more projects to follow soon.
 
 
-# Why use ipumsr? (22)
+# Why use ipumsr? (24)
 
 Regarding "One package": Without ipumsr, you'd need to use a variety of
 different approaches from different packages to read in and explore IPUMS
@@ -165,63 +165,34 @@ of IPUMS data.
 
 *a one stop shop that makes it easy to work with ipums data*
 
-
-# One package to rule them all (23)
-
-
-
-
-# Why use ipumsr? (24)
-
 Regarding "More features": The aforementioned IPUMS API support will be the next
 big feature. Another potential new feature is adding tools for properly handling
 survey weights. Let us know what would be helpful to you via GitHub or email.
 
 
-# Why use ipumsr? (25)
-
-There are other ways to read IPUMS data into R, but ipumsr is the fastest way 
-to read the data in with attached metadata, such as variable and value labels.
-
-Relatively small example, so the time costs can grow with larger datasets.
-
-
-# Poll: Have you ever used ipumsr before? (26)
-
-If you've never used ipumsr before you may be asking *where can i download it*
-
-
-# Installing ipumsr (27)
-
-More advanced users might be thinking, *"this stable release is boring"* in which case you can download the development version to test out the latest features. 
-
-The API functions are in the development version, but the API itself is not yet 
-publicly available.
-
-
-# To run the code in this webinar (28)
+# To run the code in this presentation (25)
 
 Repeat: slides/recording will be available. To run this code yourself you can clone/download the repo from our github. This provides the data extracts you'll need. 
 
 However, you may need to install some additional packages used in the example code below, as shown on the next slide.
 
 
-# Install R packages (as needed) (29)
+# Install R packages (as needed) (26)
 
 reminder, installing packages only needs to happen once, but some packages do update frequently so it can be a good idea to re-install once in a while
 
 
-# Loading packages (30)
+# Overview (27)
 
-These packages are used in some of the examples we will walk through.
-
-
-# Overview (31)
-
-Dan passes to Kara/Derek
+Dan passes to Derek. Derek switches to a web demo of extract system.
 
 
-# Downloading your data extract (32)
+# Overview (28)
+
+Website demo ends, back to slides. Derek passes to Kara.
+
+
+# Downloading your data extract (29)
 
 Kind of confusing how to save the DDI/.xml file. THIS IS HOW.
 DDI is EXTREMELY important, as it contains all the instructions regarding the METADATA
@@ -241,7 +212,7 @@ most IPUMS projects follow this standard.
 Make sure to save the data and DDI files in the same location.
 
 
-# Downloading your data extract (33)
+# Downloading your data extract (30)
 
 The links under "Command Files" contain program-specific code for reading in the
 data. The R one contains the code we'll show on the next slide.
@@ -250,7 +221,7 @@ This helper code checks that you have ipumsr installed, and if you do, it reads
 in the DDI codebook and data into separate objects.
 
 
-# Read in the data (34)
+# Read in the data (31)
 
 So you've downloaded both the data and the DDI codebook, and saved them in the 
 same folder. Here's how you actually read the data into R.
@@ -259,26 +230,18 @@ The first option, and the one I'd recommend, is to read the DDI codebook into an
 object named "ddi" using the `read_ipums_ddi()` function, and then supply that 
 ddi object to `read_ipums_micro()`.
 
-The second option is to read in the data by passing the file path to the DDI
-codebook to the `read_ipums_micro()` function. However, we recommend the first
-pattern because it's often helpful to save the codebook to it's own object to
-preserve the original metadata once you start messing around with the data.
-
-Notice that in both cases we are supplying the codebook (either already read in
+Notice that we are supplying the codebook (either already read in
 or as a file path), not the data file, to `read_ipums_micro()`. The fact that we
-don't point to the actual data file when reading in the data might confusing. If
-I want to read in the data shouldn't I point to the data file?
+don't point to the actual data file when reading in the data might confusing. 
+
+Want to emphasize that we are pointing to the ddi - not the data file - to read 
+it in.
+
+***Change the slides below to just show what's in a ddi + data file, so it
+makes sense why we need both (streamlined version of what we did before)
 
 
-# Why do I point to the codebook to read in the data? (35)
-
-Here's my attempt to explain this in a hopefully memorable way: the data file 
-is the raw ingredients, and the codebook is the recipe. And when you go to make 
-dinner, your recipe tells you how to combine your ingredients to get the 
-finished product.
-
-
-# The data file is just raw ingredients (36)
+# The data file is just raw ingredients (32)
 
 Looking at the first ten lines of our example data file, it makes sense why you 
 can't just tell R "read this data file into a data.frame". The data file itself
@@ -290,7 +253,7 @@ of those values might be.
 that is not available in some years of our data.)
 
 
-# The DDI codebook is the recipe (37)
+# The DDI codebook is the recipe (33)
 
 The DDI codebook tells you what to do with the ingredients in the data file. It
 contains a bunch of information about your extract, including the name of the
@@ -301,7 +264,7 @@ But perhaps the most important element for understanding and analyzing the data
 is the "var_info" element, so let's take a look at that.
 
 
-# The DDI codebook is the recipe (38)
+# The DDI codebook is the recipe (34)
 
 As we can see here, var_info is just data.frame where each row has information 
 about one variable, including the variable name, label, description, and value 
@@ -312,167 +275,98 @@ var_info data.frame, as long as you remember that to read in the data, you must
 point to the DDI codebook, not the data file.
 
 
-# Overview (39)
+# Overview (35)
 
 
 
 
-# What's in my extract again? (40)
-
-So we've read in our data -- how do we go about exploring it?
-
-We could refer back to the description we wrote when creating the extract, 
-maybe that will be informative. Let's see (read extract description). Ooh, 
-that's not very helpful. I'm guessing this joke hits close to home for some of 
-you long-time IPUMS users.
-
-
-# What's in my extract again? (41)
+# What's in my extract again? (36)
 
 [Read text on slides]
 
 
-# Available metadata (42)
+# Available metadata (37)
 
 So you can see here that ipumsr provides function to extract information from 
 the DDI object without the need to slice and dice that "var_info" data.frame I 
-showed before. Here we grab the label and description for the variable PHONE.
+showed before. Here we grab the label and description for the variable "Married 
+within the past year."
 
 
-# Available metadata (43)
+# Available metadata (38)
 
 Similarly, we can print the value labels by pointing to the DDI. We see here 
-that the variable PHONE takes four values: no, yes, not applicable, and 
-suppressed.
+that the variable married in the last year takes three values: NA, blank, and 
+yes.
 
 
-# An interactive view of metadata (44)
+# An interactive view of metadata (39)
 
 For a more browsable view of the metadata, the ipums_view() function makes a
 nicely-formatted static html page that allows you to browse the metadata
 associated with your data extract.
 
 
-# Wrangling value labels (45)
+# Wrangling value labels (40)
 
 IPUMS value labels don't translate perfectly to R factors. The most important 
 difference is that in a factor, values always count up from 1. In IPUMS 
 variables, the values themselves often encode meaningful information about a 
 nested structure, which we'll see with the education variable below.
-  
-To preserve both the value and label, `ipumsr` imports labelled variables as
-`haven::labelled()` objects, but these aren't always the easiest to deal with, 
-because they aren't widely supported by functions from base R and other 
-packages. Thus, you will almost always want to convert these objects to 
-something like a factor or a regular numeric or character vector.
+
+Other stats packages are more full featured - for example, R doesn't natively support variables where only some of the values are labelled, or labelled variables with values that aren't all sequential. 
+
+To preserve the value and label `ipumsr` imports labelled variables as
+`haven::labelled()` objects which are structured more like labelled variables in
+other stats packages.
 
 Luckily ipumsr provides helpers that allow you to use information from both the
 value and label to transform your variables into the shape you want.
+*We will show you some of these helper functions today*
+
+When you are done transforming your variables, you will probably need to change back to a format native to R to run an analysis because labelled variables aren't supported. To 
+do this you'll need to convert back to factor or numeric or char vector using as_factor or zap_label.
 
 
-# haven::labelled columns at a glance (46)
-
-Here's what the data look like when you read them in.
-
-
-One thing I like about the behavior of `haven::labelled()` objects is how they 
-show the value and the label when you print your data. 
-
-But let's say you just don't want to deal with these special haven::labelled
-objects, and you want to get rid of them in one fell swipe. I would advise
-against this approach in general, but it could be what you want in some cases.
-
-
-# Get rid of haven::labelled columns (47)
-
-One option is the `as_factor()` function, which can be applied to the whole data 
-frame at once. Here we see that the values have been stripped away, leaving only 
-the labels as factor levels.
-
-
-# Get rid of haven::labelled columns (48)
-
-Alternatively, if you just want the numeric values, you can use `zap_labels()` 
-on the whole data frame. Here we see that the labels have been stripped away, 
-leaving only the numeric codes.
-
-Both `as_factor()` and `zap_labels()` can be applied to a single column of a 
-data frame as well, to just strip away values or labels for that one column.
-
-But if you're going to want to recode any of these variables, you'll often be 
-able to do that more elegantly when you have access to both values and labels, 
-with the help of special ipumsr functions that leverage all that information.
-
-These special functions might take some trial and error when you first start 
-using them, but I promise the payoff will be worth it.
-
-***I wonder if a transition slide here would be nice to transition away from 
-getting rid of labelled columns to using them with ipumsr. Would maybe help 
-to distinguish which functions (ours) we are suggesting to use. ***
-
-
-# Using ipumsr label helper functions (49)
+# Using ipumsr label helper functions (41)
 
 
 
 
-# `lbl_na_if()` (50)
+# haven::labelled columns at a glance (42)
 
-The first label helper function is label NA if, which allows you to set values 
-to NA, which is R's code for missing values, according to either the value or 
-the label.
-
-Notice that we've called `ipums_val_labels()` directly on the labelled column, 
-rather than pointing to the DDI object. This works if PHONE is still a 
-haven::labelled column.
-
-In this case, given the value labels we see here, it makes sense to set values 0
-and 8 to missing.
-
-
-# `lbl_na_if()` (51)
-
-`lbl_na_if()` supports a special syntax used by a few of ipumsr's label
-functions that allows you to use anonymous functions (signaled by the "tilde"
-symbol, which is that little squiggly line) that refer to either the value of a
-variable (using the special dot val variable), the label (using dot lbl), or
-both. Here we use dot val to specify that PHONE2 should be set to missing if the
-original value is zero or eight.
-
-This can be read as, "recode variable PHONE to NA if the value is zero or 
-eight".
-
-Notice in all these examples that we create a new variable for the transformed 
-version, so that we don't overwrite the original. This can be useful so that 
-you can engage in some trial and error until you get the variable transformed as 
-you want it.
-
-
-# `lbl_na_if()` (52)
-
-In case you're unfamiliar with the anonymous function notation, that squiggly 
-tilde could be replaced with a regular function definition, as shown here. So 
-anytime you see the tilde symbol in any of these label helper functions, you 
-can read it as "a function of dot val and dot label".
-
-
-# `lbl_na_if()` (53)
-
-Because lbl_na_if works with both values and labels, we could accomplish the 
-same thing by referring to the labels. This time, we specify that PHONE3 should 
-be set to missing if the original label was "N/A" or "Suppressed".
-
-
-# `lbl_collapse()` (54)
-
-[Read bullet point]
+Here's what the data look like when you read them in. Show detailed education
+variable as an example - nested structure.
 
 We see here that values less than 10 indicate missing or no schooling values; 
 values between 10 and 19 all capture levels between nursery school and grade 4; 
 and so on.
 
+We can take advantage of all of the details given by both the value and label
+when we use a labelled variable.
 
-# `lbl_collapse()` (55)
+
+# `lbl_collapse()` (43)
+
+[Read bullet point]
+
+
+# `lbl_collapse()` (44)
+
+
+
+
+# `lbl_collapse()` (45)
+
+
+
+
+# `lbl_collapse()` (46)
+
+
+
+
+# `lbl_collapse()` (47)
 
 [Read bullet point]
 The label collapse function allows you to collapse values based on a
@@ -491,14 +385,14 @@ going on here take a bit of time to unpack, but hopefully this gives you a sense
 of the usefulness and power of this function.
 
 
-# Still too detailed for a graph (56)
+# Still too detailed for a graph (48)
 
 This shows the values and labels that we get by applying lbl_collapse() to 
 collapse the last digit. However, if we want to visualize educational 
 differences, as we'll do below, this might still be too much detail.
 
 
-# `lbl_relabel()` (57)
+# `lbl_relabel()` (49)
 
 That's where `lbl_relabel()` comes in.
 
@@ -523,13 +417,13 @@ two with a label of "Less than High School" when the input value is greater
 than 0 and less than 6".
 
 
-# `lbl_relabel()` (58)
+# `lbl_relabel()` (50)
 
 Notice that we have examples of using the dot val variable on the first and 
 fourth lines...
 
 
-# `lbl_relabel()` (59)
+# `lbl_relabel()` (51)
 
 ...and of using the dot label variable on the second and third lines. The 
 third line of the lbl_relabel() call can be read as "assign a value of 4 with a 
@@ -537,7 +431,7 @@ label of "Some college" when the input label matches our "college_regex"
 regular expression.
 
 
-# `lbl_relabel()` (60)
+# `lbl_relabel()` (52)
 
 So, now we have a education variable with fewer categories, which is more
 suitable for visualization.
@@ -546,142 +440,55 @@ For more on these helper functions, see the "Value labels" vignette, which we
 will link to below.
 
 
-# Overview (61)
+# NO HEADING (53)
+
+Now we're ready to create a line graph of the percentage of people who moved in 
+the past year. Notice that we are excluding people with missing values on the 
+migration variable from our calculations.
+
+It looks like the percentage of people who had moved in the past year increased 
+from about 6% to 8% between 2017 and 2018, possibly as a result of Hurricane 
+Maria, which made landfall in September of 2017.
+
+However, it is important to keep in mind that all of the analyses presented here
+include only point estimates without any estimation of sampling error. Thus, we
+cannot assess the statistical significance of any differences over time or
+between groups. To estimate confidence intervals for point estimates from the
+ACS or PRCS, use the replicate weight variables REPWT and REPWTP. There are 
+instructions for using those variables on the IPUMS USA replicate weight FAQ 
+page, which is linked from the variable descriptions for REPWT and REPWTP.
+
+
+# NO HEADING (54)
+
+Now, we can use that nice, collapsed education variable that we just created to 
+visualize these trends by level of education. Here we see a more complex picture 
+of who was moving during this time period, though again, we would need to 
+calculate confidence intervals to know whether these differences over time or by 
+education are statistically significant.
+
+
+# Overview (55)
 
 
 
 
-# Phone availability  (62)
+# API Timeline (56)
 
-Microdata often needs to be summarized at a higher level for visualization. In 
-this case, if we want to make a graph of phone availability over time, we need 
-to first summarize at the year level.
+The API is not yet publicly available, but is available to volunteer beta 
+testers. If you'd like to become a beta tester, email ipums+api@umn.edu and you 
+should hear back within about two business days.
 
-The first block of code computes the weighted proportion of persons with access
-to a phone in each year. Once our data are summarized so that each row
-represents a value for one year, we can make a graph by year.
-
-
-# Phone availability (63)
-
-Here we see a strange decline, then resurgence, in access to a phone line. 
-What's going on here?
+IPUMS USA is the first microdata project for which we are adding API support,
+but there is already a public API for the IPUMS NHGIS collection, which offers
+access to tabular data from the US Census Bureau, as well as corresponding
+geographic boundaries. ipumsr does not yet include functions for interacting
+with the NHGIS API, but there is a guide to interacting with that API in R,
+which we'll share a link to at the end of these slides, and we are currently
+working to add that functionality to ipumsr.
 
 
-# Interpretation (64)
-
-If we look at the Comparability tab for the PHONE variable on the IPUMS USA 
-website, we find an explanation:
-
-The 2008 ACS and 2008 PRCS instructed respondents to include cell phone service;
-prior to 2008, this was not made explicit.
-
-Just one small example of the value added to these data by the IPUMS USA team.
-
-
-# Phone availability by education (65)
-
-With our simplified education variable, we can also plot access to a phone line 
-by education. Here we see that anomalous drop and resurgence is present at all 
-education levels, and that differences in phone access by education have 
-declined since 1960.
-
-
-# Overview (66)
-
-
-
-
-# Getting geographic data (67)
-
-[Read bullet points]
-
-
-# Getting geographic data (68)
-
-Geographic boundary data is usually found via a "Geography and GIS" link on the
-left sidebar of the home page for a data collection, under the heading
-"Supplemental Data".
-
-Under that link, you can browse available shape files, then download the ones 
-you want in a zip archive, and unzip the contents of the archive into their 
-own folder within your project directory.
-
-
-# Loading shape data (69)
-
-The sp package (short for "spatial") has been around since 2005. It is more
-established and some other R spatial packages might still assume you are using
-sp data structures. The sf package (short for "simple features") is newer, but 
-seems to be on the rise as an alternative sp for some use cases.
-
-For more on the differences between sp and sf, see the free online book 
-*Geocomputation with R*, which we link to at the end of the slides.
-
-
-# Loading shape data (70)
-
-At the risk of oversimplifying, an sf object is basically a tibble or data.frame
-with a special geometry column. That simplification helps me understand the 
-process of joining the sf object to data.
-
-
-# Joining shape data (71)
-
-Before joining to shape data, we need to summarize our person level data at the 
-level of the geography we are joining to. Thus, the first block of code computes 
-the weighted proportion of persons with access to a phone for each CONSPUMA 
-unit in each year. Once our data are summarized so that each row represents a 
-value for one CONSPUMA unit in one year, we can join to the sf object we loaded 
-above.
-
-
-# Plotting shape data (72)
-
-
-
-
-# Plotting shape data (73)
-
-As with phone access by education, these maps show evidence of declining
-geographic variation in access to a phone line.
-
-For more information on IPUMS geographic data, see the ipumsr vignette on
-working with geographic data, or one of several collection-specific recorded
-webinars and tutorials on that topic, which can be found on the tutorials page 
-which we will link to below.
-
-
-# Overview (74)
-
-
-
-
-# API Timeline (75)
-
-The API is not yet publicly available, but we wanted to offer a preview of the 
-functionality that will soon be available in ipumsr.
-
-We plan to support creating extracts via API for all of our data collections, 
-but that support will be rolled out one collection at a time, to allow us to 
-thoroughly test that the extract API is working as expected for each collection.
-
-IPUMS USA is the first collection that will be supported, and we are currently
-doing internal testing of the API for USA. We'll put out a call for beta testers
-before the end of this year, but feel free to reach out in the meantime if you
-want to be added to that list. We expect to open up the USA extract API to all
-IPUMS USA users in the first few months of next year, depending on what sort of
-issues arise during beta testing.
-
-Another important note is that there is already a public API for the IPUMS NHGIS
-collection, which offers access to tabular data from the US Census Bureau, as
-well as corresponding geographic boundaries. ipumsr does not yet include
-functions for interacting with the NHGIS API, but there is a guide to
-interacting with that API in R, which we'll share a link to at the end of these
-slides, and we plan to add that functionality to ipumsr sometime next year.
-
-
-# What can I do with the API? (76)
+# What can I do with the IPUMS USA API? (57)
 
 So, your next question might be, "what will I be able to do with this API?" 
 Here's the high-level overview:
@@ -707,7 +514,7 @@ developing API client tools for Python in parallel with the R client tools that
 will be part of the ipumsr package.
 
 
-# What can't I do with the API? (77)
+# What can't I do with the IPUMS USA API? (58)
 
 The other important question to answer is what the API can't do.
 
@@ -721,6 +528,8 @@ through the existing extract system.
 
 Secondly, you can't use the API to explore what data are available from IPUMS. 
 We plan to add a public metadata API, but the timeline on that is more unknown.
+For now, you must rely on the IPUMS website to explore the variables and 
+samples that are available.
 
 A third limitation is that API users will not initially have access to all the
 bells and whistles of the extract system, such as the ability to attach 
@@ -728,102 +537,233 @@ characteristics of family members such as spouses or children. We plan to add
 these capabilities once the core functionality is well-tested and stable.
 
 
-# Pipe-friendly example (78)
+# How to use your IPUMS USA API key (59)
 
-Now let's get to some example code! We'll start with a brief example that shows 
-a typical API workflow using the "pipe" operator from the magrittr package, 
-which is often used in conjunction with tidyverse packages such as dplyr.
-
-We start by defining an extract object using the `define_extract()` function, 
-and specifying 
-
-- a data collection -- in this case, "usa" 
-- an extract description -- "Occupation by sex and age"
-- samples -- here we're asking for the 2017 and 2018 American Community Survey 
-- and variables -- sex, age, industry and occupation.
-
-The next code chunk shows how we can go from this extract definition to having 
-our extract data available in our R session in one piped expression. For any of 
-you who are unfamiliar with the pipe operator, it can be read aloud as the word 
-"then". So this piped expression says, take "my_extract", *then* submit extract, 
-*then* wait for extract, *then* download extract, *then* read in the data using 
-`read_ipums_micro()`.
-
-Since we have to wait for the extract to process, this piped expression will 
-take a bit of time to execute, depending on the size of your extract.
+If you become an API beta tester, you will receive instructions on creating an 
+API key. Once you create the key, we recommend storing it in an environment 
+variable named "IPUMS_API_KEY" by defining that environment variable in a file 
+named ".Renviron" that lives in your user account home directory. You can also 
+store it a file named ".Renviron" in your project working directory, but then 
+you need to make sure you don't include that file if you share your work with 
+others, either directly or through a code repository like GitHub. The rest of 
+the API code examples in this presentation assume that we've already stored our 
+API key in this environment variable, and thus that we don't need to pass that 
+key as an argument when we make API calls.
 
 
-# Pipe-friendly example (79)
-
-And just for fun, here's what the same piped expression looks like with the new
-base R pipe, available as of R 4.1.
-
-
-# Pipe-friendly example (80)
-
-Here are the messages you'll see if you run that code once the API is live. As 
-you can see, the `wait_for_extract()` function doubles the wait time after every 
-status check, but the maximum wait time between checks is capped at five at five 
-minutes. In the testing I've done, even large extracts of around 30 million 
-records and 40-50 variables can finish in under 30 minutes, but the wait times 
-also depend on how much traffic the extract system is getting.
-
-
-# Revise and resubmit (81)
-
-Another handy workflow where using the extract API is a "revise and resubmit" 
-workflow. Often, you might realize that you should have added one more or a few 
-more variables to your previous extract, and you just want to resubmit that 
-extract with a few additional variables.
-
-To do this with ipumsr functions, you first pull down the definition of your 
-most recent extract using the function `get_recent_extracts_info_list()`, which 
-can return information on up to 10 recent extracts. Here, we specify that we 
-only want one recent extract (the most recent one), but because this function 
-always returns a list, we also have to subset the first element.
-
-Alternatively, if we know the extract number of the extract we want to revise, 
-we can use `get_extract_info()` and specify a shorthand notation for USA 
-extract number 33, for example.
-
-
-# Revise and resubmit (82)
-
-Once we have the old extract definition, we can pass it to the 
-`revise_extract()` function to add a variable, then resubmit it.
-
-The `revise_extract()` function currently allows you to add and remove variables
-and samples, as well as change the description, data format, or data structure
-of your extract definition.
-
-
-# Share your extract definition (83)
-
-One thing that really excites us about the API is the ability to share extract
-definitions to facilitate collaboration or reproducibility.
-
-To write your extract out to a JSON file, you can use the 
-`save_extract_as_json()` function as shown here.
-
-Saving as JSON makes it easier to share an extract definition with another user 
-who might not use R -- they can use the JSON definition to submit the extract 
-using curl or Python, possibly using the currently in-development IPUMS API 
-client tools in the "ipumspy" module.
-
-If you are using ipumsr, the `define_extract_from_json()` function will create
-an extract object from a JSON-formatted definition shared by someone else.
-
-As Dan pointed out as we were preparing this webinar, this functionality could 
-also be useful for instructors who want to share an extract definition with 
-students for a class assignment.
-
-
-# Overview (84)
+# Overview (60)
 
 
 
 
-# Resources (85)
+# Overview (61)
+
+
+
+
+# Add HHINCOME to our extract (62)
+
+After looking at that graph of migration by education, it might have occurred to 
+me that I'd like to make a similar graph by level of household income. 
+Unfortunately, I didn't include the variable HHINCOME in my extract. This was a 
+common occurrence when I was an IPUMS user in grad school: I'd start exploring 
+my data and realize that I wanted an additional variable.
+
+Although the IPUMS website already includes a "Revise extract" feature that 
+allows you to use a previous extract as a starting point for a new one, ipumsr 
+includes functions that use the API to accomplish the same thing right from 
+your R session.
+
+[Describe what the code does, but don't go into too much detail]
+
+Not only does this approach save you a little time pointing and clicking through 
+the IPUMS USA website, it also streamlines the file download process by 
+automatically saving the DDI codebook and data files into your current working 
+directory. I think this is an example of how the IPUMS API, at this early stage 
+in its development at least, doesn't so much enable you to do things that were 
+impossible without the API, but rather provides slightly more efficient and 
+seamless ways of completing existing workflows.
+
+Note that you would likely run this code interactively as a convenient way to 
+revise, resubmit, and redownload your extract, but you wouldn't want to include 
+it in your analysis script, because then you'd be waiting for and redownloading 
+your extract every time you reran your analysis.
+
+
+# Update your script with new filename (63)
+
+Instead, you would likely hard-code the newly downloaded filename into your 
+analysis script, replacing the old filename.
+
+
+# NO HEADING (64)
+
+Now we can create a graph similar to the education one grouping instead by
+household income quintile. Here we see that persons from households in the
+lowest income quintile were more likely to move across this whole time period,
+and that the lowest and middle quintiles have a less pronounced jump in
+migration in 2018. Again, I want to remind you that these are purely descriptive
+trends, and that differences over time and by group may not be statistically
+significant.
+
+
+# How to create the extract from scratch (65)
+
+And just so you don't think the API can only revise extracts created on the 
+website, here's how you'd create and download the same extract that Dan made 
+earlier, with the addition of the HHINCOME variable.
+
+
+# Overview (66)
+
+
+
+
+# Share your extract (definition) (67)
+
+Now let's imagine we've completed our analysis, which might have involved a few 
+more extract revisions, and we want to enable our collaborators or other 
+researchers to reproduce or build on our analysis. A crucial step toward that 
+goal is making sure those other researchers are using the same data that you 
+used. However, IPUMS terms prohibit users from freely sharing their data. 
+To communicate to other researchers the contents of your IPUMS extract, you 
+could describe the variables and samples and other options that you included, 
+but the API provides a more efficient and less error-prone way to share your 
+data extract, or more exactly, the definition of that extract.
+
+[Describing code...]
+
+The first step in this workflow is using the API to pull down the definition of 
+your extract...
+
+...once you've created the json file containing the extract definition, you can 
+share it with other researchers in whatever way is convenient.
+
+
+# Clone a shared extract (68)
+
+Because the extract definition is saved as JSON, your collaborators don't have 
+to use R to consume that file, but if they are using R, they can follow the 
+workflow shown here to read in the definition and submit their own extract 
+request for an identical dataset.
+
+
+# Overview (69)
+
+
+
+
+# Save analysis as RMarkdown (70)
+
+Now let's say you want to go a step further and share not just your extract 
+definition, but your full analysis from start to finish. I'll show a simple 
+example here, but this same workflow could be used to share a publication-ready 
+analysis and write-up.
+
+A good first step to share your analysis is to put it in an R Markdown document, 
+such as the one shown here. If you're not familiar with R Markdown, its a plain 
+text format that uses a special syntax to combine R code and formatted text, 
+which can then be rendered into HTML, PDF, or even Word document reports.
+
+
+# NO HEADING (71)
+
+This slide shows the result of rendering that RMarkdown document as an HTML 
+report. You can see R Markdown allows you to create reports with nice features 
+like a tabbed structure for different plots or report sections. In this report 
+I've hidden the code chunks used to load and prepare the data and to create the 
+graphs, but you can also include the code in the rendered report.
+
+
+# Instead of hard-coding the extract number... (72)
+
+Next, in that R Markdown document that contains your analysis and
+interpretation, you want to change the code that reads in the data so that it
+will work not only for you, but for those you share it with, who won't already
+have the data on their computer. So instead of hard-coding the extract number...
+
+
+# ...download the data if not available locally! (73)
+
+...you include code to download the data if it's not already downloaded and 
+available locally.
+
+The code on this slide shows one way to accomplish that. The first thing you'll
+notice is that we are checking for the existence of a DDI codebook file that
+isn't named with a collection and extract number, such as USA 14 from the
+previous slide, because if you are sharing this with someone else, you don't
+know what the extract number of their extract will be. If this DDI codebook file
+doesn't exist in the working directory, this code will load the extract
+definition from the included JSON file, submit a new extract request, download
+the extract files, and rename them to match this naming scheme, so that the next
+time you run the code, the DDI codebook file will be in your working directory,
+and all this code will be skipped.
+
+This code is included in an example R Markdown that we will share a link to, in 
+case you'd like to explore it in more detail or use it yourself.
+
+Adding this code to your R Markdown document will allow collaborators to run
+your code without making any changes, and we will show an example of that in a
+brief live demo at the end of the presentation.
+
+
+# Then hard-code the renamed files (74)
+
+
+
+
+# Then hard-code the renamed files (75)
+
+Now, since the code in the if statement ensures that the data are available 
+locally and have the expected filename, we can read in the DDI and data in a way 
+that will work for any researcher with API access. Notice that since we've 
+renamed the data file, we need to use the `data_file` argument in 
+`read_ipums_micro()` to specify that file name.
+
+
+# Create a GitHub repository (76)
+
+So again, you could share these files in whatever way is convenient, but putting 
+them in a GitHub repository is a great way to promote open science and 
+reproducibility.
+
+At this point, let's assume you are working in RStudio in a folder containing 
+two files: your R Markdown analysis document and the JSON definition of your 
+extract.
+
+
+# Create a GitHub repository (77)
+
+From the starting point on the previous slide, you can get your project on 
+GitHub in three R function calls. The first line turns your current working 
+directory into an RStudio project, if it isn't one already. The second line 
+turns on git version control for your project, again, if you aren't using it 
+already, and it optionally will make an initial commit on your behalf. Finally, 
+the third line creates a repository on github.com with the same name as your 
+project directory, connects that repository to your local project, and pushes 
+your committed files up to that GitHub repository.
+
+This workflow assumes that you already have git installed on your computer, that 
+you have an account on github.com, and that you have created a GitHub personal 
+access token. All these steps are described in the fantastic free online book 
+*Happy Git and GitHub for the useR* by Jenny Bryan.
+
+And note that while this workflow doesn't rely on the IPUMS API, it does use the 
+GitHub API, and I think the convenience of these functions from the usethis 
+package is a good example of the cool stuff APIs make possible.
+
+
+# Create a GitHub repository (78)
+
+With those three steps, we now have a GitHub repository that you can point 
+anyone you'd like to share your analysis with to. And as we'll show in a minute, 
+RStudio tries to make it easy to create a new project directly from a GitHub 
+repo, so this a great way to share your work with other R users.
+
+And with that, I'll turn it over to Dan for a brief live demo.
+
+
+# Resources (79)
 
 
 

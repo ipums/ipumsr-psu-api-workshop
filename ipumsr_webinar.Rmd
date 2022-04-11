@@ -194,7 +194,7 @@ Public Health
 ???
 (Name, pronouns, academic field, time with IPUMS)
 
-So, my name is Derek Burk, I use he/him pronouns, I've been working on the
+So, my name is Derek Burk, my pronouns are he/him, I've been working on the
 IPUMS International team for the past four years, and my academic training is in
 sociology.
 
@@ -1925,6 +1925,32 @@ significant.
 
 ---
 
+# How to create the extract from scratch
+
+```{r eval=FALSE}
+my_extract <- define_extract_micro(
+  "usa",
+  description = "Puerto Rico migration extract",
+  samples = c("us2015b", "us2016b", "us2017b", "us2018b", "us2019b"),
+  variables = c("AGE", "SEX", "EDUC", "MIGRATE1", "HHINCOME")
+)
+
+ddi <- my_extract %>% 
+  submit_extract() %>% 
+  wait_for_extract() %>% 
+  download_extract() %>% 
+  read_ipums_ddi()
+
+data <- read_ipums_micro(ddi)
+```
+
+???
+And just so you don't think the API can only revise extracts created on the 
+website, here's how you'd create and download the same extract that Dan made 
+earlier, with the addition of the HHINCOME variable.
+
+---
+
 # Overview
 
 .greyed-out[
@@ -2147,7 +2173,7 @@ brief live demo at the end of the presentation.
 
 ---
 
-# Download the data if not available locally
+# Then hard-code the renamed files
 
 Now this will work for anyone!
 
@@ -2162,7 +2188,7 @@ data <- read_ipums_micro(
 
 ---
 
-# Download the data if not available locally
+# Then hard-code the renamed files
 
 Now this will work for anyone!
 
