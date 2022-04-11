@@ -252,19 +252,15 @@ You can always reach out to through our **github**, or via **user support**.
 
 --
 
-6. Brief analysis example
+6. Intro to the IPUMS USA API
 
 --
 
-7. Intro to the IPUMS USA API
+7. IPUMS API use cases
 
 --
 
-8. IPUMS API use cases
-
---
-
-9. Q & A
+8. Q & A
 
 ---
 
@@ -287,13 +283,11 @@ You can always reach out to through our **github**, or via **user support**.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q & A
+`8.` Q & A
 
 
 
@@ -523,7 +517,7 @@ Check out blog using IPUMS Global Health Data
 .pull-right[
 
 
-- **IGIS** Shapefiles for admin level 2
+- **IHGIS** Shapefiles for admin level 2
 
 - https://ihgis.ipums.org/
 
@@ -537,7 +531,6 @@ Check out blog using IPUMS Global Health Data
 
 ---
 
-#
 ![IPUMS NHGIS project logo](images/nhgis.jpg)
 
 
@@ -675,13 +668,11 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q & A
+`8.` Q & A
 
 
 ]
@@ -867,13 +858,11 @@ reminder, installing packages only needs to happen once, but some packages do up
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q & A
+`8.` Q & A
 
 ]
 
@@ -900,13 +889,11 @@ Dan passes to Derek. Derek switches to a web demo of extract system.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q & A
+`8.` Q & A
 
 
 ]
@@ -969,8 +956,6 @@ in the DDI codebook and data into separate objects.
 
 ---
 
----
-
 # Read in the data
 
 ```{r include=FALSE}
@@ -987,9 +972,9 @@ if (!file.exists("prcs_migration_extract.xml")) {
     basename()
   # Infer data file name from DDI file name
   data_filename <- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
-  # Standardize DDI and data file names #<<
-  file.rename(ddi_filename, "prcs_migration_extract.xml") #<<
-  file.rename(data_filename, "prcs_migration_extract.dat.gz") #<<
+  # Standardize DDI and data file names
+  file.rename(ddi_filename, "prcs_migration_extract.xml")
+  file.rename(data_filename, "prcs_migration_extract.dat.gz")
 }
 
 ddi <- read_ipums_ddi("prcs_migration_extract.xml")
@@ -1110,13 +1095,11 @@ point to the DDI codebook, not the data file.
 
 .strong[`5.` Exploring and manipulating metadata]
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q & A
+`8.` Q & A
 
 ]
 
@@ -1520,8 +1503,10 @@ regular expression.
 # `lbl_relabel()`
 
 ```{r, echo = FALSE}
+old_width <- getOption("width")
+options(width = 50)
 levels(data$EDUCD3)
-
+options(width = old_width)
 ```
 ???
 So, now we have a education variable with fewer categories, which is more
@@ -1630,13 +1615,11 @@ education are statistically significant.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+.strong[`6.` Intro to the IPUMS USA API]
 
-.strong[`7.` Intro to the IPUMS USA API]
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q & A
+`8.` Q & A
 
 ]
 
@@ -1783,13 +1766,11 @@ key as an argument when we make API calls.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+.strong[`7.` IPUMS API use cases]
 
-.strong[`8.` IPUMS API use cases]
-
-`9.` Q & A
+`8.` Q & A
 
 
 ]
@@ -1811,13 +1792,11 @@ key as an argument when we make API calls.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+.strong[`7a.` API use case 1: Revise your extract]
 
-.strong[`8a.` API use case 1: Revise your extract]
-
-`9.` Q & A
+`8.` Q & A
 
 ]
 
@@ -1853,9 +1832,7 @@ allows you to use a previous extract as a starting point for a new one, ipumsr
 includes functions that use the API to accomplish the same thing right from 
 your R session.
 
-[Describe the code, including how the first few functions return the extract 
-object, and `download_extract()` returns the ddi path, making for a 
-pipe-friendly workflow.]
+[Describe what the code does, but don't go into too much detail]
 
 Not only does this approach save you a little time pointing and clicking through 
 the IPUMS USA website, it also streamlines the file download process by 
@@ -1956,15 +1933,13 @@ significant.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7a.` API use case 1: Revise your extract
 
-`8a.` API use case 1: Revise your extract
+.strong[`7b.` API use case 2: Share your extract]
 
-.strong[`8b.` API use case 2: Share your extract]
-
-`9.` Q & A
+`8.` Q & A
 
 
 ]
@@ -1981,7 +1956,10 @@ extract_to_share <- get_last_extract_info("usa")
 # Or if you have the extract number:
 extract_to_share <- get_extract_info("usa:14")
 
-save_extract_as_json(extract_to_share, file = "prcs_migration_extract.json")
+save_extract_as_json(
+  extract_to_share, 
+  file = "prcs_migration_extract.json"
+)
 ```
 
 --
@@ -2048,17 +2026,15 @@ request for an identical dataset.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7a.` API use case 1: Revise your extract
 
-`8a.` API use case 1: Revise your extract
+`7b.` API use case 2: Share your extract
 
-`8b.` API use case 2: Share your extract
+.strong[`7c.` API use case 3: Share your analysis]
 
-.strong[`8c.` API use case 3: Share your analysis]
-
-`9.` Q & A
+`8.` Q & A
 
 ]
 
@@ -2121,98 +2097,6 @@ have the data on their computer. So instead of hard-coding the extract number...
 
 ```{r eval=FALSE}
 if (!file.exists("prcs_migration_extract.xml")) {
-
-}
-```
-
-???
-
-...you include code to download the data if it's not already downloaded and 
-available locally.
-
-The code on this and the next few slides shows one way to accomplish that. The
-first thing you'll notice is that we are checking for the existence of a DDI
-codebook file that isn't named with a collection and extract number, such as USA
-14 from the previous slide, because if you are sharing this with someone else,
-you don't know what the extract number of their extract will be. As you'll see,
-if this DDI codebook file doesn't exist in the working directory, this code will
-submit a new extract request, download the extract files, and rename them to
-match this naming scheme.
-
----
-
-# Download the data if not available locally
-
-```{r eval=FALSE}
-if (!file.exists("prcs_migration_extract.xml")) {
-  # Load extract definition from JSON #<<
-  prcs_migration_extract <- define_extract_from_json( #<<
-    "prcs_migration_extract.json", #<<
-    "usa" #<<
-  ) #<<
-}
-```
-
-???
-So, if the file doesn't exist locally, the first step is to load the extract 
-definition from the JSON file that you created with the `save_extract_as_json()` 
-function.
-
----
-
-# Download the data if not available locally
-
-```{r eval=FALSE}
-if (!file.exists("prcs_migration_extract.xml")) {
-  # Load extract definition from JSON
-  prcs_migration_extract <- define_extract_from_json(
-    "prcs_migration_extract.json",
-    "usa"
-  )
-  # Submit, wait for, and download extract #<<
-  ddi_filename <- submit_extract(prcs_migration_extract) %>%  #<<
-    wait_for_extract() %>%  #<<
-    download_extract() %>%  #<<
-    basename() #<<
-}
-```
-
-???
-Next, the code submits, waits for, and downloads the extract files, then grabs
-the DDI filename using the `basename()` function on the full file path that's
-returned by the `download_extract()` function.
-
----
-
-# Download the data if not available locally
-
-```{r eval=FALSE}
-if (!file.exists("prcs_migration_extract.xml")) {
-  # Load extract definition from JSON
-  prcs_migration_extract <- define_extract_from_json(
-    "prcs_migration_extract.json",
-    "usa"
-  )
-  # Submit, wait for, and download extract
-  ddi_filename <- submit_extract(prcs_migration_extract) %>% 
-    wait_for_extract() %>% 
-    download_extract() %>% 
-    basename()
-  # Infer data file name from DDI file name #<<
-  data_filename <- str_replace(ddi_filename, "\\.xml$", ".dat.gz") #<<
-}
-```
-
-???
-Next, we can infer the data file name from the DDI filename, since they use the 
-same naming scheme.
-
----
-
-# Download the data if not available locally
-
-```{r eval=FALSE}
-if (!file.exists("prcs_migration_extract.xml")) {
   # Load extract definition from JSON
   prcs_migration_extract <- define_extract_from_json(
     "prcs_migration_extract.json",
@@ -2225,16 +2109,34 @@ if (!file.exists("prcs_migration_extract.xml")) {
     basename()
   # Infer data file name from DDI file name
   data_filename <- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
-  # Standardize DDI and data file names #<<
-  file.rename(ddi_filename, "prcs_migration_extract.xml") #<<
-  file.rename(data_filename, "prcs_migration_extract.dat.gz") #<<
+  # Standardize DDI and data file names
+  file.rename(ddi_filename, "prcs_migration_extract.xml")
+  file.rename(data_filename, "prcs_migration_extract.dat.gz")
 }
 ```
 
 ???
-And finally, we rename the data and DDI codebook files to match our chosen 
-naming scheme, so that if we run the code again, the if statement will evaluate 
-to false and this code that downloads the data will be skipped.
+
+...you include code to download the data if it's not already downloaded and 
+available locally.
+
+The code on this slide shows one way to accomplish that. The first thing you'll
+notice is that we are checking for the existence of a DDI codebook file that
+isn't named with a collection and extract number, such as USA 14 from the
+previous slide, because if you are sharing this with someone else, you don't
+know what the extract number of their extract will be. If this DDI codebook file
+doesn't exist in the working directory, this code will load the extract
+definition from the included JSON file, submit a new extract request, download
+the extract files, and rename them to match this naming scheme, so that the next
+time you run the code, the DDI codebook file will be in your working directory,
+and all this code will be skipped.
+
+This code is included in an example R Markdown that we will share a link to, in 
+case you'd like to explore it in more detail or use it yourself.
+
+Adding this code to your R Markdown document will allow collaborators to run
+your code without making any changes, and we will show an example of that in a
+brief live demo at the end of the presentation.
 
 ---
 
@@ -2246,7 +2148,7 @@ Now this will work for anyone!
 ddi <- read_ipums_ddi("prcs_migration_extract.xml")
 data <- read_ipums_micro(
   ddi,
-  data_file = "prcs_migration_extract.dat.gz"
+  data_file = "prcs_migration_extract.dat.gz" #<<
 )
 ```
 
@@ -2322,6 +2224,7 @@ anyone you'd like to share your analysis with to. And as we'll show in a minute,
 RStudio tries to make it easy to create a new project directly from a GitHub 
 repo, so this a great way to share your work with other R users.
 
+And with that, I'll turn it over to Dan for a brief live demo.
 
 ---
 

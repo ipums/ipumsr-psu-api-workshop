@@ -249,19 +249,15 @@ You can always reach out to through our **github**, or via **user support**.
 
 --
 
-6. Brief analysis example
+6. Intro to the IPUMS USA API
 
 --
 
-7. Intro to the IPUMS USA API
+7. IPUMS API use cases
 
 --
 
-8. IPUMS API use cases
-
---
-
-9. Q &amp; A
+8. Q &amp; A
 
 ---
 
@@ -284,13 +280,11 @@ You can always reach out to through our **github**, or via **user support**.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 
 
@@ -518,7 +512,7 @@ Check out blog using IPUMS Global Health Data
 .pull-right[
 
 
-- **IGIS** Shapefiles for admin level 2
+- **IHGIS** Shapefiles for admin level 2
 
 - https://ihgis.ipums.org/
 
@@ -532,7 +526,6 @@ Check out blog using IPUMS Global Health Data
 
 ---
 
-#
 ![IPUMS NHGIS project logo](images/nhgis.jpg)
 
 
@@ -670,13 +663,11 @@ So ipums really is **data** and a whole lot of it. These 9 different projects in
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 
 ]
@@ -795,8 +786,8 @@ install.packages("purrr")
 ## HTML tables
 install.packages("DT")
 
-## gis
-install.packages("sf")
+## GitHub helper functions
+install.packages("usethis")
 ```
 
 ]
@@ -817,8 +808,8 @@ library(purrr)
 ## HTML tables
 library(DT)
 
-## gis
-library(sf)
+## GitHub helper functions
+library(usethis)
 ```
 
 ]
@@ -850,13 +841,11 @@ reminder, installing packages only needs to happen once, but some packages do up
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 ]
 
@@ -883,13 +872,11 @@ Dan passes to Derek. Derek switches to a web demo of extract system.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 
 ]
@@ -945,8 +932,6 @@ data. The R one contains the code we'll show on the next slide.
 
 This helper code checks that you have ipumsr installed, and if you do, it reads
 in the DDI codebook and data into separate objects. 
-
----
 
 ---
 
@@ -1096,13 +1081,11 @@ point to the DDI codebook, not the data file.
 
 .strong[`5.` Exploring and manipulating metadata]
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 ]
 
@@ -1149,13 +1132,41 @@ Variable labels and descriptions:
 
 
 ```r
-ipums_var_label(ddi, MARRINYR)
-#&gt; [1] "Married within the past year"
+ipums_var_label(ddi, MIGRATE1)
+#&gt; [1] "Migration status, 1 year [general version]"
 
-ipums_var_desc(ddi, MARRINYR) %&gt;% strwrap(60)
-#&gt; [1] "MARRINYR identifies persons who had married within the 12"  
-#&gt; [2] "months preceding June 1 (for the 1850-1880 censuses) or the"
-#&gt; [3] "date of interview (for the ACS and PRCS)."
+ipums_var_desc(ddi, MIGRATE1) %&gt;% strwrap(60)
+#&gt;  [1] "MIGRATE1 reports whether the person had changed residence"    
+#&gt;  [2] "since a reference point 1 year ago. Specifically,"            
+#&gt;  [3] "individuals age 1+ were asked if they had lived in the"       
+#&gt;  [4] "\"same house\" (non-movers) or a \"different house\" (movers)"
+#&gt;  [5] "one year earlier. Persons who had moved were to indicate"     
+#&gt;  [6] "the foreign country or the state, county, and place of"       
+#&gt;  [7] "their normal residence during the reference year. Migration"  
+#&gt;  [8] "data were collected only for sample-line persons in 1950."    
+#&gt;  [9] ""                                                             
+#&gt; [10] "The category \"Same house\" includes all eligible persons who"
+#&gt; [11] "did not move since the reference year, as well as those who"  
+#&gt; [12] "had moved but by the enumeration or survey date had"          
+#&gt; [13] "returned to their earlier residence. The category"            
+#&gt; [14] "\"Different house\" includes persons who lived in a different"
+#&gt; [15] "house in the reference year. For 1950, movers (those who"     
+#&gt; [16] "reported living in a different house in the reference year)"  
+#&gt; [17] "are further subdivided according to type of move (e.g.,"      
+#&gt; [18] "within the county or across state lines). The ACS and the"    
+#&gt; [19] "PRCS report only same/different residence and identifies"     
+#&gt; [20] "those previously living abroad."                              
+#&gt; [21] ""                                                             
+#&gt; [22] "Therefore, for the ACS/PRCS samples, MIGRATE1 uses"           
+#&gt; [23] "information contained in the IPUMS variable MIGPLAC1 and"     
+#&gt; [24] "compatible PUMAs of migration and PUMAs of residence to"      
+#&gt; [25] "indicate whether movers migrated between states or within"    
+#&gt; [26] "the same state (the same levels of detail in the 1950"        
+#&gt; [27] "classification.). For movers who migrated between states, a"  
+#&gt; [28] "detailed version of MIGRATE1 indicates whether they moved"    
+#&gt; [29] "between contiguous or non-contiguous states. For movers who"  
+#&gt; [30] "migrated within the same state, detailed MIGRATE1 indicates"  
+#&gt; [31] "whether they moved within or between PUMAs."
 ```
 
 ???
@@ -1172,13 +1183,16 @@ Value labels:
 
 
 ```r
-ipums_val_labels(ddi, MARRINYR)
-#&gt; # A tibble: 3 x 2
-#&gt;     val lbl       
-#&gt;   &lt;dbl&gt; &lt;chr&gt;     
-#&gt; 1     0 N/A       
-#&gt; 2     1 Blank (No)
-#&gt; 3     2 Yes
+ipums_val_labels(ddi, MIGRATE1)
+#&gt; # A tibble: 6 x 2
+#&gt;     val lbl                 
+#&gt;   &lt;dbl&gt; &lt;chr&gt;               
+#&gt; 1     0 N/A                 
+#&gt; 2     1 Same house          
+#&gt; 3     2 Moved within state  
+#&gt; 4     3 Moved between states
+#&gt; 5     4 Abroad one year ago 
+#&gt; 6     9 Unknown
 ```
 
 ???
@@ -1374,8 +1388,8 @@ data$EDUCD2 &lt;- lbl_collapse(data$EDUCD, ~.val %/% 10) %&gt;%
 
 . . .
 
-<div id="htmlwidget-6ed7921d568c8b42b7ea" style="width:100%;height:auto;" class="datatables html-widget"></div>
-<script type="application/json" data-for="htmlwidget-6ed7921d568c8b42b7ea">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
+<div id="htmlwidget-17adaa8bea20b44e40fb" style="width:100%;height:auto;" class="datatables html-widget"></div>
+<script type="application/json" data-for="htmlwidget-17adaa8bea20b44e40fb">{"x":{"filter":"none","vertical":false,"data":[["[0] N/A or no schooling","[1] N/A","[2] No schooling completed","[10] Nursery school to grade 4","[11] Nursery school, preschool","[12] Kindergarten","[13] Grade 1, 2, 3, or 4","[14] Grade 1","[15] Grade 2","[16] Grade 3","[17] Grade 4","[20] Grade 5, 6, 7, or 8","[21] Grade 5 or 6","[22] Grade 5","[23] Grade 6","[24] Grade 7 or 8","[25] Grade 7","[26] Grade 8","[30] Grade 9","[40] Grade 10","[50] Grade 11","[60] Grade 12","[61] 12th grade, no diploma","[62] High school graduate or GED","[63] Regular high school diploma","[64] GED or alternative credential","[65] Some college, but less than 1 year","[70] 1 year of college","[71] 1 or more years of college credit, no degree","[80] 2 years of college","[81] Associate's degree, type not specified","[82] Associate's degree, occupational program","[83] Associate's degree, academic program","[90] 3 years of college","[100] 4 years of college","[101] Bachelor's degree","[110] 5+ years of college","[111] 6 years of college (6+ in 1960-1970)","[112] 7 years of college","[113] 8+ years of college","[114] Master's degree","[115] Professional degree beyond a bachelor's degree","[116] Doctoral degree","[999] Missing"],["N/A or no schooling","N/A or no schooling","N/A or no schooling","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Nursery school to grade 4","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 5, 6, 7, or 8","Grade 9","Grade 10","Grade 11","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","Grade 12","1 year of college","1 year of college","2 years of college","2 years of college","2 years of college","2 years of college","3 years of college","4 years of college","4 years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","5+ years of college","Missing"],[0,2741,4850,0,1456,1305,0,1708,2048,2818,3255,0,0,2770,4581,0,3424,4230,5620,3221,3959,0,1346,0,29267,3066,2868,0,14766,0,10843,0,0,0,0,19810,0,0,0,0,5358,1408,1182,0]],"container":"<table class=\"display\">\n  <thead>\n    <tr>\n      <th>before ([val] label)<\/th>\n      <th>after<\/th>\n      <th>count<\/th>\n    <\/tr>\n  <\/thead>\n<\/table>","options":{"searching":false,"scrollY":"200px","scrollCollapse":true,"paging":false,"bInfo":false,"columnDefs":[{"className":"dt-right","targets":2}],"order":[],"autoWidth":false,"orderClasses":false}},"evals":[],"jsHooks":[]}</script>
 
 ???
 [Read bullet point]
@@ -1532,7 +1546,12 @@ regular expression.
 
 
 ```
-#&gt; [1] "N/A or no schooling"   "Less than High School" "High school"           "Some college"          "College or more"       "Missing"
+#&gt; [1] "N/A or no schooling"  
+#&gt; [2] "Less than High School"
+#&gt; [3] "High school"          
+#&gt; [4] "Some college"         
+#&gt; [5] "College or more"      
+#&gt; [6] "Missing"
 ```
 ???
 So, now we have a education variable with fewer categories, which is more
@@ -1597,13 +1616,11 @@ education are statistically significant.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+.strong[`6.` Intro to the IPUMS USA API]
 
-.strong[`7.` Intro to the IPUMS USA API]
+`7.` IPUMS API use cases
 
-`8.` IPUMS API use cases
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 ]
 
@@ -1748,13 +1765,11 @@ key as an argument when we make API calls.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+.strong[`7.` IPUMS API use cases]
 
-.strong[`8.` IPUMS API use cases]
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 
 ]
@@ -1776,13 +1791,11 @@ key as an argument when we make API calls.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+.strong[`7a.` API use case 1: Revise your extract]
 
-.strong[`8a.` API use case 1: Revise your extract]
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 ]
 
@@ -1819,9 +1832,7 @@ allows you to use a previous extract as a starting point for a new one, ipumsr
 includes functions that use the API to accomplish the same thing right from 
 your R session.
 
-[Describe the code, including how the first few functions return the extract 
-object, and `download_extract()` returns the ddi path, making for a 
-pipe-friendly workflow.]
+[Describe what the code does, but don't go into too much detail]
 
 Not only does this approach save you a little time pointing and clicking through 
 the IPUMS USA website, it also streamlines the file download process by 
@@ -1885,15 +1896,13 @@ significant.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7a.` API use case 1: Revise your extract
 
-`8a.` API use case 1: Revise your extract
+.strong[`7b.` API use case 2: Share your extract]
 
-.strong[`8b.` API use case 2: Share your extract]
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 
 ]
@@ -1911,7 +1920,10 @@ extract_to_share &lt;- get_last_extract_info("usa")
 # Or if you have the extract number:
 extract_to_share &lt;- get_extract_info("usa:14")
 
-save_extract_as_json(extract_to_share, file = "prcs_migration_extract.json")
+save_extract_as_json(
+  extract_to_share, 
+  file = "prcs_migration_extract.json"
+)
 ```
 
 --
@@ -1979,17 +1991,15 @@ request for an identical dataset.
 
 `5.` Exploring and manipulating metadata
 
-`6.` Brief analysis example
+`6.` Intro to the IPUMS USA API
 
-`7.` Intro to the IPUMS USA API
+`7a.` API use case 1: Revise your extract
 
-`8a.` API use case 1: Revise your extract
+`7b.` API use case 2: Share your extract
 
-`8b.` API use case 2: Share your extract
+.strong[`7c.` API use case 3: Share your analysis]
 
-.strong[`8c.` API use case 3: Share your analysis]
-
-`9.` Q &amp; A
+`8.` Q &amp; A
 
 ]
 
@@ -2050,102 +2060,6 @@ have the data on their computer. So instead of hard-coding the extract number...
 
 ```r
 if (!file.exists("prcs_migration_extract.xml")) {
-
-}
-```
-
-???
-
-...you include code to download the data if it's not already downloaded and 
-available locally.
-
-The code on this and the next few slides shows one way to accomplish that. The
-first thing you'll notice is that we are checking for the existence of a DDI
-codebook file that isn't named with a collection and extract number, such as USA
-14 from the previous slide, because if you are sharing this with someone else,
-you don't know what the extract number of their extract will be. As you'll see,
-if this DDI codebook file doesn't exist in the working directory, this code will
-submit a new extract request, download the extract files, and rename them to
-match this naming scheme.
-
----
-
-# Download the data if not available locally
-
-
-```r
-if (!file.exists("prcs_migration_extract.xml")) {
-* # Load extract definition from JSON
-* prcs_migration_extract &lt;- define_extract_from_json(
-*   "prcs_migration_extract.json",
-*   "usa"
-* )
-}
-```
-
-???
-So, if the file doesn't exist locally, the first step is to load the extract 
-definition from the JSON file that you created with the `save_extract_as_json()` 
-function.
-
----
-
-# Download the data if not available locally
-
-
-```r
-if (!file.exists("prcs_migration_extract.xml")) {
-  # Load extract definition from JSON
-  prcs_migration_extract &lt;- define_extract_from_json(
-    "prcs_migration_extract.json",
-    "usa"
-  )
-* # Submit, wait for, and download extract
-* ddi_filename &lt;- submit_extract(prcs_migration_extract) %&gt;%
-*   wait_for_extract() %&gt;%
-*   download_extract() %&gt;%
-*   basename()
-}
-```
-
-???
-Next, the code submits, waits for, and downloads the extract files, then grabs
-the DDI filename using the `basename()` function on the full file path that's
-returned by the `download_extract()` function.
-
----
-
-# Download the data if not available locally
-
-
-```r
-if (!file.exists("prcs_migration_extract.xml")) {
-  # Load extract definition from JSON
-  prcs_migration_extract &lt;- define_extract_from_json(
-    "prcs_migration_extract.json",
-    "usa"
-  )
-  # Submit, wait for, and download extract
-  ddi_filename &lt;- submit_extract(prcs_migration_extract) %&gt;% 
-    wait_for_extract() %&gt;% 
-    download_extract() %&gt;% 
-    basename()
-* # Infer data file name from DDI file name
-* data_filename &lt;- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
-}
-```
-
-???
-Next, we can infer the data file name from the DDI filename, since they use the 
-same naming scheme.
-
----
-
-# Download the data if not available locally
-
-
-```r
-if (!file.exists("prcs_migration_extract.xml")) {
   # Load extract definition from JSON
   prcs_migration_extract &lt;- define_extract_from_json(
     "prcs_migration_extract.json",
@@ -2158,16 +2072,34 @@ if (!file.exists("prcs_migration_extract.xml")) {
     basename()
   # Infer data file name from DDI file name
   data_filename &lt;- str_replace(ddi_filename, "\\.xml$", ".dat.gz")
-* # Standardize DDI and data file names
-* file.rename(ddi_filename, "prcs_migration_extract.xml")
-* file.rename(data_filename, "prcs_migration_extract.dat.gz")
+  # Standardize DDI and data file names
+  file.rename(ddi_filename, "prcs_migration_extract.xml")
+  file.rename(data_filename, "prcs_migration_extract.dat.gz")
 }
 ```
 
 ???
-And finally, we rename the data and DDI codebook files to match our chosen 
-naming scheme, so that if we run the code again, the if statement will evaluate 
-to false and this code that downloads the data will be skipped.
+
+...you include code to download the data if it's not already downloaded and 
+available locally.
+
+The code on this slide shows one way to accomplish that. The first thing you'll
+notice is that we are checking for the existence of a DDI codebook file that
+isn't named with a collection and extract number, such as USA 14 from the
+previous slide, because if you are sharing this with someone else, you don't
+know what the extract number of their extract will be. If this DDI codebook file
+doesn't exist in the working directory, this code will load the extract
+definition from the included JSON file, submit a new extract request, download
+the extract files, and rename them to match this naming scheme, so that the next
+time you run the code, the DDI codebook file will be in your working directory,
+and all this code will be skipped.
+
+This code is included in an example R Markdown that we will share a link to, in 
+case you'd like to explore it in more detail or use it yourself.
+
+Adding this code to your R Markdown document will allow collaborators to run
+your code without making any changes, and we will show an example of that in a
+brief live demo at the end of the presentation.
 
 ---
 
@@ -2180,7 +2112,7 @@ Now this will work for anyone!
 ddi &lt;- read_ipums_ddi("prcs_migration_extract.xml")
 data &lt;- read_ipums_micro(
   ddi,
-  data_file = "prcs_migration_extract.dat.gz"
+* data_file = "prcs_migration_extract.dat.gz"
 )
 ```
 
@@ -2253,6 +2185,7 @@ anyone you'd like to share your analysis with to. And as we'll show in a minute,
 RStudio tries to make it easy to create a new project directly from a GitHub 
 repo, so this a great way to share your work with other R users.
 
+And with that, I'll turn it over to Dan for a brief live demo.
 
 ---
 
