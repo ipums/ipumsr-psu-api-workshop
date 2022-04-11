@@ -1015,8 +1015,9 @@ makes sense why we need both (streamlined version of what we did before)
 
 ```{r echo=FALSE, comment = ''}
 readLines("prcs_migration_extract.dat.gz", n = 10) %>% 
+  substr(1,70) %>% 
   paste0(collapse = "\n") %>% 
-  cat()
+  cat() 
 
 ```
 ???
