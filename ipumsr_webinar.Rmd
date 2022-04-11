@@ -1505,6 +1505,10 @@ regular expression.
 
 # `lbl_relabel()`
 
+```{r, eval = FALSE}
+levels(data$EDUCD3)
+```
+
 ```{r, echo = FALSE}
 old_width <- getOption("width")
 options(width = 50)
