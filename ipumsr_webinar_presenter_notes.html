@@ -617,8 +617,11 @@ NA, blank, and yes.</p>
 makes a nicely-formatted static html page that allows you to browse the
 metadata associated with your data extract.</p>
 </div>
-<div id="wrangling-value-labels-40" class="section level1">
-<h1>Wrangling value labels (40)</h1>
+<div id="how-do-i-manipulate-metadata-40" class="section level1">
+<h1>How do I manipulate metadata? (40)</h1>
+</div>
+<div id="wrangling-value-labels-41" class="section level1">
+<h1>Wrangling value labels (41)</h1>
 <p>IPUMS value labels don’t translate perfectly to R factors. The most
 important difference is that in a factor, values always count up from 1.
 In IPUMS variables, the values themselves often encode meaningful
@@ -640,11 +643,11 @@ labelled variables aren’t supported. To do this you’ll need to convert
 back to factor or numeric or char vector using as_factor or
 zap_label.</p>
 </div>
-<div id="using-ipumsr-label-helper-functions-41" class="section level1">
-<h1>Using ipumsr label helper functions (41)</h1>
+<div id="using-ipumsr-label-helper-functions-42" class="section level1">
+<h1>Using ipumsr label helper functions (42)</h1>
 </div>
-<div id="havenlabelled-columns-at-a-glance-42" class="section level1">
-<h1>haven::labelled columns at a glance (42)</h1>
+<div id="havenlabelled-columns-at-a-glance-43" class="section level1">
+<h1>haven::labelled columns at a glance (43)</h1>
 <p>Here’s what the data look like when you read them in. Show detailed
 education variable as an example - nested structure.</p>
 <p>We see here that values less than 10 indicate missing or no schooling
@@ -653,12 +656,9 @@ school and grade 4; and so on.</p>
 <p>We can take advantage of all of the details given by both the value
 and label when we use a labelled variable.</p>
 </div>
-<div id="lbl_collapse-43" class="section level1">
-<h1><code>lbl_collapse()</code> (43)</h1>
-<p>[Read bullet point]</p>
-</div>
 <div id="lbl_collapse-44" class="section level1">
 <h1><code>lbl_collapse()</code> (44)</h1>
+<p>[Read bullet point]</p>
 </div>
 <div id="lbl_collapse-45" class="section level1">
 <h1><code>lbl_collapse()</code> (45)</h1>
@@ -668,6 +668,9 @@ and label when we use a labelled variable.</p>
 </div>
 <div id="lbl_collapse-47" class="section level1">
 <h1><code>lbl_collapse()</code> (47)</h1>
+</div>
+<div id="lbl_collapse-48" class="section level1">
+<h1><code>lbl_collapse()</code> (48)</h1>
 <p>[Read bullet point] The label collapse function allows you to
 collapse values based on a hierarchical coding scheme.</p>
 <p>Here we use the integer division operator “percent forward slash
@@ -681,15 +684,15 @@ value. I think the details of what’s going on here take a bit of time to
 unpack, but hopefully this gives you a sense of the usefulness and power
 of this function.</p>
 </div>
-<div id="still-too-detailed-for-a-graph-48" class="section level1">
-<h1>Still too detailed for a graph (48)</h1>
+<div id="still-too-detailed-for-a-graph-49" class="section level1">
+<h1>Still too detailed for a graph (49)</h1>
 <p>This shows the values and labels that we get by applying
 lbl_collapse() to collapse the last digit. However, if we want to
 visualize educational differences, as we’ll do below, this might still
 be too much detail.</p>
 </div>
-<div id="lbl_relabel-49" class="section level1">
-<h1><code>lbl_relabel()</code> (49)</h1>
+<div id="lbl_relabel-50" class="section level1">
+<h1><code>lbl_relabel()</code> (50)</h1>
 <p>That’s where <code>lbl_relabel()</code> comes in.</p>
 <p>Label relabel offers the most power and flexibility by allowing you
 to create an arbitrary number of new labeled values, controlling both
@@ -708,27 +711,27 @@ l-b-l (or “label”) helper function. So the first line can be read as
 “assign a value of two with a label of”Less than High School” when the
 input value is greater than 0 and less than 6”.</p>
 </div>
-<div id="lbl_relabel-50" class="section level1">
-<h1><code>lbl_relabel()</code> (50)</h1>
+<div id="lbl_relabel-51" class="section level1">
+<h1><code>lbl_relabel()</code> (51)</h1>
 <p>Notice that we have examples of using the dot val variable on the
 first and fourth lines…</p>
 </div>
-<div id="lbl_relabel-51" class="section level1">
-<h1><code>lbl_relabel()</code> (51)</h1>
+<div id="lbl_relabel-52" class="section level1">
+<h1><code>lbl_relabel()</code> (52)</h1>
 <p>…and of using the dot label variable on the second and third lines.
 The third line of the lbl_relabel() call can be read as “assign a value
 of 4 with a label of”Some college” when the input label matches our
 “college_regex” regular expression.</p>
 </div>
-<div id="lbl_relabel-52" class="section level1">
-<h1><code>lbl_relabel()</code> (52)</h1>
+<div id="lbl_relabel-53" class="section level1">
+<h1><code>lbl_relabel()</code> (53)</h1>
 <p>So, now we have a education variable with fewer categories, which is
 more suitable for visualization.</p>
 <p>For more on these helper functions, see the “Value labels” vignette,
 which we will link to below.</p>
 </div>
-<div id="no-heading-53" class="section level1">
-<h1>NO HEADING (53)</h1>
+<div id="no-heading-54" class="section level1">
+<h1>NO HEADING (54)</h1>
 <p>Now we’re ready to create a line graph of the percentage of people
 who moved in the past year. Notice that we are excluding people with
 missing values on the migration variable from our calculations.</p>
@@ -744,8 +747,8 @@ weight variables REPWT and REPWTP. There are instructions for using
 those variables on the IPUMS USA replicate weight FAQ page, which is
 linked from the variable descriptions for REPWT and REPWTP.</p>
 </div>
-<div id="no-heading-54" class="section level1">
-<h1>NO HEADING (54)</h1>
+<div id="no-heading-55" class="section level1">
+<h1>NO HEADING (55)</h1>
 <p>Now, we can use that nice, collapsed education variable that we just
 created to visualize these trends by level of education. Here we see a
 more complex picture of who was moving during this time period, though
@@ -753,11 +756,11 @@ again, we would need to calculate confidence intervals to know whether
 these differences over time or by education are statistically
 significant.</p>
 </div>
-<div id="overview-55" class="section level1">
-<h1>Overview (55)</h1>
+<div id="overview-56" class="section level1">
+<h1>Overview (56)</h1>
 </div>
-<div id="api-timeline-56" class="section level1">
-<h1>API Timeline (56)</h1>
+<div id="api-timeline-57" class="section level1">
+<h1>API Timeline (57)</h1>
 <p>The API is not yet publicly available, but is available to volunteer
 beta testers. If you’d like to become a beta tester, email <a href="mailto:ipums+api@umn.edu" class="email">ipums+api@umn.edu</a> and
 you should hear back within about two business days.</p>
@@ -770,8 +773,8 @@ guide to interacting with that API in R, which we’ll share a link to at
 the end of these slides, and we are currently working to add that
 functionality to ipumsr.</p>
 </div>
-<div id="what-can-i-do-with-the-ipums-usa-api-57" class="section level1">
-<h1>What can I do with the IPUMS USA API? (57)</h1>
+<div id="what-can-i-do-with-the-ipums-usa-api-58" class="section level1">
+<h1>What can I do with the IPUMS USA API? (58)</h1>
 <p>So, your next question might be, “what will I be able to do with this
 API?” Here’s the high-level overview:</p>
 <p>You’ll be able to:</p>
@@ -792,8 +795,8 @@ purpose tool like curl, and IPUMS is developing API client tools for
 Python in parallel with the R client tools that will be part of the
 ipumsr package.</p>
 </div>
-<div id="what-cant-i-do-with-the-ipums-usa-api-58" class="section level1">
-<h1>What can’t I do with the IPUMS USA API? (58)</h1>
+<div id="what-cant-i-do-with-the-ipums-usa-api-59" class="section level1">
+<h1>What can’t I do with the IPUMS USA API? (59)</h1>
 <p>The other important question to answer is what the API can’t do.</p>
 <p>Most importantly, it can’t deliver data “on demand” – extracts are
 still created through the same extract system used by the website, which
@@ -812,8 +815,8 @@ to attach characteristics of family members such as spouses or children.
 We plan to add these capabilities once the core functionality is
 well-tested and stable.</p>
 </div>
-<div id="how-to-use-your-ipums-usa-api-key-59" class="section level1">
-<h1>How to use your IPUMS USA API key (59)</h1>
+<div id="how-to-use-your-ipums-usa-api-key-60" class="section level1">
+<h1>How to use your IPUMS USA API key (60)</h1>
 <p>If you become an API beta tester, you will receive instructions on
 creating an API key. Once you create the key, we recommend storing it in
 an environment variable named “IPUMS_API_KEY” by defining that
@@ -826,14 +829,14 @@ code examples in this presentation assume that we’ve already stored our
 API key in this environment variable, and thus that we don’t need to
 pass that key as an argument when we make API calls.</p>
 </div>
-<div id="overview-60" class="section level1">
-<h1>Overview (60)</h1>
-</div>
 <div id="overview-61" class="section level1">
 <h1>Overview (61)</h1>
 </div>
-<div id="add-hhincome-to-our-extract-62" class="section level1">
-<h1>Add HHINCOME to our extract (62)</h1>
+<div id="overview-62" class="section level1">
+<h1>Overview (62)</h1>
+</div>
+<div id="add-hhincome-to-our-extract-63" class="section level1">
+<h1>Add HHINCOME to our extract (63)</h1>
 <p>After looking at that graph of migration by education, it might have
 occurred to me that I’d like to make a similar graph by level of
 household income. Unfortunately, I didn’t include the variable HHINCOME
@@ -859,13 +862,13 @@ wouldn’t want to include it in your analysis script, because then you’d
 be waiting for and redownloading your extract every time you reran your
 analysis.</p>
 </div>
-<div id="update-your-script-with-new-filename-63" class="section level1">
-<h1>Update your script with new filename (63)</h1>
+<div id="update-your-script-with-new-filename-64" class="section level1">
+<h1>Update your script with new filename (64)</h1>
 <p>Instead, you would likely hard-code the newly downloaded filename
 into your analysis script, replacing the old filename.</p>
 </div>
-<div id="no-heading-64" class="section level1">
-<h1>NO HEADING (64)</h1>
+<div id="no-heading-65" class="section level1">
+<h1>NO HEADING (65)</h1>
 <p>Now we can create a graph similar to the education one grouping
 instead by household income quintile. Here we see that persons from
 households in the lowest income quintile were more likely to move across
@@ -874,17 +877,17 @@ less pronounced jump in migration in 2018. Again, I want to remind you
 that these are purely descriptive trends, and that differences over time
 and by group may not be statistically significant.</p>
 </div>
-<div id="how-to-create-the-extract-from-scratch-65" class="section level1">
-<h1>How to create the extract from scratch (65)</h1>
+<div id="how-to-create-the-extract-from-scratch-66" class="section level1">
+<h1>How to create the extract from scratch (66)</h1>
 <p>And just so you don’t think the API can only revise extracts created
 on the website, here’s how you’d create and download the same extract
 that Dan made earlier, with the addition of the HHINCOME variable.</p>
 </div>
-<div id="overview-66" class="section level1">
-<h1>Overview (66)</h1>
+<div id="overview-67" class="section level1">
+<h1>Overview (67)</h1>
 </div>
-<div id="share-your-extract-definition-67" class="section level1">
-<h1>Share your extract (definition) (67)</h1>
+<div id="share-your-extract-definition-68" class="section level1">
+<h1>Share your extract (definition) (68)</h1>
 <p>Now let’s imagine we’ve completed our analysis, which might have
 involved a few more extract revisions, and we want to enable our
 collaborators or other researchers to reproduce or build on our
@@ -902,18 +905,18 @@ definition of your extract…</p>
 you can share it with other researchers in whatever way is
 convenient.</p>
 </div>
-<div id="clone-a-shared-extract-68" class="section level1">
-<h1>Clone a shared extract (68)</h1>
+<div id="clone-a-shared-extract-69" class="section level1">
+<h1>Clone a shared extract (69)</h1>
 <p>Because the extract definition is saved as JSON, your collaborators
 don’t have to use R to consume that file, but if they are using R, they
 can follow the workflow shown here to read in the definition and submit
 their own extract request for an identical dataset.</p>
 </div>
-<div id="overview-69" class="section level1">
-<h1>Overview (69)</h1>
+<div id="overview-70" class="section level1">
+<h1>Overview (70)</h1>
 </div>
-<div id="save-analysis-as-rmarkdown-70" class="section level1">
-<h1>Save analysis as RMarkdown (70)</h1>
+<div id="save-analysis-as-rmarkdown-71" class="section level1">
+<h1>Save analysis as RMarkdown (71)</h1>
 <p>Now let’s say you want to go a step further and share not just your
 extract definition, but your full analysis from start to finish. I’ll
 show a simple example here, but this same workflow could be used to
@@ -924,8 +927,8 @@ with R Markdown, its a plain text format that uses a special syntax to
 combine R code and formatted text, which can then be rendered into HTML,
 PDF, or even Word document reports.</p>
 </div>
-<div id="no-heading-71" class="section level1">
-<h1>NO HEADING (71)</h1>
+<div id="no-heading-72" class="section level1">
+<h1>NO HEADING (72)</h1>
 <p>This slide shows the result of rendering that RMarkdown document as
 an HTML report. You can see R Markdown allows you to create reports with
 nice features like a tabbed structure for different plots or report
@@ -933,16 +936,16 @@ sections. In this report I’ve hidden the code chunks used to load and
 prepare the data and to create the graphs, but you can also include the
 code in the rendered report.</p>
 </div>
-<div id="instead-of-hard-coding-the-extract-number-72" class="section level1">
-<h1>Instead of hard-coding the extract number… (72)</h1>
+<div id="instead-of-hard-coding-the-extract-number-73" class="section level1">
+<h1>Instead of hard-coding the extract number… (73)</h1>
 <p>Next, in that R Markdown document that contains your analysis and
 interpretation, you want to change the code that reads in the data so
 that it will work not only for you, but for those you share it with, who
 won’t already have the data on their computer. So instead of hard-coding
 the extract number…</p>
 </div>
-<div id="download-the-data-if-not-available-locally-73" class="section level1">
-<h1>…download the data if not available locally! (73)</h1>
+<div id="download-the-data-if-not-available-locally-74" class="section level1">
+<h1>…download the data if not available locally! (74)</h1>
 <p>…you include code to download the data if it’s not already downloaded
 and available locally.</p>
 <p>The code on this slide shows one way to accomplish that. The first
@@ -963,11 +966,11 @@ yourself.</p>
 to run your code without making any changes, and we will show an example
 of that in a brief live demo at the end of the presentation.</p>
 </div>
-<div id="then-hard-code-the-renamed-files-74" class="section level1">
-<h1>Then hard-code the renamed files (74)</h1>
-</div>
 <div id="then-hard-code-the-renamed-files-75" class="section level1">
 <h1>Then hard-code the renamed files (75)</h1>
+</div>
+<div id="then-hard-code-the-renamed-files-76" class="section level1">
+<h1>Then hard-code the renamed files (76)</h1>
 <p>Now, since the code in the if statement ensures that the data are
 available locally and have the expected filename, we can read in the DDI
 and data in a way that will work for any researcher with API access.
@@ -975,8 +978,8 @@ Notice that since we’ve renamed the data file, we need to use the
 <code>data_file</code> argument in <code>read_ipums_micro()</code> to
 specify that file name.</p>
 </div>
-<div id="create-a-github-repository-76" class="section level1">
-<h1>Create a GitHub repository (76)</h1>
+<div id="create-a-github-repository-77" class="section level1">
+<h1>Create a GitHub repository (77)</h1>
 <p>So again, you could share these files in whatever way is convenient,
 but putting them in a GitHub repository is a great way to promote open
 science and reproducibility.</p>
@@ -984,8 +987,8 @@ science and reproducibility.</p>
 containing two files: your R Markdown analysis document and the JSON
 definition of your extract.</p>
 </div>
-<div id="create-a-github-repository-77" class="section level1">
-<h1>Create a GitHub repository (77)</h1>
+<div id="create-a-github-repository-78" class="section level1">
+<h1>Create a GitHub repository (78)</h1>
 <p>From the starting point on the previous slide, you can get your
 project on GitHub in three R function calls. The first line turns your
 current working directory into an RStudio project, if it isn’t one
@@ -1005,8 +1008,8 @@ does use the GitHub API, and I think the convenience of these functions
 from the usethis package is a good example of the cool stuff APIs make
 possible.</p>
 </div>
-<div id="create-a-github-repository-78" class="section level1">
-<h1>Create a GitHub repository (78)</h1>
+<div id="create-a-github-repository-79" class="section level1">
+<h1>Create a GitHub repository (79)</h1>
 <p>With those three steps, we now have a GitHub repository that you can
 point anyone you’d like to share your analysis with to. And as we’ll
 show in a minute, RStudio tries to make it easy to create a new project
@@ -1014,8 +1017,8 @@ directly from a GitHub repo, so this a great way to share your work with
 other R users.</p>
 <p>And with that, I’ll turn it over to Dan for a brief live demo.</p>
 </div>
-<div id="resources-79" class="section level1">
-<h1>Resources (79)</h1>
+<div id="resources-80" class="section level1">
+<h1>Resources (80)</h1>
 </div>
 
 
