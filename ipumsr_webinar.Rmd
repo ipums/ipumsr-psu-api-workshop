@@ -1412,6 +1412,7 @@ differences, as we'll do below, this might still be too much detail.
 
 ```{r}
 college_regex <- "^[123] year(s)? of college$"
+
 data$EDUCD3 <- data$EDUCD %>%
   lbl_collapse(~.val %/% 10) %>% 
   lbl_relabel(
