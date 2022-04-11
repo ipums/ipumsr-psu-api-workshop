@@ -1136,7 +1136,9 @@ Variable labels and descriptions:
 ```{r}
 ipums_var_label(ddi, MIGRATE1)
 
-ipums_var_desc(ddi, MIGRATE1) %>% strwrap(60)
+ipums_var_desc(ddi, MIGRATE1) %>% 
+  substr(1,450) %>% 
+  strwrap(60) 
 ```
 
 ???
