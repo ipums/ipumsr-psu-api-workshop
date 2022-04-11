@@ -1182,6 +1182,11 @@ associated with your data extract.
 
 ---
 
+class: center middle
+# How do I manipulate metadata?
+
+---
+
 # Wrangling value labels
 
 - R doesn't natively support value labels like other statistical packages do
